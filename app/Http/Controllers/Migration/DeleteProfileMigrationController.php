@@ -14,6 +14,7 @@ class DeleteProfileMigrationController extends Controller
      * New DB = mysql
      *
      * Migrates `delete_profile` (old) → `member_delete_profile` (new).
+     * Only inserts rows whose `sender` exists in old `registers`.
      */
     public function migrate()
     {
@@ -21,13 +22,14 @@ class DeleteProfileMigrationController extends Controller
 
         try {
 
-            $count = $this->migrateDeleteProfile();
+            $stats = $this->migrateDeleteProfile();
 
             $result = [
                 'status'    => 'success',
                 'old_table' => 'delete_profile',
                 'new_table' => 'member_delete_profile',
-                'count'     => $count,
+                'count'     => $stats['inserted'],
+                'skipped'   => $stats['skipped'],
             ];
 
         } catch (Throwable $e) {
@@ -48,8 +50,10 @@ class DeleteProfileMigrationController extends Controller
 
     /**
      * Clear + migrate member_delete_profile
+     *
+     * @return array{inserted:int,skipped:int}
      */
-    private function migrateDeleteProfile(): int
+    private function migrateDeleteProfile(): array
     {
         $source = DB::connection('mysql_old');
         $target = DB::connection('mysql');
@@ -102,7 +106,8 @@ class DeleteProfileMigrationController extends Controller
             },
         ];
 
-        $total = 0;
+        $inserted = 0;
+        $skipped  = 0;
 
         /*
         |--------------------------------------------------------------------------
@@ -123,16 +128,33 @@ class DeleteProfileMigrationController extends Controller
         $source->table($oldTable)
             ->orderBy('id')
             ->chunk(500, function ($rows) use (
+                $source,
                 $target,
                 $columns,
                 $defaults,
                 $newTable,
-                &$total
+                &$inserted,
+                &$skipped
             ) {
 
                 $insertData = [];
 
                 foreach ($rows as $row) {
+
+                    /*
+                    |--------------------------------------------------------------------------
+                    | Only insert if `sender` exists in old `registers`
+                    |--------------------------------------------------------------------------
+                    */
+
+                    $senderExists = $source->table('registers')
+                        ->where('id', $row->sender)
+                        ->exists();
+
+                    if (!$senderExists) {
+                        $skipped++;
+                        continue;
+                    }
 
                     $data = [];
 
@@ -159,10 +181,13 @@ class DeleteProfileMigrationController extends Controller
                         array_keys($insertData[0])
                     );
 
-                    $total += count($insertData);
+                    $inserted += count($insertData);
                 }
             });
 
-        return $total;
+        return [
+            'inserted' => $inserted,
+            'skipped'  => $skipped,
+        ];
     }
 }

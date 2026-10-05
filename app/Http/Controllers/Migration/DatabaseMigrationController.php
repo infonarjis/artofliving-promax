@@ -291,7 +291,7 @@ class DatabaseMigrationController extends Controller
                     'matrimony_description' => 'matrimony_description',
                     'banner'                => 'banner_img',
                     'search_type'           => 'search_type',
-                    'matrimony_name'        => 'matrimony_name',
+                    // ❌ REMOVED: 'matrimony_name' => 'matrimony_name',
                     'matri_id_groom'        => 'matri_id_groom',
                     'matri_id_bride'        => 'matri_id_bride',
                     'meta_keyword'          => 'meta_keyword',
@@ -302,11 +302,74 @@ class DatabaseMigrationController extends Controller
                     'lang_code'  => 'en',
                     'lang_id'    => 1,
                     'match_type' => 0,
-                    'slug'       => function ($row) {
+
+                    'slug' => function ($row) {
                         return !empty($row->pagename)
                             ? \Illuminate\Support\Str::slug($row->pagename)
                             : null;
                     },
+
+                    // 🔑 Dynamic lookup: search_type + matrimony_name → master table id
+                    'matrimony_name' => function ($row) {
+
+                        $tableMap = [
+                            'religion'      => 'religion_master',
+                            'caste'         => 'caste_master',
+                            'mother_tongue' => 'mothertongue_master',
+                            'country'       => 'country_master',
+                            'state'         => 'state_master',
+                            'city'          => 'city_master',
+                            'occupation'    => 'occupation_master',
+                            'education'     => 'education_master',
+                            'designation'   => 'designation_master',
+                            'star'          => 'star_master',
+                            'moonsign'      => 'moonsign_master',
+                            'income'        => 'annual_income_master',
+                        ];
+
+                        $nameColumnMap = [
+                            'religion_master'      => 'religion_name',
+                            'caste_master'         => 'caste_name',
+                            'mothertongue_master'  => 'mtongue_name',
+                            'country_master'       => 'country_name',
+                            'state_master'         => 'state_name',
+                            'city_master'          => 'city_name',
+                            'occupation_master'    => 'occupation_name',
+                            'education_master'     => 'education_name',
+                            'designation_master'   => 'designation_name',
+                            'star_master'          => 'star_name',
+                            'moonsign_master'      => 'moonsign_name',
+                            'annual_income_master' => 'annual_income_name',
+                        ];
+
+                        $searchType = strtolower(trim((string) ($row->search_type ?? '')));
+                        $name       = trim((string) ($row->matrimony_name ?? ''));
+
+                        if ($searchType === '' || $name === '') {
+                            return null;
+                        }
+
+                        if (!isset($tableMap[$searchType])) {
+                            return null;
+                        }
+
+                        $table = $tableMap[$searchType];
+
+                        if (!isset($nameColumnMap[$table])) {
+                            return null;
+                        }
+
+                        $nameColumn = $nameColumnMap[$table];
+
+                        // 🔎 Lookup ID from target DB (Promax)
+                        $id = \DB::connection('mysql')
+                            ->table($table)
+                            ->where($nameColumn, $name)
+                            ->value('id');
+
+                        return $id; // null if not found
+                    },
+
                     'updated_at' => now(),
                     'deleted_at' => function ($row) {
                         return ($row->is_deleted === 'Yes') ? now() : null;
