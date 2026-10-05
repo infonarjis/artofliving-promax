@@ -1,0 +1,1139 @@
+/* ============================================================
+   UDAYAKEERTHI MATRIMONIAL — responsive rules
+   ============================================================ */
+@media (min-width: 1800px) {
+  .hero-couple-showcase {
+    position: absolute;
+    right: 23%;
+    bottom: 130px;
+    max-width: 640px;
+    min-width: 430px;
+    z-index: 3;
+    pointer-events: none;
+  }
+}
+
+/* desktop navbar center layout */
+@media (min-width: 992px) {
+  .nav-drawer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex: 1;
+  }
+
+  .nav-links {
+    position: absolute;
+    left: 46%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin: 0;
+  }
+}
+
+@media (max-width: 1199.98px) {
+  .badge-marriages {
+    left: -10px;
+  }
+
+  .badge-verified {
+    right: -6px;
+  }
+
+  .about-float-img {
+    width: 160px;
+    right: -20px;
+  }
+}
+
+@media (max-width: 991.98px) {
+
+  /* mobile hamburger toggler */
+  .navbar-toggler {
+    background: var(--black-color-3);
+    border: 1.5px solid var(--black-color-4);
+    border-radius: 12px;
+    width: 44px;
+    height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary-color, #E04B28);
+    font-size: 26px;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(224, 75, 40, 0.08);
+    transition: all 0.22s ease;
+    padding: 0;
+    outline: none;
+  }
+
+  .navbar-toggler:hover,
+  .navbar-toggler:focus {
+    background: #FDF1EA;
+    border-color: var(--primary-color, #E04B28);
+    color: #C03E1D;
+    transform: scale(1.04);
+    box-shadow: 0 4px 14px rgba(224, 75, 40, 0.16);
+  }
+
+  /* mobile nav drawer */
+  .nav-drawer {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: min(340px, 86vw);
+    height: 100vh;
+    height: 100dvh;
+    background: #FFFFFF;
+    background-image: linear-gradient(180deg, #FFFFFF 0%, #FDF9F6 100%);
+    border-radius: 0 24px 24px 0;
+    z-index: 1060;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: stretch;
+    padding: 24px 20px 28px;
+    box-shadow: 20px 0 50px rgba(35, 20, 10, 0.18);
+    border-right: 1px solid rgba(224, 75, 40, 0.12);
+    transition: left 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+
+  .nav-drawer::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  .nav-drawer::-webkit-scrollbar-thumb {
+    background: rgba(224, 75, 40, 0.18);
+    border-radius: 4px;
+  }
+
+  .nav-drawer.open {
+    left: 0;
+  }
+
+  .nav-drawer-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--black-color-4);
+    margin-bottom: 10px;
+    flex-shrink: 0;
+  }
+
+  .nav-drawer-head .brand-logo {
+    height: 42px;
+    width: auto;
+    max-width: 175px;
+    object-fit: contain;
+  }
+
+  .close-toggle {
+    background: var(--black-color-3);
+    border: 1px solid var(--black-color-4);
+    border-radius: 50%;
+    width: 38px;
+    height: 38px;
+    font-size: 22px;
+    color: var(--primary-color, #E04B28);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    padding: 0;
+  }
+
+  .close-toggle:hover {
+    background: var(--primary-color, #E04B28);
+    color: #FFFFFF;
+    border-color: var(--primary-color, #E04B28);
+    transform: rotate(90deg) scale(1.08);
+  }
+
+  .nav-links {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    position: static;
+    transform: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    list-style: none;
+    flex-grow: 1;
+  }
+
+  .nav-links li {
+    width: 100%;
+    list-style: none;
+  }
+
+  .nav-item {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    /* justify-content: space-between !important; */
+    width: 100%;
+    padding: 12px 16px !important;
+    border-radius: 12px !important;
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: 500;
+    color: #2C201B;
+    text-decoration: none;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    background: transparent !important;
+  }
+
+  .nav-item:hover {
+    background: #FFF6F2 !important;
+    color: var(--primary-color, #E04B28);
+    padding-left: 18px !important;
+  }
+
+  .nav-item.active {
+    background: var(--black-color-3) !important;
+    color: var(--primary-color, #E04B28) !important;
+    font-weight: 600;
+    border-left: 3.5px solid var(--primary-color, #E04B28);
+    box-shadow: 0 2px 10px rgba(224, 75, 40, 0.08);
+  }
+
+  .nav-item .active-indicator {
+    display: none !important;
+  }
+
+  /* mobile dropdown accordion */
+  .nav-dropdown-wrap {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .dropdown-toggle-fc {
+    cursor: pointer;
+  }
+
+  .dropdown-toggle-fc .nav-arrow {
+    font-size: 20px;
+    color: #786B65;
+    transition: transform 0.25s ease, color 0.25s ease;
+    margin-left: auto;
+  }
+
+  .nav-dropdown-wrap.open>.dropdown-toggle-fc {
+    color: var(--primary-color, #E04B28);
+    background: #FFF8F5 !important;
+  }
+
+  .nav-dropdown-wrap.open>.dropdown-toggle-fc .nav-arrow {
+    transform: rotate(180deg);
+    color: var(--primary-color, #E04B28);
+  }
+
+  .fc-dropdown-menu {
+    display: none;
+    position: static;
+    transform: none !important;
+    opacity: 1;
+    visibility: visible;
+    background: #FAF6F3;
+    border-radius: 14px;
+    padding: 8px 10px;
+    margin: 6px 0 10px;
+    border: 1px solid var(--black-color-4);
+    box-shadow: inset 0 2px 6px rgba(44, 32, 27, 0.03);
+    min-width: unset;
+    width: 100%;
+    list-style: none;
+  }
+
+  .fc-dropdown-menu li {
+    margin-bottom: 4px;
+    list-style: none;
+  }
+
+  .fc-dropdown-menu li:last-child {
+    margin-bottom: 0;
+  }
+
+  .fc-dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 9px 12px;
+    border-radius: 10px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    background: transparent;
+  }
+
+  .fc-dropdown-item:hover {
+    background: #FFFFFF;
+    box-shadow: 0 3px 10px rgba(224, 75, 40, 0.08);
+    transform: translateX(3px);
+  }
+
+  .dropdown-item-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 9px;
+    background: #FFF0E8;
+    color: var(--primary-color, #E04B28);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 17px;
+    flex-shrink: 0;
+    transition: all 0.2s ease;
+  }
+
+  .fc-dropdown-item:hover .dropdown-item-icon {
+    background: var(--primary-color, #E04B28);
+    color: #FFFFFF;
+  }
+
+  .dropdown-item-text {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+  }
+
+  .dropdown-item-title {
+    font-size: 13.5px;
+    font-weight: 600;
+    color: #241A16;
+  }
+
+  .dropdown-item-desc {
+    font-size: 11px;
+    color: #786B65;
+  }
+
+  /* mobile drawer CTA actions */
+  .nav-cta-wrap {
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(224, 75, 40, 0.12);
+    display: flex;
+    flex-direction: column;
+    align-items: stretch !important;
+    gap: 10px !important;
+    flex-shrink: 0;
+  }
+
+  .nav-login-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 44px;
+    border-radius: 999px;
+    border: 1.5px solid var(--black-color-4);
+    color: var(--primary-color, #E04B28);
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 14.5px;
+    text-align: center;
+    background: #FFFFFF;
+    text-decoration: none;
+    transition: all 0.22s ease;
+  }
+
+  .nav-login-link:hover {
+    border-color: var(--primary-color, #E04B28);
+    color: #FFFFFF;
+    background: var(--primary-color, #E04B28);
+    box-shadow: 0 4px 12px rgba(224, 75, 40, 0.25);
+  }
+
+  .btn-join-nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 46px;
+    border-radius: 999px;
+    background: var(--primary-color, #E04B28);
+    color: #FFFFFF;
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 14.5px;
+    box-shadow: 0 6px 18px rgba(211, 67, 32, 0.28);
+    gap: 6px;
+    text-decoration: none;
+    transition: all 0.25s ease;
+  }
+
+  .btn-join-nav:hover {
+    background: var(--primary-color, #E04B28);
+    color: #FFFFFF;
+    transform: translateY(-1px);
+    box-shadow: 0 8px 24px rgba(211, 67, 32, 0.38);
+  }
+
+  .nav-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(26, 16, 12, 0.55);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    z-index: 1050;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .nav-overlay.show {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .site-nav {
+    position: relative;
+    z-index: auto !important;
+    background: #FFFFFF;
+    border-bottom: 1px solid rgba(235, 222, 210, 0.6);
+    padding: 14px 0;
+  }
+
+  /* hero */
+
+  .hero-section {
+    padding: 40px 0 40px;
+    background-position: center center;
+  }
+
+  .title-line-1 {
+    white-space: normal;
+  }
+
+  .hero-couple-showcase {
+    position: relative;
+    right: auto;
+    bottom: auto;
+    width: 100%;
+    max-width: 440px;
+    margin: 30px auto 20px;
+  }
+
+  .hero-script-tag {
+    right: 5px;
+    top: 50%;
+  }
+
+  .hero-eyebrow-badge {
+    margin-top: 10px;
+  }
+
+  .hero-copy {
+    text-align: center;
+  }
+
+  .hero-lede {
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 14px;
+  }
+
+  .hero-actions {
+    justify-content: center;
+  }
+
+  .hero-feature-pills {
+    justify-content: center;
+  }
+
+  /* search form on tablets */
+  .search-form-grid {
+    flex-wrap: wrap;
+    gap: 14px;
+  }
+
+  .search-col {
+    flex: 1 1 calc(33.333% - 14px);
+    min-width: 160px;
+  }
+
+  .search-btn-col {
+    flex: 1 1 100%;
+  }
+
+  .steps-track::before {
+    display: none;
+  }
+
+  .app-panel {
+    padding: 44px 36px 0;
+  }
+
+  .grid-app-layout {
+    flex-direction: column;
+  }
+
+  .app-mockup {
+    margin-top: 0;
+  }
+
+  .about-media {
+    margin-bottom: 60px;
+  }
+
+  .experience-tag {
+    left: 0;
+  }
+
+  .about-float-img {
+    display: none;
+  }
+
+  .personalized-image-wrap {
+    margin-bottom: 50px;
+  }
+
+  .personalized-badge {
+    left: 0;
+  }
+
+  .stories-head {
+    text-align: center;
+    padding-right: 0;
+  }
+
+  .stories-head .slider-arrows {
+    justify-content: center;
+  }
+
+  /* Cathedral Bento Grid (Tablets) */
+  .why-bento-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .why-col-center {
+    order: -1;
+    max-width: 500px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .cathedral-arch-wrapper {
+    min-height: 460px;
+  }
+
+  .cathedral-arch-frame,
+  .cathedral-img {
+    min-height: 460px;
+  }
+
+  .why-bento-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .vishwa-reach-card {
+    padding: 38px 28px;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .hero-title {
+    font-size: clamp(28px, 7.5vw, 40px);
+  }
+
+  .hero-couple-showcase {
+    max-width: 340px;
+    margin: 0 auto 25px;
+  }
+
+  .hero-script-tag {
+    display: none;
+  }
+
+  .hero-feature-pills {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0px;
+    /* max-width: 360px; */
+    /* margin: 0 auto 26px; */
+    text-align: left;
+  }
+
+  .feature-pill-item {
+    gap: 8px;
+  }
+
+  .search-col {
+    flex: 1 1 calc(50% - 14px);
+    min-width: 140px;
+  }
+
+  .search-card-sanatan {
+    padding: 20px 18px;
+    border-radius: 20px;
+  }
+
+  .search-band {
+    margin-top: -45px;
+  }
+
+  .badge-marriages {
+    left: -6px;
+    bottom: 30px;
+    padding: 10px 14px;
+  }
+
+  .badge-num {
+    font-size: 24px;
+  }
+
+  .badge-verified {
+    top: 40px;
+    padding: 10px 14px;
+    font-size: 13px;
+  }
+
+  .deco-hero-3,
+  .deco-profiles,
+  .deco-community {
+    display: none;
+  }
+
+  .search-band {
+    margin-top: -60px;
+  }
+
+  .search-card {
+    padding: 22px 20px 26px;
+    border-radius: 22px;
+  }
+
+  .steps-section {
+    padding: 60px 0 50px;
+  }
+
+  .fc-steps-header {
+    margin-bottom: 38px;
+  }
+
+  .fc-cta-inner {
+    flex-direction: column;
+    text-align: center;
+    padding: 24px 20px;
+  }
+
+  .fc-cta-text {
+    flex-direction: column;
+    text-align: center;
+    gap: 12px;
+  }
+
+  .fc-cta-text .text-start {
+    text-align: center !important;
+  }
+
+  .btn-fc-cta-pill {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .profiles-section {
+    padding: 50px 0 60px;
+  }
+
+  .fc-profiles-head {
+    text-align: center;
+    justify-content: center !important;
+  }
+
+  .fc-profiles-head .lastProfileArrows {
+    justify-content: center;
+    width: 100%;
+    margin-top: 14px;
+  }
+
+  .stories-section {
+    padding: 30px 0 30px;
+  }
+
+  .fc-spotlight-media {
+    min-height: 260px;
+    max-height: 320px;
+  }
+
+  .fc-spotlight-content {
+    padding: 28px 20px 24px;
+  }
+
+  .fc-spotlight-names {
+    font-size: 22px;
+  }
+
+  .fc-spotlight-actions {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+  }
+
+  .btn-fc-story-primary {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .fc-testimony-card {
+    padding: 18px;
+  }
+
+  .fc-stories-bottom-bar {
+    padding: 22px 18px;
+  }
+
+  .why-us-section {
+    padding: 55px 0 50px;
+  }
+
+  .why-header-wrap {
+    margin-bottom: 34px;
+  }
+
+  .why-sacred-heading {
+    font-size: 26px;
+  }
+
+  .why-sacred-lead {
+    font-size: 14.5px;
+    margin-bottom: 20px;
+  }
+
+  .why-trust-ticker {
+    border-radius: 18px;
+    padding: 10px 14px;
+    gap: 10px !important;
+  }
+
+  .ticker-divider {
+    display: none;
+  }
+
+  .ticker-item {
+    font-size: 12px;
+  }
+
+  .why-bento-col {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .cathedral-arch-wrapper {
+    min-height: 400px;
+  }
+
+  .cathedral-arch-frame,
+  .cathedral-img {
+    min-height: 400px;
+  }
+
+  .badge-left-church {
+    top: 60px;
+    left: -8px;
+    padding: 8px 12px;
+  }
+
+  .badge-right-screened {
+    top: 180px;
+    right: -8px;
+    padding: 8px 12px;
+  }
+
+  .cathedral-badge .badge-icon-wrap {
+    width: 32px;
+    height: 32px;
+    font-size: 17px;
+  }
+
+  .badge-info strong {
+    font-size: 12px;
+  }
+
+  .badge-info span {
+    font-size: 10px;
+  }
+
+  .cathedral-pedestal-card {
+    padding: 10px 12px;
+    bottom: 10px;
+    left: 10px;
+    right: 10px;
+  }
+
+  .pedestal-quote p {
+    font-size: 11.5px;
+  }
+
+  .why-ecumenical-dock {
+    padding: 18px 16px;
+  }
+
+  .dock-tags-wrap {
+    justify-content: center;
+  }
+
+  .vishwa-reach-section {
+    padding: 55px 0 50px;
+  }
+
+  .vishwa-reach-card {
+    padding: 28px 16px;
+    border-radius: 24px;
+  }
+
+  .vishwa-reach-title {
+    font-size: 24px;
+  }
+
+  .vishwa-reach-header {
+    margin-bottom: 24px;
+  }
+
+  .vishwa-diaspora-hub-card {
+    padding: 22px 16px;
+  }
+
+  .vishwa-metric-card {
+    padding: 18px 16px;
+  }
+
+  .app-section {
+    padding: 55px 0 30px;
+    overflow: hidden;
+  }
+
+  .sanatan-app-panel,
+  .fc-app-panel {
+    padding: 38px 20px 0;
+    border-radius: 26px;
+  }
+
+  .sanatan-app-copy,
+  .fc-app-copy {
+    padding-bottom: 36px;
+    text-align: center;
+  }
+
+  .sanatan-app-features-list,
+  .fc-app-features-list {
+    align-items: flex-start;
+    display: inline-flex;
+    text-align: left;
+  }
+
+  .sanatan-app-copy .d-flex,
+  .fc-app-copy .d-flex {
+    justify-content: center;
+  }
+
+  .sanatan-app-reviews,
+  .fc-app-reviews {
+    align-items: center;
+  }
+
+  .sanatan-stars,
+  .fc-stars {
+    justify-content: center;
+  }
+
+  .sanatan-app-mockup-wrap,
+  .fc-app-mockup-wrap {
+    margin-top: 10px;
+  }
+
+  .float-top-left {
+    top: 0;
+    left: 0;
+    padding: 8px 12px;
+  }
+
+  .float-bottom-right {
+    bottom: 15px;
+    right: 0;
+    padding: 8px 12px;
+  }
+
+  .deco-app {
+    width: 80px;
+    right: -14px;
+    top: -22px;
+  }
+
+  .exp-num {
+    font-size: 32px;
+  }
+
+  .sanatan-directory-section,
+  .fc-directory-section {
+    padding: 55px 0 50px;
+  }
+
+  .sanatan-community-nav {
+    border-radius: 24px;
+    padding: 4px;
+    justify-content: center;
+  }
+
+  .sanatan-community-nav .nav-link {
+    padding: 8px 14px;
+    font-size: 12.5px;
+  }
+
+  .sanatan-dir-panel,
+  .fc-dir-card {
+    padding: 22px 18px;
+    border-radius: 22px;
+  }
+
+  .sanatan-dir-panel-header,
+  .fc-dir-card-header {
+    gap: 12px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .sanatan-dir-bottom-banner,
+  .fc-dir-bottom-banner {
+    padding: 22px 18px;
+    text-align: center;
+  }
+
+  .sanatan-dir-bottom-banner .d-flex,
+  .fc-dir-bottom-banner .d-flex {
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+  }
+
+  .fc-dir-bottom-banner .btn-fc-pill-primary {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .sanatan-footer-main,
+  .fc-footer-main {
+    padding-top: 50px;
+  }
+
+  .sanatan-footer-newsletter-card,
+  .fc-footer-newsletter-card {
+    padding: 24px 18px;
+    margin-bottom: 36px;
+    text-align: center;
+  }
+
+  .sanatan-footer-newsletter-card .d-flex,
+  .fc-footer-newsletter-card .d-flex {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .sanatan-input-group,
+  .fc-input-group {
+    flex-direction: column;
+    padding: 12px 14px;
+    border-radius: 22px;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .sanatan-input-icon,
+  .fc-input-icon {
+    top: 15px;
+  }
+
+  .sanatan-newsletter-input,
+  .fc-newsletter-input {
+    padding-left: 28px;
+    width: 100%;
+  }
+
+  .sanatan-newsletter-btn,
+  .fc-newsletter-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .sanatan-newsletter-guarantee,
+  .fc-newsletter-guarantee {
+    margin-left: 0;
+    text-align: center;
+  }
+
+  .sanatan-footer-brand-wrap,
+  .fc-footer-brand-wrap {
+    padding-right: 0;
+    text-align: center;
+  }
+
+  .sanatan-footer-socials,
+  .fc-footer-socials {
+    justify-content: center;
+  }
+
+  .sanatan-footer-bottom-bar .d-flex,
+  .fc-footer-bottom-bar .d-flex {
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .progress-wrap {
+    right: 16px;
+    bottom: 16px;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .brand-wordmark {
+    font-size: 17px;
+  }
+
+  .brand-logo {
+    width: 180px;
+    height: auto;
+  }
+
+  .hero-actions .btn-fc-primary,
+  .hero-actions .btn-fc-secondary {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .search-col {
+    flex: 1 1 100%;
+  }
+
+  .hero-actions .btn-pill {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .section-title {
+    font-size: 28px;
+  }
+
+  .hero-arch {
+    border-radius: 180px 180px 20px 20px;
+    border-width: 7px;
+  }
+
+  .why-arch,
+  .about-arch {
+    border-radius: 170px 170px 20px 20px;
+  }
+
+  .personalized-arch-main {
+    border-radius: 170px 170px 20px 20px;
+  }
+
+  .app-tagline {
+    font-size: 15.5px;
+  }
+
+  .store-badge {
+    height: 46px;
+  }
+}
+@media (min-width: 992px) {
+    .site-nav-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+    }
+
+    .brand-lockup {
+        flex-shrink: 0;
+    }
+
+    .brand-logo {
+        max-width: 180px;
+        height: auto;
+    }
+
+    .nav-drawer {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        flex: 1;
+        min-width: 0;
+        gap: 18px;
+    }
+
+    .nav-links {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 24px;
+        flex: 1;
+        min-width: 0;
+        padding: 0;
+        margin: 0;
+    }
+
+    .nav-links > li {
+        flex-shrink: 0;
+    }
+
+    .nav-links .nav-item {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        white-space: nowrap;
+    }
+
+    .nav-cta-wrap {
+        display: flex;
+        align-items: center;
+        gap: 10px !important;
+        flex-shrink: 0;
+    }
+}
+
+/* Switch to the mobile drawer before desktop links overlap */
+@media (min-width: 992px) and (max-width: 1199.98px) {
+    .brand-logo {
+        max-width: 135px;
+    }
+
+    .nav-drawer {
+        gap: 10px;
+    }
+
+    .nav-links {
+        gap: 9px;
+    }
+
+    .nav-links .nav-item {
+        gap: 4px;
+        font-size: 12px;
+    }
+
+    .nav-cta-wrap {
+        gap: 7px !important;
+    }
+
+    .nav-login-link {
+        font-size: 12px;
+    }
+
+    .btn-join-nav {
+        padding-left: 14px;
+        padding-right: 14px;
+    }
+}

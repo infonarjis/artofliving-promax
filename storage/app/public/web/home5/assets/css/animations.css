@@ -1,0 +1,257 @@
+/* ==========================================================================
+   TWILIGHT ROSE — Animations & Motion System
+   ========================================================================== */
+
+/* ---- Floating Keyframes ---- */
+@keyframes floatY {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-16px); }
+}
+
+@keyframes floatYSlow {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes floatX {
+  0%, 100% { transform: translateX(0px); }
+  50% { transform: translateX(12px); }
+}
+
+@keyframes floatRotate {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  33% { transform: translateY(-12px) rotate(8deg); }
+  66% { transform: translateY(-6px) rotate(-5deg); }
+}
+
+/* ---- Glow Pulsing ---- */
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(232, 86, 127, 0.3); }
+  50% { box-shadow: 0 0 20px 8px rgba(232, 86, 127, 0.08); }
+}
+
+@keyframes pulseGlowAccent {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255, 179, 71, 0.3); }
+  50% { box-shadow: 0 0 20px 8px rgba(255, 179, 71, 0.08); }
+}
+
+/* ---- Gradient Mesh Shift ---- */
+@keyframes meshShift {
+  0%, 100% { background-position: 0% 50%; }
+  25% { background-position: 100% 25%; }
+  50% { background-position: 100% 50%; }
+  75% { background-position: 0% 75%; }
+}
+
+/* ---- Scale Bounce ---- */
+@keyframes scaleBounce {
+  0% { transform: scale(0.8); opacity: 0; }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* ---- Shimmer / Shine Effect ---- */
+@keyframes shimmer {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+/* ---- Soft Fade Slide Up ---- */
+@keyframes fadeSlideUp {
+  0% { opacity: 0; transform: translateY(30px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* ---- Soft Fade Slide Down ---- */
+@keyframes fadeSlideDown {
+  0% { opacity: 0; transform: translateY(-20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* ---- Rotating Border ---- */
+@keyframes rotateBorder {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* ---- Blob Morph ---- */
+@keyframes blobMorph {
+  0%, 100% {
+    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  }
+  25% {
+    border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+  }
+  50% {
+    border-radius: 50% 60% 30% 60% / 30% 50% 70% 60%;
+  }
+  75% {
+    border-radius: 60% 40% 60% 30% / 70% 30% 50% 60%;
+  }
+}
+
+/* ---- Staggered Card Reveal (for use with JS/IntersectionObserver) ---- */
+.reveal-card {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-card.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-card:nth-child(1) { transition-delay: 0.05s; }
+.reveal-card:nth-child(2) { transition-delay: 0.1s; }
+.reveal-card:nth-child(3) { transition-delay: 0.15s; }
+.reveal-card:nth-child(4) { transition-delay: 0.2s; }
+.reveal-card:nth-child(5) { transition-delay: 0.25s; }
+.reveal-card:nth-child(6) { transition-delay: 0.3s; }
+
+/* ---- Subtle Link Underline Grow ---- */
+.animated-underline {
+  position: relative;
+}
+
+.animated-underline::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--primary-gradient);
+  transition: width 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.animated-underline:hover::after {
+  width: 100%;
+}
+
+/* ---- Orbit Dots ---- */
+@keyframes orbitDot {
+  0% { transform: rotate(0deg) translateX(60px) rotate(0deg); }
+  100% { transform: rotate(360deg) translateX(60px) rotate(-360deg); }
+}
+
+/* ---- Breathing Scale ---- */
+@keyframes breathe {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.03); }
+}
+
+/* ---- Typewriter Cursor Blink ---- */
+@keyframes cursorBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* ---- Gradient Text Animation ---- */
+@keyframes gradientText {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.animated-gradient-text {
+  background: linear-gradient(270deg, #FF6B8A, #C2185B, #FFB347, #FF6B8A);
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradientText 6s ease infinite;
+}
+
+/* ---- Ripple Effect ---- */
+@keyframes ripple {
+  0% { transform: scale(0.8); opacity: 1; }
+  100% { transform: scale(2.4); opacity: 0; }
+}
+
+/* ---- Counter Number Slide ---- */
+@keyframes numberSlide {
+  0% { transform: translateY(100%); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+/* ---- Smooth Entrance from Left/Right ---- */
+@keyframes slideInLeft {
+  0% { opacity: 0; transform: translateX(-40px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideInRight {
+  0% { opacity: 0; transform: translateX(40px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+
+/* ---- About Section Decorative Animations ---- */
+.topLeftimg {
+  animation: floatYSlow 5s ease-in-out infinite;
+}
+
+.bottomRightimg {
+  animation: floatYSlow 6s ease-in-out infinite 0.5s;
+}
+
+/* ---- Decorative Dot Particle Field ---- */
+.gm-hero-section .hero-dot {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--primary);
+  opacity: 0.15;
+  animation: floatY 4s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.gm-hero-section .hero-dot:nth-child(1) {
+  top: 15%;
+  left: 8%;
+  animation-delay: 0s;
+  animation-duration: 4.5s;
+}
+
+.gm-hero-section .hero-dot:nth-child(2) {
+  top: 35%;
+  right: 12%;
+  animation-delay: 0.8s;
+  animation-duration: 5s;
+  width: 4px;
+  height: 4px;
+  background: var(--accent);
+}
+
+.gm-hero-section .hero-dot:nth-child(3) {
+  bottom: 25%;
+  left: 15%;
+  animation-delay: 1.5s;
+  animation-duration: 5.5s;
+  width: 8px;
+  height: 8px;
+}
+
+.gm-hero-section .hero-dot:nth-child(4) {
+  bottom: 40%;
+  right: 20%;
+  animation-delay: 0.5s;
+  animation-duration: 4s;
+  width: 5px;
+  height: 5px;
+  background: var(--accent);
+}
+
+/* ---- Reduce Motion Preference ---- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

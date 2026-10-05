@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 245 50" width="245" height="50" fill="none">
+  <!-- Lotus Icon -->
+  <g transform="translate(2, 2)">
+    <!-- Outer Side Petals (Maroon) -->
+    <path d="M22 36 C10 32 -1 24 2 13 C9 17 18 24 22 36 Z" fill="#681628"/>
+    <path d="M22 36 C34 32 45 24 42 13 C35 17 26 24 22 36 Z" fill="#681628"/>
+    
+    <!-- Lower Horizontal Petals (Warm Gold) -->
+    <path d="M22 36 C10 37 -1 35 1 26 C10 26 17 32 22 36 Z" fill="#c48834"/>
+    <path d="M22 36 C34 37 45 35 43 26 C34 26 27 32 22 36 Z" fill="#c48834"/>
+    
+    <!-- Central Maroon Petal -->
+    <path d="M22 6 C13 16 13 30 22 38 C31 30 31 16 22 6 Z" fill="#681628"/>
+    
+    <!-- Inner Golden Flame in Central Petal -->
+    <path d="M22 13 C17 19 17 28 22 34 C27 28 27 19 22 13 Z" fill="#d99b38"/>
+    
+    <!-- Base Golden Diamond / Drop -->
+    <path d="M22 39 L24 43 L22 47 L20 43 Z" fill="#c48834"/>
+    
+    <!-- Tiny Accent Golden Dots -->
+    <circle cx="8" cy="18" r="1.5" fill="#d99b38"/>
+    <circle cx="36" cy="18" r="1.5" fill="#d99b38"/>
+  </g>
+
+  <!-- Brand Typography -->
+  <g transform="translate(54, 0)">
+    <!-- Vivah (Maroon) -->
+    <text x="0" y="28" font-family="'Raleway', sans-serif" font-size="28" font-weight="800" fill="#681628" letter-spacing="-0.5">Vivah</text>
+    <!-- Sutra (Gold) -->
+    <text x="96" y="28" font-family="'Raleway', sans-serif" font-size="28" font-weight="800" fill="#ba812c" letter-spacing="-0.5">Sutra</text>
+    <!-- Tagline (Tradition Meets Tomorrow) -->
+    <text x="1" y="42" font-family="'Plus Jakarta Sans', Arial, sans-serif" font-size="7.5" font-weight="700" fill="#5a3d31" letter-spacing="2.8">TRADITION MEETS TOMORROW</text>
+  </g>
+</svg>

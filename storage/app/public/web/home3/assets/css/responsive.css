@@ -1,0 +1,663 @@
+@media only screen and (max-width: 1399px) {
+  .hero-main-title {
+    font-size: 48px;
+  }
+}
+
+@media only screen and (max-width: 1199px) {
+  .main-hero-section {
+    padding-bottom: 20px;
+  }
+
+  .hero-main-title {
+    font-size: 40px;
+    line-height: 1.15;
+  }
+
+  .stat-active-members {
+    top: 8%;
+    left: -2%;
+  }
+
+  .stat-success-stories {
+    bottom: 16%;
+    right: -2%;
+  }
+}
+
+@media only screen and (max-width: 991px) {
+
+  /* Mobile Navigation Drawer */
+  .navbar-toggler {
+    background: var(--primary-color) !important;
+    color: #ffffff !important;
+    border: none;
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    box-shadow: 0 4px 14px rgba(49, 70, 46, 0.3);
+    cursor: pointer;
+  }
+
+  .mobile-nav-header {
+    width: 100%;
+  }
+
+  .navbar-ui li {
+    width: 100%;
+  }
+
+  .navbar-ui-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    transform: translateX(-105%);
+    visibility: hidden;
+    width: 290px;
+    max-width: 85vw;
+    height: 100vh;
+    background-color: #ffffff;
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.35s;
+    z-index: 10000;
+    overflow-y: auto;
+    border-radius: 0 24px 24px 0;
+    padding: 24px 20px;
+    box-shadow: 10px 0 35px rgba(0, 0, 0, 0.18);
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .navbar-ui-wrapper.active {
+    transform: translateX(0) !important;
+    visibility: visible !important;
+  }
+
+  .mobile-nav-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    z-index: 9999;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+  }
+
+  .mobile-nav-backdrop.active {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .close-toggle {
+    background: #f4efe6;
+    height: 38px;
+    width: 38px;
+    border-radius: 50%;
+    color: var(--primary-color);
+    font-size: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    cursor: pointer;
+    transition: 0.2s ease;
+  }
+
+  .close-toggle:hover {
+    background: var(--primary-color);
+    color: #ffffff;
+  }
+
+  .navbar-ui-wrapper .navbar-ui {
+    display: flex;
+    flex-direction: column;
+    padding-left: 0;
+    margin-bottom: 15px;
+    gap: 17px !important;
+    width: 100%;
+    margin-top: 26px;
+  }
+
+  .navbar-ui-wrapper .nav-item {
+    display: flex;
+    align-items: center;
+    padding: 10px 16px;
+    border-radius: 48px;
+    font-size: 15px;
+    font-weight: 600;
+    color: #1a221b;
+    text-decoration: none;
+    transition: 0.2s ease;
+  }
+
+  .navbar-ui-wrapper .nav-item:hover,
+  .navbar-ui-wrapper .nav-item.nav-pill-active {
+    background: rgba(49, 70, 46, 0.08) !important;
+    color: var(--primary-color) !important;
+  }
+
+  .navbar-ui-wrapper .btn-login-pill {
+    width: 100%;
+    justify-content: center;
+    padding: 12px 20px;
+  }
+
+  /* Mobile Search Dropdown in Drawer */
+  .navbar-ui-wrapper .nav-item-dropdown {
+    width: 100%;
+  }
+
+  .navbar-ui-wrapper .nav-custom-dropdown-menu {
+    position: static;
+    transform: none;
+    box-shadow: none;
+    border: 1px solid rgba(197, 164, 103, 0.2);
+    background: #fbfaf7;
+    border-radius: 18px;
+    padding: 8px;
+    margin-top: 6px;
+    margin-bottom: 6px;
+    display: none;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    width: 100%;
+    min-width: 100%;
+  }
+
+  .navbar-ui-wrapper .nav-custom-dropdown-menu::before {
+    display: none;
+  }
+
+  .navbar-ui-wrapper .nav-item-dropdown.open .nav-custom-dropdown-menu {
+    display: block;
+    animation: mobileMenuDrop 0.25s ease-out forwards;
+  }
+
+  .navbar-ui-wrapper .dropdown-item-custom {
+    padding: 9px 12px;
+  }
+
+  .navbar-ui-wrapper .dropdown-icon-box {
+    width: 34px;
+    height: 34px;
+    font-size: 18px;
+  }
+
+  @keyframes mobileMenuDrop {
+    from {
+      opacity: 0;
+      transform: translateY(-8px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Hero Mobile Styling */
+  .main-header-bg {
+    background-image:
+      linear-gradient(180deg, rgba(248, 243, 233, 0.93) 0%, rgba(248, 243, 233, 0.88) 50%, rgba(248, 243, 233, 0.96) 100%),
+      url("../images/hero-bg.png");
+    background-size: cover;
+    background-position: 80% center;
+    min-height: auto;
+    padding-bottom: 25px;
+  }
+
+  .main-hero-section {
+    padding-top: 15px;
+    padding-bottom: 10px;
+  }
+
+  .hero-content-row {
+    min-height: auto;
+  }
+
+  .hero-left-contents {
+    max-width: 100%;
+    text-align: center;
+    padding-right: 0 !important;
+    margin: 0 auto;
+  }
+
+  .hero-top-badge {
+    padding: 5px 14px;
+    font-size: 11px;
+    margin-bottom: 12px;
+  }
+
+  .hero-main-title {
+    font-size: 32px;
+    line-height: 1.2;
+    margin-top: 6px;
+    margin-bottom: 12px;
+  }
+
+  .hero-subtitle-text {
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 14px;
+    line-height: 1.55;
+    margin-bottom: 14px;
+    max-width: 95%;
+  }
+
+  .hero-trust-badges {
+    justify-content: center;
+    gap: 8px;
+    margin-top: 12px;
+    margin-bottom: 15px;
+  }
+
+  .trust-badge-card {
+    /* padding: 8px 12px 8px 8px; */
+    /* border-radius: 50px; */
+    /* gap: 8px; */
+  }
+
+  .trust-badge-icon {
+    width: 32px;
+    height: 32px;
+    font-size: 18px;
+  }
+
+  .trust-badge-title {
+    text-align: left;
+  }
+
+  .trust-badge-sub {
+    text-align: left;
+  }
+
+  .hero-right-col {
+    display: none;
+  }
+
+  .hero-search-wrapper {
+    margin-top: 15px;
+  }
+
+  .hero-search-card {
+    padding: 16px 14px;
+    border-radius: 20px;
+  }
+
+  .custom-select__trigger {
+    padding: 9px 14px;
+  }
+
+  .custom-select__value {
+    font-size: 14px;
+  }
+
+  .inner-search-section {
+    border-radius: 22px;
+    padding: 16px 14px;
+  }
+
+  .search-col-divider::after {
+    display: none;
+  }
+
+  .custom-select-trigger {
+    line-height: 30px;
+  }
+
+  .search-btn-form {
+    margin-top: 8px;
+    padding-left: 18px;
+  }
+
+  .search-btn-icon {
+    height: 44px;
+    width: 44px;
+    font-size: 24px;
+  }
+
+  .Islamic-main-image {
+    height: 420px;
+  }
+
+  .single-Islamic-card {
+    align-items: flex-start;
+  }
+
+  .Islamic-left-column {
+    margin-left: 0;
+  }
+
+  .Islamic-iconbox {
+    height: 112px;
+    width: 112px;
+    min-width: 112px;
+    border-radius: 24px;
+  }
+
+  .Islamic-iconbox i {
+    font-size: 42px;
+  }
+
+  .text_Content {
+    padding-left: 0;
+    margin-top: 34px;
+  }
+
+  .AboutUS_Section .titles_AboutUS ul {
+    gap: 5px 26px;
+  }
+
+  .AboutUS_Section .titles_AboutUS li {
+    margin-top: 20px;
+  }
+
+  .explore-community-main {
+    padding: 60px 0px;
+  }
+
+  .single-community-card {
+    padding: 20px 18px;
+    min-height: auto;
+  }
+
+  .footer-main {
+    padding-top: 56px;
+  }
+
+  .footer-top-shell {
+    border-radius: 60px;
+    padding: 16px 18px;
+  }
+
+  .footer-brand-circle {
+    margin-top: 0;
+    height: 92px;
+    width: 92px;
+    min-width: 92px;
+  }
+
+  .footer-round-logo {
+    width: 74px;
+    height: 74px;
+  }
+
+  .footer-socials a {
+    height: 46px;
+    width: 46px;
+    min-width: 46px;
+    font-size: 24px;
+  }
+}
+
+@media only screen and (max-width: 570px) {
+  .hero-main-title {
+    font-size: 34px;
+    line-height: 1.25;
+  }
+
+  .hero-subtitle-text {
+    font-size: 13.5px;
+  }
+
+  .hero-trust-badges {
+    /* flex-direction: column; */
+    width: 100%;
+  }
+
+  .trust-badge-card {
+    /* width: 100%; */
+    /* justify-content: flex-start; */
+  }
+
+  .hero-search-card {
+    padding: 14px 14px;
+  }
+
+  .btn-hero-search-submit {
+    height: 44px;
+    font-size: 13px;
+  }
+
+  .how-work-section {
+    padding: 30px 0px;
+  }
+
+  .islamic-step-card {
+    padding: 26px 20px;
+    border-radius: 22px;
+  }
+
+  .step-title {
+    font-size: 20px;
+  }
+
+  .step-desc {
+    font-size: 13.5px;
+    margin-bottom: 18px;
+  }
+
+  .islamic-arch-iconbox {
+    width: 68px;
+    height: 68px;
+    border-radius: 20px 20px 14px 14px;
+    margin-bottom: 18px;
+  }
+
+  .step-icon-main {
+    font-size: 32px;
+  }
+
+  .last-added-section {
+    background: #ffffff;
+    padding: 40px 0px;
+  }
+
+  .islamic-stories-wrapper {
+    padding: 24px 16px !important;
+    border-radius: 24px;
+  }
+
+  .story-couple-title {
+    font-size: 18px;
+  }
+
+  .profile-card-image-wrap {
+    height: 280px;
+  }
+
+  .profile-info-body {
+    padding: 16px 14px;
+  }
+
+  .profile-name {
+    font-size: 18px;
+  }
+
+  .islamic-main-arch-frame {
+    height: 360px;
+    border-radius: 120px 120px 24px 24px;
+  }
+
+  .islamic-showcase-wrapper {
+    padding: 10px 0;
+  }
+
+  .float-top-right {
+    top: 20px;
+    right: 5px;
+  }
+
+  .float-bottom-left {
+    bottom: 30px;
+    left: 5px;
+  }
+
+  .float-bottom-right {
+    display: none;
+  }
+
+  .islamic-app-card {
+    padding: 30px 20px !important;
+    border-radius: 26px;
+  }
+
+  .app-floating-pill {
+    display: none;
+  }
+
+  .app-users-glass-card {
+    position: relative;
+    bottom: 0;
+    left: 0;
+    margin-top: 15px;
+    display: inline-block;
+  }
+
+  .Islamic-home-section {
+    background: #ffffff;
+    overflow: hidden;
+    padding: 40px 0px;
+  }
+
+  .language-home-section {
+    background: var(--white-color);
+    padding-bottom: 50px;
+  }
+
+  .AboutUS_Section .titles_AboutUS li {
+    font-size: 15px;
+  }
+
+  .explore-community-main {
+    padding: 50px 0px;
+  }
+
+  .single-community-card {
+    padding: 16px 14px;
+    border-radius: 20px;
+  }
+
+  .community-card-icon {
+    height: 54px;
+    width: 54px;
+    min-width: 54px;
+    border-radius: 14px;
+  }
+
+  .community-card-icon i {
+    font-size: 30px;
+  }
+
+  .footer-top-shell {
+    gap: 16px;
+    border-radius: 60px;
+    text-align: center;
+  }
+
+  .footer-brand-circle {
+    height: 82px;
+    width: 82px;
+    min-width: 82px;
+  }
+
+  .footer-round-logo {
+    width: 66px;
+    height: 66px;
+  }
+
+  .footer-socials a {
+    height: 42px;
+    width: 42px;
+    min-width: 42px;
+    font-size: 22px;
+  }
+
+  .footer-link-list li {
+    margin-bottom: 10px;
+  }
+
+  .footer-link-list li a,
+  .footer-contact-main a,
+  .footer-contact-main p,
+  .footer-copyright-bar p {
+    font-size: 14px;
+  }
+
+  .appusesesusermain {
+    right: 17px;
+    top: 220px;
+  }
+
+  .AboutUS_Section .photos_Videos_Experiance .experiance {
+    display: none;
+  }
+
+  .AboutUS_Section {
+    padding: 50px 0px;
+  }
+
+  .AboutUS_Section .photos_Videos_Experiance .centerimg {
+    left: 60px;
+    z-index: 1;
+    width: 79%;
+    margin-left: 40px;
+  }
+}
+
+@media only screen and (max-device-width: 570px) {
+  .top-stories-img .story-img-cpl {
+    height: 320px;
+  }
+
+  .success-stories-slider .slick-dots {
+    bottom: -20px;
+  }
+
+  .successStoryArrows {
+    display: none !important;
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1200px) {
+  .brand-logo {
+    width: auto;
+    height: 40px;
+    max-width: 240px;
+    object-fit: contain;
+  }
+  .btn-login-pill {
+    padding: 8px 8px;
+  }
+
+  .navbar-pro-inner {
+    gap: 10px;
+  }
+
+  .navbar-pro-inner .navbar-brand img {
+    max-width: 145px;
+  }
+
+  .nav-item {
+    gap: 5px;
+    font-size: 13px;
+  }
+
+  .navbar-pro-inner .nav-arrow {
+    font-size: 15px;
+  }
+
+  .navbar-pro-inner .btn {
+    padding: 9px 12px;
+    white-space: nowrap;
+  }
+}

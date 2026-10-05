@@ -1,0 +1,4641 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap");
+
+/* ==========================================================================
+   CSS CUSTOM PROPERTIES — "TWILIGHT ROSE" DESIGN SYSTEM
+   ========================================================================== */
+:root {
+  --primary-color: #0d56de;
+  --primary-color-rgb: 13, 86, 222;
+  --primary-light-color: #1a2a8024;
+
+  --black-color: #eff3f6;
+  --black-color-1: #ffffff;
+  --black-color-1white: #ffffff;
+  --black-color-2: #dfdfdf;
+  --black-color-2p: #090f1c;
+  --black-color-3: #ccd0d8;
+  --black-color-3primary: #0d56de;
+  --black-color-3w: #ffffff;
+  --black-color-4: #cdd2dd;
+  --black-color-5: #bbbec3;
+  --black-color-6: #c4c5c5;
+
+  --white-color: #0f1522;
+  --white-color-p: #ffffff;
+  --white-color-70: #000000b3;
+  --white-color-p70: #ffffffb3;
+
+  --input-border: #727272;
+  --input-border-light: #dadada;
+  --common-border: #cccccc47;
+
+  --green-color: #00a569;
+  --payment-color: #50b748;
+  --error-color: #f03d3e;
+  --pending-bgcolor: #ffe8c7;
+  --pending-textcolor: #d49233;
+  --accept-bgcolor: #cdfde6;
+  --accept-textcolor: #18cb75;
+  --saleText-color: #dd4949;
+  --sale-bg-color: #ffd5d5;
+
+  /* ---- added tokens: light equivalents ---- */
+  --toast-bg: rgba(255, 255, 255, 0.85);
+  --toast-border: rgba(15, 21, 34, 0.08);
+  --toast-text: #0f1522;
+  --toast-close: #9aa3af;
+
+  --otp-modal-bg: #ffffff;
+  --otp-circle-bg: #eef1f6;
+  --otp-line-color: #c9ccd2;
+  --otp-line-color-active: #0f1522;
+  --otp-divider: #e2e5ea;
+
+  --cookie-bg: rgba(255, 255, 255, 0.95);
+  --cookie-border: rgba(15, 21, 34, 0.08);
+  --cookie-title: #0f1522;
+  --cookie-text: rgba(15, 21, 34, 0.7);
+  --cookie-reject-bg: rgba(15, 21, 34, 0.04);
+  --cookie-reject-border: rgba(15, 21, 34, 0.12);
+
+  --ai-card-bg-1: linear-gradient(130deg, #eaf1ff 0%, #dce8ff 60%, #d3e2ff 100%);
+  --ai-card-bg-2: linear-gradient(130deg, #e7f1ff 0%, #d9e9ff 60%, #cfe1ff 100%);
+  --ai-card-border: rgba(13, 86, 222, 0.12);
+  --ai-title-color: #0f1e40;
+  --ai-desc-color: rgba(15, 30, 60, 0.65);
+  --ai-icon-color: #0d56de;
+  --ai-icon-bg: rgba(13, 86, 222, 0.1);
+  --ai-icon-border: rgba(13, 86, 222, 0.2);
+  --ai-label-color: #0d56de;
+  --ai-label-bg: rgba(13, 86, 222, 0.1);
+  --ai-label-border: rgba(13, 86, 222, 0.2);
+  --ai-promo-bg: #ffffffe6;
+
+  --suspended-icon-bg: rgba(255, 59, 48, 0.08);
+  --suspended-icon-color: #d9342d;
+  --suspended-ring: rgba(255, 59, 48, 0.18);
+
+  --loader-bg: #eff3f6;
+
+  /* ---- added tokens: layout, brand accents, typography ---- */
+  --bg-main: #f5f7fa;
+  --bg-sidebar: #ffffff;
+  --bg-card: #ffffff;
+  --bg-card-hover: #f0f3f8;
+  --bg-ad-banner: linear-gradient(135deg, #e7f1ff 0%, #d9e9ff 100%);
+
+  --color-text-white: #0f1522;
+  --color-text-muted: #5b6472;
+  --color-text-sub: #475569;
+
+  --border-subtle: rgba(15, 21, 34, 0.08);
+
+  /* --font-main: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-script: 'Alex Brush', cursive; */
+
+  --metric-purple-bg: rgba(139, 92, 246, 0.10);
+  --metric-purple-border: rgba(139, 92, 246, 0.25);
+  --metric-purple-text: #7c3aed;
+
+  --metric-blue-bg: rgba(59, 130, 246, 0.10);
+  --metric-blue-border: rgba(59, 130, 246, 0.25);
+  --metric-blue-text: #2563eb;
+
+  /* New */
+  --bg-card-hover: #FDFBF7;
+  /* NOT USED -- no hover-state slot in the 16-token set */
+  --bg-glass: rgba(255, 255, 255, 0.82);
+  /* NOT USED -- translucent, no flat-color slot */
+  --bg-glass-strong: rgba(255, 255, 255, 0.95);
+  /* NOT USED -- translucent, no flat-color slot */
+  --primary-hover: #085241;
+  /* NOT USED -- no hover-state slot */
+  --primary-light: rgba(13, 110, 88, 0.09);
+  /* NOT USED -- translucent tint, no slot */
+  --primary-glow: rgba(13, 110, 88, 0.28);
+  /* NOT USED -- translucent glow, no slot */
+  --accent-hover: #C59B27;
+  /* NOT USED -- no hover-state slot */
+  --accent-light: rgba(212, 175, 55, 0.14);
+  /* NOT USED -- translucent tint, no slot */
+  --accent-gradient: linear-gradient(135deg, #F59E0B 0%, #D4AF37 50%, #B45309 100%);
+  /* NOT USED -- gradient */
+  --text-body: #475B52;
+  /* NOT USED -- no matching slot (secondary-but-not-muted text tier) */
+  --text-white: #FFFFFF;
+  /* NOT USED -- redundant with --bg-card in this token set */
+  --border-glass: rgba(255, 255, 255, 0.65);
+  /* NOT USED -- translucent, no slot */
+  --shadow-sm: 0 2px 12px rgba(19, 34, 28, 0.04);
+  /* NOT USED -- box-shadow, not a color token */
+  --shadow-md: 0 8px 32px -4px rgba(19, 34, 28, 0.08);
+  /* NOT USED -- box-shadow */
+  --shadow-lg: 0 20px 60px -12px rgba(13, 110, 88, 0.16);
+  /* NOT USED -- box-shadow */
+  --shadow-glow: 0 0 40px rgba(212, 175, 55, 0.22);
+  /* NOT USED -- box-shadow */
+  --nav-border: rgba(212, 175, 55, 0.24);
+  /* NOT USED -- translucent, close relative of --accent already used for black-color-5 */
+  --radius-sm: 12px;
+  /* NOT USED -- border-radius, not a color */
+  --radius-md: 16px;
+  /* NOT USED */
+  --radius-lg: 24px;
+  /* NOT USED */
+  --radius-xl: 32px;
+  /* NOT USED */
+  --radius-full: 9999px;
+  /* NOT USED */
+
+  --font-main: "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  /* NOT USED -- typography, not color */
+}
+
+[data-theme="dark"] {
+  --primary-color: #0d56de;
+  --primary-color-rgb: 13, 86, 222;
+  --primary-light-color: #1a2a8024;
+
+  --black-color: #0f1522;
+  --black-color-1: #161d2d;
+  --black-color-1white: #161d2d;
+  --black-color-2: #090f1c;
+  --black-color-2p: #090f1c;
+  --black-color-3: #272d3a;
+  --black-color-3primary: #272d3a;
+  --black-color-3w: #272d3a;
+  --black-color-4: #313848;
+  --black-color-5: #404d60;
+  --black-color-6: #acb5bd;
+
+  --white-color: #ffffff;
+  --white-color-p: #ffffff;
+  --white-color-70: #ffffffb3;
+  --white-color-p70: #ffffffb3;
+
+  --input-border: #727272;
+  --input-border-light: #727272;
+  --common-border: #cccccc47;
+
+  --green-color: #00a569;
+  --payment-color: #50b748;
+  --error-color: #f03d3e;
+  --pending-bgcolor: #ffe8c7;
+  --pending-textcolor: #d49233;
+  --accept-bgcolor: #cdfde6;
+  --accept-textcolor: #18cb75;
+  --saleText-color: #dd4949;
+  --sale-bg-color: #ffd5d5;
+
+  /* ---- added tokens: components that used to be hardcoded ---- */
+  --toast-bg: rgba(30, 41, 59, 0.7);
+  --toast-border: rgba(255, 255, 255, 0.1);
+  --toast-text: #ffffff;
+  --toast-close: #64748b;
+
+  --otp-modal-bg: #0c1421;
+  --otp-circle-bg: #171f2c;
+  --otp-line-color: #555c68;
+  --otp-line-color-active: #ffffff;
+  --otp-divider: #313848;
+
+  --cookie-bg: rgba(22, 29, 45, 0.95);
+  --cookie-border: rgba(255, 255, 255, 0.1);
+  --cookie-title: #ffffff;
+  --cookie-text: rgba(255, 255, 255, 0.7);
+  --cookie-reject-bg: rgba(255, 255, 255, 0.05);
+  --cookie-reject-border: rgba(255, 255, 255, 0.1);
+
+  --ai-card-bg-1: linear-gradient(130deg, #0f1c3a 0%, #162550 60%, #1a2d5e 100%);
+  --ai-card-bg-2: linear-gradient(130deg, #0c1f35 0%, #112b4e 60%, #143460 100%);
+  --ai-card-border: rgba(255, 255, 255, 0.07);
+  --ai-title-color: #e8f0ff;
+  --ai-desc-color: rgba(180, 210, 255, 0.7);
+  --ai-icon-color: #7eb5ff;
+  --ai-icon-bg: rgba(78, 130, 255, 0.18);
+  --ai-icon-border: rgba(100, 150, 255, 0.25);
+  --ai-label-color: #7eb5ff;
+  --ai-label-bg: rgba(78, 130, 255, 0.15);
+  --ai-label-border: rgba(100, 160, 255, 0.2);
+  --ai-promo-bg: #161d2de6;
+
+  --suspended-icon-bg: rgba(255, 59, 48, 0.1);
+  --suspended-icon-color: #ff3b30;
+  --suspended-ring: rgba(255, 59, 48, 0.2);
+
+  --loader-bg: #0f1522;
+
+  /* ---- added tokens: layout, brand accents, typography ---- */
+  --bg-main: #0a0f1d;
+  --bg-sidebar: #101727;
+  --bg-card: #151d2f;
+  --bg-card-hover: #19243a;
+  --bg-ad-banner: linear-gradient(135deg, #132247 0%, #0d1733 100%);
+
+  --color-text-white: #ffffff;
+  --color-text-muted: #8e9ab2;
+  --color-text-sub: #64748b;
+
+  --border-subtle: rgba(255, 255, 255, 0.08);
+
+  --metric-purple-bg: rgba(139, 92, 246, 0.15);
+  --metric-purple-border: rgba(139, 92, 246, 0.35);
+  --metric-purple-text: #c4b5fd;
+
+  --metric-blue-bg: rgba(59, 130, 246, 0.15);
+  --metric-blue-border: rgba(59, 130, 246, 0.35);
+  --metric-blue-text: #93c5fd;
+
+  /* --font-main: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-script: 'Alex Brush', cursive;
+   */
+  /* DARK THEME — Deep Midnight Emerald & Arabian Gold */
+  --bg-card-hover: #142B23;
+  /* NOT USED -- no hover-state slot */
+  --bg-glass: rgba(14, 31, 25, 0.84);
+  /* NOT USED -- translucent, no slot */
+  --bg-glass-strong: rgba(23, 26, 25, 0.95);
+  /* NOT USED -- translucent, no slot */
+  --primary-hover: #10B981;
+  /* NOT USED -- no hover-state slot */
+  --primary-light: rgba(52, 211, 153, 0.12);
+  /* NOT USED -- translucent tint */
+  --primary-glow: #34d39952;
+  /* NOT USED -- translucent glow */
+  --accent-hover: #F59E0B;
+  /* NOT USED -- no hover-state slot */
+  --accent-light: rgba(251, 191, 36, 0.14);
+  /* NOT USED -- translucent tint */
+  --accent-gradient: linear-gradient(135deg, #FDE68A 0%, #F59E0B 100%);
+  /* NOT USED -- gradient */
+  --text-body: #9FC2B4;
+  /* NOT USED -- no matching slot */
+  --text-white: #FFFFFF;
+  /* NOT USED -- redundant with --text-main's role in this token set */
+  --border-glass: rgba(255, 255, 255, 0.08);
+  /* NOT USED -- translucent, duplicate of --black-color-4 here */
+  --shadow-sm: 0 2px 12px rgba(0, 0, 0, 0.45);
+  /* NOT USED -- box-shadow */
+  --shadow-md: 0 8px 32px -4px rgba(0, 0, 0, 0.55);
+  /* NOT USED -- box-shadow */
+  --shadow-lg: 0 20px 60px -12px rgba(5, 150, 105, 0.22);
+  /* NOT USED -- box-shadow */
+  --shadow-glow: 0 0 40px rgba(251, 191, 36, 0.22);
+  /* NOT USED -- box-shadow */
+  --hero-bg: linear-gradient(135deg, #050E0A 0%, #0A1C15 50%, #071510 100%);
+  /* NOT USED -- gradient */
+  --nav-border: rgba(212, 175, 55, 0.2);
+  /* NOT USED -- translucent */
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+
+body {
+  font-family: var(--font-main);
+  background-color: var(--bg-main);
+  color: var(--text-body);
+  line-height: 1.7;
+  overflow-x: hidden;
+  max-width: 100vw;
+  position: relative;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background-color: var(--primary-color);
+  color: #FFFFFF;
+}
+
+img {
+  max-width: 100%;
+}
+
+/* Typography Utilities */
+.font-heading {
+  font-family: var(--font-main) !important;
+  font-weight: 800 !important;
+}
+
+.font-arabic {
+  font-family: "Amiri", "Traditional Arabic", serif !important;
+}
+
+.text-gradient-primary {
+  background: var(--primary-color);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-gradient-gold {
+  background: var(--primary-color);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-primary-color {
+  color: var(--primary-color) !important;
+}
+
+.text-gold-color {
+  color: var(--black-color-5) !important;
+}
+
+.text-main-color {
+  color: var(--white-color) !important;
+}
+
+/* Utility font sizes */
+.fts-10 {
+  font-size: 10px;
+}
+
+.fts-14 {
+  font-size: 14px;
+}
+
+.fts-15 {
+  font-size: 15px;
+}
+
+.fts-16 {
+  font-size: 16px;
+}
+
+.fts-18 {
+  font-size: 18px;
+}
+
+.fts-20 {
+  font-size: 20px;
+}
+
+.fw-4 {
+  font-weight: 400;
+}
+
+.fw-5 {
+  font-weight: 500;
+}
+
+.fw-7 {
+  font-weight: 700;
+}
+
+.brand-logo {
+  width: auto;
+  height: 40px;
+  max-width: 240px;
+  object-fit: contain;
+}
+
+/* Section Header Component */
+.gm-section-header {
+  text-align: center;
+  max-width: 680px;
+  margin: 0 auto 36px auto;
+}
+
+.gm-pill-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 20px;
+  background: var(--primary-light);
+  color: var(--primary-color);
+  border-radius: var(--radius-full);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(232, 86, 127, 0.1);
+}
+
+.gm-section-title {
+  font-family: var(--font-main);
+  font-size: 44px;
+  font-weight: 800;
+  color: var(--white-color);
+  line-height: 1.15;
+  letter-spacing: -0.5px;
+}
+
+.gm-section-subtitle {
+  font-size: 17px;
+  color: var(--text-body);
+  margin-top: 14px;
+  line-height: 1.7;
+}
+
+/* ==========================================================================
+   FLOATING ISLAMIC GLASS NAVBAR — Distinct Luxury Pill
+   ========================================================================== */
+.gm-navbar {
+  position: sticky;
+  top: 14px;
+  z-index: 1000;
+  padding: 0 16px;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.gm-navbar.scrolled {
+  top: 8px;
+}
+
+.gm-nav-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--bg-main);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1.5px solid var(--nav-border);
+  border-radius: var(--radius-full);
+  padding: 10px 24px;
+  box-shadow: 0 12px 36px -10px rgba(13, 110, 88, 0.14), 0 2px 10px rgba(212, 175, 55, 0.08);
+  transition: all 0.35s ease;
+  max-width: 1240px;
+  margin: 0 auto;
+}
+
+.gm-navbar.scrolled .gm-nav-container {
+  padding: 8px 20px;
+  box-shadow: 0 16px 44px -10px rgba(13, 110, 88, 0.22);
+}
+
+/* Brand Logo */
+.gm-brand-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  transition: transform 0.25s ease;
+}
+
+.gm-brand-logo:hover {
+  transform: scale(1.02);
+}
+
+.gm-logo-badge {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--primary-color);
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  box-shadow: 0 4px 18px var(--primary-glow);
+  position: relative;
+  border: 1.5px solid rgba(212, 175, 55, 0.4);
+}
+
+.gm-logo-badge::after {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  pointer-events: none;
+}
+
+.gm-logo-star {
+  position: absolute;
+  top: 6px;
+  right: 8px;
+  font-size: 9px;
+  color: var(--black-color-5);
+  line-height: 1;
+}
+
+.gm-brand-title {
+  font-family: var(--font-main);
+  font-size: 21px;
+  font-weight: 800;
+  color: var(--white-color);
+  line-height: 1.05;
+  letter-spacing: -0.4px;
+}
+
+.gm-brand-accent {
+  font-family: var(--font-main);
+  font-size: 21px;
+  font-weight: 800;
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  line-height: 1.05;
+}
+
+.gm-brand-tagline {
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.8px;
+  color: var(--primary-color);
+  margin-top: 1px;
+}
+
+/* Center Nav Links */
+.gm-nav-center-menu {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  list-style: none;
+  margin: 0;
+  padding: 4px;
+  background: var(--black-color-3);
+  border-radius: var(--radius-full);
+  border: 1px solid var(--black-color-4);
+}
+
+.gm-nav-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px;
+  border-radius: var(--radius-full);
+  color: var(--text-body);
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.gm-nav-link iconify-icon {
+  font-size: 17px;
+  color: var(--black-color-6);
+  transition: all 0.25s ease;
+}
+
+.gm-nav-link:hover {
+  color: var(--primary-color);
+}
+
+.gm-nav-link:hover iconify-icon {
+  color: var(--primary-color);
+}
+
+.gm-nav-link.active {
+  background: var(--black-color-1);
+  color: var(--primary-color);
+  box-shadow: 0 2px 10px rgba(13, 110, 88, 0.12);
+  border: 1px solid rgba(212, 175, 55, 0.25);
+}
+
+.gm-nav-link.active iconify-icon {
+  color: var(--black-color-5);
+}
+
+/* Right Controls */
+.gm-nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.gm-theme-toggle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--black-color-3);
+  border: 1px solid var(--black-color-4);
+  color: var(--white-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.gm-theme-toggle:hover {
+  transform: rotate(180deg) scale(1.05);
+  background: var(--primary-light);
+  border-color: var(--black-color-5);
+  color: var(--primary-color);
+  box-shadow: var(--shadow-glow);
+}
+
+[data-theme="dark"] .icon-sun {
+  display: inline-block;
+}
+
+[data-theme="dark"] .icon-moon {
+  display: none;
+}
+
+[data-theme="light"] .icon-sun {
+  display: none;
+}
+
+[data-theme="light"] .icon-moon {
+  display: inline-block;
+}
+
+:root:not([data-theme="dark"]) .icon-sun {
+  display: none;
+}
+
+:root:not([data-theme="dark"]) .icon-moon {
+  display: inline-block;
+}
+
+.gm-btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 20px;
+  border-radius: var(--radius-full);
+  border: 1.5px solid var(--nav-border);
+  background: transparent;
+  color: var(--white-color);
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.25s ease;
+}
+
+.gm-btn-outline:hover {
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+  background: var(--primary-light);
+  transform: translateY(-1px);
+}
+
+.gm-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border-radius: var(--radius-full);
+  background: var(--primary-color);
+  color: #FFFFFF !important;
+  font-size: 14px;
+  font-weight: 700;
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  text-decoration: none;
+  box-shadow: 0 6px 24px var(--primary-glow);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.gm-btn-primary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+  transition: left 0.5s ease;
+}
+
+.gm-btn-primary:hover::before {
+  left: 100%;
+}
+
+.gm-btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 32px var(--primary-glow);
+}
+
+/* ==========================================================================
+   HERO SECTION — Luxury Muslim Matrimonial Split Showcase
+   ========================================================================== */
+.gm-hero-section {
+  position: relative;
+  background: var(--hero-bg);
+  min-height: 741px;
+  display: flex;
+  align-items: center;
+  padding: 120px 0 140px 0;
+  overflow: hidden;
+  border-radius: 40px;
+  margin: -25px 19px;
+}
+
+/* Atmospheric Ambient Background Image */
+.gm-hero-backdrop-img {
+  position: absolute;
+  inset: 0;
+  background: url('../images/muslim-couple-hero.jpg') no-repeat center center / cover;
+  opacity: 0.12;
+  filter: blur(2px);
+  z-index: 0;
+  pointer-events: none;
+}
+
+[data-theme="dark"] .gm-hero-backdrop-img {
+  opacity: 0.08;
+  filter: blur(3px) brightness(0.6);
+}
+
+/* Ambient dynamic glowing orbs */
+.gm-hero-ambient-glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(70px);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.glow-primary {
+  width: 550px;
+  height: 550px;
+  background: radial-gradient(circle, rgba(13, 110, 88, 0.22) 0%, transparent 70%);
+  /* top: -80px; */
+  /* left: -80px; */
+  animation: meshFloat 14s ease-in-out infinite;
+}
+
+.glow-accent {
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(255, 179, 71, 0.2) 0%, transparent 70%);
+  top: 10%;
+  right: -50px;
+  animation: meshFloat 16s ease-in-out infinite reverse;
+}
+
+.glow-emerald {
+  width: 420px;
+  height: 420px;
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.12) 0%, transparent 70%);
+  bottom: -60px;
+  left: 35%;
+  animation: meshFloat 18s ease-in-out infinite;
+}
+
+@keyframes meshFloat {
+
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+
+  33% {
+    transform: translate(30px, -40px) scale(1.05);
+  }
+
+  66% {
+    transform: translate(-20px, 20px) scale(0.95);
+  }
+}
+
+/* Hero Content Typography & Elements */
+.gm-hero-text-wrap {
+  position: relative;
+  z-index: 2;
+  max-width: 640px;
+}
+
+.gm-hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 20px;
+  background: var(--bg-glass-strong);
+  border: 1px solid rgba(255, 179, 71, 0.35);
+  border-radius: var(--radius-full);
+  color: var(--white-color);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  margin-bottom: 24px;
+  box-shadow: 0 4px 20px rgba(255, 179, 71, 0.12);
+}
+
+.gm-arabic-bismillah {
+  font-family: "Amiri", "Scheherazade New", "Traditional Arabic", serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--primary-color);
+  line-height: 1;
+}
+
+.gm-badge-divider {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--black-color-5);
+  display: inline-block;
+}
+
+.gm-badge-icon {
+  color: var(--black-color-5);
+  font-size: 16px;
+}
+
+.gm-hero-title {
+  font-family: var(--font-main);
+  font-size: 56px;
+  font-weight: 800;
+  color: var(--white-color);
+  line-height: 1.12;
+  letter-spacing: -1.2px;
+  margin-bottom: 20px;
+}
+
+.gm-hero-subtitle {
+  font-size: 18px;
+  color: var(--text-body);
+  line-height: 1.7;
+  margin-bottom: 28px;
+  font-weight: 400;
+}
+
+/* 3 Halal Trust Pillars */
+.gm-trust-pillars {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 32px;
+}
+
+.gm-trust-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.gm-trust-icon {
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  border-radius: 12px;
+  background: var(--primary-light);
+  color: var(--primary-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+
+  transition: transform 0.3s ease;
+}
+
+.gm-trust-item:hover .gm-trust-icon {
+  transform: scale(1.1) rotate(5deg);
+}
+
+.gm-trust-icon.icon-gold {
+  background: rgba(255, 179, 71, 0.15);
+  color: #F59E0B;
+
+}
+
+.gm-trust-icon.icon-emerald {
+  background: rgba(16, 185, 129, 0.15);
+  color: #10B981;
+
+}
+
+.gm-trust-text strong {
+  display: block;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--white-color);
+  line-height: 1.3;
+}
+
+.gm-trust-text span {
+  display: block;
+  font-size: 13px;
+  color: var(--black-color-6);
+  line-height: 1.3;
+}
+
+/* Hero Action Buttons */
+.gm-hero-action-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 32px;
+}
+
+.gm-hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 36px;
+  background: var(--primary-color);
+  color: #FFFFFF !important;
+  border-radius: var(--radius-full);
+  font-size: 16px;
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: 0 8px 32px var(--primary-glow);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.gm-hero-cta::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+  transition: left 0.5s ease;
+}
+
+.gm-hero-cta:hover::before {
+  left: 100%;
+}
+
+.gm-hero-cta:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 14px 44px var(--primary-glow);
+}
+
+.gm-hero-secondary-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 28px;
+  background: var(--bg-glass-strong);
+  border: 1px solid var(--black-color-4);
+  border-radius: var(--radius-full);
+  color: var(--white-color) !important;
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  backdrop-filter: blur(16px);
+  box-shadow: var(--shadow-sm);
+  transition: all 0.3s ease;
+}
+
+.gm-hero-secondary-btn iconify-icon {
+  color: var(--primary-color);
+  font-size: 18px;
+}
+
+.gm-hero-secondary-btn:hover {
+  background: var(--black-color-1);
+  transform: translateY(-2px);
+  border-color: var(--primary-color);
+  box-shadow: var(--shadow-md);
+}
+
+/* Community Social Proof */
+.gm-hero-community-proof {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding-top: 18px;
+  border-top: 1px solid var(--black-color-4);
+}
+
+.gm-proof-avatars {
+  display: flex;
+  align-items: center;
+}
+
+.gm-proof-avatars img,
+.gm-proof-plus {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid var(--black-color-1);
+  object-fit: cover;
+  margin-right: -10px;
+  box-shadow: var(--shadow-sm);
+}
+
+.gm-proof-plus {
+  background: var(--primary-color);
+  color: #FFF;
+  font-size: 11px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 0;
+}
+
+.gm-proof-meta {
+  display: flex;
+  flex-direction: column;
+}
+
+.gm-stars {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  color: #F59E0B;
+  font-size: 14px;
+}
+
+.gm-stars-score {
+  font-weight: 700;
+  color: var(--white-color);
+  font-size: 13px;
+  margin-left: 6px;
+}
+
+.gm-proof-sub {
+  font-size: 12px;
+  color: var(--black-color-6);
+  font-weight: 500;
+}
+
+/* ==========================================================================
+   RIGHT SHOWCASE STAGE — Transparent PNG Couple with Islamic Halo
+   ========================================================================== */
+.gm-couple-png-stage {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  min-height: 570px;
+  padding-bottom: 10px;
+}
+
+.gm-couple-halo-backdrop {
+  position: absolute;
+  width: 440px;
+  height: 440px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(212, 175, 55, 0.28) 0%, rgba(13, 110, 88, 0.22) 50%, transparent 70%);
+  filter: blur(40px);
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+  animation: auraPulse 6s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes auraPulse {
+
+  0%,
+  100% {
+    transform: translateX(-50%) scale(0.96);
+    opacity: 0.8;
+  }
+
+  50% {
+    transform: translateX(-50%) scale(1.05);
+    opacity: 1;
+  }
+}
+
+.gm-couple-arch-silhouette {
+  position: absolute;
+  width: 380px;
+  height: 520px;
+  border-radius: 200px 200px 30px 30px;
+  border: 1.5px dashed rgba(212, 175, 55, 0.4);
+  top: 4%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+  pointer-events: none;
+  background: radial-gradient(ellipse at 50% 30%, rgba(212, 175, 55, 0.09) 0%, transparent 70%);
+}
+
+[data-theme="dark"] .gm-couple-arch-silhouette {
+  border-color: rgba(251, 191, 36, 0.35);
+  background: radial-gradient(ellipse at 50% 30%, rgba(52, 211, 153, 0.08) 0%, transparent 70%);
+}
+
+.gm-couple-png-wrapper {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.gm-couple-png-img {
+  max-width: 100%;
+  width: auto;
+  height: 560px;
+  max-height: 82vh;
+  object-fit: contain;
+  display: block;
+  filter: drop-shadow(0 20px 35px rgba(13, 110, 88, 0.2)) drop-shadow(0 4px 12px rgba(0, 0, 0, 0.08));
+  transition: transform 0.4s ease;
+  animation: floatCouple 6s ease-in-out infinite;
+}
+
+[data-theme="dark"] .gm-couple-png-img {
+  filter: drop-shadow(0 24px 45px rgba(0, 0, 0, 0.85)) drop-shadow(0 0 25px rgba(52, 211, 153, 0.25));
+}
+
+@keyframes floatCouple {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.gm-couple-floor-shadow {
+  width: 280px;
+  height: 22px;
+  background: radial-gradient(ellipse at center, rgba(19, 34, 28, 0.3) 0%, transparent 75%);
+  border-radius: 50%;
+  margin-top: -12px;
+  z-index: 1;
+  filter: blur(4px);
+}
+
+[data-theme="dark"] .gm-couple-floor-shadow {
+  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.65) 0%, transparent 75%);
+}
+
+/* Floating Glassmorphic Badges */
+.gm-floating-chip {
+  position: absolute;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 18px;
+  background: var(--bg-glass-strong);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-full);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: var(--shadow-md);
+  animation: floatChip 5s ease-in-out infinite;
+}
+
+.chip-top-right {
+  top: 35px;
+  right: -24px;
+}
+
+.chip-bottom-right {
+  bottom: 140px;
+  left: 24px;
+  animation-delay: -2.5s;
+}
+
+.gm-chip-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 17px;
+}
+
+.chip-accent {
+  background: rgba(255, 179, 71, 0.18);
+  color: #F59E0B;
+}
+
+.chip-success {
+  background: rgba(16, 185, 129, 0.18);
+  color: #10B981;
+}
+
+.gm-floating-chip strong {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--white-color);
+  line-height: 1.2;
+}
+
+.chip-sub {
+  font-size: 11px;
+  color: var(--black-color-6);
+  font-weight: 500;
+}
+
+/* Floating Success Story Card */
+.gm-floating-card {
+  position: absolute;
+  z-index: 5;
+  bottom: 0px;
+  background: var(--bg-glass-strong);
+  border: 1px solid var(--border-glass);
+  border-radius: 20px;
+  padding: 14px 18px;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 16px 36px -8px rgba(26, 17, 40, 0.15);
+  width: -webkit-fill-available;
+  text-align: left;
+  animation: floatCard 6s ease-in-out infinite;
+  text-align: center;
+}
+
+.gm-story-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+  background: rgba(232, 86, 127, 0.12);
+  color: var(--primary-color);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+}
+
+.gm-story-quote {
+  font-size: 12px;
+  font-style: italic;
+  color: var(--white-color);
+  line-height: 1.35;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.gm-story-couple-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.gm-couple-names {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--white-color);
+}
+
+.gm-story-tag {
+  font-size: 10px;
+  font-weight: 600;
+  color: #10B981;
+}
+
+@keyframes floatChip {
+
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+@keyframes floatCard {
+
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(6px);
+  }
+}
+
+/* ==========================================================================
+   SMART SEARCH CAPSULE WIDGET — Glassmorphic
+   ========================================================================== */
+.gm-search-wrapper {
+  position: relative;
+  z-index: 10;
+  margin-top: -72px;
+}
+
+.gm-search-card {
+  background: var(--bg-glass-strong);
+  border: 1px solid var(--black-color-4);
+  border-radius: var(--radius-xl);
+  padding: 32px 40px;
+  box-shadow: var(--shadow-lg);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  transition: all 0.4s ease;
+}
+
+.gm-search-card:hover {
+  box-shadow: 0 24px 64px -12px rgba(232, 86, 127, 0.12);
+}
+
+.gm-search-field label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--black-color-6);
+  margin-bottom: 8px;
+}
+
+.gm-search-field label iconify-icon {
+  color: var(--primary-color);
+  font-size: 16px;
+}
+
+/* Custom Dropdowns */
+.custom-select-wrapper {
+  position: relative;
+  user-select: none;
+  width: 100%;
+}
+
+.custom-select {
+  position: relative;
+  display: block;
+  width: 100%;
+}
+
+.custom-select-trigger {
+  position: relative;
+  display: block;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--white-color);
+  line-height: 48px;
+  background: var(--black-color-3);
+  border: 1.5px solid var(--black-color-4);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  padding: 0 38px 0 16px;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.custom-select-trigger:hover {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px var(--primary-light);
+}
+
+.custom-select-trigger:after {
+  position: absolute;
+  display: block;
+  content: "";
+  width: 7px;
+  height: 7px;
+  top: 50%;
+  right: 16px;
+  margin-top: -6px;
+  border-bottom: 2px solid var(--black-color-6);
+  border-right: 2px solid var(--black-color-6);
+  transform: rotate(45deg);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.custom-select.opened .custom-select-trigger:after {
+  transform: rotate(-135deg);
+  margin-top: -2px;
+}
+
+.custom-select.opened .custom-select-trigger {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px var(--primary-light);
+}
+
+.custom-options {
+  position: absolute;
+  display: block;
+  top: 100%;
+  left: 0;
+  right: 0;
+  min-width: 100%;
+  margin-top: 6px;
+  border-radius: var(--radius-md);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+  background: var(--black-color-1);
+  border: 1px solid var(--black-color-4);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(-10px);
+  z-index: 100;
+  max-height: 220px;
+  overflow-y: auto;
+  padding: 6px;
+}
+
+.custom-select.opened .custom-options {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.custom-option {
+  position: relative;
+  display: block;
+  padding: 10px 14px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--white-color);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  border-radius: var(--radius-sm);
+}
+
+.custom-option:hover,
+.custom-option.selection {
+  background: var(--primary-light);
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+.gm-search-to {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--black-color-6);
+  margin-bottom: 12px;
+}
+
+.gm-search-submit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  height: 50px;
+  background: var(--primary-color);
+  color: #FFFFFF;
+  border: none;
+  border-radius: var(--radius-md);
+  font-family: var(--font-main);
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 20px var(--primary-glow);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+  margin-top: 24px;
+}
+
+.gm-search-submit::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, transparent 50%);
+}
+
+.gm-search-submit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px var(--primary-glow);
+}
+
+/* ==========================================================================
+   HOW DOES IT WORK — The Blessed Halal Journey (Islamic Redesign)
+   ========================================================================== */
+.gm-steps-section {
+  padding: 60px 0 60px;
+
+  position: relative;
+  overflow: hidden;
+}
+
+[data-theme="dark"] .gm-steps-section {
+  background: radial-gradient(circle at 50% 15%, rgba(251, 191, 36, 0.07) 0%, rgba(52, 211, 153, 0.06) 45%, transparent 75%),
+    var(--bg-main);
+}
+
+/* Islamic Geometric Pattern Overlay */
+.gm-islamic-pattern-overlay {
+  position: absolute;
+  inset: 0;
+  background-image: url('../images/islamic-pattern.svg');
+  background-repeat: repeat;
+  background-size: 76px 76px;
+  opacity: 0.07;
+  pointer-events: none;
+  z-index: 1;
+  mask-image: radial-gradient(circle at 50% 50%, rgba(0, 0, 0, 1) 30%, transparent 85%);
+  -webkit-mask-image: radial-gradient(circle at 50% 50%, rgba(0, 0, 0, 1) 30%, transparent 85%);
+}
+
+[data-theme="dark"] .gm-islamic-pattern-overlay {
+  opacity: 0.12;
+}
+
+/* Ambient Glow Blobs */
+.gm-islamic-glow-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.gm-blob-1 {
+  width: 480px;
+  height: 480px;
+  top: -120px;
+  left: -120px;
+  background: radial-gradient(circle, rgba(212, 175, 55, 0.14) 0%, transparent 70%);
+}
+
+.gm-blob-2 {
+  width: 520px;
+  height: 520px;
+  bottom: -150px;
+  right: -120px;
+  background: radial-gradient(circle, rgba(13, 110, 88, 0.16) 0%, transparent 70%);
+}
+
+/* Floating Islamic Star Rosettes */
+.gm-islamic-floating-rosette {
+  position: absolute;
+  width: 280px;
+  height: 280px;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.45;
+  transition: transform 0.8s ease;
+}
+
+.rosette-left {
+  top: 100px;
+  left: -110px;
+  animation: rosetteFloatLeft 22s ease-in-out infinite alternate;
+}
+
+.rosette-right {
+  bottom: 80px;
+  right: -110px;
+  animation: rosetteFloatRight 26s ease-in-out infinite alternate;
+}
+
+@keyframes rosetteFloatLeft {
+  0% {
+    transform: translateY(0) rotate(0deg);
+  }
+
+  100% {
+    transform: translateY(35px) rotate(45deg);
+  }
+}
+
+@keyframes rosetteFloatRight {
+  0% {
+    transform: translateY(0) rotate(0deg);
+  }
+
+  100% {
+    transform: translateY(-35px) rotate(-45deg);
+  }
+}
+
+/* Header Crest & Typography */
+.gm-islamic-header-crest {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 12px;
+  color: var(--black-color-5);
+}
+
+.crest-line {
+  width: 48px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--black-color-5));
+}
+
+.crest-line:last-child {
+  background: linear-gradient(90deg, var(--black-color-5), transparent);
+}
+
+.crest-star {
+  font-size: 16px;
+  color: var(--black-color-5);
+  line-height: 1;
+}
+
+.crest-arabic {
+  font-size: 19px;
+  color: var(--primary-color);
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  line-height: 1;
+}
+
+[data-theme="dark"] .crest-arabic {
+  color: var(--black-color-5);
+}
+
+.gm-islamic-badge {
+  background: rgba(212, 175, 55, 0.12) !important;
+  border-color: rgba(212, 175, 55, 0.45) !important;
+  color: var(--primary-color) !important;
+  gap: 8px !important;
+}
+
+.badge-dot {
+  color: var(--black-color-5);
+  font-size: 11px;
+}
+
+.badge-arabic-sub {
+  font-size: 13px;
+  color: var(--black-color-5);
+  font-weight: 700;
+}
+
+.gm-section-subtitle {
+  max-width: 620px;
+  margin: 12px auto 0 auto;
+  font-size: 16px;
+  color: var(--text-body);
+  line-height: 1.65;
+}
+
+/* Sacred Journey Connector Line (Desktop) */
+.gm-steps-flow-track {
+  position: absolute;
+  top: 275px;
+  left: 6%;
+  right: 6%;
+  height: 48px;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.gm-flow-svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.flow-animated-path {
+  stroke-dasharray: 8 8;
+  animation: flowDash 35s linear infinite;
+}
+
+@keyframes flowDash {
+  to {
+    stroke-dashoffset: -400;
+  }
+}
+
+.flow-checkpoint {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--black-color-1);
+  border: 1.5px solid var(--black-color-5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 16px var(--shadow-glow);
+  animation: checkpointPulse 3.5s ease-in-out infinite alternate;
+}
+
+.chk-1 {
+  left: 33.33%;
+}
+
+.chk-2 {
+  left: 66.66%;
+}
+
+.chk-star {
+  font-size: 13px;
+  color: var(--black-color-5);
+  line-height: 1;
+}
+
+@keyframes checkpointPulse {
+  0% {
+    transform: translate(-50%, -50%) scale(0.9);
+    box-shadow: 0 0 8px var(--shadow-glow);
+  }
+
+  100% {
+    transform: translate(-50%, -50%) scale(1.15);
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.45);
+  }
+}
+
+/* ==========================================================================
+   ISLAMIC MIHRAB ARCH CARDS
+   ========================================================================== */
+.gm-islamic-card {
+  position: relative;
+  background: var(--black-color-1);
+  border: 1.5px solid rgba(212, 175, 55, 0.3);
+  border-radius: 80px 80px var(--radius-xl) var(--radius-xl);
+  padding: 38px 28px 34px;
+  text-align: center;
+  box-shadow: 0 10px 32px -8px rgba(19, 34, 28, 0.06);
+  transition: all 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+  z-index: 2;
+}
+
+/* Inner Quranic Manuscript Illumination Border */
+.gm-islamic-card::before {
+  content: '';
+  position: absolute;
+  inset: 7px;
+  border-radius: 73px 73px calc(var(--radius-xl) - 5px) calc(var(--radius-xl) - 5px);
+  border: 1px dashed rgba(13, 110, 88, 0.2);
+  pointer-events: none;
+  transition: all 0.4s ease;
+}
+
+/* Card Subtle Pattern Texture */
+.gm-islamic-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('../images/islamic-pattern.svg');
+  background-size: 64px 64px;
+  opacity: 0.035;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+
+.gm-islamic-card:hover {
+  transform: translateY(-12px);
+  border-color: var(--black-color-5);
+  box-shadow: 0 24px 54px -10px rgba(13, 110, 88, 0.18), 0 0 30px rgba(212, 175, 55, 0.2);
+}
+
+.gm-islamic-card:hover::before {
+  border-color: rgba(212, 175, 55, 0.5);
+}
+
+.gm-islamic-card:hover::after {
+  opacity: 0.08;
+}
+
+/* Highlight Middle Card */
+.gm-card-highlight {
+  border-color: rgba(13, 110, 88, 0.45);
+  box-shadow: 0 14px 40px -8px rgba(13, 110, 88, 0.12);
+  background: linear-gradient(180deg, rgba(13, 110, 88, 0.03) 0%, var(--black-color-1) 28%);
+}
+
+.gm-card-top-tag {
+  position: absolute;
+  top: 14px;
+  background: var(--primary-color);
+  color: #FFFFFF;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  padding: 4px 16px;
+  border-radius: var(--radius-full);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 0 12px color-mix(in srgb, var(--primary-color) 30%, transparent);
+  z-index: 5;
+}
+
+/* Mihrab Arch Top Crest */
+.gm-card-mihrab-crest {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 140px;
+  height: 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  pointer-events: none;
+  z-index: 3;
+}
+
+.mihrab-finial {
+  width: 41px;
+  height: 41px;
+  border-radius: 50%;
+  background: var(--black-color-1);
+  /* border: 1px solid var(--black-color-5); */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 23px;
+  /* box-shadow: 0 2px 8px rgba(212, 175, 55, 0.25); */
+  transition: transform 0.4s ease;
+}
+
+.finial-icon {
+  color: var(--black-color-5);
+  font-size: 11px;
+  line-height: 1;
+}
+
+.gm-islamic-card:hover .mihrab-finial {
+  transform: scale(1.15) rotate(45deg);
+  border-color: var(--primary-color);
+}
+
+.mihrab-arch-svg {
+  width: 100%;
+  height: 18px;
+  color: rgba(212, 175, 55, 0.35);
+}
+
+/* 8-Pointed Rub el Hizb Number Medallion */
+.gm-step-star-badge {
+  position: absolute;
+  top: 18px;
+  right: 20px;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 4;
+}
+
+.star-badge-svg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.star-box {
+  fill: var(--black-color-3);
+  stroke: var(--black-color-5);
+  stroke-width: 1.5;
+  transition: all 0.4s ease;
+}
+
+.star-box.b2 {
+  transform-origin: 32px 32px;
+  transform: rotate(45deg);
+}
+
+.star-core {
+  fill: var(--primary-color);
+  stroke: var(--black-color-5);
+  stroke-width: 1;
+}
+
+.gm-islamic-card:hover .star-badge-svg {
+  transform: rotate(45deg);
+}
+
+.gm-islamic-card:hover .star-box {
+  fill: var(--primary-light);
+  stroke: var(--black-color-5);
+}
+
+.star-num-wrap {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1;
+}
+
+.star-arabic {
+  font-size: 10px;
+  color: #FFFFFF;
+  opacity: 0.9;
+  line-height: 1;
+  font-weight: 700;
+}
+
+.star-english {
+  font-size: 13px;
+  font-weight: 800;
+  color: #FFFFFF;
+  letter-spacing: -0.5px;
+  line-height: 1.1;
+}
+
+/* Mihrab Sanctuary Chamber (Icon Housing) */
+.gm-mihrab-niche {
+  position: relative;
+  width: 88px;
+  height: 102px;
+  margin: 18px auto 20px auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gm-niche-arch-bg {
+  position: absolute;
+  inset: 0;
+  border-radius: 44px 44px 18px 18px;
+  background: linear-gradient(180deg, rgba(13, 110, 88, 0.12) 0%, rgba(212, 175, 55, 0.16) 100%);
+  border: 1.5px solid var(--black-color-5);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.gm-step-icon-halo {
+  position: relative;
+  z-index: 2;
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  background: var(--black-color-1);
+  color: var(--primary-color);
+  font-size: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 20px rgba(13, 110, 88, 0.12);
+  border: 1.5px solid rgba(13, 110, 88, 0.2);
+  transition: all 0.4s ease;
+}
+
+.gm-islamic-card:hover .gm-niche-arch-bg {
+  background: var(--primary-color);
+  border-color: var(--black-color-5);
+  box-shadow: 0 8px 26px var(--primary-glow);
+}
+
+.gm-islamic-card:hover .gm-step-icon-halo {
+  transform: scale(1.1);
+  color: var(--black-color-5);
+  border-color: var(--black-color-5);
+  box-shadow: 0 8px 24px rgba(212, 175, 55, 0.35);
+}
+
+/* Card Typography & Text */
+.gm-card-body-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  width: 100%;
+}
+
+.gm-step-arabic-tag {
+  font-family: var(--font-main);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--black-color-5);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  margin-bottom: 8px;
+}
+
+.gm-step-title {
+  font-family: var(--font-main);
+  font-size: 21px;
+  font-weight: 800;
+  color: var(--white-color);
+  margin-bottom: 12px;
+  letter-spacing: -0.3px;
+}
+
+.gm-step-desc {
+  font-size: 14.5px;
+  color: var(--text-body);
+  line-height: 1.65;
+  margin-bottom: 22px;
+}
+
+/* Halal Highlights / Mini Tags */
+.gm-step-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  margin-top: auto;
+  width: 100%;
+}
+
+.gm-halal-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 13px;
+  border-radius: var(--radius-full);
+  background: rgba(13, 110, 88, 0.07);
+  border: 1px solid rgba(13, 110, 88, 0.18);
+  color: var(--primary-color);
+  font-size: 12px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.gm-halal-pill i {
+  font-size: 15px;
+  color: var(--black-color-5);
+}
+
+.gm-islamic-card:hover .gm-halal-pill {
+  background: rgba(212, 175, 55, 0.14);
+  border-color: rgba(212, 175, 55, 0.4);
+}
+
+[data-theme="dark"] .gm-halal-pill {
+  background: rgba(52, 211, 153, 0.1);
+  border-color: rgba(52, 211, 153, 0.22);
+  color: var(--primary-color);
+}
+
+/* Corner Arabesque Filigree Brackets */
+.gm-corner {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  pointer-events: none;
+  opacity: 0.35;
+  transition: opacity 0.3s ease;
+}
+
+.gm-islamic-card:hover .gm-corner {
+  opacity: 0.95;
+}
+
+.corner-tl {
+  top: 10px;
+  left: 10px;
+  border-top: 2px solid var(--black-color-5);
+  border-left: 2px solid var(--black-color-5);
+}
+
+.corner-tr {
+  top: 10px;
+  right: 10px;
+  border-top: 2px solid var(--black-color-5);
+  border-right: 2px solid var(--black-color-5);
+}
+
+.corner-bl {
+  bottom: 10px;
+  left: 10px;
+  border-bottom: 2px solid var(--black-color-5);
+  border-left: 2px solid var(--black-color-5);
+}
+
+.corner-br {
+  bottom: 10px;
+  right: 10px;
+  border-bottom: 2px solid var(--black-color-5);
+  border-right: 2px solid var(--black-color-5);
+}
+
+/* Islamic Hadith Quote Banner */
+.gm-islamic-hadith-bar {
+  margin-top: 50px;
+  padding: 16px 28px;
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.08) 0%, rgba(13, 110, 88, 0.08) 100%);
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  border-radius: var(--radius-full);
+  box-shadow: 0 4px 20px rgba(13, 110, 88, 0.04);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.hadith-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  text-align: center;
+}
+
+.hadith-star {
+  color: var(--black-color-5);
+  font-size: 18px;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.hadith-text {
+  margin: 0;
+  font-size: 14.5px;
+  color: var(--white-color);
+  font-style: italic;
+  line-height: 1.5;
+}
+
+.hadith-text strong {
+  color: var(--primary-color);
+  font-style: normal;
+}
+
+.hadith-source {
+  display: inline-block;
+  margin-left: 8px;
+  font-size: 13px;
+  color: var(--black-color-5);
+  font-weight: 700;
+  font-style: normal;
+}
+
+[data-theme="dark"] .gm-islamic-hadith-bar {
+  background: linear-gradient(135deg, rgba(251, 191, 36, 0.06) 0%, rgba(52, 211, 153, 0.06) 100%);
+  border-color: rgba(251, 191, 36, 0.25);
+}
+
+/* Backward compatibility aliases */
+.gm-step-card {
+  display: none;
+}
+
+/* ==========================================================================
+   LAST ADDED PROFILES — Authentic Muslim Matches (Islamic Redesign)
+   ========================================================================== */
+.gm-profiles-section {
+  padding: 60px 0 60px;
+  background: radial-gradient(circle at 50% 15%, rgba(212, 175, 55, 0.07) 0%, rgba(13, 110, 88, 0.04) 45%, transparent 70%),
+    var(--black-color);
+  position: relative;
+  overflow: hidden;
+}
+
+[data-theme="dark"] .gm-profiles-section {
+  background: radial-gradient(circle at 50% 15%, rgba(251, 191, 36, 0.06) 0%, rgba(52, 211, 153, 0.05) 45%, transparent 75%),
+    var(--black-color);
+}
+
+.gm-profiles-pattern-bg {
+  position: absolute;
+  inset: 0;
+  background-image: url('../images/islamic-pattern.svg');
+  background-repeat: repeat;
+  background-size: 76px 76px;
+  opacity: 0.045;
+  pointer-events: none;
+  mask-image: radial-gradient(circle at 50% 50%, rgba(0, 0, 0, 1) 40%, transparent 85%);
+  -webkit-mask-image: radial-gradient(circle at 50% 50%, rgba(0, 0, 0, 1) 40%, transparent 85%);
+}
+
+[data-theme="dark"] .gm-profiles-pattern-bg {
+  opacity: 0.09;
+}
+
+.gm-profiles-subtitle {
+  font-size: 15.5px;
+  color: var(--text-body);
+  max-width: 580px;
+  line-height: 1.6;
+  margin-top: 8px;
+}
+
+/* Islamic Architectural Profile Card */
+.gm-profile-card {
+  background: var(--black-color-1);
+  border: 1.5px solid rgba(212, 175, 55, 0.25);
+  border-radius: 36px 36px var(--radius-xl) var(--radius-xl);
+  overflow: hidden;
+  margin: 12px;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 8px 28px -6px rgba(19, 34, 28, 0.07);
+  position: relative;
+}
+
+.gm-profile-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--black-color-5), transparent);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: 5;
+}
+
+.gm-profile-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 22px 50px -10px rgba(13, 110, 88, 0.18), 0 0 25px rgba(212, 175, 55, 0.15);
+  border-color: var(--black-color-5);
+}
+
+.gm-profile-card:hover::before {
+  opacity: 1;
+}
+
+/* Mihrab Arch Image Holder */
+.gm-profile-img-holder {
+  position: relative;
+  width: 100%;
+  height: 320px;
+  overflow: hidden;
+  background: var(--black-color-3);
+  border-radius: 34px 34px 18px 18px;
+  margin: 0;
+}
+
+.gm-profile-img-holder img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: all 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.gm-profile-card:hover .gm-profile-img-holder img {
+  transform: scale(1.08);
+}
+
+/* Subtle Vignette on Photo for Overlay Badges */
+.gm-profile-img-holder::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(7, 18, 14, 0.3) 0%, transparent 40%, rgba(7, 18, 14, 0.7) 100%);
+  pointer-events: none;
+}
+
+/* Luxury Islamic Tier Badge */
+.gm-badge-tier {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  padding: 5px 13px;
+  border-radius: var(--radius-full);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  z-index: 3;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.gm-badge-tier.Platinum {
+  background: linear-gradient(135deg, rgba(30, 41, 59, 0.92) 0%, rgba(71, 85, 105, 0.92) 100%);
+  color: #F8FAFC;
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.35);
+  border-color: rgba(226, 232, 240, 0.3);
+}
+
+.gm-badge-tier.Gold {
+  background: linear-gradient(135deg, rgba(217, 119, 6, 0.92) 0%, rgba(245, 158, 11, 0.92) 100%);
+  color: #FFF;
+  box-shadow: 0 4px 14px rgba(217, 119, 6, 0.35);
+  border-color: rgba(254, 240, 138, 0.4);
+}
+
+.gm-badge-tier.Silver {
+  background: linear-gradient(135deg, rgba(71, 85, 105, 0.92) 0%, rgba(148, 163, 184, 0.92) 100%);
+  color: #FFF;
+  box-shadow: 0 4px 14px rgba(71, 85, 105, 0.3);
+}
+
+.gm-badge-tier.dimand {
+  background: linear-gradient(135deg, rgba(13, 110, 88, 0.92) 0%, rgba(16, 185, 129, 0.92) 100%);
+  color: #FFF;
+  box-shadow: 0 4px 16px rgba(13, 110, 88, 0.4);
+  border-color: rgba(212, 175, 55, 0.5);
+}
+
+/* Halal Verified Pill on Photo (Top Right) */
+.gm-verified-badge-pill {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  padding: 5px 12px;
+  border-radius: var(--radius-full);
+  background: rgba(13, 110, 88, 0.88);
+  border: 1px solid rgba(212, 175, 55, 0.6);
+  color: #FFFFFF;
+  font-size: 11px;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  z-index: 3;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.25);
+}
+
+.gm-verified-badge-pill i {
+  color: var(--black-color-5);
+  font-size: 14px;
+}
+
+/* Deen Snapshot Overlay (Bottom Left of Photo) */
+.gm-img-overlay-info {
+  position: absolute;
+  bottom: 12px;
+  left: 14px;
+  z-index: 3;
+}
+
+.gm-deen-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 11px;
+  background: rgba(19, 34, 28, 0.75);
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  border-radius: var(--radius-full);
+  color: #FAF7F2;
+  font-size: 11.5px;
+  font-weight: 600;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.gm-deen-pill i {
+  color: var(--black-color-5);
+  font-size: 12px;
+}
+
+/* Profile Body Details */
+.gm-profile-body {
+  padding: 20px 22px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  background: var(--black-color-1);
+}
+
+.gm-profile-info-block {
+  flex: 1;
+  min-width: 0;
+}
+
+.gm-profile-name {
+  font-family: var(--font-main);
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--white-color);
+  margin-bottom: 2px;
+  letter-spacing: -0.2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.gm-deen-match-chip {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--primary-color);
+  background: rgba(13, 110, 88, 0.1);
+  border: 1px solid rgba(13, 110, 88, 0.2);
+  padding: 3px 8px;
+  border-radius: var(--radius-full);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+[data-theme="dark"] .gm-deen-match-chip {
+  color: var(--black-color-5);
+  background: rgba(251, 191, 36, 0.12);
+  border-color: rgba(251, 191, 36, 0.25);
+}
+
+.gm-profile-info {
+  font-size: 13px;
+  color: var(--text-body);
+  margin-bottom: 3px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.gm-profile-loc {
+  font-size: 12px;
+  color: var(--black-color-6);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.gm-profile-loc i {
+  color: var(--black-color-5);
+  font-size: 13px;
+}
+
+/* View Profile Button */
+.gm-btn-view-profile {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--primary-light);
+  border: 1.5px solid rgba(13, 110, 88, 0.2);
+  color: var(--primary-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  flex-shrink: 0;
+}
+
+.gm-btn-view-profile:hover {
+  background: var(--primary-color);
+  border-color: transparent;
+  color: #FFFFFF;
+  transform: scale(1.12);
+  box-shadow: 0 4px 18px var(--primary-glow);
+}
+
+/* Slick Custom Navigation Arrows */
+.lastProfileArrows,
+.successStoryArrows {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.custom-arrow,
+.success-arrow {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: var(--black-color-1);
+  border: 1.5px solid rgba(212, 175, 55, 0.35);
+  color: var(--primary-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.custom-arrow:hover,
+.success-arrow:hover {
+  background: var(--primary-color);
+  color: #FFFFFF;
+  border-color: var(--black-color-5);
+  transform: scale(1.08);
+  box-shadow: 0 4px 18px var(--primary-glow);
+}
+
+/* ==========================================================================
+   6. BLESSED NIKAH & SUCCESS STORIES (ISLAMIC THEME)
+   ========================================================================== */
+.gm-stories-section {
+  padding: 60px 0;
+  background: radial-gradient(circle at 10% 20%, rgba(13, 92, 70, 0.03) 0%, transparent 50%),
+    radial-gradient(circle at 90% 80%, rgba(212, 175, 55, 0.05) 0%, transparent 50%),
+    var(--bg-main);
+  position: relative;
+}
+
+.gm-stories-header-wrapper {
+  position: relative;
+}
+
+/* Equal Height Slider Setup */
+.happy-success-Slider .slick-track {
+  display: flex !important;
+  align-items: stretch !important;
+}
+
+.happy-success-Slider .slick-slide {
+  height: auto !important;
+  display: flex !important;
+  flex-direction: column;
+}
+
+.happy-success-Slider .slick-slide>div {
+  display: flex !important;
+  flex-direction: column;
+  flex: 1 1 100%;
+  height: 100%;
+}
+
+.gm-story-slide {
+  padding: 10px 12px;
+  outline: none;
+  display: flex !important;
+  flex-direction: column;
+  flex: 1 1 100%;
+  height: 100%;
+}
+
+/* Split Architectural Card */
+.gm-nikah-card {
+  background: var(--black-color-1);
+  border: 1.5px solid var(--black-color-4);
+  border-radius: 26px;
+  padding: 22px;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 8px 26px rgba(13, 92, 70, 0.06);
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+}
+
+.gm-nikah-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--black-color-5), transparent);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.gm-nikah-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(212, 175, 55, 0.55);
+  box-shadow: 0 18px 42px rgba(13, 92, 70, 0.12), 0 0 20px rgba(212, 175, 55, 0.15);
+}
+
+.gm-nikah-card:hover::before {
+  opacity: 1;
+}
+
+/* Dual Column Layout */
+.gm-nikah-grid {
+  display: grid;
+  grid-template-columns: 210px 1fr;
+  gap: 22px;
+  align-items: stretch;
+  height: 100%;
+  flex: 1 1 auto;
+}
+
+/* Left: Architectural Mihrab Photo */
+.gm-nikah-photo-col {
+  position: relative;
+  height: 100%;
+  display: flex;
+}
+
+.gm-nikah-photo-frame {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 290px;
+  border-radius: 100px 100px 18px 18px;
+  /* Islamic Arch / Mihrab Top Silhouette */
+  overflow: hidden;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  border: 2px solid rgba(212, 175, 55, 0.35);
+  background: #112d24;
+  display: flex;
+}
+
+.gm-nikah-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+  flex: 1;
+}
+
+.gm-nikah-card:hover .gm-nikah-img {
+  transform: scale(1.08);
+}
+
+/* Golden Seal Stamp */
+.gm-nikah-seal {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: linear-gradient(135deg, #fce293 0%, #d4af37 60%, #9e791b 100%);
+  color: #0d382c;
+  border-radius: 12px;
+  padding: 5px 9px 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  z-index: 2;
+  text-align: center;
+}
+
+.gm-nikah-seal .seal-icon {
+  font-size: 13px;
+  color: #0d382c;
+  line-height: 1;
+}
+
+.gm-nikah-seal .seal-ar {
+  font-family: 'Amiri', serif;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.gm-nikah-seal .seal-en {
+  font-size: 8px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  opacity: 0.95;
+}
+
+/* Floating Date Tag at Bottom of Photo */
+.gm-nikah-date-tag {
+  position: absolute;
+  bottom: 10px;
+  left: 8px;
+  right: 8px;
+  background: rgba(13, 56, 44, 0.88);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: 20px;
+  padding: 5px 10px;
+  color: #f7f3eb;
+  font-size: 11px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  text-align: center;
+  z-index: 2;
+}
+
+/* Right: Content & Testimonial Column */
+.gm-nikah-body-col {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.gm-nikah-dua-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(13, 92, 70, 0.06);
+  border: 1px solid rgba(13, 92, 70, 0.15);
+  border-radius: 16px;
+  padding: 3px 10px;
+  margin-bottom: 10px;
+  width: fit-content;
+}
+
+.gm-nikah-dua-badge .dua-ar {
+  font-family: 'Amiri', serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--primary-color);
+}
+
+.gm-nikah-dua-badge .dua-sep {
+  color: var(--black-color-5);
+  font-size: 10px;
+}
+
+.gm-nikah-dua-badge .dua-en {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--black-color-6);
+}
+
+.gm-nikah-couple-name {
+  font-family: var(--font-main);
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--text-heading);
+  margin-bottom: 4px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.gm-nikah-verified-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: rgba(13, 92, 70, 0.08);
+  border: 1px solid rgba(13, 92, 70, 0.2);
+  color: var(--primary-color);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 12px;
+}
+
+.gm-nikah-verified-badge iconify-icon {
+  color: var(--black-color-5);
+  font-size: 13px;
+}
+
+.gm-nikah-location {
+  font-size: 12.5px;
+  color: var(--black-color-6);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 500;
+}
+
+.gm-nikah-quote-box {
+  position: relative;
+  /* background: rgba(248, 246, 240, 0.7); */
+  border-left: 3px solid var(--black-color-5);
+  border-radius: 0 12px 12px 0;
+  padding: 12px 14px 12px 32px;
+  margin-bottom: 14px;
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+}
+
+.gm-nikah-quote-box .gm-quote-icon {
+  position: absolute;
+  left: 8px;
+  top: 10px;
+  font-size: 18px;
+  color: rgba(212, 175, 55, 0.65);
+}
+
+.gm-nikah-quote-text {
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--text-body);
+  font-style: italic;
+  margin: 0;
+}
+
+.gm-nikah-milestones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 14px;
+  min-height: 48px;
+  align-content: flex-start;
+}
+
+.milestone-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 6px;
+  background: var(--black-color);
+  border: 1px solid var(--black-color-4);
+  color: var(--text-body);
+}
+
+.milestone-chip iconify-icon {
+  color: var(--black-color-5);
+  font-size: 12px;
+}
+
+.gm-nikah-footer {
+  padding-top: 10px;
+  border-top: 1px dashed var(--black-color-4);
+  margin-top: auto;
+}
+
+.gm-nikah-read-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--primary-color);
+  text-decoration: none;
+  transition: all 0.25s ease;
+}
+
+.gm-nikah-read-link:hover {
+  color: var(--black-color-5);
+  transform: translateX(4px);
+}
+
+@media (max-width: 767px) {
+  .gm-nikah-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .gm-nikah-photo-frame {
+    min-height: 230px;
+    max-height: 260px;
+    border-radius: 16px 16px 16px 16px;
+  }
+
+  .gm-nikah-card {
+    padding: 16px;
+  }
+
+  .gm-nikah-couple-name {
+    font-size: 18px;
+  }
+
+  .gm-nikah-quote-box {
+    padding: 10px 10px 10px 28px;
+  }
+
+  .gm-nikah-milestones {
+    min-height: auto;
+  }
+
+  .gm-nikah-dua-badge {
+    flex-wrap: wrap;
+  }
+}
+
+/* ==========================================================================
+   7. WHY CHOOSE — ISLAMIC BENTO ARCHITECTURE
+   ========================================================================== */
+.gm-excellence-section {
+  padding: 60px 0;
+  background: radial-gradient(circle at 85% 15%, rgba(212, 175, 55, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 15% 85%, rgba(13, 92, 70, 0.04) 0%, transparent 50%),
+    var(--black-color);
+  position: relative;
+}
+
+.gm-excellence-bento {
+  position: relative;
+}
+
+/* Left: Architectural Moorish Mihrab Pillar */
+.gm-bento-hero-arch {
+  height: 100%;
+  min-height: 520px;
+  border-radius: 24px 24px 24px 24px;
+  /* Islamic Arch Silhouette */
+  border: 2px solid rgba(212, 175, 55, 0.4);
+  box-shadow: 0 16px 40px rgba(13, 92, 70, 0.1);
+  overflow: hidden;
+  position: relative;
+  background: #0d2820;
+}
+
+.gm-bento-hero-img-wrap {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  min-height: 520px;
+}
+
+.gm-bento-hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.gm-bento-hero-arch:hover .gm-bento-hero-img {
+  transform: scale(1.06);
+}
+
+.gm-bento-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(13, 56, 44, 0.6) 0%, transparent 40%, rgba(13, 56, 44, 0.88) 100%);
+  pointer-events: none;
+}
+
+/* Top Floating Pill */
+.gm-bento-badge-top {
+  position: absolute;
+  top: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(13, 56, 44, 0.88);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(212, 175, 55, 0.45);
+  border-radius: 20px;
+  padding: 6px 16px;
+  color: #FFFFFF;
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Center Gold Rosette Medallion */
+.gm-bento-rosette-center {
+  position: absolute;
+  top: 72px;
+  right: 18px;
+  z-index: 3;
+  background: linear-gradient(135deg, #fce293 0%, #d4af37 60%, #9e791b 100%);
+  color: #0d382c;
+  border-radius: 50%;
+  width: 76px;
+  height: 76px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.28);
+  border: 2px solid rgba(255, 255, 255, 0.7);
+}
+
+.gm-bento-rosette-center .rosette-ar {
+  font-family: 'Amiri', serif;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.gm-bento-rosette-center .rosette-en {
+  font-size: 8px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Bottom Glassmorphic Card */
+.gm-bento-hero-footer {
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+  right: 16px;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 18px;
+  padding: 14px 18px;
+  border: 1.5px solid rgba(212, 175, 55, 0.4);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.15);
+  z-index: 3;
+}
+
+.gm-bento-stat-circle {
+  width: 46px;
+  height: 46px;
+  min-width: 46px;
+  border-radius: 50%;
+  background: var(--primary-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FFFFFF;
+  font-weight: 800;
+  font-size: 12.5px;
+  box-shadow: 0 4px 12px var(--primary-glow);
+}
+
+.hero-footer-title {
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--text-heading);
+}
+
+.hero-footer-sub {
+  font-size: 11.5px;
+  color: var(--black-color-6);
+  line-height: 1.4;
+}
+
+/* Right: 4 Islamic Bento Cards */
+.gm-bento-card {
+  background: var(--black-color-1);
+  border: 1.5px solid var(--black-color-4);
+  border-radius: 22px;
+  padding: 24px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 6px 20px rgba(13, 92, 70, 0.05);
+  position: relative;
+  overflow: hidden;
+}
+
+.gm-bento-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--primary-color), var(--black-color-5), var(--primary-color));
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.gm-bento-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(212, 175, 55, 0.6);
+  box-shadow: 0 16px 36px rgba(13, 92, 70, 0.12), 0 0 18px rgba(212, 175, 55, 0.12);
+}
+
+.gm-bento-card:hover::before {
+  opacity: 1;
+}
+
+.gm-bento-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.gm-bento-icon-box {
+  width: 50px;
+  height: 50px;
+  min-width: 50px;
+  border-radius: 14px;
+  background: var(--primary-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FFFFFF;
+  font-size: 24px;
+  box-shadow: 0 0 12px color-mix(in srgb, var(--primary-color) 30%, transparent);
+  transition: transform 0.35s ease;
+}
+
+.gm-bento-card:hover .gm-bento-icon-box {
+  transform: rotate(6deg) scale(1.08);
+}
+
+.gm-bento-ar-tag {
+  font-family: 'Amiri', serif;
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--primary-color);
+  background: rgba(13, 92, 70, 0.08);
+  border: 1px solid rgba(13, 92, 70, 0.16);
+  padding: 3px 10px;
+  border-radius: 12px;
+}
+
+.gm-bento-card-title {
+  font-family: var(--font-main);
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--text-heading);
+  margin-bottom: 8px;
+  letter-spacing: -0.2px;
+}
+
+.gm-bento-card-desc {
+  font-size: 13.5px;
+  color: var(--text-body);
+  line-height: 1.65;
+  margin-bottom: 16px;
+  flex-grow: 1;
+}
+
+.gm-bento-card-footer {
+  margin-top: auto;
+}
+
+.gm-bento-metric-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--primary-color);
+  background: var(--black-color);
+  border: 1px solid var(--black-color-4);
+  padding: 4px 10px;
+  border-radius: 8px;
+}
+
+.gm-bento-metric-chip iconify-icon {
+  color: var(--black-color-5);
+  font-size: 13px;
+}
+
+/* ==========================================================================
+   8. GLOBAL UMMAH STATS RIBBON (ISLAMIC THEME)
+   ========================================================================== */
+.gm-stats-section {
+  padding: 30px 0;
+  background: var(--primary-color);
+  border-top: 1px solid rgba(212, 175, 55, 0.22);
+  border-bottom: 1px solid rgba(212, 175, 55, 0.22);
+  position: relative;
+}
+
+.gm-stat-item-box {
+  background: var(--bg-main);
+  border: 1.5px solid var(--black-color-4);
+  border-radius: 20px;
+  padding: 22px 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03);
+}
+
+.gm-stat-item-box:hover {
+  transform: translateY(-6px);
+  border-color: rgba(212, 175, 55, 0.55);
+  box-shadow: 0 12px 30px rgba(13, 92, 70, 0.1);
+}
+
+.gm-stat-icon-circle {
+  width: 52px;
+  height: 52px;
+  min-width: 52px;
+  border-radius: 14px;
+  background: rgba(13, 92, 70, 0.08);
+  color: var(--primary-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  border: 1px solid rgba(13, 92, 70, 0.16);
+  transition: all 0.35s ease;
+}
+
+.gm-stat-item-box:hover .gm-stat-icon-circle {
+  background: var(--primary-color);
+  color: #FFFFFF;
+  border-color: transparent;
+  box-shadow: 0 4px 16px var(--primary-glow);
+}
+
+.gm-stat-number {
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--text-heading);
+  line-height: 1.1;
+  letter-spacing: -0.4px;
+}
+
+.gm-stat-label {
+  font-size: 13px;
+  color: var(--black-color-6);
+  font-weight: 600;
+  margin-top: 3px;
+}
+
+@media (max-width: 991px) {
+  .gm-bento-hero-arch {
+    min-height: 420px;
+  }
+
+  .gm-bento-hero-img-wrap {
+    min-height: 420px;
+  }
+}
+
+@media (max-width: 575px) {
+  .gm-bento-hero-arch {
+    min-height: 360px;
+  }
+
+  .gm-bento-hero-img-wrap {
+    min-height: 360px;
+  }
+
+  .gm-bento-rosette-center {
+    width: 64px;
+    height: 64px;
+    top: 60px;
+    right: 12px;
+  }
+
+  .gm-bento-badge-top {
+    font-size: 10.5px;
+    padding: 5px 12px;
+  }
+}
+
+/* ==========================================================================
+   9. ISLAMIC MOBILE MATRIMONY SHOWCASE
+   ========================================================================== */
+.gm-app-section {
+  padding: 60px 0;
+  background: linear-gradient(135deg, #09261f 0%, #0d382c 50%, #061814 100%);
+  color: #FFFFFF;
+  position: relative;
+  overflow: hidden;
+  border-top: 1.5px solid rgba(212, 175, 55, 0.25);
+  border-bottom: 1.5px solid rgba(212, 175, 55, 0.25);
+}
+
+.gm-app-arabesque-overlay {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle at 80% 20%, rgba(212, 175, 55, 0.12) 0%, transparent 60%),
+    radial-gradient(circle at 20% 80%, rgba(13, 110, 88, 0.2) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+[data-theme="dark"] .gm-app-section {
+  background: linear-gradient(135deg, #061a15 0%, #09261f 50%, #04100d 100%);
+}
+
+.gm-app-halal-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: rgba(212, 175, 55, 0.15);
+  border: 1px solid rgba(212, 175, 55, 0.4);
+  border-radius: 20px;
+  padding: 6px 16px;
+  color: #fce293;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.gm-app-title {
+  font-size: 38px;
+  font-weight: 800;
+  color: #FFFFFF;
+  line-height: 1.25;
+  letter-spacing: -0.5px;
+}
+
+.gm-app-desc {
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.82);
+  line-height: 1.7;
+}
+
+.gm-app-checklist {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.gm-check-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #f7f3eb;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.gm-check-item iconify-icon {
+  font-size: 18px;
+}
+
+.gm-app-badge-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 24px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1.5px solid rgba(212, 175, 55, 0.35);
+  border-radius: 14px;
+  color: #FFFFFF;
+  text-decoration: none;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  backdrop-filter: blur(10px);
+}
+
+.gm-app-badge-btn:hover {
+  background: linear-gradient(135deg, #fce293 0%, #d4af37 100%);
+  color: #0d382c !important;
+  border-color: #fce293;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(212, 175, 55, 0.35);
+}
+
+.gm-app-badge-icon {
+  font-size: 28px;
+}
+
+.gm-app-mockup-stage {
+  position: relative;
+  display: inline-block;
+}
+
+.gm-app-mockup-img {
+  max-width: 480px;
+  width: 100%;
+  filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.45));
+}
+
+.gm-app-floating-pill-top {
+  position: absolute;
+  top: 12%;
+  right: 6%;
+  background: rgba(13, 56, 44, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1.5px solid rgba(212, 175, 55, 0.45);
+  border-radius: 20px;
+  padding: 8px 16px;
+  color: #FFFFFF;
+  font-size: 12px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  z-index: 5;
+  animation: floatSlow 4s ease-in-out infinite;
+}
+
+.gm-app-user-pill {
+  bottom: 25px;
+  left: 10px;
+  background: rgba(13, 56, 44, 0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  padding: 12px 22px;
+  border-radius: var(--radius-full);
+  border: 1.5px solid rgba(212, 175, 55, 0.4);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+  z-index: 5;
+}
+
+.gm-user-avatar-group {
+  display: flex;
+  align-items: center;
+}
+
+.gm-avatar-img {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 2px solid rgba(212, 175, 55, 0.7);
+  margin-left: -12px;
+  object-fit: cover;
+  transition: transform 0.25s ease;
+}
+
+.gm-avatar-img:first-child {
+  margin-left: 0;
+}
+
+.gm-avatar-img:hover {
+  transform: translateY(-3px) scale(1.1);
+  z-index: 2;
+}
+
+/* ==========================================================================
+   10. ABOUT US & SACRED MISSION (ISLAMIC THEME)
+   ========================================================================== */
+.gm-about-section {
+  padding: 90px 0;
+  background-color: var(--bg-main);
+  position: relative;
+}
+
+.gm-about-media-wrap {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.gm-about-mihrab-frame {
+  position: relative;
+  width: 100%;
+  max-width: 460px;
+  margin: 0 auto;
+  height: 500px;
+  border-radius: 130px 130px 24px 24px;
+  /* Islamic Arch Frame */
+  overflow: hidden;
+  border: 2.5px solid rgba(212, 175, 55, 0.45);
+  box-shadow: 0 16px 40px rgba(13, 92, 70, 0.12);
+  background: #0d2820;
+}
+
+.gm-about-thumb-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.gm-about-mihrab-frame:hover .gm-about-thumb-img {
+  transform: scale(1.05);
+}
+
+.gm-about-thumb-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(13, 56, 44, 0.35) 0%, transparent 40%, rgba(13, 56, 44, 0.85) 100%);
+  pointer-events: none;
+}
+
+.gm-about-arch-tag {
+  position: absolute;
+  top: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(13, 56, 44, 0.88);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(212, 175, 55, 0.4);
+  border-radius: 20px;
+  padding: 6px 16px;
+  color: #FFFFFF;
+  font-size: 11.5px;
+  font-weight: 700;
+  white-space: nowrap;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+}
+
+.gm-play-pulse-btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #fce293 0%, #d4af37 60%, #9e791b 100%);
+  color: #0d382c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 34px;
+  box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.5);
+  cursor: pointer;
+  transition: all 0.35s ease;
+  animation: playPulseGold 2s infinite;
+  z-index: 4;
+}
+
+.gm-play-pulse-btn:hover {
+  transform: translate(-50%, -50%) scale(1.1);
+  color: #081e17;
+}
+
+@keyframes playPulseGold {
+
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.6);
+  }
+
+  50% {
+    box-shadow: 0 0 0 18px transparent;
+  }
+}
+
+.gm-about-experience-seal {
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+  right: 16px;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 18px;
+  padding: 14px 20px;
+  border: 1.5px solid rgba(212, 175, 55, 0.4);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.15);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  z-index: 4;
+}
+
+.gm-about-years {
+  font-family: var(--font-main);
+  font-size: 38px;
+  font-weight: 900;
+  background: var(--primary-color);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1;
+}
+
+.gm-about-years-text {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--text-body);
+  line-height: 1.35;
+}
+
+.gm-about-years-text span {
+  color: var(--primary-color);
+  font-weight: 800;
+}
+
+.gm-mission-pillars {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.gm-mission-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 14px 16px;
+  border-radius: 16px;
+  background: var(--black-color-1);
+  border: 1.5px solid var(--black-color-4);
+  transition: all 0.3s ease;
+}
+
+.gm-mission-item:hover {
+  border-color: rgba(212, 175, 55, 0.55);
+  transform: translateX(5px);
+  box-shadow: 0 6px 20px rgba(13, 92, 70, 0.08);
+}
+
+.gm-mission-icon {
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  border-radius: 12px;
+  background: rgba(13, 92, 70, 0.08);
+  color: var(--primary-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  border: 1px solid rgba(13, 92, 70, 0.16);
+}
+
+.gm-mission-item-title {
+  font-size: 15.5px;
+  font-weight: 800;
+  color: var(--text-heading);
+  margin-bottom: 3px;
+}
+
+.gm-mission-item-desc {
+  font-size: 13px;
+  color: var(--black-color-6);
+  line-height: 1.5;
+  margin: 0;
+}
+
+@keyframes floatYSlow {
+
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.modal-content {
+  background: var(--black-color-1);
+  border: 1px solid var(--black-color-4);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+}
+
+.close_one {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.5);
+  border: none;
+  color: #FFFFFF;
+  cursor: pointer;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s ease;
+}
+
+.close_one:hover {
+  background: var(--primary-color);
+  transform: rotate(90deg);
+}
+
+.about-modal-video {
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+  overflow: hidden;
+}
+
+.about-modal-video iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* ==========================================================================
+   COMMUNITY EXPLORE SECTION
+   ========================================================================== */
+.gm-community-section {
+  padding: 80px 0;
+  background-color: var(--black-color);
+}
+
+.gm-community-card {
+  background: var(--black-color-1);
+  border: 1.5px solid var(--black-color-4);
+  border-radius: var(--radius-lg);
+  padding: 28px;
+  height: 100%;
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: var(--shadow-sm);
+}
+
+.gm-community-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--primary-color);
+}
+
+.gm-community-icon {
+  width: 52px;
+  height: 52px;
+  min-width: 52px;
+  border-radius: var(--radius-md);
+  background: var(--primary-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  color: #FFFFFF;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 0 12px color-mix(in srgb, var(--primary-color) 30%, transparent);
+  transition: all 0.35s ease;
+}
+
+.gm-community-icon::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, transparent 50%);
+}
+
+.gm-community-card:hover .gm-community-icon {
+  transform: rotate(-6deg) scale(1.05);
+}
+
+.white-color-L {
+  color: #FFFFFF;
+}
+
+/* ==========================================================================
+   11. SACRED COMMUNITIES DIRECTORY (MOCKUP IN EMERALD & GOLD THEME)
+   ========================================================================== */
+.gm-community-directory-section {
+  padding: 80px 0;
+  background: var(--bg-main);
+  position: relative;
+}
+
+.gm-explore-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(212, 175, 55, 0.12);
+  border: 1px solid rgba(212, 175, 55, 0.32);
+  color: #B45309;
+  border-radius: 9999px;
+  padding: 6px 16px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+[data-theme="dark"] .gm-explore-badge {
+  color: #FBBF24;
+  background: rgba(251, 191, 36, 0.12);
+  border-color: rgba(251, 191, 36, 0.3);
+}
+
+.text-gradient-gold {
+  background: var(--primary-color);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+[data-theme="dark"] .text-gradient-gold {
+  background: var(--primary-color);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Tab Bar */
+.gm-comm-tabs-wrap {
+  position: relative;
+}
+
+.gm-comm-tabs-nav {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background: var(--black-color-1);
+  padding: 6px;
+  border-radius: 9999px;
+  border: 1px solid var(--black-color-4);
+  box-shadow: 0 4px 20px rgba(13, 110, 88, 0.06);
+}
+
+.gm-comm-tab-btn {
+  border: none;
+  background: transparent;
+  padding: 10px 22px;
+  border-radius: 9999px;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--text-body);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.gm-comm-tab-btn iconify-icon {
+  font-size: 16px;
+}
+
+.gm-comm-tab-btn:hover {
+  color: var(--primary-color);
+  background: var(--primary-light);
+}
+
+.gm-comm-tab-btn.active {
+  background: var(--primary-color);
+  color: #FFFFFF !important;
+  box-shadow: 0 4px 16px var(--primary-glow);
+}
+
+/* Main Directory Card */
+.gm-comm-main-card {
+  background: var(--black-color-1);
+  border-radius: 24px;
+  border: 1px solid var(--black-color-4);
+  padding: 34px 38px;
+  box-shadow: 0 12px 36px -8px rgba(19, 34, 28, 0.05);
+  position: relative;
+}
+
+.gm-comm-header-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  background: var(--primary-light);
+  color: var(--primary-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  flex-shrink: 0;
+}
+
+.gm-comm-card-title {
+  font-family: var(--font-main);
+  font-size: 19px;
+  font-weight: 800;
+  color: var(--white-color);
+  letter-spacing: -0.2px;
+}
+
+.gm-comm-card-sub {
+  font-size: 13.5px;
+  color: var(--black-color-6);
+}
+
+.gm-comm-verified-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(13, 110, 88, 0.08);
+  border: 1px solid rgba(13, 110, 88, 0.25);
+  color: var(--primary-color);
+  border-radius: 9999px;
+  padding: 6px 14px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.gm-comm-dotted-divider {
+  border-top: 1.5px dashed var(--black-color-4);
+  margin: 24px 0 26px 0;
+}
+
+/* Chips Grid */
+.gm-comm-chips-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.gm-comm-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 9999px;
+  background: var(--black-color-1);
+  border: 1px solid var(--black-color-4);
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--white-color);
+  text-decoration: none;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.gm-comm-chip .chip-count {
+  background: rgba(212, 175, 55, 0.16);
+  color: #B45309;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 9999px;
+  line-height: 1.2;
+}
+
+[data-theme="dark"] .gm-comm-chip .chip-count {
+  background: rgba(251, 191, 36, 0.16);
+  color: #FBBF24;
+}
+
+.gm-comm-chip:hover {
+  border-color: var(--primary-color);
+  background: var(--primary-light);
+  color: var(--primary-color);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px rgba(13, 110, 88, 0.12);
+}
+
+.gm-comm-chip-all {
+  background: rgba(13, 110, 88, 0.08) !important;
+  border-color: rgba(13, 110, 88, 0.28) !important;
+  color: var(--primary-color) !important;
+  font-weight: 700 !important;
+}
+
+.gm-comm-chip-all:hover {
+  background: var(--primary-color) !important;
+  color: #FFFFFF !important;
+  border-color: transparent !important;
+}
+
+/* Callout Banner Card */
+.gm-comm-callout-card {
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.09) 0%, rgba(13, 110, 88, 0.06) 100%);
+  border: 1.5px solid rgba(212, 175, 55, 0.32);
+  border-radius: 20px;
+  padding: 22px 28px;
+  box-shadow: 0 8px 24px rgba(212, 175, 55, 0.06);
+}
+
+[data-theme="dark"] .gm-comm-callout-card {
+  background: linear-gradient(135deg, rgba(251, 191, 36, 0.08) 0%, rgba(52, 211, 153, 0.06) 100%);
+  border-color: rgba(251, 191, 36, 0.25);
+}
+
+.gm-callout-icon-box {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  background: rgba(212, 175, 55, 0.2);
+  color: #B45309;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  flex-shrink: 0;
+}
+
+[data-theme="dark"] .gm-callout-icon-box {
+  color: #FBBF24;
+  background: rgba(251, 191, 36, 0.2);
+}
+
+.gm-callout-title {
+  font-family: var(--font-main);
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--white-color);
+  letter-spacing: -0.2px;
+}
+
+.gm-callout-desc {
+  font-size: 13px;
+  color: var(--black-color-6);
+}
+
+.gm-btn-callout {
+  background: var(--accent-gradient);
+  color: #FFFFFF !important;
+  font-weight: 700;
+  font-size: 13.5px;
+  border-radius: 9999px;
+  padding: 12px 24px;
+  border: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 4px 16px rgba(212, 175, 55, 0.35);
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.gm-btn-callout:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(212, 175, 55, 0.5);
+}
+
+/* ==========================================================================
+   12. ISLAMIC SANCTUARY FOOTER (INSPIRED BY MOCKUP, OUR COLOR THEME)
+   ========================================================================== */
+.gm-footer {
+  background: var(--black-color-2p);
+  color: #A7BDB6;
+  padding-top: 60px;
+  position: relative;
+  border-top: 1px solid rgba(212, 175, 55, 0.2);
+}
+
+/* Newsletter Card */
+.gm-footer-newsletter-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1.5px solid rgba(212, 175, 55, 0.28);
+  border-radius: 22px;
+  padding: 30px 36px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.gm-footer-newsletter-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 14px;
+  background: rgba(212, 175, 55, 0.14);
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  color: #F59E0B;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  flex-shrink: 0;
+}
+
+.gm-fnl-title {
+  font-family: var(--font-main);
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: -0.2px;
+}
+
+.gm-fnl-sub {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.gm-fnl-input-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.gm-fnl-field-icon {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 16px;
+  pointer-events: none;
+}
+
+.gm-fnl-input {
+  background: rgba(255, 255, 255, 0.07);
+  border: 1.5px solid rgba(255, 255, 255, 0.15);
+  border-radius: 9999px;
+  padding: 12px 20px 12px 44px;
+  color: #FFFFFF !important;
+  font-size: 14px;
+  transition: all 0.25s ease;
+}
+
+.gm-fnl-input:focus {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: var(--black-color-5);
+  box-shadow: 0 0 14px rgba(212, 175, 55, 0.3);
+  color: #FFFFFF;
+}
+
+.gm-fnl-input::placeholder {
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.gm-btn-fnl-submit {
+  background: var(--accent-gradient);
+  color: #FFFFFF !important;
+  font-weight: 700;
+  font-size: 13.5px;
+  border-radius: 9999px;
+  padding: 12px 24px;
+  border: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+  box-shadow: 0 4px 16px rgba(212, 175, 55, 0.35);
+  transition: all 0.3s ease;
+}
+
+.gm-btn-fnl-submit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(212, 175, 55, 0.5);
+}
+
+.gm-fnl-meta {
+  font-size: 11.5px;
+  color: rgba(255, 255, 255, 0.45);
+  letter-spacing: 0.3px;
+}
+
+/* Footer Brand */
+.gm-footer .gm-brand-title {
+  color: #FFFFFF;
+}
+
+.gm-footer .gm-brand-tagline {
+  color: var(--primary-color);
+  opacity: 0.9;
+  letter-spacing: 0.5px;
+}
+
+.gm-footer-brand-text {
+  font-size: 13.5px;
+  color: rgba(255, 255, 255, 0.65);
+  line-height: 1.65;
+  max-width: 320px;
+}
+
+/* Column Titles & Links */
+.gm-fcol-title {
+  font-family: var(--font-main);
+  font-size: 16px;
+  font-weight: 700;
+  color: #FFFFFF;
+  margin-bottom: 20px;
+  letter-spacing: -0.2px;
+}
+
+.gm-fcol-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.gm-fcol-links li {
+  margin-bottom: 12px;
+}
+
+.gm-fcol-links li a {
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.25s ease;
+  display: inline-block;
+}
+
+.gm-fcol-links li a:hover {
+  color: #FFFFFF;
+  padding-left: 4px;
+}
+
+/* Contact Block & Socials */
+.gm-fsocial-icons a {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 17px;
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.gm-fsocial-icons a:hover {
+  background: var(--primary-color);
+  border-color: transparent;
+  color: #FFFFFF;
+  transform: translateY(-3px);
+  box-shadow: 0 0 12px color-mix(in srgb, var(--primary-color) 30%, transparent);
+}
+
+/* Footer Bottom Bar */
+.gm-footer-bottom-bar {
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 22px 0;
+  margin-top: 30px;
+}
+
+/* ==========================================================================
+   PROGRESS SCROLL BACK TO TOP
+   ========================================================================== */
+.progress-wrap {
+  position: fixed;
+  right: 28px;
+  bottom: 28px;
+  height: 48px;
+  width: 48px;
+  cursor: pointer;
+  display: block;
+  border-radius: 50px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  z-index: 10000;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(15px);
+  transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  background: var(--black-color-1);
+  border: 1.5px solid var(--black-color-4);
+}
+
+.progress-wrap.active-progress {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.progress-wrap::after {
+  position: absolute;
+  content: "↑";
+  text-align: center;
+  line-height: 46px;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--primary-color);
+  left: 0;
+  top: 0;
+  height: 48px;
+  width: 48px;
+  cursor: pointer;
+  display: block;
+  z-index: 1;
+  transition: all 200ms ease;
+}
+
+.progress-wrap:hover {
+  box-shadow: var(--shadow-glow);
+  border-color: var(--primary-color);
+}
+
+.progress-wrap:hover::after {
+  transform: translateY(-2px);
+}
+
+.progress-wrap svg path {
+  fill: none;
+}
+
+.progress-wrap svg.progress-circle path {
+  stroke: var(--primary-color);
+  stroke-width: 4;
+  box-sizing: border-box;
+  transition: all 200ms linear;
+}
+
+/* ==========================================================================
+   NAVBAR TOGGLER (MOBILE)
+   ========================================================================== */
+.navbar-toggler {
+  width: 42px;
+  height: 42px;
+  border-radius: 100px;
+  background: var(--black-color-3);
+  border: 1px solid var(--black-color-4);
+  color: var(--white-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.navbar-toggler:hover {
+  background: var(--primary-light);
+  color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.fts-13 {
+  font-size: 13px;
+}
+
+.gm-comm-card-header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+/* theme light & dark mode button */
+.theme-switch {
+  position: fixed;
+  width: 52px;
+  height: 26px;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  margin: auto;
+  transform: rotate(268deg);
+  z-index: 9991;
+}
+
+.theme-switch .switch {
+  width: 52px;
+  height: 26px;
+  background: var(--black-color-2p);
+  border: 1px solid var(--common-border);
+  border-radius: 30px;
+  position: relative;
+  cursor: pointer;
+  transition: 0.3s ease;
+  display: block;
+}
+
+.switch .circle {
+  width: 20px;
+  height: 20px;
+  background: var(--white-color-p);
+  border-radius: 50%;
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  transition: 0.3s ease;
+  z-index: 5;
+}
+
+.switch .icon {
+  position: absolute;
+  font-size: 18px;
+  color: var(--pending-textcolor);
+  transition: 0.3s ease;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.switch .sun {
+  right: 6px;
+  opacity: 1;
+}
+
+.switch .moon {
+  left: 6px;
+  opacity: 0;
+}
+
+.theme-switch input:checked+.switch {
+  background: var(--black-color);
+}
+
+.theme-switch input:checked+.switch .circle {
+  transform: translateX(26px);
+}
+
+.theme-switch input:checked+.switch .sun {
+  opacity: 0;
+}
+
+.theme-switch input:checked+.switch .moon {
+  opacity: 1;
+}
+
+/* Newsletter */
+.gm-fnl-form {
+  max-width: 480px;
+}
+
+.gm-fnl-input-wrapper {
+  position: relative;
+}
+
+.gm-fnl-field-icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 18px;
+  color: #999;
+  pointer-events: none;
+}
+
+.gm-fnl-input {
+  padding-left: 40px !important;
+}
+
+.gm-fnl-input.is-invalid {
+  border-color: #d9363e !important;
+}
+
+.gm-btn-fnl-submit {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+  position: relative;
+}
+
+.gm-btn-fnl-submit:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.gm-btn-fnl-submit .btn-loader {
+  display: none;
+  width: 14px;
+  height: 14px;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: gm-fnl-spin 0.6s linear infinite;
+}
+
+.gm-btn-fnl-submit.loading .btn-text,
+.gm-btn-fnl-submit.loading iconify-icon {
+  display: none;
+}
+
+.gm-btn-fnl-submit.loading .btn-loader {
+  display: inline-block;
+}
+
+@keyframes gm-fnl-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.gm-fnl-message {
+  margin-top: 10px;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.gm-fnl-message.success {
+  background: #e6f7ec;
+  color: #1a7f3c;
+  border: 1px solid #b7e4c7;
+}
+
+.gm-fnl-message.error {
+  background: #fdecea;
+  color: #d9363e;
+  border: 1px solid #f5c2c0;
+}
+
+/* Newsletter */
+/* Language selector */
+.gm-language-wrapper {
+    position: relative;
+    flex-shrink: 0;
+    z-index: 1050;
+}
+
+.gm-language-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 42px;
+    padding: 0 13px;
+    border: 1px solid var(--nav-border);
+    border-radius: 24px;
+    background: rgba(255, 255, 255, 0.04);
+    color: var(--white-color);
+    font-size: 13px;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.gm-language-toggle > iconify-icon {
+    font-size: 17px;
+}
+
+.gm-language-toggle:hover,
+.gm-language-wrapper.is-open .gm-language-toggle {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(45, 201, 151, 0.5);
+}
+
+.gm-language-arrow {
+    font-size: 13px !important;
+    transition: transform 0.2s ease;
+}
+
+.gm-language-wrapper.is-open .gm-language-arrow {
+    transform: rotate(180deg);
+}
+
+/* Dropdown panel */
+.gm-language-dropdown {
+    display: none;
+    position: absolute;
+    top: calc(100% + 10px);
+    right: 0;
+    left: auto;
+    width: 280px;
+    max-width: calc(100vw - 32px);
+    padding: 0;
+    color: #edf5f1;
+    background: var(--black-color-3);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 14px;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+    overflow: hidden;
+    z-index: 1100;
+}
+
+.gm-language-wrapper.is-open .gm-language-dropdown {
+    display: block;
+}
+
+/* Heading */
+.gm-language-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.gm-language-heading > div {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.gm-language-heading strong {
+    color: #f3faf6;
+    font-size: 14px;
+}
+
+.gm-language-heading small {
+    color: #9aafa6;
+    font-size: 11px;
+}
+
+.gm-language-count {
+    flex-shrink: 0;
+    padding: 5px 8px;
+    border-radius: 20px;
+    background: rgba(45, 201, 151, 0.12);
+    color: #45d9a8;
+    font-size: 10px;
+    white-space: nowrap;
+}
+
+/* Options list */
+.gm-language-list {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    max-height: 260px;
+    padding: 8px;
+    overflow-y: auto;
+}
+
+.gm-language-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding: 10px;
+    border-radius: 9px;
+    color: #dce9e3;
+    text-decoration: none;
+    font-size: 13px;
+    transition: background 0.2s ease;
+}
+
+.gm-language-option:hover,
+.gm-language-option.active {
+    color: #45d9a8;
+    background: rgba(45, 201, 151, 0.1);
+}
+
+.gm-language-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    flex-shrink: 0;
+    border-radius: 9px;
+    color: #45d9a8;
+    background: rgba(45, 201, 151, 0.1);
+    font-size: 18px;
+}
+
+.gm-language-text {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.gm-language-text small {
+    color: #91a69d;
+    font-size: 11px;
+}
+
+.gm-language-check {
+    color: #45d9a8;
+    font-size: 17px;
+}
+
+/* Mobile drawer */
+.gm-mobile-language {
+    margin-bottom: 14px;
+}
+
+.gm-mobile-language .gm-language-toggle {
+    width: 100%;
+    justify-content: space-between;
+}
+
+.gm-mobile-language .gm-language-dropdown {
+    position: relative;
+    top: auto;
+    right: auto;
+    left: auto;
+    width: 100%;
+    max-width: 100%;
+    margin-top: 10px;
+}
+
+/* Smaller screens */
+@media (max-width: 575.98px) {
+    #gmDesktopLanguage .gm-language-dropdown {
+        right: -8px;
+        max-width: calc(100vw - 24px);
+    }
+}

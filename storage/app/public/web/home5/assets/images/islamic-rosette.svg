@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="240" viewBox="0 0 240 240">
+  <defs>
+    <radialGradient id="rosetteGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#D4AF37" stop-opacity="0.3"/>
+      <stop offset="60%" stop-color="#0D6E58" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#0D6E58" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="goldStroke" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F59E0B"/>
+      <stop offset="50%" stop-color="#D4AF37"/>
+      <stop offset="100%" stop-color="#92400E"/>
+    </linearGradient>
+  </defs>
+
+  <circle cx="120" cy="120" r="110" fill="url(#rosetteGlow)" />
+  
+  <!-- Outer decorative ring -->
+  <circle cx="120" cy="120" r="105" fill="none" stroke="url(#goldStroke)" stroke-width="1.5" stroke-dasharray="4 4" opacity="0.6"/>
+  <circle cx="120" cy="120" r="95" fill="none" stroke="#0D6E58" stroke-width="1" opacity="0.4"/>
+
+  <!-- 16-pointed star / Rosette lattice -->
+  <g transform="translate(120, 120)">
+    <!-- 8-pointed star 1 -->
+    <rect x="-60" y="-60" width="120" height="120" fill="none" stroke="url(#goldStroke)" stroke-width="1.5" opacity="0.8"/>
+    <rect x="-60" y="-60" width="120" height="120" transform="rotate(45)" fill="none" stroke="url(#goldStroke)" stroke-width="1.5" opacity="0.8"/>
+    
+    <!-- Secondary rotated stars -->
+    <rect x="-48" y="-48" width="96" height="96" transform="rotate(22.5)" fill="none" stroke="#0D6E58" stroke-width="1" opacity="0.6"/>
+    <rect x="-48" y="-48" width="96" height="96" transform="rotate(67.5)" fill="none" stroke="#0D6E58" stroke-width="1" opacity="0.6"/>
+    
+    <!-- Center star and petals -->
+    <circle cx="0" cy="0" r="32" fill="none" stroke="url(#goldStroke)" stroke-width="1.2" opacity="0.9"/>
+    <circle cx="0" cy="0" r="18" fill="none" stroke="#0D6E58" stroke-width="1.2" opacity="0.9"/>
+    
+    <!-- Center 8-pointed Rub el Hizb -->
+    <rect x="-10" y="-10" width="20" height="20" fill="none" stroke="url(#goldStroke)" stroke-width="1.5"/>
+    <rect x="-10" y="-10" width="20" height="20" transform="rotate(45)" fill="none" stroke="url(#goldStroke)" stroke-width="1.5"/>
+    <circle cx="0" cy="0" r="4" fill="#D4AF37"/>
+  </g>
+</svg>

@@ -1,0 +1,631 @@
+/* ==========================================================================
+   RESPONSIVE DESIGN SYSTEM — Twilight Rose Theme
+   ========================================================================== */
+
+@media only screen and (max-width: 1399px) {
+  .gm-hero-title {
+    font-size: 54px;
+  }
+}
+
+@media only screen and (max-width: 1199px) {
+  .gm-hero-title {
+    font-size: 48px;
+  }
+
+  .gm-section-title {
+    font-size: 36px;
+  }
+
+  .gm-nav-link {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+
+  .gm-hero-section {
+    min-height: 620px;
+    padding: 90px 0 140px 0;
+  }
+}
+
+/* ==========================================================================
+   MOBILE OFFCANVAS DRAWER & BACKDROP
+   ========================================================================== */
+@media only screen and (min-width: 992px) {
+
+  .gm-drawer-overlay,
+  .gm-mobile-drawer {
+    display: none !important;
+  }
+}
+
+.gm-drawer-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(7, 18, 14, 0.65);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  z-index: 99998;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.35s ease, visibility 0.35s ease;
+}
+
+.gm-drawer-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.gm-mobile-drawer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 320px;
+  max-width: 86vw;
+  height: 100vh;
+  height: 100dvh;
+  background: var(--bg-card);
+  border-right: 1.5px solid rgba(212, 175, 55, 0.3);
+  box-shadow: 16px 0 50px rgba(0, 0, 0, 0.3);
+  z-index: 99999;
+  display: flex;
+  flex-direction: column;
+  padding: 24px 20px;
+  transform: translateX(-105%);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow-y: auto;
+}
+
+.gm-mobile-drawer.active {
+  transform: translateX(0);
+}
+
+body.drawer-open {
+  overflow: hidden !important;
+}
+
+.gm-drawer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--border-light);
+  margin-bottom: 18px;
+}
+
+.close-toggle {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--bg-muted);
+  border: 1px solid var(--border-light);
+  color: var(--text-main);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.close-toggle:hover {
+  background: var(--primary-light);
+  color: var(--primary);
+  border-color: var(--primary);
+}
+
+.gm-drawer-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.gm-drawer-menu .gm-nav-link {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border-radius: var(--radius-md);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-main);
+  text-decoration: none;
+  background: transparent;
+  transition: all 0.25s ease;
+}
+
+.gm-drawer-menu .gm-nav-link iconify-icon {
+  font-size: 20px;
+  color: var(--primary);
+}
+
+.gm-drawer-menu .gm-nav-link:hover,
+.gm-drawer-menu .gm-nav-link.active {
+  background: var(--primary-light);
+  color: var(--primary);
+}
+
+.gm-drawer-footer {
+  margin-top: auto;
+  padding-top: 24px;
+  border-top: 1px solid var(--border-light);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Tablet & Mobile Header Adjustments */
+@media only screen and (max-width: 991px) {
+  .gm-navbar {
+    padding: 0 12px;
+    top: 10px;
+  }
+
+  .chip-top-right {
+    top: -25px;
+    right: 6px;
+  }
+
+  .gm-nav-container {
+    padding: 8px 16px;
+  }
+
+  .gm-brand-logo {
+    gap: 8px;
+  }
+
+  .gm-logo-badge {
+    width: 38px;
+    height: 38px;
+    font-size: 19px;
+  }
+
+  .gm-brand-title,
+  .gm-brand-accent {
+    font-size: 18px;
+  }
+
+  .gm-brand-tagline {
+    font-size: 8px;
+    letter-spacing: 1px;
+  }
+
+  .gm-hero-section {
+    min-height: 560px;
+    padding: 70px 0 120px 0;
+  }
+
+  .gm-hero-section.gm-muslim-hero {
+    padding: 90px 0 100px 0;
+    text-align: center;
+  }
+
+  .gm-hero-text-wrap {
+    max-width: 100%;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .gm-hero-badge {
+    margin: 0 auto 20px auto;
+  }
+
+  .gm-trust-pillars {
+    align-items: center;
+    max-width: 480px;
+    margin: 0 auto 28px auto;
+  }
+
+  .gm-trust-item {
+    text-align: left;
+    width: 100%;
+  }
+
+  .gm-hero-action-row {
+    justify-content: center;
+  }
+
+  .gm-hero-community-proof {
+    justify-content: center;
+  }
+
+  .gm-couple-png-stage {
+    margin-top: 36px;
+    min-height: 480px;
+  }
+
+  .gm-couple-png-img {
+    height: 480px;
+  }
+
+  .gm-couple-halo-backdrop {
+    width: 380px;
+    height: 380px;
+  }
+
+  .gm-couple-arch-silhouette {
+    width: 320px;
+    height: 440px;
+  }
+
+  .gm-hero-section::before {
+    width: 350px;
+    height: 350px;
+    top: -60px;
+    right: -60px;
+  }
+
+  .gm-hero-section::after {
+    width: 300px;
+    height: 300px;
+    bottom: -40px;
+    left: -40px;
+  }
+
+  .gm-search-wrapper {
+    margin-top: -50px;
+  }
+
+  .gm-search-card {
+    padding: 24px 20px;
+  }
+
+  .gm-hero-stats-row {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .gm-about-media-wrap {
+    margin-top: 40px;
+  }
+
+  .gm-about-video-box {
+    width: 270px;
+    height: 330px;
+  }
+
+  .topLeftimg {
+    width: 110px;
+    height: 130px;
+    top: -20px;
+    left: 0;
+  }
+
+  .bottomRightimg {
+    width: 120px;
+    height: 140px;
+    bottom: -20px;
+    right: 0;
+  }
+
+  .gm-about-experience-seal {
+    bottom: 0;
+    left: -10px;
+    padding: 12px 18px;
+  }
+
+  .gm-about-years {
+    font-size: 32px;
+  }
+
+  .changeflexDirection {
+    flex-direction: column-reverse;
+  }
+
+  .gm-app-user-pill {
+    position: static;
+    margin-top: 20px;
+    display: inline-flex !important;
+  }
+
+  .gm-steps-section,
+  .gm-stories-section,
+  .gm-excellence-section,
+  .gm-about-section,
+  .gm-community-section {
+    padding: 80px 0;
+  }
+
+  .gm-profiles-section {
+    padding: 60px 0;
+  }
+
+  .gm-app-section {
+    padding: 80px 0;
+  }
+
+  .gm-section-header {
+    margin-bottom: 40px;
+  }
+}
+
+@media only screen and (max-width: 576px) {
+  .gm-navbar {
+    padding: 0 10px;
+    top: 8px;
+  }
+
+  .gm-nav-container {
+    padding: 6px 14px;
+  }
+
+  .gm-brand-tagline {
+    display: none;
+  }
+
+  .gm-hero-badge {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 8px 16px;
+    gap: 4px;
+    max-width: 96%;
+    margin: 0 auto 20px auto;
+    border-radius: var(--radius-md);
+    white-space: normal;
+  }
+
+  .gm-arabic-bismillah {
+    font-size: 14px;
+    width: 100%;
+    text-align: center;
+    display: block;
+  }
+
+  .gm-badge-divider {
+    display: none;
+  }
+
+  .gm-hero-title {
+    font-size: 30px;
+    letter-spacing: -0.5px;
+    line-height: 1.25;
+  }
+
+  .gm-section-title {
+    font-size: 26px;
+    letter-spacing: -0.3px;
+  }
+
+  .gm-islamic-floating-rosette {
+    display: none !important;
+  }
+
+  .gm-hero-subtitle {
+    font-size: 15px;
+    padding: 0 4px;
+  }
+
+  .gm-hero-cta {
+    width: 100%;
+    justify-content: center;
+    padding: 16px 28px;
+    font-size: 16px;
+  }
+
+  .gm-hero-action-row {
+    flex-direction: column;
+    width: 100%;
+    gap: 12px;
+  }
+
+  .gm-hero-secondary-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .gm-couple-png-stage {
+    min-height: 380px;
+    margin-top: 24px;
+  }
+
+  .gm-couple-png-img {
+    height: 360px;
+  }
+
+  .gm-couple-halo-backdrop {
+    width: 280px;
+    height: 280px;
+  }
+
+  .gm-couple-arch-silhouette {
+    width: 250px;
+    height: 340px;
+  }
+
+  .chip-top-right {
+    right: 0;
+    top: 5px;
+    padding: 6px 12px;
+    font-size: 11px;
+  }
+
+  .chip-bottom-right {
+    display: none;
+  }
+
+  .card-bottom-left {
+    left: 0;
+    bottom: -15px;
+    padding: 8px 12px;
+  }
+
+  .card-bottom-left .gm-story-quote {
+    display: none;
+  }
+
+  .gm-step-card,
+  .gm-islamic-card {
+    padding: 34px 20px 28px;
+    border-radius: 64px 64px var(--radius-lg) var(--radius-lg);
+  }
+
+  .gm-islamic-hadith-bar {
+    border-radius: var(--radius-lg);
+    padding: 14px 18px;
+    margin-top: 36px;
+  }
+
+  .hadith-inner {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .crest-line {
+    width: 28px;
+  }
+
+  .crest-arabic {
+    font-size: 15px;
+  }
+
+  .gm-step-watermark {
+    font-size: 48px;
+  }
+
+  .gm-footer {
+    padding-top: 50px;
+  }
+
+  .gm-hero-section {
+    min-height: auto;
+    padding: 60px 0 100px 0;
+  }
+
+  .gm-hero-section::before,
+  .gm-hero-section::after {
+    width: 200px;
+    height: 200px;
+  }
+
+  .gm-hero-badge {
+    font-size: 10px;
+    padding: 17px 16px;
+    letter-spacing: 1px;
+  }
+
+  .gm-feature-card,
+  .gm-bento-card {
+    padding: 20px 18px;
+  }
+
+  .gm-community-card {
+    padding: 22px;
+  }
+
+  .gm-search-card {
+    padding: 20px 16px;
+    border-radius: var(--radius-lg);
+  }
+
+  .gm-profile-img-holder {
+    height: 280px;
+  }
+
+  .gm-steps-section,
+  .gm-stories-section,
+  .gm-excellence-section,
+  .gm-about-section,
+  .gm-community-section {
+    padding: 60px 0;
+  }
+
+  .gm-app-section {
+    padding: 60px 0;
+  }
+
+  .gm-stats-section {
+    padding: 50px 0;
+  }
+
+  .gm-app-title {
+    font-size: 26px;
+  }
+
+  .gm-about-mihrab-frame {
+    height: 360px;
+    border-radius: 90px 90px 20px 20px;
+  }
+
+  .gm-app-mockup-img {
+    max-width: 310px;
+  }
+
+  .gm-app-floating-pill-top {
+    top: 5%;
+    right: 2%;
+    font-size: 11px;
+    padding: 6px 12px;
+  }
+
+  /* Sacred Communities & Footer Responsive */
+  .gm-community-directory-section {
+    padding: 50px 0;
+  }
+
+  .gm-comm-tabs-nav {
+    border-radius: 16px;
+    padding: 5px;
+    width: 100%;
+    justify-content: flex-start;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .gm-comm-tabs-nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .gm-comm-tab-btn {
+    white-space: nowrap;
+    padding: 8px 15px;
+    font-size: 12.5px;
+  }
+
+  .gm-comm-main-card {
+    padding: 22px 18px;
+    border-radius: 18px;
+  }
+
+  .gm-comm-card-title {
+    font-size: 17px;
+  }
+
+  .gm-comm-chip {
+    padding: 6px 13px;
+    font-size: 12.5px;
+  }
+
+  .gm-comm-callout-card {
+    padding: 20px 18px;
+    border-radius: 18px;
+  }
+
+  .gm-btn-callout {
+    width: 100%;
+    justify-content: center;
+    margin-top: 10px;
+  }
+
+  .gm-footer-newsletter-card {
+    padding: 22px 18px;
+    border-radius: 18px;
+  }
+
+  .gm-fnl-form {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .gm-btn-fnl-submit {
+    width: 100%;
+    justify-content: center;
+  }
+}

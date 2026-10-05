@@ -1,0 +1,5305 @@
+@import url("https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Dancing+Script:wght@600;700&family=Gabarito:wght@400;500;600;700;800;900&display=swap");
+
+:root {
+  --primary-color: #0d56de;
+  --primary-color-rgb: 13, 86, 222;
+  --primary-light-color: #1a2a8024;
+
+  --black-color: #0f1522;
+  --black-color-1: #161d2d;
+  --black-color-1white: #161d2d;
+  --black-color-2: #090f1c;
+  --black-color-2p: #090f1c;
+  --black-color-3: #272d3a;
+  --black-color-3primary: #272d3a;
+  --black-color-3w: #272d3a;
+  --black-color-4: #313848;
+  --black-color-5: #404d60;
+  --black-color-6: #acb5bd;
+
+  --white-color: #ffffff;
+  --white-color-p: #ffffff;
+  --white-color-70: #ffffffb3;
+  --white-color-p70: #ffffffb3;
+
+  --input-border: #727272;
+  --input-border-light: #727272;
+  --common-border: #cccccc47;
+
+  --green-color: #00a569;
+  --payment-color: #50b748;
+  --error-color: #f03d3e;
+  --pending-bgcolor: #ffe8c7;
+  --pending-textcolor: #d49233;
+  --accept-bgcolor: #cdfde6;
+  --accept-textcolor: #18cb75;
+  --saleText-color: #dd4949;
+  --sale-bg-color: #ffd5d5;
+
+  /* ---- added tokens: components that used to be hardcoded ---- */
+  --toast-bg: rgba(30, 41, 59, 0.7);
+  --toast-border: rgba(255, 255, 255, 0.1);
+  --toast-text: #ffffff;
+  --toast-close: #64748b;
+
+  --otp-modal-bg: #0c1421;
+  --otp-circle-bg: #171f2c;
+  --otp-line-color: #555c68;
+  --otp-line-color-active: #ffffff;
+  --otp-divider: #313848;
+
+  --cookie-bg: rgba(22, 29, 45, 0.95);
+  --cookie-border: rgba(255, 255, 255, 0.1);
+  --cookie-title: #ffffff;
+  --cookie-text: rgba(255, 255, 255, 0.7);
+  --cookie-reject-bg: rgba(255, 255, 255, 0.05);
+  --cookie-reject-border: rgba(255, 255, 255, 0.1);
+
+  --ai-card-bg-1: linear-gradient(130deg, #0f1c3a 0%, #162550 60%, #1a2d5e 100%);
+  --ai-card-bg-2: linear-gradient(130deg, #0c1f35 0%, #112b4e 60%, #143460 100%);
+  --ai-card-border: rgba(255, 255, 255, 0.07);
+  --ai-title-color: #e8f0ff;
+  --ai-desc-color: rgba(180, 210, 255, 0.7);
+  --ai-icon-color: #7eb5ff;
+  --ai-icon-bg: rgba(78, 130, 255, 0.18);
+  --ai-icon-border: rgba(100, 150, 255, 0.25);
+  --ai-label-color: #7eb5ff;
+  --ai-label-bg: rgba(78, 130, 255, 0.15);
+  --ai-label-border: rgba(100, 160, 255, 0.2);
+  --ai-promo-bg: #161d2de6;
+
+  --suspended-icon-bg: rgba(255, 59, 48, 0.1);
+  --suspended-icon-color: #ff3b30;
+  --suspended-ring: rgba(255, 59, 48, 0.2);
+
+  --loader-bg: #0f1522;
+
+  /* ---- added tokens: layout, brand accents, typography ---- */
+  --bg-main: #0a0f1d;
+  --bg-sidebar: #101727;
+  --bg-card: #151d2f;
+  --bg-card-hover: #19243a;
+  --bg-ad-banner: linear-gradient(135deg, #132247 0%, #0d1733 100%);
+
+  --color-text-white: #ffffff;
+  --color-text-muted: #8e9ab2;
+  --color-text-sub: #64748b;
+
+  --border-subtle: rgba(255, 255, 255, 0.08);
+
+  --metric-purple-bg: rgba(139, 92, 246, 0.15);
+  --metric-purple-border: rgba(139, 92, 246, 0.35);
+  --metric-purple-text: #c4b5fd;
+
+  --metric-blue-bg: rgba(59, 130, 246, 0.15);
+  --metric-blue-border: rgba(59, 130, 246, 0.35);
+  --metric-blue-text: #93c5fd;
+
+  --font-main: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-script: 'Alex Brush', cursive;
+}
+
+.light-mode {
+  --primary-color: #0d56de;
+  --primary-color-rgb: 13, 86, 222;
+  --primary-light-color: #1a2a8024;
+
+  --black-color: #eff3f6;
+  --black-color-1: #ffffff;
+  --black-color-1white: #ffffff;
+  --black-color-2: #dfdfdf;
+  --black-color-2p: #090f1c;
+  --black-color-3: #ccd0d8;
+  --black-color-3primary: #0d56de;
+  --black-color-3w: #ffffff;
+  --black-color-4: #cdd2dd;
+  --black-color-5: #bbbec3;
+  --black-color-6: #c4c5c5;
+
+  --white-color: #0f1522;
+  --white-color-p: #ffffff;
+  --white-color-70: #000000b3;
+  --white-color-p70: #ffffffb3;
+
+  --input-border: #727272;
+  --input-border-light: #dadada;
+  --common-border: #cccccc47;
+
+  --green-color: #00a569;
+  --payment-color: #50b748;
+  --error-color: #f03d3e;
+  --pending-bgcolor: #ffe8c7;
+  --pending-textcolor: #d49233;
+  --accept-bgcolor: #cdfde6;
+  --accept-textcolor: #18cb75;
+  --saleText-color: #dd4949;
+  --sale-bg-color: #ffd5d5;
+
+  /* ---- added tokens: light equivalents ---- */
+  --toast-bg: rgba(255, 255, 255, 0.85);
+  --toast-border: rgba(15, 21, 34, 0.08);
+  --toast-text: #0f1522;
+  --toast-close: #9aa3af;
+
+  --otp-modal-bg: #ffffff;
+  --otp-circle-bg: #eef1f6;
+  --otp-line-color: #c9ccd2;
+  --otp-line-color-active: #0f1522;
+  --otp-divider: #e2e5ea;
+
+  --cookie-bg: rgba(255, 255, 255, 0.95);
+  --cookie-border: rgba(15, 21, 34, 0.08);
+  --cookie-title: #0f1522;
+  --cookie-text: rgba(15, 21, 34, 0.7);
+  --cookie-reject-bg: rgba(15, 21, 34, 0.04);
+  --cookie-reject-border: rgba(15, 21, 34, 0.12);
+
+  --ai-card-bg-1: linear-gradient(130deg, #eaf1ff 0%, #dce8ff 60%, #d3e2ff 100%);
+  --ai-card-bg-2: linear-gradient(130deg, #e7f1ff 0%, #d9e9ff 60%, #cfe1ff 100%);
+  --ai-card-border: rgba(13, 86, 222, 0.12);
+  --ai-title-color: #0f1e40;
+  --ai-desc-color: rgba(15, 30, 60, 0.65);
+  --ai-icon-color: #0d56de;
+  --ai-icon-bg: rgba(13, 86, 222, 0.1);
+  --ai-icon-border: rgba(13, 86, 222, 0.2);
+  --ai-label-color: #0d56de;
+  --ai-label-bg: rgba(13, 86, 222, 0.1);
+  --ai-label-border: rgba(13, 86, 222, 0.2);
+  --ai-promo-bg: #ffffffe6;
+
+  --suspended-icon-bg: rgba(255, 59, 48, 0.08);
+  --suspended-icon-color: #d9342d;
+  --suspended-ring: rgba(255, 59, 48, 0.18);
+
+  --loader-bg: #eff3f6;
+
+  /* ---- added tokens: layout, brand accents, typography ---- */
+  --bg-main: #f5f7fa;
+  --bg-sidebar: #ffffff;
+  --bg-card: #ffffff;
+  --bg-card-hover: #f0f3f8;
+  --bg-ad-banner: linear-gradient(135deg, #e7f1ff 0%, #d9e9ff 100%);
+
+  --color-text-white: #0f1522;
+  --color-text-muted: #5b6472;
+  --color-text-sub: #475569;
+
+  --border-subtle: rgba(15, 21, 34, 0.08);
+
+  --font-main: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-script: 'Alex Brush', cursive;
+
+  --metric-purple-bg: rgba(139, 92, 246, 0.10);
+  --metric-purple-border: rgba(139, 92, 246, 0.25);
+  --metric-purple-text: #7c3aed;
+
+  --metric-blue-bg: rgba(59, 130, 246, 0.10);
+  --metric-blue-border: rgba(59, 130, 246, 0.25);
+  --metric-blue-text: #2563eb;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001s !important;
+    transition-duration: 0.001s !important;
+  }
+}
+
+body {
+  font-family: "Gabarito", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: var(--black-color, #FAF5ED);
+  color: var(--white-color, #1F1614);
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+ul,
+ol {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+a,
+a:focus {
+  text-decoration: none;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  padding: 0;
+}
+
+img {
+  max-width: 100%;
+}
+
+::selection {
+  background: var(--primary-color, #E04B28);
+  color: #FFFFFF;
+}
+
+::-moz-selection {
+  background: var(--primary-color, #E04B28);
+  color: #FFFFFF;
+}
+
+a:focus-visible,
+button:focus-visible,
+select:focus-visible {
+  outline: 3px solid var(--primary-color, #E04B28);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+/* ---------- shared type & chips ---------- */
+
+.section-title {
+  font-family: "Gabarito", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-weight: 600;
+  font-size: clamp(30px, 4vw, 44px);
+  line-height: 1.15;
+  color: var(--white-color, #1F1614);
+  letter-spacing: -0.01em;
+}
+
+.accent-italic {
+  font-style: italic;
+  font-weight: 600;
+  background: linear-gradient(135deg, var(--black-color-5, #E65C30) 0%, var(--primary-color, #E04B28) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+.accent-orange-italic {
+  font-style: italic;
+  font-weight: 600;
+  background: linear-gradient(135deg, var(--black-color-5, #E65C30) 0%, var(--primary-color, #E04B28) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+.section-sub {
+  color: 5E534D;
+  max-width: 560px;
+  margin-top: 10px;
+}
+
+.section-head {
+  margin-bottom: 42px;
+}
+
+.eyebrow-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--black-color-3, #FDF1EA);
+  color: var(--primary-color, #E04B28);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 7px 16px;
+  border-radius: 100px;
+  margin-bottom: 16px;
+}
+
+.eyebrow-chip iconify-icon {
+  font-size: 16px;
+}
+
+.chip-green {
+  background: var(--black-color-3, #FDF1EA);
+  color: var(--black-color-5, #E65C30);
+}
+
+.chip-cream {
+  background: rgb(255 255 255);
+}
+
+/* ---------- buttons ---------- */
+
+.btn-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 600;
+  font-size: 15px;
+  padding: 12px 26px;
+  border-radius: 10px;
+  border: 2px solid transparent;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, color 0.2s ease;
+  cursor: pointer;
+}
+
+.btn-pill iconify-icon {
+  font-size: 20px;
+  transition: transform 0.2s ease;
+}
+
+.btn-pill:hover iconify-icon {
+  transform: translateX(4px);
+}
+
+.btn-lg-pill {
+  padding: 15px 32px;
+  font-size: 15px;
+}
+
+.btn-orange {
+  background: linear-gradient(135deg, var(--black-color-5, #E65C30) 0%, var(--primary-color, #E04B28) 100%);
+  color: #FFFFFF;
+  box-shadow: 0 10px 24px rgba(224, 75, 40, 0.28);
+}
+
+.btn-orange:hover {
+  background: linear-gradient(135deg, #EE683D 0%, #DF4A25 100%);
+  color: #FFFFFF;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(224, 75, 40, 0.35);
+}
+
+.btn-green {
+  background: #FFFFFF;
+  color: var(--primary-color, #E04B28);
+  border: 2px solid var(--primary-color, #E04B28);
+  box-shadow: 0 10px 24px rgba(224, 75, 40, 0.08);
+}
+
+.btn-green:hover {
+  background: linear-gradient(135deg, var(--black-color-5, #E65C30) 0%, var(--primary-color, #E04B28) 100%);
+  color: #FFFFFF;
+  border-color: transparent;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(224, 75, 40, 0.25);
+}
+
+.btn-green-outline {
+  background: transparent;
+  border-color: var(--primary-color, #E04B28);
+  color: var(--primary-color, #E04B28);
+}
+
+.btn-green-outline:hover {
+  background: linear-gradient(135deg, var(--black-color-5, #E65C30) 0%, var(--primary-color, #E04B28) 100%);
+  color: #FFFFFF;
+  border-color: transparent;
+  transform: translateY(-2px);
+}
+
+.btn-ghost {
+  color: var(--black-color-5, #E65C30);
+  font-weight: 600;
+  padding: 10px 16px;
+  border-radius: 100px;
+  transition: background 0.2s ease;
+}
+
+.btn-ghost:hover {
+  background: var(--black-color-3, #FDF1EA);
+  color: var(--black-color-5, #E65C30);
+}
+
+/* ---------- scallop garland edges (signature) ---------- */
+
+.scallop-top,
+.scallop-bottom {
+  height: 26px;
+  width: 100%;
+  background-image: radial-gradient(circle at 50% 0, var(--black-color, #FAF5ED) 13px, transparent 14px);
+  background-size: 40px 26px;
+  background-repeat: repeat-x;
+}
+
+.scallop-bottom {
+  background-image: radial-gradient(circle at 50% 100%, var(--black-color, #FAF5ED) 13px, transparent 14px);
+}
+
+/* ---------- top ribbon ---------- */
+
+.top-ribbon {
+  background: var(--black-color-5, #E65C30);
+  padding: 8px 0;
+}
+
+.ribbon-text,
+.ribbon-links a {
+  color: #d7ecd9;
+  font-size: 13px;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.ribbon-links a:hover {
+  color: #ffd9b3;
+}
+
+/* ============================================================
+   SANATAN CONNECT — NAVBAR & HERO SECTION STYLES
+   ============================================================ */
+
+/* ---------- navbar ---------- */
+
+.site-nav {
+  background: transparent;
+  padding: 24px 0 10px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 100;
+  border-bottom: none;
+  box-shadow: none;
+}
+
+.brand-logo {
+  width: auto;
+  height: 52px;
+  max-width: 240px;
+  object-fit: contain;
+}
+
+.site-nav-inner {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.nav-drawer {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.nav-item {
+  color: #382C27;
+  font-family: "Gabarito", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-weight: 500;
+  font-size: 15px;
+  padding: 6px 0;
+  border-radius: 0;
+  transition: color 0.2s ease;
+  display: inline-flex;
+  /* flex-direction: column; */
+  gap: 8px;
+  align-items: center;
+  position: relative;
+  text-decoration: none;
+  background: transparent !important;
+}
+
+.nav-item:hover {
+  color: var(--primary-color, #E04B28);
+  background: transparent !important;
+}
+
+.nav-item.active {
+  color: var(--primary-color, #E04B28);
+  font-weight: 600;
+  background: transparent !important;
+}
+
+.nav-item .active-indicator {
+  display: none;
+  width: 26px;
+  height: 3px;
+  background: var(--primary-color, #E04B28);
+  border-radius: 99px;
+  position: absolute;
+  bottom: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.nav-item.active .active-indicator {
+  display: block;
+}
+
+/* ---------- nav dropdown menu (Search) ---------- */
+
+.nav-dropdown-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.dropdown-toggle-fc {
+  display: inline-flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  gap: 4px;
+}
+
+.nav-arrow {
+  font-size: 17px;
+  color: #64748B;
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), color 0.2s;
+  display: inline-flex;
+  align-items: center;
+}
+
+.nav-dropdown-wrap:hover .nav-arrow {
+  transform: rotate(180deg);
+  color: var(--primary-color, #E04B28);
+}
+
+.nav-dropdown-wrap:hover .dropdown-toggle-fc {
+  color: var(--primary-color, #E04B28);
+}
+
+/* Dropdown Menu Container */
+.fc-dropdown-menu {
+  position: absolute;
+  top: calc(100% + 14px);
+  left: 50%;
+  transform: translateX(-50%) translateY(12px) scale(0.96);
+  background: #FFFFFF;
+  min-width: 290px;
+  padding: 10px;
+  border-radius: 20px;
+  border: 1px solid rgba(235, 222, 210, 0.8);
+  box-shadow: 0 20px 48px rgba(224, 75, 40, 0.12), 0 4px 16px rgba(0, 0, 0, 0.04);
+  list-style: none;
+  margin: 0;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+    visibility 0.25s;
+  z-index: 1000;
+}
+
+/* Bridge hover gap */
+.fc-dropdown-menu::before {
+  content: "";
+  position: absolute;
+  top: -16px;
+  left: 0;
+  right: 0;
+  height: 18px;
+  background: transparent;
+}
+
+.nav-dropdown-wrap:hover .fc-dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateX(-50%) translateY(0) scale(1);
+}
+
+.fc-dropdown-menu li {
+  width: 100%;
+  margin-bottom: 4px;
+}
+
+.fc-dropdown-menu li:last-child {
+  margin-bottom: 0;
+}
+
+.fc-dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 10px 14px;
+  border-radius: 14px;
+  text-decoration: none;
+  color: #1E293B;
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  background: transparent;
+}
+
+.fc-dropdown-item:hover {
+  background: #FFF9F5;
+  transform: translateX(4px);
+  color: #201614;
+}
+
+.dropdown-item-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: #FDF1EA;
+  color: var(--primary-color, #E04B28);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 19px;
+  flex-shrink: 0;
+  transition: all 0.22s ease;
+}
+
+.fc-dropdown-item:hover .dropdown-item-icon {
+  background: var(--primary-color, #E04B28);
+  color: #FFFFFF;
+  transform: scale(1.06);
+  box-shadow: 0 4px 14px rgba(224, 75, 40, 0.3);
+}
+
+.dropdown-item-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.dropdown-item-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1E293B;
+  line-height: 1.25;
+  transition: color 0.2s ease;
+}
+
+.fc-dropdown-item:hover .dropdown-item-title {
+  color: var(--primary-color, #E04B28);
+}
+
+.dropdown-item-desc {
+  font-size: 11.5px;
+  color: #64748B;
+  font-weight: 400;
+  margin-top: 2px;
+  line-height: 1.3;
+}
+
+.nav-login-link {
+  color: #382C27;
+  font-family: "Gabarito", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-weight: 500;
+  font-size: 15px;
+  padding: 8px;
+  border-radius: 999px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+
+.nav-login-link:hover {
+  color: var(--primary-color, #E04B28);
+  background: rgba(224, 75, 40, 0.08);
+}
+
+.btn-join-nav {
+  background: var(--primary-color, #E04B28);
+  color: #FFFFFF;
+  font-family: "Gabarito", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-weight: 600;
+  font-size: 14.5px;
+  padding: 10px 18px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+  box-shadow: 0 4px 14px rgba(211, 67, 32, 0.28);
+  transition: all 0.25s ease;
+}
+
+.btn-join-nav:hover {
+  background: linear-gradient(135deg, #EE683D 0%, #DF4A25 100%);
+  color: #FFFFFF;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(211, 67, 32, 0.38);
+}
+
+.btn-join-nav i {
+  font-size: 19px;
+}
+
+.navbar-toggler,
+.close-toggle {
+  background: #FDF1EA;
+  border: none;
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  font-size: 26px;
+  color: var(--primary-color, #E04B28);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ============================================================
+   SANATAN CONNECT — HERO SECTION STYLES
+   ============================================================ */
+
+.hero-section {
+  position: relative;
+  padding-top: 130px;
+  padding-bottom: 36px;
+  background-color: #FAF5ED;
+  /* background-image: url('../images/her0-section-bg.png'); */
+  background-repeat: no-repeat;
+  background-position: right top;
+  background-size: cover;
+  overflow: hidden;
+  min-height: 720px;
+}
+
+.hero-main-container {
+  z-index: 5;
+}
+
+.hero-eyebrow-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #d748231f;
+  color: #A83E20;
+  font-family: "Gabarito", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 6px 16px;
+  border-radius: 999px;
+  margin-bottom: 20px;
+}
+
+.lotus-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary-color, #E04B28);
+}
+
+.hero-title {
+  font-family: "Gabarito", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-weight: 700;
+  font-size: clamp(36px, 4.1vw, 56px);
+  color: #1F1614;
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+  margin-bottom: 20px;
+}
+
+.title-line-1 {
+  white-space: nowrap;
+}
+
+.title-line-2 {
+  color: #1F1614;
+  margin-top: 2px;
+}
+
+.highlight-orange {
+  color: var(--primary-color, #E04B28);
+}
+
+.hero-lede {
+  font-family: "Gabarito", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  color: #5E534D;
+  font-size: 15.5px;
+  max-width: 480px;
+  margin-bottom: 32px;
+  line-height: 1.62;
+  font-weight: 400;
+}
+
+/* 4 Feature Pills / Trust Row */
+.hero-feature-pills {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  margin-bottom: 34px;
+  flex-wrap: wrap;
+}
+
+.feature-pill-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.pill-icon-box {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #e2572d24;
+  color: var(--primary-color, #E04B28);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.feature-pill-item:hover .pill-icon-box {
+  transform: scale(1.08);
+  background: #FCE5D9;
+}
+
+.pill-text {
+  display: flex;
+  flex-direction: column;
+  font-family: "Gabarito", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #241A16;
+  line-height: 1.25;
+}
+
+/* Hero Actions */
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+
+}
+
+.btn-sanatan-primary {
+  background: var(--primary-color, #E04B28);
+  color: #FFFFFF;
+  font-family: "Gabarito", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-weight: 600;
+  font-size: 14.5px;
+  padding: 13px 30px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  transition: all 0.25s ease;
+}
+
+.btn-sanatan-primary:hover {
+  background: linear-gradient(135deg, #EE683D 0%, #DF4A25 100%);
+  color: #FFFFFF;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(211, 67, 32, 0.42);
+}
+
+.btn-sanatan-primary i {
+  font-size: 19px;
+  transition: transform 0.2s ease;
+}
+
+.btn-sanatan-primary:hover i {
+  transform: translateX(4px);
+}
+
+.btn-sanatan-secondary {
+  /* background: #FFFFFF; */
+  border: 1.5px solid var(--primary-color, #E04B28);
+  color: var(--primary-color, #E04B28);
+  font-family: "Gabarito", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-weight: 600;
+  font-size: 14.5px;
+  padding: 11px 26px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  /* box-shadow: 0 4px 12px rgba(224, 75, 40, 0.06); */
+  transition: all 0.25s ease;
+}
+
+.btn-sanatan-secondary:hover {
+  background: #FFF8F5;
+  color: var(--primary-color, #E04B28);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(224, 75, 40, 0.12);
+}
+
+.play-icon-circle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary-color, #E04B28);
+}
+
+/* Right Column: Couple & Calligraphy Layer */
+.hero-couple-showcase {
+  position: absolute;
+  right: 10%;
+  bottom: 130px;
+  max-width: 640px;
+  min-width: 430px;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.couple-img-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.hero-couple-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  filter: drop-shadow(0 15px 30px rgba(90, 45, 15, 0.12));
+}
+
+.hero-script-tag {
+  position: absolute;
+  right: -75px;
+  top: 50%;
+  transform: translateY(-50%) rotate(2.5deg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 4;
+  pointer-events: none;
+}
+
+.script-line {
+  font-family: 'Caveat', 'Dancing Script', cursive;
+  font-size: 34px;
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.0;
+  text-shadow: 1px 2px 2px rgb(0 0 0 / 27%);
+}
+
+.script-heart {
+  margin-top: 3px;
+  display: inline-flex;
+}
+
+/* ============================================================
+   SANATAN CONNECT — FLOATING SEARCH FILTER BAND
+   ============================================================ */
+
+.search-band {
+  position: relative;
+  z-index: 15;
+  margin-top: 65px;
+  padding-bottom: 0px;
+}
+
+.search-card-sanatan {
+  background: #ffffff59;
+  border: 3px solid rgb(255 255 255 / 25%);
+  border-radius: 20px;
+  padding: 20px 28px;
+  box-shadow: 0 18px 45px rgba(60, 30, 15, 0.08), 0 2px 8px rgba(0, 0, 0, 0.02);
+  backdrop-filter: blur(16px);
+}
+
+.search-form-grid {
+  display: flex;
+  align-items: flex-end;
+  gap: 14px;
+  width: 100%;
+}
+
+.search-col {
+  flex: 1;
+  min-width: 0;
+}
+
+.search-btn-col {
+  flex: 0 0 135px;
+}
+
+.fc-field-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #2B1F1A;
+  margin-bottom: 6px;
+  padding-left: 2px;
+}
+
+.fc-field-label .fc-icon {
+  color: var(--primary-color, #E04B28);
+  font-size: 15px;
+  display: inline-flex;
+  align-items: center;
+}
+
+.fc-field-label .om-symbol {
+  color: var(--primary-color, #E04B28);
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.fc-select-wrap {
+  position: relative;
+}
+
+.fc-custom-select {
+  width: 100%;
+  height: 44px;
+  background: #FFFFFF;
+  border: 1px solid #EBE3DC;
+  border-radius: 12px;
+  padding: 0 30px 0 14px;
+  font-family: "Gabarito", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: #201614;
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23E04B28' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.fc-custom-select:focus,
+.fc-custom-select:hover {
+  border-color: var(--primary-color, #E04B28);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(224, 75, 40, 0.12);
+}
+
+.sanatan-search-submit {
+  width: 100%;
+  height: 45px;
+  background: var(--primary-color, #E04B28);
+  color: #FFFFFF;
+  border: none;
+  border-radius: 12px;
+  font-family: "Gabarito", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-weight: 600;
+  font-size: 14.5px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(211, 67, 32, 0.3);
+  transition: all 0.2s ease;
+}
+
+.sanatan-search-submit:hover {
+  background: linear-gradient(135deg, #EE683D 0%, #DF4A25 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(211, 67, 32, 0.4);
+}
+
+.sanatan-search-submit i {
+  font-size: 18px;
+}
+
+/* Select2 overrides specifically for Sanatan Connect search card */
+.search-card-sanatan .select2-container--default .select2-selection--single {
+  background: #FFFFFF !important;
+  border: none !important;
+  border-radius: 12px !important;
+  height: 44px !important;
+  display: flex !important;
+  align-items: center !important;
+  padding: 0 14px !important;
+  transition: border-color 0.2s, box-shadow 0.2s !important;
+  font-family: "Gabarito", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+}
+
+.search-card-sanatan .select2-container--default.select2-container--open .select2-selection--single,
+.search-card-sanatan .select2-container--default .select2-selection--single:hover {
+  border-color: var(--primary-color, #E04B28) !important;
+  box-shadow: 0 0 0 3px rgba(224, 75, 40, 0.12) !important;
+}
+
+.search-card-sanatan .select2-container--default .select2-selection--single .select2-selection__rendered {
+  color: #201614 !important;
+  font-size: 13.5px !important;
+  font-weight: 500 !important;
+  padding-left: 0 !important;
+  padding-right: 20px !important;
+  line-height: 42px !important;
+}
+
+.search-card-sanatan .select2-container--default .select2-selection--single .select2-selection__placeholder {
+  color: #6C5F57 !important;
+}
+
+.search-card-sanatan .select2-container--default .select2-selection--single .select2-selection__arrow {
+  height: 44px !important;
+  right: 12px !important;
+  width: 20px !important;
+  top: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.search-card-sanatan .select2-container--default .select2-selection--single .select2-selection__arrow b {
+  display: none !important;
+}
+
+.search-card-sanatan .select2-container--default .select2-selection--single .select2-selection__arrow::after {
+  content: "";
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23E04B28' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  transition: transform 0.25s ease;
+}
+
+.search-card-sanatan .select2-container--default.select2-container--open .select2-selection--single .select2-selection__arrow::after {
+  transform: rotate(180deg);
+}
+
+.select2-dropdown {
+  background: #FFFFFF !important;
+  border: 1px solid #EBE3DC !important;
+  border-radius: 14px !important;
+  box-shadow: 0 16px 36px rgba(60, 30, 15, 0.1) !important;
+  padding: 6px !important;
+  overflow: hidden !important;
+  z-index: 1050 !important;
+  margin-top: 4px !important;
+}
+
+.select2-search--dropdown {
+  padding: 6px !important;
+}
+
+.select2-search--dropdown .select2-search__field {
+  border: 1px solid #EBE3DC !important;
+  border-radius: 8px !important;
+  padding: 8px 12px !important;
+  outline: none !important;
+  font-family: "Gabarito", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+  font-size: 13.5px !important;
+  color: #201614 !important;
+  background: #FFFDFB !important;
+}
+
+.select2-search--dropdown .select2-search__field:focus {
+  border-color: var(--primary-color, #E04B28) !important;
+}
+
+.select2-results__option {
+  font-family: "Gabarito", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+  font-size: 13.5px !important;
+  padding: 8px 12px !important;
+  border-radius: 8px !important;
+  color: #201614 !important;
+  transition: all 0.15s ease !important;
+}
+
+.select2-container--default .select2-results__option--highlighted[aria-selected] {
+  background-color: #FDF1EA !important;
+  color: var(--primary-color, #E04B28) !important;
+  font-weight: 600 !important;
+}
+
+.select2-container--default .select2-results__option[aria-selected=true] {
+  background-color: var(--primary-color, #E04B28) !important;
+  color: #FFFFFF !important;
+  font-weight: 600 !important;
+}
+
+/* ---------- SACRED VIVAH JOURNEY (Sanatan Connect) ---------- */
+
+.sanatan-journey-section {
+  position: relative;
+  padding: 85px 0 80px;
+  background: var(--bg-main);
+  overflow: hidden;
+}
+
+.journey-ambient-glow {
+  position: absolute;
+  top: 12%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 850px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(224, 75, 40, 0.08) 0%, rgba(251, 191, 36, 0.04) 50%, transparent 75%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.journey-header {
+  max-width: 720px;
+  margin: 0 auto 56px;
+  position: relative;
+  z-index: 2;
+}
+
+.journey-eyebrow-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #FDF1EA;
+  border: 1px solid rgba(224, 75, 40, 0.22);
+  color: var(--primary-color, #E04B28);
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  padding: 7px 18px;
+  border-radius: 999px;
+  margin-bottom: 16px;
+  box-shadow: 0 4px 14px rgba(224, 75, 40, 0.06);
+}
+
+.journey-eyebrow-icon {
+  display: inline-flex;
+  align-items: center;
+  color: var(--primary-color, #E04B28);
+}
+
+.journey-main-title {
+  font-family: "Gabarito", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: clamp(32px, 4vw, 44px);
+  font-weight: 700;
+  color: var(--white-color);
+  line-height: 1.22;
+  margin-bottom: 14px;
+}
+
+.journey-subtitle {
+  font-size: 16px;
+  color: #6E5F57;
+  line-height: 1.65;
+  font-weight: 400;
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+/* Progressive Step Cards Grid */
+.journey-cards-wrap {
+  position: relative;
+  z-index: 2;
+}
+
+.journey-track-line {
+  position: absolute;
+  top: 96px;
+  left: 8%;
+  right: 8%;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.journey-step-card {
+  position: relative;
+  background: #FFFFFF;
+  border: 1.5px solid #EFE5DB;
+  border-radius: 26px;
+  padding: 34px 28px 28px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  box-shadow: 0 16px 36px rgba(44, 32, 27, 0.05), 0 2px 6px rgba(0, 0, 0, 0.02);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease, border-color 0.35s ease;
+  z-index: 2;
+  overflow: hidden;
+}
+
+.journey-step-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 24px 50px rgba(224, 75, 40, 0.13), 0 4px 12px rgba(0, 0, 0, 0.03);
+  border-color: rgba(224, 75, 40, 0.38);
+}
+
+.step-watermark-num {
+  position: absolute;
+  top: 10px;
+  right: 18px;
+  font-size: 68px;
+  font-weight: 900;
+  line-height: 1;
+  color: rgba(224, 75, 40, 0.06);
+  pointer-events: none;
+  font-family: "Gabarito", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.step-card-featured {
+  background: #FFFFFF;
+  border: 1.5px solid rgba(224, 75, 40, 0.38);
+  box-shadow: 0 22px 48px rgba(224, 75, 40, 0.12), 0 4px 14px rgba(0, 0, 0, 0.03);
+}
+
+.step-card-head {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  position: relative;
+  z-index: 2;
+}
+
+.step-pill-tag {
+  display: inline-flex;
+  align-items: center;
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--primary-color, #E04B28);
+  background: #FFF2EC;
+  padding: 6px 14px;
+  border-radius: 999px;
+}
+
+.step-pill-tag.tag-featured {
+  background: var(--primary-color, #E04B28);
+  color: #FFFFFF;
+  box-shadow: 0 4px 12px rgba(211, 67, 32, 0.3);
+}
+
+.step-popular-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: #B83616;
+  background: #FDF1EA;
+  border: 1px solid rgba(224, 75, 40, 0.25);
+  padding: 5px 12px;
+  border-radius: 999px;
+}
+
+.step-category-tag {
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: #8F7D74;
+  background: #F8F4F0;
+  padding: 5px 12px;
+  border-radius: 999px;
+}
+
+/* Icon Orb Container */
+.step-icon-orb {
+  width: 84px;
+  height: 84px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 22px;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease;
+  position: relative;
+  z-index: 2;
+}
+
+.journey-step-card:hover .step-icon-orb {
+  transform: scale(1.08) rotate(3deg);
+}
+
+.orb-warm {
+  background: #FFF4EE;
+  border: 2px solid rgba(224, 75, 40, 0.2);
+  color: var(--primary-color, #E04B28);
+  box-shadow: 0 10px 24px rgba(224, 75, 40, 0.08);
+}
+
+.orb-gradient {
+  background: var(--primary-color, #E04B28);
+  border: 2px solid rgba(255, 255, 255, 0.6);
+  color: #FFFFFF;
+  box-shadow: 0 14px 30px rgba(211, 67, 32, 0.34);
+}
+
+.step-card-title {
+  font-size: 21px;
+  font-weight: 700;
+  color: #1F1614;
+  margin-bottom: 12px;
+  line-height: 1.32;
+  font-family: "Gabarito", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.step-card-desc {
+  font-size: 14.5px;
+  color: #6E5F57;
+  line-height: 1.65;
+  margin-bottom: 24px;
+  flex-grow: 1;
+}
+
+/* Step Footer / Feature Tag */
+.step-card-foot {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding-top: 18px;
+  border-top: 1px solid #F3EAE1;
+}
+
+.step-feature-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #4F4038;
+  background: #FAF5F0;
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1px solid #EAE0D6;
+}
+
+.step-feature-chip i {
+  font-size: 15px;
+  color: var(--primary-color, #E04B28);
+}
+
+.step-feature-chip.chip-highlight {
+  background: #FFF2EC;
+  color: #B83616;
+  border-color: rgba(224, 75, 40, 0.25);
+}
+
+.step-feature-chip.chip-highlight i {
+  color: var(--primary-color, #E04B28);
+}
+
+/* Bottom Journey CTA Banner */
+.journey-cta-banner {
+  margin-top: 56px;
+  position: relative;
+  z-index: 2;
+}
+
+.journey-cta-card {
+  background: #FFFFFF;
+  border: 1.5px solid rgba(224, 75, 40, 0.18);
+  border-radius: 24px;
+  padding: 22px 36px;
+  box-shadow: 0 16px 40px rgba(224, 75, 40, 0.08), 0 2px 6px rgba(0, 0, 0, 0.02);
+  gap: 20px;
+}
+
+.journey-diya-badge {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  background: #FFF4EE;
+  border: 1px solid rgba(224, 75, 40, 0.2);
+  color: var(--primary-color, #E04B28);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 6px 16px rgba(224, 75, 40, 0.1);
+}
+
+.journey-cta-head {
+  font-size: 17.5px;
+  font-weight: 700;
+  color: #1F1614;
+  margin: 0 0 3px 0;
+  line-height: 1.3;
+  font-family: "Gabarito", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.journey-cta-sub {
+  font-size: 14px;
+  color: #6E5F57;
+  margin: 0;
+  font-weight: 400;
+}
+
+.btn-journey-cta {
+  background: var(--primary-color, #E04B28);
+  color: #FFFFFF;
+  font-weight: 600;
+  font-size: 14.5px;
+  padding: 12px 28px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  box-shadow: 0 6px 18px rgba(211, 67, 32, 0.3);
+  transition: all 0.25s ease;
+  white-space: nowrap;
+}
+
+.btn-journey-cta:hover {
+  background: linear-gradient(135deg, #EE683D 0%, #DF4A25 100%);
+  color: #FFFFFF;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(211, 67, 32, 0.4);
+}
+
+.btn-journey-cta i {
+  font-size: 18px;
+  transition: transform 0.2s ease;
+}
+
+.btn-journey-cta:hover i {
+  transform: translateX(4px);
+}
+
+/* ---------- profiles slider (Sanatan Connect Hindu Profiles) ---------- */
+
+.profiles-section,
+.sanatan-profiles-section {
+  padding: 70px 0 75px;
+  position: relative;
+  background: linear-gradient(180deg, #FFF9F5 0%, #FFF9F5 50%, #FFF9F5 100%);
+  overflow: hidden;
+}
+
+
+.sanatan-profiles-head {
+  margin-bottom: 36px;
+}
+
+.sanatan-profiles-title {
+  font-family: "Gabarito", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: clamp(30px, 3.6vw, 42px);
+  font-weight: 700;
+  color: #1E293B;
+  line-height: 1.22;
+  margin-bottom: 8px;
+}
+
+.sanatan-profiles-subtitle {
+  font-size: 15.5px;
+  color: #64748B;
+  font-weight: 400;
+  max-width: 600px;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Luxury Sanatan Profile Card */
+.sanatan-member-card {
+  background: #FFFFFF;
+  border: 1px solid rgba(224, 75, 40, 0.12);
+  border-radius: 22px;
+  padding: 11px;
+  box-shadow: 0 10px 28px rgba(100, 116, 139, 0.07), 0 2px 8px rgba(224, 75, 40, 0.03);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease, border-color 0.35s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.sanatan-member-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 22px 45px rgba(224, 75, 40, 0.13), 0 4px 14px rgba(0, 0, 0, 0.04);
+  border-color: rgba(224, 75, 40, 0.35);
+}
+
+/* Card Media / Photography Aperture */
+.member-card-media {
+  position: relative;
+  border-radius: 17px;
+  overflow: hidden;
+  background: #FFF3EB;
+  aspect-ratio: 1 / 1.22;
+}
+
+.member-card-media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.15) 0%, rgba(0, 0, 0, 0) 40%, rgba(15, 23, 42, 0.72) 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.member-img-link {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.member-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.sanatan-member-card:hover .member-img {
+  transform: scale(1.06);
+}
+
+/* Floating Badges Over Photo */
+.member-media-top {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  right: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 2;
+}
+
+.badge-guna-milan {
+  background: var(--primary-color, #E04B28);
+  color: #FFFFFF;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  padding: 4px 10px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  box-shadow: 0 4px 12px rgba(224, 75, 40, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.badge-guna-milan i {
+  font-size: 12px;
+  color: #FFE699;
+}
+
+.badge-verified-pill {
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #16A34A;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  padding: 4px 9px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+}
+
+.badge-verified-pill i {
+  font-size: 13px;
+  color: #16A34A;
+}
+
+.member-media-bottom {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  right: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 2;
+}
+
+.member-community-tag {
+  background: rgba(15, 23, 42, 0.65);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  color: #FFFFFF;
+  font-size: 11.5px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  letter-spacing: 0.02em;
+}
+
+.member-wishlist-btn {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  color: var(--primary-color, #E04B28);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 17px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+}
+
+.member-wishlist-btn:hover {
+  background: var(--primary-color, #E04B28);
+  color: #FFFFFF;
+  border-color: var(--primary-color, #E04B28);
+  transform: scale(1.12);
+  box-shadow: 0 6px 16px rgba(224, 75, 40, 0.35);
+}
+
+/* Card Body */
+.member-card-body {
+  padding: 13px 4px 4px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.member-head-line {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 5px;
+}
+
+.member-name {
+  font-family: "Gabarito", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+  color: #1E293B;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.25;
+}
+
+.member-name a {
+  color: #1E293B;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.member-name a:hover {
+  color: var(--primary-color, #E04B28);
+}
+
+.member-age-pill {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--primary-color, #E04B28);
+  background: #FFF4EE;
+  padding: 2px 8px;
+  border-radius: 6px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.member-meta-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12.5px;
+  color: #64748B;
+  font-weight: 500;
+  margin-bottom: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.member-meta-item i {
+  color: var(--primary-color, #E04B28);
+  font-size: 15px;
+  flex-shrink: 0;
+}
+
+.member-chips-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin: 8px 0 12px;
+}
+
+.member-chip {
+  font-size: 11px;
+  font-weight: 600;
+  color: #475569;
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  padding: 3px 8px;
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.member-chip i {
+  color: var(--primary-color, #E04B28);
+  font-size: 12px;
+}
+
+/* Card Actions */
+.member-card-actions {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: auto;
+}
+
+.btn-member-connect {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background: var(--primary-color, #E04B28);
+  color: #FFFFFF;
+  font-family: "Gabarito", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-weight: 600;
+  font-size: 13px;
+  padding: 9px 12px;
+  border-radius: 12px;
+  text-decoration: none;
+  box-shadow: 0 4px 14px rgba(224, 75, 40, 0.22);
+  transition: all 0.25s ease;
+}
+
+.btn-member-connect:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(224, 75, 40, 0.35);
+  color: #FFFFFF;
+}
+
+.btn-member-connect i {
+  font-size: 14px;
+  transition: transform 0.2s ease;
+}
+
+.btn-member-connect:hover i {
+  transform: translateX(2px) translateY(-1px);
+}
+
+.btn-member-kundali {
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  background: #FFF4EE;
+  border: 1px solid rgba(224, 75, 40, 0.2);
+  color: var(--primary-color, #E04B28);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 17px;
+  text-decoration: none;
+  transition: all 0.25s ease;
+  flex-shrink: 0;
+}
+
+.btn-member-kundali:hover {
+  background: var(--primary-color, #E04B28);
+  color: #FFFFFF;
+  border-color: var(--primary-color, #E04B28);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(224, 75, 40, 0.25);
+}
+
+/* Slider Navigation Arrows */
+.slider-arrows button {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(224, 75, 40, 0.22);
+  background: #FFFFFF;
+  color: var(--primary-color, #E04B28);
+  font-size: 22px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 14px rgba(224, 75, 40, 0.08);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+}
+
+.slider-arrows button:hover {
+  background: var(--primary-color, #E04B28);
+  border-color: var(--primary-color, #E04B28);
+  color: #FFFFFF;
+  transform: scale(1.08);
+  box-shadow: 0 8px 22px rgba(224, 75, 40, 0.32);
+}
+
+.arrows-on-dark button {}
+
+.arrows-on-dark button:hover {
+  background: var(--primary-color, #E04B28);
+  border-color: var(--primary-color, #E04B28);
+}
+
+/* ---------- success stories (Sanatan Vivah Sacred Testimonials) ---------- */
+
+.stories-section,
+.sanatan-stories-section {
+  background: var(--bg-main);
+  position: relative;
+  padding: 70px 0 75px;
+  overflow: hidden;
+}
+
+.sanatan-stories-glow {
+  position: absolute;
+  top: 15%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 920px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(245, 134, 52, 0.12) 0%, rgba(224, 75, 40, 0.04) 45%, rgba(255, 255, 255, 0) 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.sanatan-stories-header {
+  max-width: 680px;
+  margin: 0 auto 46px;
+  position: relative;
+  z-index: 2;
+}
+
+.sanatan-stories-title {
+  font-family: "Gabarito", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: clamp(32px, 3.8vw, 42px);
+  font-weight: 700;
+  color: var(--white-color);
+  line-height: 1.25;
+  margin-bottom: 10px;
+}
+
+.sanatan-stories-subtitle {
+  font-size: 16px;
+  color: #64748B;
+  font-weight: 400;
+  line-height: 1.6;
+  margin: 0 auto;
+}
+
+/* Luxury 3-Column Vivah Story Card */
+.sanatan-story-card {
+  background: #FFFFFF;
+  border: 1px solid rgba(224, 75, 40, 0.14);
+  border-radius: 26px;
+  overflow: hidden;
+  box-shadow: 0 12px 34px rgba(100, 116, 139, 0.07), 0 2px 8px rgba(224, 75, 40, 0.03);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease, border-color 0.35s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 2;
+}
+
+.sanatan-story-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 24px 50px rgba(224, 75, 40, 0.14), 0 4px 14px rgba(0, 0, 0, 0.04);
+  border-color: rgba(224, 75, 40, 0.35);
+}
+
+/* Centerpiece Featured Union Card */
+.story-card-featured {
+  border: 2px solid rgba(224, 75, 40, 0.32);
+  box-shadow: 0 16px 42px rgba(224, 75, 40, 0.12), 0 4px 14px rgba(0, 0, 0, 0.03);
+}
+
+.featured-story-banner {
+  background: var(--primary-color, #E04B28);
+  color: #FFFFFF;
+  font-family: "Gabarito", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-align: center;
+  padding: 6px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.featured-story-banner i {
+  font-size: 13px;
+  color: #FFE699;
+}
+
+/* Card Media / Wedding Photography */
+.story-card-media {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: #FFF4EE;
+}
+
+.story-card-media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.15) 0%, rgba(0, 0, 0, 0) 40%, rgba(15, 23, 42, 0.5) 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.story-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.sanatan-story-card:hover .story-card-img {
+  transform: scale(1.06);
+}
+
+/* Top Media Badges */
+.story-media-top {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  right: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 2;
+}
+
+.story-guna-badge {
+  background: rgba(15, 23, 42, 0.72);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #FFE699;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.badge-featured-gold {
+  background: var(--primary-color, #E04B28);
+  color: #FFFFFF;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.story-tradition-tag {
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: var(--primary-color, #E04B28);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Sacred Knot Floating Ornament */
+.story-knot-icon {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  color: var(--primary-color, #E04B28);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  z-index: 2;
+  transition: transform 0.25s ease;
+}
+
+.sanatan-story-card:hover .story-knot-icon {
+  transform: scale(1.1);
+  background: var(--primary-color, #E04B28);
+  color: #FFFFFF;
+  border-color: var(--primary-color, #E04B28);
+}
+
+/* Card Body */
+.story-card-body {
+  padding: 20px 20px 18px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.story-stars-row {
+  display: flex;
+  gap: 3px;
+  color: #F59E0B;
+  font-size: 15px;
+  margin-bottom: 8px;
+}
+
+.story-couple-names {
+  font-family: "Gabarito", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 19px;
+  font-weight: 700;
+  color: #1E293B;
+  margin: 0 0 3px;
+  line-height: 1.25;
+}
+
+.story-meta-location {
+  font-size: 12px;
+  color: #64748B;
+  font-weight: 500;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.story-meta-location i {
+  color: var(--primary-color, #E04B28);
+  font-size: 14px;
+}
+
+.story-quote {
+  font-size: 13.5px;
+  color: #475569;
+  line-height: 1.65;
+  font-style: italic;
+  margin-bottom: 14px;
+  flex-grow: 1;
+}
+
+/* Vedic Shloka Box */
+.story-shloka-box {
+  background: #FFF7F2;
+  border-left: 3px solid #E04B28;
+  border-radius: 0 10px 10px 0;
+  padding: 9px 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11.5px;
+  color: #9A3412;
+  margin-bottom: 16px;
+  line-height: 1.45;
+}
+
+.story-shloka-box i {
+  font-size: 16px;
+  color: var(--primary-color, #E04B28);
+  flex-shrink: 0;
+}
+
+.box-featured-shloka {
+  background: #FFF1E8;
+  border-left-color: var(--primary-color, #E04B28);
+}
+
+/* Story Footer */
+.story-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 12px;
+  border-top: 1px solid #F1E5DC;
+  font-size: 12px;
+  margin-top: auto;
+}
+
+.story-verified-tag {
+  color: #16A34A;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.story-verified-tag i {
+  font-size: 14px;
+}
+
+.story-approved-tag {
+  color: var(--primary-color, #E04B28);
+  font-weight: 600;
+  background: #FFF4EE;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 11px;
+}
+
+/* Vivah Milestone Trust Strip */
+.sanatan-stories-bottom-bar {
+  margin-top: 48px;
+  background: #FFFFFF;
+  border: 1px solid rgba(224, 75, 40, 0.16);
+  border-radius: 24px;
+  padding: 22px 34px;
+  box-shadow: 0 12px 32px rgba(224, 75, 40, 0.06);
+  position: relative;
+  z-index: 2;
+}
+
+.sanatan-diya-icon-badge {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #FFF4EE;
+  color: var(--primary-color, #E04B28);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.milestone-title {
+  font-family: "Gabarito", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 16.5px;
+  font-weight: 700;
+  color: #1E293B;
+}
+
+.milestone-desc {
+  font-size: 13.5px;
+  color: #64748B;
+}
+
+.btn-sanatan-story-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--primary-color, #E04B28);
+  color: #FFFFFF;
+  font-family: "Gabarito", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-weight: 600;
+  font-size: 13.5px;
+  padding: 11px 24px;
+  border-radius: 999px;
+  text-decoration: none;
+  box-shadow: 0 6px 18px rgba(224, 75, 40, 0.25);
+  transition: all 0.25s ease;
+  white-space: nowrap;
+}
+
+.btn-sanatan-story-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(224, 75, 40, 0.38);
+  color: #FFFFFF;
+}
+
+.btn-sanatan-story-cta i {
+  font-size: 16px;
+  transition: transform 0.2s ease;
+}
+
+.btn-sanatan-story-cta:hover i {
+  transform: translateX(4px);
+}
+
+/* ---------- why us (Sanatan Vivah Bento Showcase) ---------- */
+
+.why-us-section {
+  padding: 75px 0 80px;
+  position: relative;
+  background: var(--black-color-3);
+  overflow: hidden;
+}
+
+/* Ambient Sacred Warmth Background Orbs */
+.why-ambient-glow {
+  position: absolute;
+  pointer-events: none;
+  border-radius: 50%;
+  filter: blur(60px);
+  z-index: 0;
+}
+
+.why-ambient-glow.glow-top {
+  top: -60px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 720px;
+  height: 380px;
+  background: radial-gradient(circle, rgba(230, 92, 48, 0.14) 0%, rgba(224, 75, 40, 0.06) 50%, rgba(255, 255, 255, 0) 75%);
+}
+
+.why-ambient-glow.glow-bottom {
+  bottom: 0;
+  right: 5%;
+  width: 500px;
+  height: 320px;
+  background: radial-gradient(circle, rgba(254, 243, 199, 0.35) 0%, rgba(224, 75, 40, 0.08) 50%, rgba(255, 255, 255, 0) 70%);
+}
+
+/* Header */
+.why-header-wrap {
+  max-width: 820px;
+  margin: 0 auto 48px;
+}
+
+.why-sacred-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #FFF5F2;
+  border: 1px solid rgba(255, 126, 64, 0.28);
+  color: var(--primary-color, #E04B28);
+  font-size: 11.5px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  padding: 6px 18px;
+  border-radius: 999px;
+  margin-bottom: 16px;
+  box-shadow: 0 4px 14px rgba(224, 75, 40, 0.08);
+}
+
+.why-pill-diya {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--primary-color, #E04B28);
+  color: #FFFFFF;
+}
+
+.why-sacred-heading {
+  font-family: "Gabarito", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: clamp(32px, 3.8vw, 44px);
+  font-weight: 800;
+  color: var(--white-color);
+  line-height: 1.24;
+  margin-bottom: 14px;
+  letter-spacing: -0.015em;
+}
+
+.why-title-accent {
+  background: var(--primary-color, #E04B28);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline;
+}
+
+.why-sacred-lead {
+  font-size: 16px;
+  color: #78686A;
+  line-height: 1.65;
+  max-width: 660px;
+  margin: 0 auto 26px;
+}
+
+/* Trust Metric Ribbon */
+.why-trust-ticker {
+  background: #FFFFFF;
+  border: 1px solid #F7E0DA;
+  border-radius: 999px;
+  padding: 9px 24px;
+  box-shadow: 0 8px 24px rgba(43, 33, 34, 0.05);
+  display: inline-flex;
+}
+
+.ticker-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 13px;
+  color: #554446;
+}
+
+.ticker-item i {
+  font-size: 18px;
+  color: var(--primary-color, #E04B28);
+}
+
+.ticker-item strong {
+  color: #2B2122;
+  font-weight: 700;
+}
+
+.ticker-divider {
+  width: 1px;
+  height: 14px;
+  background: #F0D5CE;
+}
+
+/* Bento Grid */
+.why-bento-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.18fr 1fr;
+  gap: 24px;
+  align-items: stretch;
+  margin-bottom: 36px;
+}
+
+.why-bento-col {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.why-col-center {
+  justify-content: center;
+}
+
+/* Bento Feature Cards */
+.why-feature-bento-card {
+  background: #FFFFFF;
+  border: 1px solid #F7E0DA;
+  border-radius: 26px;
+  padding: 24px 22px;
+  box-shadow: 0 10px 30px rgba(43, 33, 34, 0.04);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease, border-color 0.35s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.why-feature-bento-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(224, 75, 40, 0.35);
+  box-shadow: 0 18px 42px rgba(224, 75, 40, 0.12);
+}
+
+.why-card-top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.why-feature-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  transition: transform 0.3s ease;
+}
+
+.why-feature-bento-card:hover .why-feature-icon {
+  transform: scale(1.1) rotate(4deg);
+}
+
+.orb-marigold {
+  background: #FDF1EA;
+  color: var(--primary-color, #E04B28);
+}
+
+.orb-orange {
+  background: #FFF7ED;
+  color: #EA580C;
+}
+
+.orb-emerald {
+  background: #ECFDF5;
+  color: #059669;
+}
+
+.orb-rose {
+  background: #FFF5F0;
+  color: #D34320;
+}
+
+.why-badge-pill {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 999px;
+  letter-spacing: 0.02em;
+}
+
+.pill-marigold {
+  background: #FDF1EA;
+  color: var(--primary-color, #E04B28);
+  border: 1px solid #FCE5D9;
+}
+
+.pill-orange {
+  background: #FFF7ED;
+  color: #EA580C;
+  border: 1px solid #FED7AA;
+}
+
+.pill-emerald {
+  background: #ECFDF5;
+  color: #059669;
+  border: 1px solid #A7F3D0;
+}
+
+.pill-rose {
+  background: #FFF5F0;
+  color: #D34320;
+  border: 1px solid #FCE5D9;
+}
+
+.why-card-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #2B2122;
+  margin-bottom: 8px;
+  line-height: 1.3;
+}
+
+.why-card-desc {
+  font-size: 13.5px;
+  color: #78686A;
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+
+/* Interactive Widget 1: Kundali Milan */
+.why-resonance-widget {
+  background: #FFF9F7;
+  border: 1px solid #FDE8E1;
+  border-radius: 16px;
+  padding: 12px 14px;
+}
+
+.resonance-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  font-size: 11.5px;
+  font-weight: 700;
+}
+
+.resonance-label {
+  color: #78686A;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.resonance-score {
+  color: var(--primary-color, #E04B28);
+  background: #FFFFFF;
+  padding: 2px 9px;
+  border-radius: 999px;
+  border: 1px solid #FCE5D9;
+  font-weight: 700;
+}
+
+.resonance-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.res-tag {
+  font-size: 11px;
+  font-weight: 600;
+  color: #C2410C;
+  background: #FFFFFF;
+  border: 1px solid #FED7AA;
+  padding: 3px 9px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: all 0.2s ease;
+}
+
+.res-tag:hover {
+  background: var(--primary-color, #E04B28);
+  color: #FFFFFF;
+  border-color: var(--primary-color, #E04B28);
+}
+
+.res-tag i {
+  font-size: 12px;
+}
+
+/* Interactive Widget 2: Privacy Shield */
+.why-privacy-widget {
+  background: #FAF8F6;
+  border: 1px solid #F0E6E1;
+  border-radius: 16px;
+  padding: 10px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.privacy-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 12px;
+}
+
+.privacy-name {
+  color: #554446;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.privacy-name i {
+  color: #78686A;
+  font-size: 14px;
+}
+
+.privacy-state {
+  font-size: 10.5px;
+  font-weight: 700;
+  padding: 2px 9px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.state-locked {
+  background: #FEF2F2;
+  color: #DC2626;
+  border: 1px solid #FECACA;
+}
+
+.state-active {
+  background: #FFF7ED;
+  color: #C2410C;
+  border: 1px solid #FDBA74;
+}
+
+.state-shielded {
+  background: #ECFDF5;
+  color: #059669;
+  border: 1px solid #A7F3D0;
+}
+
+/* Interactive Widget 3: Vetting Pipeline */
+.why-vetting-pipeline {
+  background: #F0FDF4;
+  border: 1px solid #DCFCE7;
+  border-radius: 16px;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.vetting-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.step-marker {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #059669;
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.step-content strong {
+  display: block;
+  font-size: 12px;
+  color: #065F46;
+  line-height: 1.25;
+}
+
+.step-content span {
+  display: block;
+  font-size: 10.5px;
+  color: #047857;
+}
+
+/* Interactive Widget 4: Dedicated Elder Support */
+.why-pastoral-callout {
+  background: #FFF5F2;
+  border: 1px solid #FDE4DC;
+  border-radius: 16px;
+  padding: 12px 14px;
+}
+
+.callout-advisor-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+
+.advisor-avatars {
+  display: flex;
+  align-items: center;
+}
+
+.advisor-circle {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  border: 1.5px solid #FFFFFF;
+  margin-left: -6px;
+}
+
+.advisor-circle:first-child {
+  margin-left: 0;
+}
+
+.bg-p1 {
+  background: #FED7AA;
+  color: #C2410C;
+}
+
+.bg-p2 {
+  background: #FECDD3;
+  color: #BE123C;
+}
+
+.advisor-status {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  color: #C2410C;
+}
+
+.status-live-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #10B981;
+  box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.25);
+  animation: pulse-dot 1.8s infinite;
+}
+
+@keyframes pulse-dot {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.5);
+  }
+
+  70% {
+    transform: scale(1.1);
+    box-shadow: 0 0 0 5px rgba(16, 185, 129, 0);
+  }
+
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+  }
+}
+
+.advisor-subtext {
+  font-size: 11.5px;
+  color: #78686A;
+  line-height: 1.45;
+  margin-bottom: 8px;
+}
+
+.btn-pastoral-help {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--primary-color, #E04B28);
+  text-decoration: none;
+  transition: transform 0.2s ease;
+}
+
+.btn-pastoral-help:hover {
+  color: #D34320;
+  transform: translateX(3px);
+}
+
+/* Mandap Temple Arch Centerpiece */
+.cathedral-arch-wrapper {
+  position: relative;
+  height: 100%;
+  min-height: 520px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cathedral-halo {
+  position: absolute;
+  inset: -12px;
+  border-radius: 280px 280px 42px 42px;
+  background: radial-gradient(circle at 50% 30%, rgba(255, 183, 77, 0.45) 0%, rgba(255, 126, 64, 0.2) 50%, transparent 75%);
+  filter: blur(16px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.cathedral-arch-frame {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 520px;
+  border-radius: 260px 260px 38px 38px;
+  overflow: hidden;
+  border: 7px solid #FFFFFF;
+  box-shadow: 0 24px 60px rgba(255, 126, 64, 0.16), 0 4px 16px rgba(0, 0, 0, 0.04);
+  z-index: 1;
+}
+
+.cathedral-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  min-height: 520px;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cathedral-arch-frame:hover .cathedral-img {
+  transform: scale(1.05);
+}
+
+.cathedral-gradient-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0) 35%, rgba(43, 33, 34, 0.8) 100%);
+  pointer-events: none;
+}
+
+/* Floating Elements on Mandap Arch */
+.cathedral-floating-top {
+  position: absolute;
+  top: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: var(--primary-color, #E04B28);
+  font-size: 12px;
+  font-weight: 700;
+  padding: 6px 16px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 8px 24px rgba(43, 33, 34, 0.14);
+  white-space: nowrap;
+  z-index: 4;
+}
+
+.top-cross-symbol {
+  font-size: 13px;
+}
+
+.cathedral-badge {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.97);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1.5px solid rgba(255, 255, 255, 0.95);
+  border-radius: 999px;
+  padding: 10px 18px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0 16px 36px rgba(43, 33, 34, 0.14), 0 2px 8px rgba(255, 126, 64, 0.08);
+  z-index: 4;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+  white-space: nowrap;
+}
+
+.cathedral-badge:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 20px 42px rgba(43, 33, 34, 0.18), 0 4px 12px rgba(255, 126, 64, 0.12);
+}
+
+.badge-left-church {
+  top: 75px;
+  left: -18px;
+}
+
+.badge-right-screened {
+  top: 205px;
+  right: -18px;
+}
+
+.badge-icon-wrap {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.icon-marigold {
+  background: #FFF2EC;
+  color: var(--primary-color, #E04B28);
+}
+
+.icon-verified {
+  background: #ECFDF5;
+  color: #059669;
+}
+
+.badge-info strong {
+  display: block;
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #2B2122;
+  line-height: 1.2;
+}
+
+.badge-info span {
+  display: block;
+  font-size: 11px;
+  color: #78686A;
+}
+
+/* Mandap Bottom Pedestal Card */
+.cathedral-pedestal-card {
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+  right: 16px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  border-radius: 20px;
+  padding: 14px 18px;
+  box-shadow: 0 12px 32px rgba(43, 33, 34, 0.2);
+  z-index: 4;
+}
+
+.pedestal-quote {
+  margin-bottom: 8px;
+}
+
+.pedestal-quote .quote-icon {
+  font-size: 16px;
+  color: #F59E0B;
+  display: inline-block;
+  margin-bottom: 3px;
+}
+
+.pedestal-quote p {
+  font-size: 12.5px;
+  color: #2B2122;
+  font-weight: 700;
+  font-style: italic;
+  line-height: 1.45;
+  margin: 0;
+}
+
+.scripture-cite {
+  display: block;
+  font-size: 11px;
+  color: var(--primary-color, #E04B28);
+  font-weight: 700;
+  font-style: normal;
+  margin-top: 3px;
+}
+
+.pedestal-footer-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid #F5E8E4;
+  padding-top: 8px;
+}
+
+.pedestal-seal {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11.5px;
+  font-weight: 700;
+  color: #059669;
+}
+
+.pedestal-seal i {
+  font-size: 15px;
+}
+
+.pedestal-stars {
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: #F59E0B;
+}
+
+/* Sanatan Community Unity Dock */
+.why-ecumenical-dock {
+  background: #FFFFFF;
+  border: 1.5px solid #FDE8E1;
+  border-radius: 24px;
+  padding: 20px 28px;
+  box-shadow: 0 12px 32px rgba(255, 126, 64, 0.06);
+}
+
+.dock-cross-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: #FFF5F2;
+  color: var(--primary-color, #E04B28);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.dock-main-label {
+  display: block;
+  font-size: 14.5px;
+  font-weight: 800;
+  color: #2B2122;
+  line-height: 1.25;
+}
+
+.dock-sub-label {
+  display: block;
+  font-size: 12px;
+  color: #78686A;
+}
+
+.dock-tags-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.denom-pill {
+  font-size: 12px;
+  font-weight: 600;
+  color: #554446;
+  background: #FFF9F7;
+  border: 1px solid #F7E0DA;
+  padding: 5px 13px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: default;
+}
+
+.denom-pill:hover {
+  background: #FFF5F2;
+  color: var(--primary-color, #E04B28);
+  border-color: #FCE5D9;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(224, 75, 40, 0.15);
+}
+
+.denom-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--primary-color, #E04B28);
+}
+
+/* ---------- vishwa sanatan global reach (Redesign) ---------- */
+.vishwa-reach-section {
+  padding: 75px 0 80px;
+  position: relative;
+  background: var(--bg-main);
+  overflow: hidden;
+}
+
+.vishwa-reach-ambient-glow {
+  position: absolute;
+  top: 15%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 850px;
+  height: 420px;
+  background: radial-gradient(circle, rgba(230, 92, 48, 0.12) 0%, rgba(224, 75, 40, 0.06) 50%, rgba(255, 253, 251, 0) 75%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.vishwa-reach-card {
+  background: #FFFFFF;
+  border: 1.5px solid #F7E0DA;
+  border-radius: 36px;
+  padding: 48px 42px;
+  box-shadow: 0 24px 60px rgba(43, 33, 34, 0.06), 0 4px 16px rgba(255, 126, 64, 0.04);
+  position: relative;
+  z-index: 1;
+}
+
+.vishwa-reach-header {
+  max-width: 720px;
+  margin: 0 auto 36px;
+}
+
+.vishwa-pill-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #FFF5F2;
+  border: 1px solid rgba(255, 126, 64, 0.28);
+  color: var(--primary-color, #E04B28);
+  font-size: 11.5px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  padding: 6px 18px;
+  border-radius: 999px;
+  box-shadow: 0 4px 12px rgba(255, 126, 64, 0.08);
+}
+
+.vishwa-pill-globe {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary-color, #E04B28);
+  font-size: 15px;
+}
+
+.vishwa-reach-title {
+  font-family: "Gabarito", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: clamp(30px, 3.6vw, 42px);
+  font-weight: 800;
+  color: #2B2122;
+  line-height: 1.25;
+  margin-bottom: 12px;
+  letter-spacing: -0.015em;
+}
+
+.vishwa-title-gradient {
+  background: var(--primary-color, #E04B28);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline;
+}
+
+.vishwa-reach-desc {
+  font-size: 15.5px;
+  color: #78686A;
+  line-height: 1.6;
+  max-width: 660px;
+  margin-bottom: 0;
+}
+
+/* Left Hero: Global Diaspora Interactive Hub Card */
+.vishwa-diaspora-hub-card {
+  background: linear-gradient(145deg, #1C1112 0%, #2B1618 60%, #1A0D0F 100%);
+  border: 1.5px solid rgba(255, 126, 64, 0.3);
+  border-radius: 28px;
+  padding: 30px 26px;
+  color: #FFFFFF;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 20px 48px rgba(28, 17, 18, 0.35);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.hub-flame-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+  background: rgba(255, 126, 64, 0.2);
+  color: #E04B28;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+}
+
+.hub-title {
+  font-size: 16.5px;
+  font-weight: 800;
+  color: #FFFFFF;
+}
+
+.hub-live-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(16, 185, 129, 0.15);
+  border: 1px solid rgba(16, 185, 129, 0.35);
+  color: #34D399;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 999px;
+}
+
+.hub-live-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #10B981;
+  box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.25);
+  animation: pulse-dot 1.8s infinite;
+}
+
+.hub-subtitle {
+  font-size: 12.5px;
+  color: rgba(255, 255, 255, 0.72);
+  margin-bottom: 16px;
+}
+
+.hub-nodes-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.hub-node-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 10px 14px;
+  transition: all 0.25s ease;
+}
+
+.hub-node-item:hover {
+  background: rgba(255, 126, 64, 0.15);
+  border-color: rgba(255, 126, 64, 0.4);
+  transform: translateX(4px);
+}
+
+.hub-node-flag {
+  font-size: 20px;
+  margin-right: 10px;
+  flex-shrink: 0;
+}
+
+.hub-node-info {
+  flex-grow: 1;
+}
+
+.hub-node-info strong {
+  display: block;
+  font-size: 13px;
+  color: #FFFFFF;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.hub-node-info span {
+  display: block;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.hub-node-count {
+  font-size: 12px;
+  font-weight: 800;
+  color: #E04B28;
+  background: rgba(255, 126, 64, 0.15);
+  padding: 3px 8px;
+  border-radius: 999px;
+  flex-shrink: 0;
+}
+
+.hub-card-footer {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.hub-footer-text {
+  font-size: 11.5px;
+  color: rgba(255, 255, 255, 0.72);
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.hub-footer-text i {
+  color: #10B981;
+  font-size: 15px;
+}
+
+.btn-hub-explore {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--primary-color, #E04B28);
+  text-decoration: none;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.btn-hub-explore:hover {
+  color: #FFA270;
+  transform: translateX(3px);
+}
+
+/* Right Side: 4 Metric Cards */
+.vishwa-metric-card {
+  background: #FFFDFC;
+  border: 1px solid #F7E0DA;
+  border-radius: 22px;
+  padding: 22px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 8px 24px rgba(43, 33, 34, 0.03);
+}
+
+.vishwa-metric-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(224, 75, 40, 0.3);
+  box-shadow: 0 16px 36px rgba(224, 75, 40, 0.1);
+  background: #FFFFFF;
+}
+
+.vishwa-metric-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.vishwa-icon-orb {
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  transition: transform 0.3s ease;
+}
+
+.vishwa-metric-card:hover .vishwa-icon-orb {
+  transform: scale(1.1) rotate(4deg);
+}
+
+.orb-amber {
+  background: #FEF3C7;
+  color: #D97706;
+}
+
+.vishwa-micro-tag {
+  font-size: 10.5px;
+  font-weight: 700;
+  color: #78686A;
+  background: #F7EAE6;
+  padding: 3px 9px;
+  border-radius: 999px;
+}
+
+.vishwa-metric-num {
+  font-size: 32px;
+  font-weight: 800;
+  color: #2B2122;
+  line-height: 1.15;
+  margin: 0 0 4px 0;
+}
+
+.vishwa-metric-label {
+  font-size: 15px;
+  font-weight: 700;
+  color: #2B2122;
+  margin: 0 0 6px 0;
+}
+
+.vishwa-metric-desc {
+  font-size: 12.5px;
+  color: #78686A;
+  line-height: 1.5;
+  margin: 0 0 8px 0;
+}
+
+.vishwa-micro-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.vishwa-micro-pills span {
+  font-size: 10.5px;
+  font-weight: 600;
+  color: #8C4425;
+  background: #FFF5F0;
+  border: 1px solid #FDDDD3;
+  padding: 2px 8px;
+  border-radius: 999px;
+}
+
+/* ---------- Mobile App Experience (Sanatan Connect Luxury Vivah App) ---------- */
+
+.app-section {
+
+  position: relative;
+  background: #FFFFFF;
+}
+
+.sanatan-app-panel,
+.fc-app-panel {
+  position: relative;
+  background: var(--black-color-2p);
+  /* background: radial-gradient(circle at 85% 20%, rgba(230, 92, 48, 0.35) 0%, transparent 55%),
+    radial-gradient(circle at 10% 85%, rgba(224, 75, 40, 0.28) 0%, transparent 55%),
+    radial-gradient(circle at 50% 50%, rgba(245, 158, 11, 0.12) 0%, transparent 60%),
+    linear-gradient(135deg, #1C0F11 0%, #291216 48%, #14080A 100%); */
+  border: 1.5px solid rgba(255, 183, 77, 0.32);
+  border-radius: 36px;
+  padding: 60px 60px 0;
+  overflow: visible;
+}
+
+/* Subtle decorative golden corner accents */
+.sanatan-app-panel::before {
+  content: '';
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  right: 12px;
+  bottom: 12px;
+  border: 1px solid rgba(255, 215, 0, 0.08);
+  border-radius: 26px;
+  pointer-events: none;
+}
+
+.sanatan-app-ambient-glow,
+.fc-app-ambient-glow {
+  position: absolute;
+  top: 50%;
+  right: 15%;
+  transform: translate(50%, -50%);
+  width: 460px;
+  height: 460px;
+  background: radial-gradient(circle, rgba(230, 92, 48, 0.32) 0%, rgba(245, 158, 11, 0.12) 40%, transparent 70%);
+  pointer-events: none;
+  filter: blur(20px);
+}
+
+.sanatan-app-copy,
+.fc-app-copy {
+  padding-bottom: 60px;
+  position: relative;
+  z-index: 2;
+}
+
+/* Eyebrow Pill */
+.sanatan-app-pill,
+.fc-app-pill-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 183, 77, 0.45);
+  color: #FFD180;
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  padding: 7px 18px;
+  border-radius: 999px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+  text-transform: uppercase;
+}
+
+.app-pill-flame {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #FFB74D;
+  font-size: 14px;
+  filter: drop-shadow(0 0 6px rgba(255, 183, 77, 0.8));
+}
+
+.sanatan-app-title,
+.fc-app-title {
+  font-family: "Gabarito", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: clamp(34px, 4.2vw, 44px);
+  font-weight: 800;
+  color: #FFFFFF;
+  line-height: 1.25;
+  margin-bottom: 16px;
+}
+
+.sanatan-app-gradient {
+  background: linear-gradient(135deg, #E04B28 0%, #E65C30 48%, #FFB74D 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+  filter: drop-shadow(0 2px 10px rgba(224, 75, 40, 0.3));
+}
+
+.sanatan-app-lede,
+.fc-app-lede {
+  color: rgba(255, 245, 240, 0.88);
+  font-size: 15.5px;
+  line-height: 1.7;
+  margin-bottom: 24px;
+  max-width: 520px;
+}
+
+/* Feature Checklist */
+.sanatan-app-features-list,
+.fc-app-features-list {
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+  margin-bottom: 28px;
+}
+
+.sanatan-app-feature-item,
+.fc-app-feature-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #FFF5F0;
+  font-size: 14.5px;
+  font-weight: 500;
+}
+
+.sanatan-feat-icon,
+.fc-feat-icon {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(224, 75, 40, 0.35), rgba(230, 92, 48, 0.4));
+  border: 1px solid rgba(255, 183, 77, 0.7);
+  color: #FFD180;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(224, 75, 40, 0.3);
+}
+
+/* Store Buttons */
+.sanatan-store-button,
+.fc-store-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 10px 14px;
+  border-radius: 86px;
+  color: #FFFFFF;
+  text-decoration: none;
+  transition: all 0.25s ease;
+}
+
+.sanatan-store-button:hover,
+.fc-store-button:hover {
+  background: rgba(255, 255, 255, 0.18);
+  border-color: #FFB74D;
+  color: #FFFFFF;
+  transform: translateY(-3px);
+  box-shadow: 0 10px 24px rgba(224, 75, 40, 0.38);
+}
+
+.sanatan-store-button i,
+.fc-store-button i {
+  font-size: 32px;
+  color: #FFFFFF;
+}
+
+.sanatan-store-button small,
+.fc-store-button small {
+  display: block;
+  font-size: 10.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: rgba(255, 255, 255, 0.75);
+  line-height: 1.1;
+}
+
+.sanatan-store-button strong,
+.fc-store-button strong {
+  display: block;
+  font-size: 15.5px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+/* QR Scan Pill */
+.sanatan-qr-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 183, 77, 0.1);
+  border: 1px dashed rgba(255, 183, 77, 0.5);
+  color: #FFD180;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 12px 18px;
+  border-radius: 999px;
+  backdrop-filter: blur(8px);
+  transition: all 0.25s ease;
+}
+
+.sanatan-qr-pill:hover {
+  background: rgba(255, 183, 77, 0.18);
+  border-color: #FFB74D;
+  transform: translateY(-2px);
+}
+
+.sanatan-qr-pill i {
+  font-size: 18px;
+}
+
+/* Stack on Dark */
+.stack-on-dark img {
+  border: 2.5px solid #230B12 !important;
+}
+
+/* Reviews / Rating */
+.sanatan-app-reviews,
+.fc-app-reviews {
+  display: flex;
+  flex-direction: column;
+}
+
+.sanatan-stars,
+.fc-stars {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: #F59E0B;
+  font-size: 15px;
+  margin-bottom: 2px;
+}
+
+.sanatan-stars span,
+.fc-stars span {
+  color: #FFFFFF;
+  font-weight: 700;
+  font-size: 13px;
+  margin-left: 6px;
+}
+
+.app-users-line {
+  color: rgba(255, 245, 240, 0.85);
+  font-size: 13px;
+}
+
+.app-users-line strong {
+  color: #FFD180;
+}
+
+/* Right Mockup Showcase */
+.sanatan-app-mockup-wrap,
+.fc-app-mockup-wrap {
+  position: relative;
+  z-index: 2;
+  margin-top: -30px;
+}
+
+.sanatan-mockup-halo,
+.fc-mockup-halo {
+  position: absolute;
+  top: 42%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(255, 126, 64, 0.38) 0%, rgba(245, 158, 11, 0.15) 45%, transparent 70%);
+  pointer-events: none;
+  z-index: -1;
+  filter: blur(25px);
+}
+
+.sanatan-app-mockup,
+.fc-app-mockup {
+  max-width: 90%;
+  display: inline-block;
+  filter: drop-shadow(0 30px 60px rgba(0, 0, 0, 0.55));
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.sanatan-app-mockup-wrap:hover .sanatan-app-mockup,
+.fc-app-mockup-wrap:hover .fc-app-mockup {
+  transform: translateY(-8px) scale(1.02);
+}
+
+/* Floating Glass Badges */
+.sanatan-app-float-badge,
+.fc-app-float-badge {
+  position: absolute;
+  background: rgba(36, 13, 20, 0.88);
+  border: 1px solid rgba(255, 183, 77, 0.4);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-radius: 200px;
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
+  z-index: 4;
+  color: #FFFFFF;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.sanatan-app-float-badge:hover,
+.fc-app-float-badge:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.55);
+}
+
+.float-top-left {
+  top: 15%;
+  left: -20px;
+  animation: floatAppBadge 4.5s ease-in-out infinite;
+}
+
+.float-bottom-right {
+  bottom: 12%;
+  right: -20px;
+  animation: floatAppBadgeRev 5s ease-in-out infinite;
+}
+
+@keyframes floatAppBadge {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes floatAppBadgeRev {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(8px);
+  }
+}
+
+.float-top-left:hover,
+.float-bottom-right:hover {
+  animation-play-state: paused;
+}
+
+.float-badge-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.float-badge-icon.icon-marigold {
+  background: rgba(255, 126, 64, 0.25);
+  border: 1px solid #FF8A50;
+  color: #FFD166;
+  box-shadow: 0 0 12px rgba(255, 126, 64, 0.35);
+}
+
+.float-badge-icon.icon-emerald {
+  background: rgba(16, 185, 129, 0.22);
+  border: 1px solid #10B981;
+  color: #6EE7B7;
+  box-shadow: 0 0 12px rgba(16, 185, 129, 0.3);
+}
+
+.float-badge-icon.icon-purple {
+  background: rgba(224, 75, 40, 0.25);
+  border: 1px solid #E04B28;
+  color: #FFB74D;
+  box-shadow: 0 0 12px rgba(224, 75, 40, 0.35);
+}
+
+.float-badge-icon.icon-green {
+  background: rgba(16, 185, 129, 0.25);
+  border: 1px solid #10B981;
+  color: #6EE7B7;
+}
+
+.sanatan-app-float-badge strong,
+.fc-app-float-badge strong {
+  display: block;
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #FFFFFF;
+  line-height: 1.2;
+}
+
+.sanatan-app-float-badge span,
+.fc-app-float-badge span {
+  display: block;
+  font-size: 11px;
+  color: rgba(255, 235, 225, 0.85);
+}
+
+/* ---------- about ---------- */
+
+.about-section {
+  padding: 50px 0;
+}
+
+.about-media {
+  position: relative;
+  max-width: 420px;
+  margin: 0 auto;
+}
+
+.about-arch {
+  position: relative;
+  border-radius: 210px 210px 24px 24px;
+  overflow: hidden;
+  border: 8px solid #FFFFFF;
+  outline: 3px solid var(--primary-color, #E04B28);
+  outline-offset: 8px;
+  box-shadow: 0 24px 64px rgba(36, 26, 22, 0.08);
+}
+
+.about-arch img {
+  width: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.play-btn {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FFFFFF;
+  font-size: 84px;
+  background: rgba(20, 83, 45, 0.25);
+  cursor: pointer;
+  transition: background 0.25s ease;
+}
+
+.play-btn:hover {
+  background: rgba(20, 83, 45, 0.45);
+  color: var(--black-color-3, #FDF1EA);
+}
+
+.play-btn iconify-icon {
+  filter: drop-shadow(0 6px 18px rgba(0, 0, 0, 0.4));
+  animation: pulse-play 2.4s ease-in-out infinite;
+}
+
+@keyframes pulse-play {
+
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.08);
+  }
+}
+
+.about-float-img {
+  position: absolute;
+  width: 165px;
+  right: -14px;
+  bottom: 26px;
+  border-radius: 18px;
+  border: 6px solid #FFFFFF;
+  box-shadow: 0 16px 48px rgba(36, 26, 22, 0.05);
+}
+
+.experience-tag {
+  position: absolute;
+  left: -40px;
+  bottom: -18px;
+  background: linear-gradient(135deg, var(--black-color-5, #E65C30) 0%, var(--primary-color, #E04B28) 100%);
+  color: #FFFFFF;
+  border-radius: 20px;
+  padding: 16px 22px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0 14px 30px rgba(224, 75, 40, 0.25);
+}
+
+.exp-num {
+  font-family: "Gabarito", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 42px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.exp-label {
+  font-size: 13.5px;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.about-lede {
+  color: 5E534D;
+  font-size: 16.5px;
+  margin-top: 18px;
+  max-width: 480px;
+}
+
+.about-checklist {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 28px;
+  margin: 24px 0 26px;
+}
+
+.about-checklist li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+  color: var(--white-color, #1F1614);
+}
+
+.about-checklist iconify-icon {
+  color: var(--primary-color, #E04B28);
+  font-size: 21px;
+}
+
+/* video modal */
+
+.video-modal {
+  background: transparent;
+  border: none;
+}
+
+.video-modal .modal-body {
+  padding: 0;
+  position: relative;
+}
+
+.video-modal iframe {
+  border-radius: 18px;
+  border: 0;
+}
+
+.video-close {
+  position: absolute;
+  top: -46px;
+  right: 0;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: none;
+  background: linear-gradient(135deg, var(--black-color-5, #E65C30) 0%, var(--primary-color, #E04B28) 100%);
+  color: #FFFFFF;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 5;
+}
+
+/* ---------- Sanatan Community & Heritage Directory Showcase (Tabbed Redesign) ---------- */
+
+.sanatan-directory-section,
+.fc-directory-section {
+  padding: 70px 0 75px;
+  position: relative;
+  background: #FFFDFB;
+  overflow: hidden;
+}
+
+.sanatan-directory-glow,
+.fc-directory-glow {
+  position: absolute;
+  top: 19%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 950px;
+  height: 100%;
+  background: radial-gradient(circle, rgba(230, 92, 48, 0.15) 0%, rgba(224, 75, 40, 0.08) 40%, rgba(255, 253, 251, 0) 75%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.sanatan-directory-header,
+.fc-directory-header {
+  max-width: 760px;
+  margin: 0 auto 32px;
+}
+
+.sanatan-dir-pill,
+.fc-pill-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #FFF5F0;
+  border: 1px solid rgba(255, 126, 64, 0.35);
+  color: #8C4425;
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  padding: 6px 18px;
+  border-radius: 999px;
+  text-transform: uppercase;
+}
+
+.dir-pill-flame {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary-color, #E04B28);
+  font-size: 14px;
+}
+
+.sanatan-directory-title,
+.fc-directory-title {
+  font-family: "Gabarito", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: clamp(32px, 3.8vw, 42px);
+  font-weight: 800;
+  color: #1C0F12;
+  line-height: 1.25;
+  margin-bottom: 14px;
+}
+
+.sanatan-directory-gradient {
+  background: linear-gradient(135deg, #E04B28 0%, #E65C30 55%, #F59E0B 100%);
+  /* background: var(--primary-color, #E04B28); */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+.sanatan-directory-desc,
+.fc-directory-desc {
+  font-size: 15.5px;
+  color: #665248;
+  line-height: 1.65;
+  max-width: 640px;
+}
+
+/* Tab Navigation (Segmented Pill Bar) */
+.sanatan-tabs-wrapper {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  z-index: 2;
+}
+
+.sanatan-community-nav {
+  display: inline-flex;
+  align-items: center;
+  background: #FFFFFF;
+  border: 1.5px solid rgba(255, 126, 64, 0.22);
+  border-radius: 999px;
+  padding: 6px;
+  box-shadow: 0 10px 30px rgba(140, 68, 37, 0.08);
+  gap: 4px;
+}
+
+.sanatan-community-nav .nav-item {
+  margin: 0;
+}
+
+.sanatan-community-nav .nav-link {
+  color: #5C473E;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 10px 22px;
+  border-radius: 999px;
+  border: none;
+  background: transparent;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  white-space: nowrap;
+}
+
+.nav-icon {
+  font-size: 16px;
+  flex-shrink: 0;
+  color: inherit;
+}
+
+.sanatan-community-nav .nav-link i {
+  font-size: 17px;
+  transition: transform 0.25s ease;
+}
+
+.sanatan-community-nav .nav-link:hover {
+  color: var(--primary-color, #E04B28);
+  background: #FFF5F0;
+}
+
+.sanatan-community-nav .nav-link:hover i {
+  transform: scale(1.15);
+}
+
+.sanatan-community-nav .nav-link.active {
+  background: var(--primary-color, #E04B28) !important;
+  color: #FFFFFF !important;
+  font-weight: 700;
+  box-shadow: 0 6px 20px rgba(224, 75, 40, 0.35);
+}
+
+.sanatan-community-nav .nav-link.active i {
+  color: #FFFFFF;
+}
+
+/* Tab Panel Card */
+.sanatan-dir-panel,
+.fc-dir-card {
+  background: #FFFFFF;
+  border: 1.5px solid rgba(255, 126, 64, 0.18);
+  border-radius: 28px;
+  padding: 36px 38px;
+  box-shadow: 0 16px 45px rgba(140, 68, 37, 0.07);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.sanatan-dir-panel-header,
+.fc-dir-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 26px;
+  padding-bottom: 20px;
+  border-bottom: 1px dashed #FFE4D6;
+}
+
+.sanatan-dir-icon,
+.fc-dir-icon {
+  width: 54px;
+  height: 54px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  flex-shrink: 0;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+}
+
+.orb-orange {
+  background: #FFF2EC;
+  color: var(--primary-color, #E04B28);
+}
+
+.orb-marigold {
+  background: #FFFBEB;
+  color: #F59E0B;
+}
+
+.orb-coral {
+  background: #FFF2EC;
+  color: var(--primary-color, #E04B28);
+}
+
+.orb-blue {
+  background: #EFF6FF;
+  color: #2563EB;
+}
+
+.orb-emerald {
+  background: #ECFDF5;
+  color: #059669;
+}
+
+.sanatan-dir-name,
+.fc-dir-name {
+  font-family: "Gabarito", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: #1C0F12;
+  margin: 0 0 3px 0;
+}
+
+.sanatan-dir-sub,
+.fc-dir-sub {
+  font-size: 13.5px;
+  color: #64534B;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.sanatan-dir-meta-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #FFF9F5;
+  border: 1px solid #FFE4D6;
+  color: #8C4425;
+  font-size: 12.5px;
+  font-weight: 700;
+  padding: 6px 16px;
+  border-radius: 999px;
+}
+
+.sanatan-dir-meta-badge i {
+  color: #10B981;
+  font-size: 15px;
+}
+
+/* Tag Cloud & Pills */
+.sanatan-tag-cloud,
+.fc-tag-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.sanatan-dir-tag,
+.fc-dir-tag {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #382923;
+  background: #FFFBF9;
+  border: 1px solid #FFE5D9;
+  padding: 8px 16px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  transition: all 0.22s ease;
+}
+
+.sanatan-dir-tag .tag-count,
+.fc-dir-tag .tag-count {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--primary-color, #E04B28);
+  background: rgba(224, 75, 40, 0.1);
+  padding: 2px 8px;
+  border-radius: 999px;
+  transition: all 0.22s ease;
+}
+
+.sanatan-dir-tag:hover,
+.fc-dir-tag:hover {
+  background: var(--primary-color, #E04B28);
+  color: #FFFFFF;
+  border-color: var(--primary-color, #E04B28);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(224, 75, 40, 0.28);
+}
+
+.sanatan-dir-tag:hover .tag-count,
+.fc-dir-tag:hover .tag-count {
+  background: rgba(255, 255, 255, 0.28);
+  color: #FFFFFF;
+}
+
+.sanatan-dir-tag-more,
+.fc-dir-tag-more {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--primary-color, #E04B28);
+  background: #FFF2EC;
+  border: 1px solid rgba(224, 75, 40, 0.3);
+  padding: 8px 18px;
+  border-radius: 999px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  transition: all 0.22s ease;
+}
+
+.sanatan-dir-tag-more:hover,
+.fc-dir-tag-more:hover {
+  background: var(--primary-color, #E04B28);
+  color: #FFFFFF;
+  border-color: var(--primary-color, #E04B28);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(224, 75, 40, 0.28);
+}
+
+/* Bottom CTA Banner */
+.sanatan-dir-bottom-banner,
+.fc-dir-bottom-banner {
+  background: linear-gradient(135deg, #FFFDFB 0%, #FFF5EF 100%);
+  border: 1.5px solid rgba(255, 126, 64, 0.22);
+  border-radius: 26px;
+  padding: 26px 36px;
+  box-shadow: 0 12px 35px rgba(140, 68, 37, 0.06);
+}
+
+.sanatan-dir-cta-icon,
+.fc-dir-cta-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 15px;
+  background: linear-gradient(135deg, #FFF0EC 0%, #FFE6DC 100%);
+  border: 1px solid #FFD3C2;
+  color: var(--primary-color, #E04B28);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  flex-shrink: 0;
+}
+
+.sanatan-dir-cta-title,
+.fc-dir-cta-title {
+  font-size: 16.5px;
+  font-weight: 700;
+  color: #1C0F12;
+  margin: 0 0 3px 0;
+}
+
+.sanatan-dir-cta-sub,
+.fc-dir-cta-sub {
+  font-size: 13.5px;
+  color: #64534B;
+}
+
+.btn-sanatan-pill-primary,
+.btn-fc-pill-primary {
+  background: var(--primary-color, #E04B28);
+  color: #FFFFFF;
+  padding: 11px 24px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 14px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 6px 18px rgba(224, 75, 40, 0.32);
+  transition: all 0.25s ease;
+  white-space: nowrap;
+}
+
+.btn-sanatan-pill-primary:hover,
+.btn-fc-pill-primary:hover {
+  background: linear-gradient(135deg, #EE683D 0%, #DF4A25 100%);
+  color: #FFFFFF;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(224, 75, 40, 0.45);
+}
+
+/* ---------- Sanatan Matrimonial Luxury Footer (Theme Redesign) ---------- */
+
+.sanatan-footer-main,
+.fc-footer-main {
+  background: var(--black-color-2p);
+  position: relative;
+  overflow: hidden;
+  padding-top: 65px;
+}
+
+.sanatan-footer-glow,
+.fc-footer-glow {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1000px;
+  height: 100%;
+  /* background: radial-gradient(circle, rgba(255, 126, 64, 0.2) 0%, rgba(245, 158, 11, 0.08) 45%, transparent 75%); */
+  pointer-events: none;
+}
+
+/* Newsletter Card */
+.sanatan-footer-newsletter-card,
+.fc-footer-newsletter-card {
+  background: linear-gradient(135deg, rgba(38, 14, 22, 0.95) 0%, rgba(48, 18, 28, 0.95) 100%);
+  border: 1.5px solid rgba(255, 183, 77, 0.28);
+  border-radius: 28px;
+  padding: 36px 42px;
+  margin-bottom: 56px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.sanatan-newsletter-icon,
+.fc-newsletter-icon {
+  width: 54px;
+  height: 54px;
+  border-radius: 16px;
+  background: rgba(255, 126, 64, 0.22);
+  border: 1px solid rgba(255, 183, 77, 0.45);
+  color: #FFD180;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  flex-shrink: 0;
+  box-shadow: 0 4px 14px rgba(255, 126, 64, 0.2);
+}
+
+.sanatan-newsletter-title,
+.fc-newsletter-title {
+  font-family: "Gabarito", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: #FFFFFF;
+  margin: 0 0 4px 0;
+}
+
+.sanatan-newsletter-sub,
+.fc-newsletter-sub {
+  font-size: 13.5px;
+  color: rgba(255, 235, 225, 0.82);
+}
+
+.sanatan-input-group,
+.fc-input-group {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1.5px solid rgba(255, 183, 77, 0.35);
+  border-radius: 999px;
+  padding: 6px 6px 6px 44px;
+  transition: all 0.25s ease;
+}
+
+.sanatan-input-group:focus-within,
+.fc-input-group:focus-within {
+  background: rgba(255, 255, 255, 0.14);
+  border-color: var(--primary-color, #E04B28);
+  box-shadow: 0 0 22px rgba(255, 126, 64, 0.38);
+}
+
+.sanatan-input-icon,
+.fc-input-icon {
+  position: absolute;
+  left: 18px;
+  font-size: 20px;
+  color: #FFD180;
+}
+
+.sanatan-newsletter-input,
+.fc-newsletter-input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  color: #FFFFFF;
+  font-size: 14px;
+  outline: none;
+  padding-right: 12px;
+}
+
+.sanatan-newsletter-input::placeholder,
+.fc-newsletter-input::placeholder {
+  color: rgba(255, 235, 225, 0.55);
+}
+
+.sanatan-newsletter-btn,
+.fc-newsletter-btn {
+  background: var(--primary-color, #E04B28);
+  color: #FFFFFF;
+  border: none;
+  border-radius: 999px;
+  padding: 10px 22px;
+  font-size: 13.5px;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.25s ease;
+}
+
+.sanatan-newsletter-btn:hover,
+.fc-newsletter-btn:hover {
+  background: linear-gradient(135deg, #EE683D 0%, #DF4A25 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(224, 75, 40, 0.45);
+}
+
+.sanatan-newsletter-guarantee,
+.fc-newsletter-guarantee {
+  display: block;
+  font-size: 11.5px;
+  color: rgba(255, 235, 225, 0.7);
+  margin-top: 8px;
+  margin-left: 16px;
+}
+
+.sanatan-newsletter-guarantee i,
+.fc-newsletter-guarantee i {
+  color: #10B981;
+  font-size: 13px;
+}
+
+/* Main Footer Grid */
+.sanatan-footer-grid,
+.fc-footer-grid {
+  padding-bottom: 56px;
+}
+
+.sanatan-footer-brand-wrap,
+.fc-footer-brand-wrap {
+  padding-right: 16px;
+}
+
+.sanatan-footer-logo-badge,
+.fc-footer-logo-badge {
+  background: #FFFFFF;
+  padding: 8px 18px;
+  border-radius: 86px;
+  display: inline-block;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 183, 77, 0.3);
+}
+
+.footer-logo {
+  height: 42px;
+  width: auto;
+  display: block;
+}
+
+.sanatan-footer-mission,
+.fc-footer-mission {
+  color: rgba(255, 235, 225, 0.75);
+  font-size: 14px;
+  line-height: 1.68;
+  margin-top: 14px;
+  margin-bottom: 18px;
+}
+
+/* Social Icons */
+.sanatan-footer-socials a,
+.fc-footer-socials a {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 183, 77, 0.25);
+  color: #FFF5F0;
+  font-size: 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  text-decoration: none;
+}
+
+.sanatan-footer-socials a:hover,
+.fc-footer-socials a:hover {
+  background: linear-gradient(135deg, #E65C30, #D34320);
+  border-color: var(--primary-color, #E04B28);
+  color: #FFFFFF;
+  transform: translateY(-3px) scale(1.1);
+  box-shadow: 0 8px 20px rgba(224, 75, 40, 0.45);
+}
+
+/* Links Columns */
+.sanatan-footer-title,
+.fc-footer-title {
+  font-family: "Gabarito", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+  color: #FFFFFF;
+  margin-bottom: 20px;
+  position: relative;
+  display: inline-block;
+}
+
+.sanatan-footer-title::after,
+.fc-footer-title::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 26px;
+  height: 2px;
+  background: linear-gradient(90deg, #E04B28, #FF7E40);
+  border-radius: 2px;
+}
+
+.sanatan-footer-links,
+.fc-footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sanatan-footer-links li+li,
+.fc-footer-links li+li {
+  margin-top: 11px;
+}
+
+.sanatan-footer-links a,
+.fc-footer-links a {
+  color: rgba(255, 235, 225, 0.72);
+  font-size: 14px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.sanatan-footer-links a:hover,
+.fc-footer-links a:hover {
+  color: #FFD180;
+  transform: translateX(4px);
+}
+
+/* Contact Box */
+.sanatan-footer-contact-box,
+.fc-footer-contact-box {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.sanatan-contact-item,
+.fc-contact-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.sanatan-contact-item i,
+.fc-contact-item i {
+  font-size: 20px;
+  color: var(--primary-color, #E04B28);
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+.sanatan-contact-item small,
+.fc-contact-item small {
+  display: block;
+  font-size: 11.5px;
+  color: rgba(255, 235, 225, 0.6);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  line-height: 1.2;
+}
+
+.sanatan-contact-item a,
+.fc-contact-item a,
+.sanatan-contact-item span,
+.fc-contact-item span {
+  font-size: 14.5px;
+  font-weight: 700;
+  color: #FFF5F0;
+  text-decoration: none;
+  line-height: 1.3;
+  transition: color 0.2s ease;
+}
+
+.sanatan-contact-item a:hover,
+.fc-contact-item a:hover {
+  color: #FFD180;
+}
+
+/* Bottom Bar */
+.sanatan-footer-bottom-bar,
+.fc-footer-bottom-bar {
+  background: #0C0407;
+  border-top: 1px solid rgba(255, 183, 77, 0.15);
+  padding: 22px 0;
+}
+
+.sanatan-copy-text,
+.fc-copy-text {
+  color: rgba(255, 235, 225, 0.65);
+  font-size: 13.5px;
+}
+
+.sanatan-copy-text strong,
+.fc-copy-text strong {
+  color: #FFD180;
+  font-weight: 600;
+}
+
+.sanatan-motto-text,
+.fc-motto-text {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  color: rgba(255, 235, 225, 0.75);
+}
+
+.dot-gold,
+.dot-purple {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #F59E0B;
+  display: inline-block;
+  box-shadow: 0 0 6px rgba(245, 158, 11, 0.6);
+}
+
+/* ---------- scroll progress ---------- */
+
+.progress-wrap {
+  position: fixed;
+  right: 26px;
+  bottom: 26px;
+  height: 48px;
+  width: 48px;
+  cursor: pointer;
+  display: block;
+  border-radius: 50%;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(16px);
+  transition: all 0.3s ease;
+  background: #FFFFFF;
+  box-shadow: 0 10px 26px rgba(224, 75, 40, 0.3);
+}
+
+.progress-wrap.active-progress {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.progress-wrap::after {
+  position: absolute;
+  content: "\eedc";
+  font-family: boxicons !important;
+  text-align: center;
+  line-height: 48px;
+  font-size: 20px;
+  color: var(--primary-color, #E04B28);
+  left: 0;
+  top: 0;
+  height: 48px;
+  width: 48px;
+  cursor: pointer;
+  display: block;
+  z-index: 1;
+  transition: all 0.3s ease;
+}
+
+.progress-wrap:hover::after {
+  transform: translateY(-4px);
+}
+
+.progress-wrap svg path {
+  fill: none;
+}
+
+.progress-wrap svg.progress-circle path {
+  stroke: var(--primary-color, #E04B28);
+  stroke-width: 4;
+  box-sizing: border-box;
+  transition: all 0.3s ease;
+}
+
+/* ---------- slick defaults tune ---------- */
+
+.slick-slide {
+  outline: none;
+}
+
+.slick-list {
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+/* ---------- Redesign Layout additions ---------- */
+
+.grid-app-layout {
+  display: flex;
+  align-items: center;
+}
+
+.newsletter-wrap {
+  font-family: "Gabarito", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.input-group-sub {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: min(340px, 90vw);
+  border-radius: 100px;
+  background: rgb(0 0 0 / 8%);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  padding: 4px;
+  transition: all 0.25s ease;
+  color: black;
+}
+
+.input-group-sub:focus-within {
+  border-color: var(--black-color-5, #E65C30);
+  background: rgba(255, 255, 255, 0.14);
+  box-shadow: 0 0 12px rgba(255, 126, 64, 0.25);
+}
+
+.newsletter-input {
+  background: #00000000;
+  border: none;
+  outline: none;
+  color: black;
+  padding: 8px 16px;
+  font-size: 14px;
+  width: 100%;
+}
+
+.newsletter-input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.btn-sub {
+  background: linear-gradient(135deg, var(--black-color-5, #E65C30) 0%, var(--primary-color, #E04B28) 100%);
+  color: #FFFFFF;
+  border: none;
+  border-radius: 100px;
+  padding: 8px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.btn-sub:hover {
+  background: linear-gradient(135deg, #EE683D 0%, #DF4A25 100%);
+  transform: scale(1.03);
+}
+
+.profiles-bg-pattern {
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, var(--black-color-3, #FDF1EA) 0%, transparent 70%);
+  top: 10%;
+  left: -200px;
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+/* ---------- Personalize Service Section ---------- */
+.personalized-section {
+  padding: 80px 0;
+  position: relative;
+  background: var(--black-color, #FAF5ED);
+}
+
+.personalized-image-wrap {
+  position: relative;
+  max-width: 420px;
+  margin: 0 auto;
+}
+
+.personalized-arch-main {
+  position: relative;
+  border-radius: 210px 210px 24px 24px;
+  overflow: hidden;
+  border: 8px solid #FFFFFF;
+  outline: 3px solid var(--black-color-5, #E65C30);
+  outline-offset: 8px;
+  box-shadow: 0 24px 64px rgba(36, 26, 22, 0.08);
+}
+
+.personalized-img {
+  width: 100%;
+  display: block;
+  object-fit: cover;
+  aspect-ratio: 1 / 1;
+}
+
+.personalized-badge {
+  position: absolute;
+  left: -30px;
+  bottom: 30px;
+  background: linear-gradient(135deg, var(--black-color-5, #E65C30) 0%, var(--primary-color, #E04B28) 100%);
+  color: #FFFFFF;
+  border-radius: 20px;
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 14px 30px rgba(224, 75, 40, 0.25);
+  font-weight: 600;
+  font-size: 14.5px;
+  z-index: 2;
+}
+
+.personalized-badge iconify-icon {
+  font-size: 20px;
+}
+
+.deco-personalized {
+  width: 80px;
+  top: -20px;
+  right: -20px;
+  z-index: 2;
+  animation: bob 5s ease-in-out infinite;
+}
+
+.personalized-lede {
+  color: 5E534D;
+  font-size: 16.5px;
+  max-width: 520px;
+}
+
+.service-benefit {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.benefit-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: var(--black-color-3, #FDF1EA);
+  color: var(--primary-color, #E04B28);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  flex-shrink: 0;
+}
+
+.service-benefit h5 {
+  font-family: "Gabarito", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--white-color, #1F1614);
+  margin-bottom: 4px;
+}
+
+.service-benefit p {
+  color: 5E534D;
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+/* theme light & dark mode button */
+.theme-switch {
+  position: fixed;
+  width: 52px;
+  height: 26px;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  margin: auto;
+  transform: rotate(268deg);
+  z-index: 9991;
+}
+
+.theme-switch .switch {
+  width: 52px;
+  height: 26px;
+  background: var(--black-color-2p);
+  border: 1px solid var(--common-border);
+  border-radius: 30px;
+  position: relative;
+  cursor: pointer;
+  transition: 0.3s ease;
+  display: block;
+}
+
+.switch .circle {
+  width: 20px;
+  height: 20px;
+  background: var(--white-color-p);
+  border-radius: 50%;
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  transition: 0.3s ease;
+  z-index: 5;
+}
+
+.switch .icon {
+  position: absolute;
+  font-size: 18px;
+  color: #d49233;
+  transition: 0.3s ease;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.switch .sun {
+  right: 6px;
+  opacity: 1;
+}
+
+.switch .moon {
+  left: 6px;
+  opacity: 0;
+}
+
+.theme-switch input:checked+.switch {
+  background: var(--black-color);
+}
+
+.theme-switch input:checked+.switch .circle {
+  transform: translateX(26px);
+}
+
+.theme-switch input:checked+.switch .sun {
+  opacity: 0;
+}
+
+.theme-switch input:checked+.switch .moon {
+  opacity: 1;
+}
+
+/* Newsletter */
+.newsletter-message {
+  margin-top: 12px;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  animation: newsletter-fade-in 0.3s ease;
+}
+
+.newsletter-message.success {
+  background: #e6f7ec;
+  color: #1a7f3c;
+  border: 1px solid #b7e4c7;
+}
+
+.newsletter-message.error {
+  background: #fdecea;
+  color: #d9363e;
+  border: 1px solid #f5c2c0;
+}
+
+@keyframes newsletter-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Newsletter */
+
+/* Language dropdown wrapper */
+#nav-language-wrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  z-index: 1055;
+}
+
+/* Language selector button */
+#nav-language-wrapper .language-selector-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 40px;
+  padding: 0px 10px;
+  border: 1px solid var(--border-color, #e5e7eb);
+  border-radius: 24px;
+  background: var(--card-bg, #fff);
+  color: var(--text-color, #333);
+  font: inherit;
+  font-size: 13px;
+  line-height: 1;
+  white-space: nowrap;
+  cursor: pointer;
+  box-shadow: none;
+}
+
+#nav-language-wrapper .language-selector-btn iconify-icon {
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+#nav-language-wrapper .language-selector-btn:hover {
+  border-color: var(--primary-color, #e34b36);
+}
+
+#nav-language-wrapper .lang-caret {
+  font-size: 12px;
+  transition: transform 0.2s ease;
+}
+
+/* Dropdown panel: hidden until opened */
+#nav-language-wrapper .language-popover {
+  display: none;
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  left: auto;
+  width: 270px;
+  max-width: calc(100vw - 24px);
+  padding: 0;
+  background: var(--card-bg, #fff);
+  color: var(--text-color, #333);
+  border: 1px solid var(--border-color, #e5e7eb);
+  border-radius: 14px;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.14);
+  overflow: hidden;
+  z-index: 1060;
+}
+
+/* Open state */
+#nav-language-wrapper .language-popover.show,
+#nav-language-wrapper .language-popover.is-open {
+  display: block;
+}
+
+/* Dropdown heading */
+#nav-language-wrapper .lang-popover-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 16px;
+  border-bottom: 1px solid var(--border-color, #e5e7eb);
+}
+
+#nav-language-wrapper .popover-header-title-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+#nav-language-wrapper .popover-title {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+#nav-language-wrapper .popover-header-sub {
+  font-size: 12px;
+  opacity: 0.7;
+}
+
+#nav-language-wrapper .popover-badge-accent {
+  font-size: 11px;
+  white-space: nowrap;
+  padding: 5px 8px;
+  border-radius: 20px;
+  background: rgba(227, 75, 54, 0.1);
+  color: var(--primary-color, #e34b36);
+}
+
+/* Language options */
+#nav-language-wrapper .lang-options-list {
+  padding: 6px;
+  max-height: 260px;
+  overflow-y: auto;
+}
+
+#nav-language-wrapper .lang-option-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 11px 10px;
+  border-radius: 9px;
+  color: inherit;
+  text-decoration: none;
+  transition: background 0.2s ease;
+}
+
+#nav-language-wrapper .lang-option-item:hover,
+#nav-language-wrapper .lang-option-item.active {
+  background: rgba(227, 75, 54, 0.08);
+}
+
+#nav-language-wrapper .lang-item-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+#nav-language-wrapper .lang-flag-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 9px;
+  background: rgba(227, 75, 54, 0.1);
+  color: var(--primary-color, #e34b36);
+  font-size: 18px;
+}
+
+#nav-language-wrapper .lang-item-text {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+#nav-language-wrapper .lang-item-native {
+  font-size: 13px;
+  font-weight: 500;
+}
+
+#nav-language-wrapper .lang-item-sub {
+  font-size: 11px;
+  opacity: 0.65;
+}
+
+#nav-language-wrapper .lang-item-check {
+  visibility: hidden;
+  color: var(--primary-color, #e34b36);
+  font-size: 16px;
+}
+
+#nav-language-wrapper .lang-option-item.active .lang-item-check {
+  visibility: visible;
+}
