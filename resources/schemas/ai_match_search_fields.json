@@ -1,0 +1,215 @@
+{
+  "code": 200,
+  "status": "success",
+  "message": "AI Match Search fields fetched successfully",
+  "data": {
+    "total_steps": 1,
+    "allow_skip_steps": false,
+    "sections": [
+      {
+        "step_number": 1,
+        "step_key": "ai_match_search",
+        "title": "lbl_ai_match_search",
+        "description": "lbl_find_your_matching_partner_quickly",
+        "fields": [
+          {
+            "name": "min_match_percentage",
+            "label": "lbl_min_compatibility_score",
+            "type": "single_slider",
+            "min_val": 0,
+            "max_val": 100,
+            "default_value": "70",
+            "is_required": false
+          },
+          {
+            "name": "part_age_range",
+            "label": "field_lbl_age",
+            "type": "range_slider",
+            "min_val": 18,
+            "max_val": 60,
+            "default_range": [18, 60],
+            "is_required": false
+          },
+          {
+            "name": "part_height_range",
+            "label": "field_lbl_height",
+            "type": "range_slider",
+            "min_val": 48,
+            "max_val": 84,
+            "default_range": [48, 84],
+            "is_required": false
+          },
+          {
+            "name": "marital_status",
+            "label": "field_lbl_marital_status",
+            "type": "multi_select_dropdown",
+            "dropdown_source": "marital_status_list",
+            "is_required": false
+          },
+          {
+            "name": "mother_tongue",
+            "label": "field_lbl_mother_tongue",
+            "type": "multi_select_dropdown",
+            "dropdown_source": "mother_tongue_list",
+            "is_required": false
+          },
+          {
+            "name": "religion",
+            "label": "field_lbl_religion",
+            "type": "multi_select_dropdown",
+            "dropdown_source": "religion_list",
+            "is_required": false
+          },
+          {
+            "name": "caste",
+            "label": "field_lbl_caste",
+            "type": "dependent_dropdown",
+            "parent_field": "religion",
+            "dependency_api": "common-request/get-dependency-dropdown",
+            "dependency_param": "parent_id",
+            "is_required": false
+          },
+          {
+            "name": "manglik",
+            "label": "field_lbl_manglik",
+            "type": "multi_select_dropdown",
+            "dropdown_source": "manglik_list",
+            "is_required": false
+          },
+          {
+            "name": "moonsign",
+            "label": "field_lbl_moonsing",
+            "type": "multi_select_dropdown",
+            "dropdown_source": "moongsign_list",
+            "is_required": false
+          },
+          {
+            "name": "star",
+            "label": "field_lbl_star",
+            "type": "multi_select_dropdown",
+            "dropdown_source": "star_list",
+            "is_required": false
+          },
+          {
+            "name": "horoscope",
+            "label": "field_horoscope",
+            "type": "multi_select_dropdown",
+            "dropdown_source": "horoscope_list",
+            "is_required": false
+          },
+
+          {
+            "name": "country_id",
+            "label": "field_lbl_country",
+            "type": "multi_select_dropdown",
+            "dropdown_source": "country_list",
+            "is_required": false
+          },
+          {
+            "name": "state_id",
+            "label": "field_lbl_state",
+            "type": "dependent_dropdown",
+            "parent_field": "country_id",
+            "dependency_api": "common-request/get-dependency-dropdown",
+            "dependency_param": "parent_id",
+            "is_required": false
+          },
+          {
+            "name": "city",
+            "label": "field_lbl_city",
+            "type": "dependent_dropdown",
+            "parent_field": "state_id",
+            "dependency_api": "common-request/get-dependency-dropdown",
+            "dependency_param": "parent_id",
+            "is_required": false
+          },
+          {
+            "name": "education_level",
+            "label": "field_lbl_education",
+            "type": "multi_select_dropdown",
+            "dropdown_source": "education_list",
+            "is_required": false
+          },
+          {
+            "name": "occupation",
+            "label": "field_lbl_occupation",
+            "type": "multi_select_dropdown",
+            "dropdown_source": "occupation_list",
+            "is_required": false
+          },
+          {
+            "name": "employee_in",
+            "label": "field_lbl_employee_in",
+            "type": "multi_select_dropdown",
+            "dropdown_source": "employee_in_list",
+            "is_required": false
+          },
+          {
+            "name": "income",
+            "label": "field_lbl_annual_income",
+            "type": "multi_select_dropdown",
+            "dropdown_source": "income_list",
+            "is_required": false
+          },
+          {
+            "name": "designation_level",
+            "label": "field_lbl_designation",
+            "type": "multi_select_dropdown",
+            "dropdown_source": "designation_list",
+            "is_required": false
+          },
+          {
+            "name": "diet",
+            "label": "field_lbl_eating_habits",
+            "type": "multi_select_dropdown",
+            "dropdown_source": "eating_habit_list",
+            "is_required": false
+          },
+          {
+            "name": "smoke",
+            "label": "field_lbl_smoking",
+            "type": "multi_select_dropdown",
+            "dropdown_source": "smoking_habit_list",
+            "is_required": false
+          },
+          {
+            "name": "drink",
+            "label": "field_lbl_drinking",
+            "type": "multi_select_dropdown",
+            "dropdown_source": "drinking_habit_list",
+            "is_required": false
+          },
+          {
+            "name": "body_type",
+            "label": "field_lbl_body_type",
+            "type": "multi_select_dropdown",
+            "dropdown_source": "body_type_list",
+            "is_required": false
+          },
+          {
+            "name": "complexion",
+            "label": "field_lbl_complexion",
+            "type": "multi_select_dropdown",
+            "dropdown_source": "complexion_list",
+            "is_required": false
+          },
+          {
+            "name": "blood_group_id",
+            "label": "field_lbl_blood_group",
+            "type": "multi_select_dropdown",
+            "dropdown_source": "blood_group_list",
+            "is_required": false
+          },
+          {
+            "name": "photo_search",
+            "label": "lbl_profile_with_photo",
+            "type": "switch",
+            "default_value": "false",
+            "is_required": false
+          }
+        ]
+      }
+    ]
+  }
+}
+ 

@@ -1,0 +1,44 @@
+/vendor/
+node_modules/
+npm-debug.log
+yarn-error.log
+changes
+
+# Laravel 4 specific
+bootstrap/compiled.php
+app/storage/debugbar
+app/storage/framework
+app/storage/logs
+app/storage/app/temp
+app/storage/app/public/assets
+app/storage/app/public/export
+app/storage/app/public/web/assets/img
+app/storage/app/public/web/affiliate/assets
+app/storage/app/public/admin/assets
+app/storage/app/public/admin/third-party
+app/storage/app/public/admin/package.json
+app/storage/app/public/admin/webpack.config.js
+
+# Laravel 5 & Lumen specific
+public/storage
+public/hot
+
+# Laravel 5 & Lumen specific with changed public path
+public_html/storage
+public_html/hot
+
+storage/*.key
+.env
+Homestead.yaml
+Homestead.json
+/.vagrant
+.phpunit.result.cache
+
+/public/build
+/storage/pail
+.env.backup
+.env.production
+.phpactor.json
+auth.json
+
+changes.txt

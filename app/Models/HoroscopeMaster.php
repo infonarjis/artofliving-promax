@@ -1,0 +1,133 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
+class HoroscopeMaster extends Model
+{
+    use SoftDeletes;
+    protected $dates = ['deleted_at'];
+    protected $table = 'horoscope_masters';
+
+    protected $primaryKey = 'id';
+
+    public $timestamps = false;
+
+    protected $fillable = [
+        'horoscope_name',
+        'status',
+        'lang_code',
+        'lang_id',
+    ];
+
+    protected $casts = [
+        'id' => 'integer',
+        'lang_id' => 'integer',
+    ];
+
+    /*
+    |--------------------------------------------------------------------------
+    | Model Events (Auto Clear Cache)
+    |--------------------------------------------------------------------------
+    */
+
+    protected static function booted()
+    {
+        static::saved(function ($model) {
+            Cache::forget('horoscope_master_dropdown_'.$model->lang_code);
+        });
+
+        static::deleted(function ($model) {
+            Cache::forget('horoscope_master_dropdown_'.$model->lang_code);
+        });
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Query Scopes
+    |--------------------------------------------------------------------------
+    */
+
+    public function scopeActive(Builder $query): Builder
+    {
+        return $query->where('status', 'APPROVED');
+    }
+
+    public function scopeByLang(Builder $query, $langCode): Builder
+    {
+        return $query->where('lang_code', $langCode);
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Helper Methods
+    |--------------------------------------------------------------------------
+    */
+    public static function getDropdown($langCode = '')
+    {
+        $defaultLang = _getDefaultLanguage();
+
+        if (blank($langCode)) {
+            $langCode = $defaultLang;
+        }
+        $cacheKey = 'horoscope_master_dropdown_' . $langCode;
+        return Cache::rememberForever($cacheKey, function () use ($langCode, $defaultLang) {
+            // Base records (default language IDs)
+            $base = self::active()
+                ->where('lang_code', $defaultLang)
+                ->select('id', 'horoscope_name')
+                ->get()
+                ->keyBy('id');
+            if ($langCode === $defaultLang) {
+                // Simple case
+                $result = $base
+                    ->pluck('horoscope_name', 'id')
+                    ->toArray();
+
+                // Alphabetical ascending order
+                asort($result, SORT_NATURAL | SORT_FLAG_CASE);
+
+                return $result;
+            }
+            // Translations for requested language
+            $translations = self::active()
+                ->where('lang_code', $langCode)
+                ->whereNotNull('lang_id')
+                ->pluck('horoscope_name', 'lang_id'); // key = base id
+            $result = [];
+            foreach ($base as $id => $row) {
+                $result[$id] = $translations[$id] ?? $row->horoscope_name;
+            }
+            asort($result); // keep alphabetical order by name
+            return $result;
+        });
+    }
+
+    public function getNameByLang($langCode = '')
+    {
+        $defaultLang = _getDefaultLanguage();
+
+        if (blank($langCode) || $langCode === $defaultLang) {
+            return $this->horoscope_name;
+        }
+
+        $translated = self::where([
+            'lang_id'   => $this->id,
+            'lang_code' => $langCode,
+            'status'    => 'APPROVED',
+        ])->value('horoscope_name');
+
+        return $translated ?: $this->horoscope_name;
+    }
+
+    public function getTranslatedNameAttribute()
+    {
+        $langCode = app()->getLocale(); // or session('lang_code');
+
+        return $this->getNameByLang($langCode);
+    }
+}

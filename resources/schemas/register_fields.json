@@ -1,0 +1,825 @@
+{
+  "status": "success",
+  "code": 200,
+  "message": "Registration form schema loaded successfully",
+  "data": {
+    "total_steps": 10,
+    "allow_skip_steps": false,
+    "sections": [
+      {
+        "step_number": 1,
+        "step_key": "basic_credentials",
+        "title": "lbl_create_account",
+        "subtitle": "lbl_fill_in_your_details_to_start_your_journey",
+        "endpoint": "register",
+        "http_method": "POST",
+        "fields": [
+          {
+            "name": "gender",
+            "label": "field_lbl_gender",
+            "type": "segment_selector",
+            "is_required": true,
+            "default_value": "Male",
+            "dropdown_source": "gender_list"
+          },
+          {
+            "name": "profileby",
+            "label": "field_lbl_profile_by",
+            "placeholder": "field_lbl_select_profile_by",
+            "type": "single_select_dropdown",
+            "dropdown_source": "profileby_list",
+            "is_required": true
+          },
+          {
+            "name": "fullname",
+            "label": "field_lbl_fullname",
+            "placeholder": "field_lbl_enter_full_name",
+            "type": "text",
+            "icon": "user",
+            "is_required": true,
+            "validation": {
+              "min_length": 3,
+              "max_length": 50,
+              "error_message": "Please enter a valid full name"
+            }
+          },
+          {
+            "name": "mobile",
+            "label": "field_lbl_mobile_number",
+            "placeholder": "field_lbl_enter_mobile_number",
+            "type": "phone_number",
+            "is_required": true,
+            "default_country_code": "+91",
+            "validation": {
+              "min_digits": 8,
+              "max_digits": 15,
+              "error_message": "Please enter a valid mobile number"
+            }
+          },
+          {
+            "name": "email",
+            "label": "field_lbl_email_id",
+            "placeholder": "field_lbl_enter_your_email_id",
+            "type": "email",
+            "icon": "mail",
+            "is_required": true,
+            "validation": {
+              "regex": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$",
+              "error_message": "Please enter a valid email address"
+            }
+          },
+          {
+            "name": "password",
+            "label": "field_lbl_password",
+            "placeholder": "field_lbl_enter_password",
+            "type": "password",
+            "icon": "lock",
+            "is_required": true,
+            "validation": {
+              "min_length": 8,
+              "error_message": "Password must be at least 8 characters"
+            }
+          },
+          {
+            "name": "confirm_password",
+            "label": "field_lbl_password_confirmation",
+            "placeholder": "field_lbl_enter_password_confirmation",
+            "type": "password",
+            "icon": "lock",
+            "is_required": true,
+            "validation": {
+              "match_field": "password",
+              "error_message": "Passwords do not match"
+            }
+          },
+          {
+            "name": "birthdate",
+            "label": "field_lbl_date_of_birth",
+            "placeholder": "DD-MM-YYYY",
+            "type": "date_picker",
+            "icon": "calendar",
+            "is_required": true,
+            "validation": {
+              "min_age_male": 21,
+              "min_age_female": 18,
+              "error_message": "Age must be at least 18 (Female) or 21 (Male)"
+            }
+          },
+          {
+            "name": "marital_status",
+            "label": "field_lbl_marital_status",
+            "placeholder": "field_lbl_select_marital_status",
+            "type": "single_select_dropdown",
+            "dropdown_source": "marital_status_list",
+            "is_required": true
+          },
+          {
+            "name": "total_children",
+            "label": "field_lbl_total_children",
+            "placeholder": "field_select_lbl_total_children",
+            "type": "single_select_dropdown",
+            "dropdown_source": "total_children_list",
+            "is_required": false,
+            "show_if": {
+              "field": "marital_status",
+              "operator": "not_equal",
+              "value": "Unmarried"
+            }
+          },
+          {
+            "name": "status_children",
+            "label": "field_lbl_status_children",
+            "placeholder": "field_select_lbl_status_children",
+            "type": "single_select_dropdown",
+            "dropdown_source": "status_children_list",
+            "is_required": false,
+            "show_if": {
+              "field": "total_children",
+              "operator": "not_in",
+              "value": [
+                "0",
+                "None",
+                "No Children"
+              ]
+            }
+          },
+          {
+            "name": "religion",
+            "label": "field_lbl_religion",
+            "placeholder": "field_lbl_select_religion",
+            "type": "single_select_dropdown",
+            "dropdown_source": "religion_list",
+            "is_required": true
+          },
+          {
+            "name": "caste",
+            "label": "field_lbl_caste",
+            "placeholder": "field_lbl_select_caste",
+            "type": "dependent_dropdown",
+            "parent_field": "religion",
+            "dependency_api": "common-request/get-dependency-dropdown",
+            "dependency_param": "religion_id",
+            "is_required": true
+          },
+          {
+            "name": "terms",
+            "label": "lb_i_agree_to_terms_conditions_and_privacy_policy",
+            "type": "checkbox",
+            "is_required": true,
+            "default_value": true,
+            "validation": {
+              "must_be_checked": true,
+              "error_message": "You must accept Terms & Conditions"
+            }
+          }
+        ]
+      },
+      {
+        "step_number": 2,
+        "step_key": "religious_info",
+        "title": "lbl_religious_information",
+        "subtitle": "lbl_enter_your_religious_information",
+        "endpoint": "register/next-step",
+        "http_method": "POST",
+        "extra_params": {
+          "step": 1
+        },
+        "fields": [
+          {
+            "name": "subcaste",
+            "label": "field_lbl_sub_caste",
+            "placeholder": "field_lbl_enter_sub_caste",
+            "type": "text",
+            "is_required": false
+          },
+          {
+            "name": "mother_tongue",
+            "label": "field_lbl_mother_tongue",
+            "placeholder": "field_lbl_select_mother_tongue",
+            "type": "single_select_dropdown",
+            "dropdown_source": "mother_tongue_list",
+            "is_required": true
+          },
+          {
+            "name": "manglik",
+            "label": "field_lbl_manglik",
+            "placeholder": "field_lbl_select_manglik",
+            "type": "single_select_dropdown",
+            "dropdown_source": "manglik_list",
+            "is_required": true
+          },
+          {
+            "name": "gothra",
+            "label": "field_lbl_gothra",
+            "placeholder": "field_lbl_enter_gothra",
+            "type": "text",
+            "is_required": false
+          },
+          {
+            "name": "moonsign",
+            "label": "field_lbl_moonsing",
+            "placeholder": "field_lbl_select_moonsing",
+            "type": "single_select_dropdown",
+            "dropdown_source": "moongsign_list",
+            "is_required": false
+          },
+          {
+            "name": "star",
+            "label": "field_lbl_star",
+            "placeholder": "field_lbl_select_star",
+            "type": "single_select_dropdown",
+            "dropdown_source": "star_list",
+            "is_required": false
+          },
+          {
+            "name": "horoscope",
+            "label": "field_horoscope",
+            "placeholder": "field_select_horoscope",
+            "type": "single_select_dropdown",
+            "dropdown_source": "horoscope_list",
+            "is_required": false
+          },
+          {
+            "name": "birthplace",
+            "label": "field_lbl_birth_place",
+            "placeholder": "field_lbl_enter_birth_place",
+            "type": "text",
+            "is_required": false
+          },
+          {
+            "name": "birthtime",
+            "label": "field_lbl_birth_time",
+            "placeholder": "field_lbl_enter_birth_time",
+            "type": "time_picker",
+            "is_required": false
+          }
+        ]
+      },
+      {
+        "step_number": 3,
+        "step_key": "location_info",
+        "title": "lbl_location_details",
+        "subtitle": "lbl_enter_your_location_details",
+        "endpoint": "register/next-step",
+        "http_method": "POST",
+        "extra_params": {
+          "step": 2
+        },
+        "fields": [
+          {
+            "name": "country_id",
+            "label": "field_lbl_country",
+            "placeholder": "field_lbl_select_country",
+            "type": "single_select_dropdown",
+            "dropdown_source": "country_list",
+            "is_required": true
+          },
+          {
+            "name": "state_id",
+            "label": "field_lbl_state",
+            "placeholder": "field_lbl_select_state",
+            "type": "dependent_dropdown",
+            "parent_field": "country_id",
+            "dependency_api": "common-request/get-dependency-dropdown",
+            "dependency_param": "country_id",
+            "is_required": true
+          },
+          {
+            "name": "city",
+            "label": "field_lbl_city",
+            "placeholder": "field_lbl_select_city",
+            "type": "dependent_dropdown",
+            "parent_field": "state_id",
+            "dependency_api": "common-request/get-dependency-dropdown",
+            "dependency_param": "state_id",
+            "is_required": true
+          },
+          {
+            "name": "alternate_number",
+            "label": "field_lbl_alternate_number",
+            "placeholder": "field_lbl_enter_alternate_number",
+            "type": "phone_number",
+            "is_required": false
+          },
+          {
+            "name": "residence_type",
+            "label": "field_lbl_residence_type",
+            "placeholder": "field_lbl_select_residence_type",
+            "type": "single_select_dropdown",
+            "dropdown_source": "residence_master_list",
+            "is_required": false
+          },
+          {
+            "name": "nri_country",
+            "label": "field_lbl_nri_originated_country",
+            "placeholder": "field_lbl_enter_nri_originated_country",
+            "type": "text",
+            "is_required": false
+          },
+          {
+            "name": "address",
+            "label": "field_lbl_address",
+            "placeholder": "field_lbl_enter_address",
+            "type": "textarea",
+            "is_required": false,
+            "max_lines": 3,
+            "validation": {
+              "max_length": 500
+            }
+          }
+        ]
+      },
+      {
+        "step_number": 4,
+        "step_key": "education_career",
+        "title": "lbl_education_other_details",
+        "subtitle": "lbl_enter_your_education_other_details",
+        "endpoint": "register/next-step",
+        "http_method": "POST",
+        "extra_params": {
+          "step": 3
+        },
+        "fields": [
+          {
+            "name": "education_level",
+            "label": "field_lbl_education",
+            "placeholder": "field_lbl_select_education",
+            "type": "multi_select_dropdown",
+            "dropdown_source": "education_list",
+            "is_required": true
+          },
+          {
+            "name": "education_details",
+            "label": "field_lbl_education_details",
+            "placeholder": "field_lbl_enter_education_details",
+            "type": "text",
+            "is_required": false
+          },
+          {
+            "name": "occupation",
+            "label": "field_lbl_occupation",
+            "placeholder": "field_lbl_select_occupation",
+            "type": "single_select_dropdown",
+            "dropdown_source": "occupation_list",
+            "is_required": true
+          },
+          {
+            "name": "employee_in",
+            "label": "field_lbl_employee_in",
+            "placeholder": "field_lbl_select_employee_in",
+            "type": "single_select_dropdown",
+            "dropdown_source": "employee_in_list",
+            "is_required": true
+          },
+          {
+            "name": "income",
+            "label": "field_lbl_annual_income",
+            "placeholder": "field_lbl_select_annual_income",
+            "type": "single_select_dropdown",
+            "dropdown_source": "income_list",
+            "is_required": true
+          },
+          {
+            "name": "designation_level",
+            "label": "field_lbl_designation",
+            "placeholder": "field_lbl_select_designation",
+            "type": "single_select_dropdown",
+            "dropdown_source": "designation_list",
+            "is_required": true
+          }
+        ]
+      },
+      {
+        "step_number": 5,
+        "step_key": "lifestyle_habits",
+        "title": "lbl_physical_information",
+        "subtitle": "lbl_enter_your_physical_information",
+        "endpoint": "register/next-step",
+        "http_method": "POST",
+        "extra_params": {
+          "step": 4
+        },
+        "fields": [
+          {
+            "name": "height",
+            "label": "field_lbl_height",
+            "placeholder": "field_lbl_select_height",
+            "type": "single_select_dropdown",
+            "dropdown_source": "height_list",
+            "is_required": true
+          },
+          {
+            "name": "weight",
+            "label": "field_lbl_weight",
+            "placeholder": "field_lbl_select_weight",
+            "type": "single_select_dropdown",
+            "dropdown_source": "weight_list",
+            "is_required": true
+          },
+          {
+            "name": "diet",
+            "label": "field_lbl_eating_habits",
+            "placeholder": "field_lbl_select_eating_habits",
+            "type": "single_select_dropdown",
+            "dropdown_source": "eating_habit_list",
+            "is_required": false
+          },
+          {
+            "name": "smoke",
+            "label": "field_lbl_smoking",
+            "placeholder": "field_lbl_select_smoking",
+            "type": "single_select_dropdown",
+            "dropdown_source": "smoking_habit_list",
+            "is_required": false
+          },
+          {
+            "name": "drink",
+            "label": "field_lbl_drinking",
+            "placeholder": "field_lbl_select_drinking",
+            "type": "single_select_dropdown",
+            "dropdown_source": "drinking_habit_list",
+            "is_required": false
+          },
+          {
+            "name": "body_type",
+            "label": "field_lbl_body_type",
+            "placeholder": "field_lbl_select_body_type",
+            "type": "single_select_dropdown",
+            "dropdown_source": "body_type_list",
+            "is_required": false
+          },
+          {
+            "name": "complexion",
+            "label": "field_lbl_complexion",
+            "placeholder": "field_lbl_select_complexion",
+            "type": "single_select_dropdown",
+            "dropdown_source": "complexion_list",
+            "is_required": false
+          },
+          {
+            "name": "blood_group_id",
+            "label": "field_lbl_blood_group",
+            "placeholder": "field_lbl_select_blood_group",
+            "type": "single_select_dropdown",
+            "dropdown_source": "blood_group_list",
+            "is_required": false
+          },
+          {
+            "name": "about_me_description",
+            "label": "field_lbl_about_me",
+            "placeholder": "lbl_write_a_few_lines_about_yourself",
+            "type": "textarea",
+            "has_ai_generate": true,
+            "ai_generate_endpoint": "register/generate-about-me",
+            "is_required": false,
+            "max_lines": 5,
+            "validation": {
+              "min_length": 20,
+              "max_length": 500
+            }
+          }
+        ]
+      },
+      {
+        "step_number": 6,
+        "step_key": "family_details",
+        "title": "lbl_family_details",
+        "subtitle": "lbl_enter_your_family_details",
+        "endpoint": "register/next-step",
+        "http_method": "POST",
+        "extra_params": {
+          "step": 5
+        },
+        "fields": [
+          {
+            "name": "family_type",
+            "label": "field_lbl_family_type",
+            "placeholder": "field_lbl_select_family_type",
+            "type": "single_select_dropdown",
+            "dropdown_source": "family_type_list",
+            "is_required": false
+          },
+          {
+            "name": "family_status",
+            "label": "field_lbl_family_status",
+            "placeholder": "field_lbl_select_family_type",
+            "type": "single_select_dropdown",
+            "dropdown_source": "family_status_list",
+            "is_required": false
+          },
+          {
+            "name": "father_name",
+            "label": "field_lbl_father_name",
+            "placeholder": "field_lbl_enter_father_name",
+            "type": "text",
+            "is_required": true
+          },
+          {
+            "name": "father_occupation",
+            "label": "field_lbl_father_occupation",
+            "placeholder": "field_lbl_select_father_occupation",
+            "type": "single_select_dropdown",
+            "dropdown_source": "occupation_list",
+            "is_required": true
+          },
+          {
+            "name": "mother_name",
+            "label": "field_lbl_mother_name",
+            "placeholder": "field_lbl_enter_mother_name",
+            "type": "text",
+            "is_required": true
+          },
+          {
+            "name": "mother_occupation",
+            "label": "field_lbl_mother_occupation",
+            "placeholder": "field_lbl_select_mother_occupation",
+            "type": "single_select_dropdown",
+            "dropdown_source": "occupation_list",
+            "is_required": true
+          },
+          {
+            "name": "no_of_brother",
+            "label": "field_lbl_no_of_brothers",
+            "placeholder": "field_lbl_select_no_of_brothers",
+            "type": "single_select_dropdown",
+            "dropdown_source": "no_of_bro_sis_list",
+            "is_required": false
+          },
+          {
+            "name": "no_of_married_brother",
+            "label": "field_lbl_no_married_of_brothers",
+            "placeholder": "field_lbl_select_no_of_married_brothers",
+            "type": "single_select_dropdown",
+            "dropdown_source": "no_of_married_brother_list",
+            "is_required": false,
+            "show_if": {
+              "field": "no_of_brother",
+              "operator": "not_in",
+              "value": [
+                "0",
+                "None",
+                "No Brothers"
+              ]
+            }
+          },
+          {
+            "name": "no_of_sister",
+            "label": "field_lbl_no_of_sisters",
+            "placeholder": "field_lbl_select_no_of_sisters",
+            "type": "single_select_dropdown",
+            "dropdown_source": "no_of_bro_sis_list",
+            "is_required": false
+          },
+          {
+            "name": "no_of_married_sister",
+            "label": "field_lbl_no_of_married_sisters",
+            "placeholder": "field_lbl_select_no_of_married_sisters",
+            "type": "single_select_dropdown",
+            "dropdown_source": "no_of_married_sister_list",
+            "is_required": false,
+            "show_if": {
+              "field": "no_of_sister",
+              "operator": "not_in",
+              "value": [
+                "0",
+                "None",
+                "No Sisters"
+              ]
+            }
+          },
+          {
+            "name": "family_details",
+            "label": "field_lbl_family_details",
+            "placeholder": "field_lbl_enter_family_details",
+            "type": "textarea",
+            "is_required": false,
+            "max_lines": 3,
+            "validation": {
+              "max_length": 500
+            }
+          }
+        ]
+      },
+      {
+        "step_number": 7,
+        "step_key": "photos",
+        "title": "lbl_upload_photos",
+        "subtitle": "lbl_add_photos_take_a_selfie_to_verify_your_profile",
+        "endpoint": "register/next-step",
+        "http_method": "POST",
+        "is_multipart": true,
+        "extra_params": {
+          "step": 6
+        },
+        "fields": [
+          {
+            "name": "selfie_photo",
+            "label": "lbl_live_selfie_verification",
+            "type": "selfie_capture",
+            "is_required": true,
+            "description": "lbl_ensure_your_face_is_clearly_visible"
+          },
+          {
+            "name": "photo_visibility",
+            "label": "lbl_privacy_settings",
+            "type": "segment_selector",
+            "is_required": true,
+            "default_value": "2",
+            "options": [
+              {
+                "id": "0",
+                "label": "Hide for all members"
+              },
+              {
+                "id": "1",
+                "label": "Show to all members"
+              },
+              {
+                "id": "2",
+                "label": "Visible only to paid members"
+              }
+            ]
+          },
+          {
+            "name": "photo1",
+            "label": "lbl_profile_photo",
+            "type": "photo_upload",
+            "is_required": true,
+            "aspect_ratio": "1:1"
+          },
+          {
+            "name": "photo2",
+            "label": "attr_photo2",
+            "type": "photo_upload",
+            "is_required": false
+          },
+          {
+            "name": "photo3",
+            "label": "attr_photo3",
+            "type": "photo_upload",
+            "is_required": false
+          },
+          {
+            "name": "photo4",
+            "label": "attr_photo4",
+            "type": "photo_upload",
+            "is_required": false
+          }
+        ]
+      },
+      {
+        "step_number": 8,
+        "step_key": "id_proof",
+        "title": "lbl_upload_id_proof",
+        "subtitle": "lbl_add_your_id_proof_for_verification",
+        "endpoint": "register/next-step",
+        "http_method": "POST",
+        "is_multipart": true,
+        "extra_params": {
+          "step": 7
+        },
+        "fields": [
+          {
+            "name": "id_proof_type",
+            "label": "lbl_select_id_proof_type",
+            "type": "segment_selector",
+            "is_required": true,
+            "default_value": "Aadhar Card",
+            "dropdown_source": "id_proof_type_list"
+          },
+          {
+            "name": "id_proof_front",
+            "label": "lbl_front_side_photo",
+            "type": "file_upload",
+            "is_required": true
+          },
+          {
+            "name": "id_proof_back",
+            "label": "lbl_back_side_photo",
+            "type": "file_upload",
+            "is_required": true
+          }
+        ]
+      },
+      {
+        "step_number": 9,
+        "step_key": "partner_preferences",
+        "title": "lbl_partner_preferences",
+        "subtitle": "lbl_enter_your_partner_preferences_details",
+        "endpoint": "register/next-step",
+        "http_method": "POST",
+        "extra_params": {
+          "step": 8
+        },
+        "fields": [
+          {
+            "name": "part_age_range",
+            "label": "field_lbl_partner_age",
+            "type": "range_slider",
+            "min_val": 18,
+            "max_val": 60,
+            "default_range": [
+              18,
+              60
+            ],
+            "is_required": true
+          },
+          {
+            "name": "part_height_range",
+            "label": "field_lbl_partner_height",
+            "type": "range_slider",
+            "min_val": 48,
+            "max_val": 84,
+            "default_range": [
+              48,
+              84
+            ],
+            "is_required": true
+          },
+          {
+            "name": "part_religion",
+            "label": "field_lbl_partner_religion",
+            "placeholder": "field_lbl_select_partner_religion",
+            "type": "multi_select_dropdown",
+            "dropdown_source": "religion_list",
+            "is_required": false
+          },
+          {
+            "name": "part_caste",
+            "label": "field_lbl_partner_caste",
+            "placeholder": "field_lbl_select_partner_caste",
+            "type": "multi_select_dropdown",
+            "parent_field": "part_religion",
+            "dependency_api": "common-request/get-dependency-dropdown",
+            "is_required": false
+          },
+          {
+            "name": "part_country",
+            "label": "field_lbl_partner_country",
+            "placeholder": "field_lbl_select_partner_country",
+            "type": "multi_select_dropdown",
+            "dropdown_source": "country_list",
+            "is_required": false
+          },
+          {
+            "name": "part_state",
+            "label": "field_lbl_partner_state",
+            "placeholder": "field_lbl_select_partner_state",
+            "type": "multi_select_dropdown",
+            "parent_field": "part_country",
+            "dependency_api": "common-request/get-dependency-dropdown",
+            "is_required": false
+          },
+          {
+            "name": "part_marital_status",
+            "label": "field_lbl_partner_marital_status",
+            "placeholder": "field_lbl_select_partner_marital_status",
+            "type": "multi_select_dropdown",
+            "dropdown_source": "marital_status_list",
+            "is_required": false
+          },
+          {
+            "name": "part_income",
+            "label": "field_lbl_partner_annual_income",
+            "placeholder": "field_lbl_select_partner_annual_income",
+            "type": "multi_select_dropdown",
+            "dropdown_source": "income_list",
+            "is_required": false
+          },
+          {
+            "name": "part_education",
+            "label": "field_lbl_partner_education",
+            "placeholder": "field_lbl_select_partner_education",
+            "type": "multi_select_dropdown",
+            "dropdown_source": "education_list",
+            "is_required": false
+          },
+          {
+            "name": "part_occupation",
+            "label": "field_lbl_partner_occupation",
+            "placeholder": "field_lbl_select_partner_occupation",
+            "type": "multi_select_dropdown",
+            "dropdown_source": "occupation_list",
+            "is_required": false
+          },
+          {
+            "name": "part_mothertongue",
+            "label": "field_lbl_partner_mother_tongue",
+            "placeholder": "field_lbl_select_partner_mother_tongue",
+            "type": "multi_select_dropdown",
+            "dropdown_source": "mother_tongue_list",
+            "is_required": false
+          },
+          {
+            "name": "part_manglik",
+            "label": "field_lbl_partner_manglik",
+            "placeholder": "field_lbl_select_partner_manglik",
+            "type": "multi_select_dropdown",
+            "dropdown_source": "manglik_list",
+            "is_required": false
+          }
+        ]
+      }
+    ]
+  }
+}

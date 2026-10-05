@@ -1,0 +1,94 @@
+<IfModule mod_rewrite.c>
+    <IfModule mod_negotiation.c>
+        Options -MultiViews -Indexes
+    </IfModule>
+
+    RewriteEngine On
+
+    # Send image requests to watermark.php :
+    RewriteCond %{REQUEST_URI} ^/.*/public/(storage/assets/memberPhotos/.*)$ [OR]
+    RewriteCond %{REQUEST_URI} ^/.*/public/(storage/assets/memberBlurPhotos/.*)$
+    RewriteRule ^ watermark.php?path=%1 [L,QSA]
+
+    # Handle Authorization Header
+    RewriteCond %{HTTP:Authorization} .
+    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+    # Redirect Trailing Slashes If Not A Folder...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_URI} (.+)/$
+    RewriteRule ^ %1 [L,R=301]
+
+    # Handle Front Controller...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^ index.php [L]
+</IfModule>
+
+# Disable directory listing
+Options -Indexes
+
+# ============================================
+# SECURITY: Block PHP / script execution inside ALL upload directories
+# This is the critical fix — even if a malicious file is uploaded,
+# Apache will refuse to execute it as code.
+# ============================================
+<IfModule mod_php7.c>
+    php_flag engine off
+</IfModule>
+<IfModule mod_php.c>
+    php_flag engine off
+</IfModule>
+
+<FilesMatch "\.(php|phtml|php\d*|pht|phar|cgi|pl|py|sh|asp|aspx|jsp)$">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order allow,deny
+        Deny from all
+    </IfModule>
+</FilesMatch>
+
+# Explicitly re-allow the watermark.php entry point in the public root
+# (this file lives at /public/watermark.php, NOT inside storage/, so it's unaffected
+#  by the storage-specific block below — but if you ever move it, add an exception here)
+
+# Extra hard block specifically on the two upload folders, regardless of extension tricks
+<IfModule mod_rewrite.c>
+    RewriteCond %{REQUEST_URI} ^/.*/public/storage/assets/memberPhotos/.*\.(php|phtml|pht|phar|cgi|pl|py)$ [NC,OR]
+    RewriteCond %{REQUEST_URI} ^/.*/public/storage/assets/memberBlurPhotos/.*\.(php|phtml|pht|phar|cgi|pl|py)$ [NC]
+    RewriteRule ^ - [F,L]
+</IfModule>
+
+# Hide sensitive files
+<Files ~ "\.(env|json|config.js|md|xml|gitignore|gitattributes|lock|editorconfig|yml|styleci.yml)$">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order allow,deny
+        Deny from all
+    </IfModule>
+</Files>
+
+Options -Indexes
+
+<Files ~ "(artisan|package.json|webpack.mix.js)$">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order allow,deny
+        Deny from all
+    </IfModule>
+</Files>
+
+# Security headers (defense in depth)
+<IfModule mod_headers.c>
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-Frame-Options "SAMEORIGIN"
+    Header set X-XSS-Protection "1; mode=block"
+</IfModule>
+
+#DirectoryIndex home.php
