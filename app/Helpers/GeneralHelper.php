@@ -198,10 +198,10 @@ function _getStaticArr($arrName = '', $id = "")
     );
 
     $idProofTypeArr = array(
+        'Aadhaar Card' => 'Aadhaar Card',
         'PAN Card' => 'PAN Card',
-        'Aadhar Card' => 'Aadhar Card',
-        'Voter ID Card' => 'Voter ID Card',
-        'Driving License' => 'Driving License',
+        'Passport' => 'Passport',
+        'Driving License' => 'Driving License'
     );
 
     ## Seo Pages List:

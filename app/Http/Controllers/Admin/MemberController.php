@@ -3171,6 +3171,18 @@ class MemberController extends Controller
                         'key_disp' => 'plan_name'
                     )
                 ),
+                'plan_status' => array(
+                    'is_register' => 'yes',
+                    'type' => 'dropdown',
+                    'is_multiple' => 'yes',
+                    'display_placeholder' => 'No',
+                    'class' => 'single',
+                    'value_arr' => array(
+                        'Not Paid' => 'Not Paid',
+                        'Paid' => 'Paid',
+                        'Expired ' => 'Expired '
+                    )
+                ),
                 'mother_tongue' => array(
                     'class' => 'single not_reset  ',
                     'is_multiple' => 'yes',
@@ -3398,18 +3410,6 @@ class MemberController extends Controller
                         'rel_model' => 'FamilyStatusMaster',
                         'key_val' => 'id',
                         'key_disp' => 'family_status_name'
-                    )
-                ),
-                'plan_status' => array(
-                    'is_register' => 'yes',
-                    'type' => 'dropdown',
-                    'is_multiple' => 'yes',
-                    'display_placeholder' => 'No',
-                    'class' => 'single',
-                    'value_arr' => array(
-                        'Not Paid' => 'Not Paid',
-                        'Paid' => 'Paid',
-                        'Expired ' => 'Expired '
                     )
                 ),
                 'staff_id' => array(

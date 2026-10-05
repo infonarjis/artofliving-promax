@@ -6,6 +6,8 @@ use App\Http\Controllers\Migration\ShortlistMigrationController;
 use App\Http\Controllers\Migration\DeleteProfileMigrationController;
 use App\Http\Controllers\Migration\ContactRequestMigrationController;
 use App\Http\Controllers\Migration\AssignHistoryMigrationController;
+use App\Http\Controllers\Migration\UserMigrationController;
+use App\Http\Controllers\Migration\StaticMasterMigrationController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -431,12 +433,23 @@ Route::group(['prefix' => ''], function (): void {
     Route::get('/matrimony/{slug}', [MatrimonyPagesController::class, 'index'])->where('slug', '[a-z0-9-]+')->name('web.matrimony.index');
 
 
-
     ## Database Migration Master Tables:
-    Route::get('/religion-master', [DataCommonMigrationController::class, 'religonMaster'])->name('web.religonMaster.index');
-    Route::get('/database/migrate', [DatabaseMigrationController::class, 'migrate']);
-    Route::get('/database/shortlist/migrate',  [ShortlistMigrationController::class, 'migrate']);
-    Route::get('/database/delete-profile/migrate', [DeleteProfileMigrationController::class, 'migrate']);
-    Route::get('/database/contact-request/migrate',[ContactRequestMigrationController::class, 'migrate']);
-    Route::get('/database/assign-history/migrate',[AssignHistoryMigrationController::class, 'migrate']);
+    Route::prefix('migrate')->group(function () {
+        ## Old DB -> new DB :
+        Route::get('/religion-master', [DataCommonMigrationController::class, 'religonMaster'])->name('web.religonMaster.index');
+        Route::get('/database/migrate', [DatabaseMigrationController::class, 'migrate']);
+        Route::get('/database/shortlist/migrate',  [ShortlistMigrationController::class, 'migrate']);
+        Route::get('/database/delete-profile/migrate', [DeleteProfileMigrationController::class, 'migrate']);
+        Route::get('/database/contact-request/migrate',[ContactRequestMigrationController::class, 'migrate']);
+        Route::get('/database/assign-history/migrate',[AssignHistoryMigrationController::class, 'migrate']);
+
+        ## Static arrays -> tables :
+        Route::get('static-masters',    [StaticMasterMigrationController::class, 'databaseMIgration']);
+
+        ## Register Migration Old Data to new database :
+        Route::get('registers',          [UserMigrationController::class, 'registers']);
+        Route::get('register-partners',  [UserMigrationController::class, 'registerPartners']);
+        Route::get('users-all',          [UserMigrationController::class, 'all']); // both, in order
+    });
+    
 });

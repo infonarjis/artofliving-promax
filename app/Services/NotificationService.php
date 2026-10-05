@@ -23,11 +23,18 @@ class NotificationService
     /**
      * Load Firebase JSON from DB and cache forever
      */
-    protected function getCredentials(): array
+    public static function getCredentials(): array
     {
-        return Cache::rememberForever('firebase_credentials', function () {
+        return Cache::rememberForever('firebase_credentials', function (): array {
             $configArr = _getSiteSetting();
-            return json_decode($configArr['firebase_json'], true);
+
+            if (empty($configArr['firebase_json'])) {
+                return [];
+            }
+
+            $credentials = json_decode($configArr['firebase_json'], true);
+
+            return is_array($credentials) ? $credentials : [];
         });
     }
 
