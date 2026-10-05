@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Migration\DataCommonMigrationController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Web\{
@@ -418,4 +419,9 @@ Route::group(['prefix' => ''], function (): void {
     Route::get('/matrimony/more-details/{type}', [MatrimonyPagesController::class, 'moreDetails'])->name('web.matrimony.moreDetails');
     Route::get('/matrimony/{slug}/members', [MatrimonyPagesController::class, 'members'])->where('slug', '[a-z0-9-]+')->name('web.matrimony.members');
     Route::get('/matrimony/{slug}', [MatrimonyPagesController::class, 'index'])->where('slug', '[a-z0-9-]+')->name('web.matrimony.index');
+
+
+
+    ## Database Migration Master Tables:
+    Route::get('/religion-master', [DataCommonMigrationController::class, 'religonMaster'])->name('web.religonMaster.index');
 });
