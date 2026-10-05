@@ -88,23 +88,23 @@ class DatabaseMigrationController extends Controller
                 ],
             ],
 
-            // 'city_master' => [
-            //     'new_table' => 'city_master',
-            //     'columns' => [
-            //         'id'         => 'id',
-            //         'status'     => 'status',
-            //         'city_name'  => 'city_name',
-            //         'country_id' => 'country_id',
-            //         'state_id'   => 'state_id',
-            //     ],
-            //     'defaults' => [
-            //         'lang_code' => 'en',
-            //         'lang_id'   => 1,
-            //         'deleted_at' => function ($row) {
-            //             return ($row->is_deleted === 'Yes') ? now() : null;
-            //         },
-            //     ],
-            // ],
+            'city_master' => [
+                'new_table' => 'city_master',
+                'columns' => [
+                    'id'         => 'id',
+                    'status'     => 'status',
+                    'city_name'  => 'city_name',
+                    'country_id' => 'country_id',
+                    'state_id'   => 'state_id',
+                ],
+                'defaults' => [
+                    'lang_code' => 'en',
+                    'lang_id'   => 1,
+                    'deleted_at' => function ($row) {
+                        return ($row->is_deleted === 'Yes') ? now() : null;
+                    },
+                ],
+            ],
 
             'occupation' => [
                 'new_table' => 'occupation_master',

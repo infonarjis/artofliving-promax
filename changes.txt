@@ -29,7 +29,7 @@
 - admin_notification_list	 	             :
 - advertisement_master	 	                 :
 - annual_income_master	 	                 : Done By Nasir Marediya
-- assign_history	 	                     :
+- assign_history	 	                     : Done By Nasir Marediya
 - blog_master	 	                         : Done By Nasir Marediya
 - caste	 		 	                         : Done By Nasir Marediya
 - city_master	 	                         : Done By Nasir Marediya
@@ -40,15 +40,15 @@
 - country_master	 	                     : Done By Nasir Marediya
 - coupan_code	 	                         :
 - course_detail                              : Done By Ahesanali
-- currency_master	 	                     :
-- custom_chat_conversation                   :
-- custom_chat_conversation_message           :
-- delete_profile	 	                     :
+- currency_master	 	                     : 
+- custom_chat_conversation                   : 
+- custom_chat_conversation_message           : 
+- delete_profile	 	                     : 
 - designation                                : Done By Nasir Marediya
 - education_detail                           : Done By Nasir Marediya
 - email_templates	 	                     : No Need to transfer
 - events	 	                             : Done By Nasir Marediya
-- events_register                            :
+- events_register                            : No Need to transfer beacuse have testing data
 - excel_data	 	                         : Skip Field Not Exists
 - expressinterest                            :
 - failed_jobs	 	                         : Cannot Transfer
@@ -89,7 +89,7 @@
 - request_call_back                          : Skip Field Not Exists
 - send_bulk_notification                     :
 - seo_page_data	 	                         :
-- shortlisted	 	                         :
+- shortlisted	 	                         : Done By Nasir Marediya
 - site_config	 	                         :
 - skip_profile                               : Skip Field Not Exists
 - sms_templates	 	                         : No Need to transfer

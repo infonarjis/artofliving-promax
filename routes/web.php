@@ -436,7 +436,6 @@ Route::group(['prefix' => ''], function (): void {
     ## Database Migration Master Tables:
     Route::prefix('migrate')->group(function () {
         ## Old DB -> new DB :
-        Route::get('/religion-master', [DataCommonMigrationController::class, 'religonMaster'])->name('web.religonMaster.index');
         Route::get('/database/migrate', [DatabaseMigrationController::class, 'migrate']);
         Route::get('/database/shortlist/migrate',  [ShortlistMigrationController::class, 'migrate']);
         Route::get('/database/delete-profile/migrate', [DeleteProfileMigrationController::class, 'migrate']);
