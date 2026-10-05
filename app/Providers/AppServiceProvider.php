@@ -9,7 +9,7 @@ use App\Services\SeoService;
 use App\View\Composers\AdvertisementComposer;
 use App\View\Composers\HeaderComposer;
 use App\View\Composers\SidebarComposer;
-use Fruitcake\LaravelDebugbar\Facades\Debugbar;
+//use Fruitcake\LaravelDebugbar\Facades\Debugbar;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Cache;
@@ -34,7 +34,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(SeoService $seoService): void
     {
-        Debugbar::disable();
+       /// Debugbar::disable();
 
         ## Force HTTPS in production :
         // if ($this->app->environment('production')) {

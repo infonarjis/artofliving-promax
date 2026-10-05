@@ -1,6 +1,12 @@
 <?php
 
 use App\Http\Controllers\Migration\DataCommonMigrationController;
+use App\Http\Controllers\Migration\DatabaseMigrationController;
+use App\Http\Controllers\Migration\ShortlistMigrationController;
+use App\Http\Controllers\Migration\DeleteProfileMigrationController;
+use App\Http\Controllers\Migration\ContactRequestMigrationController;
+use App\Http\Controllers\Migration\AssignHistoryMigrationController;
+
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Web\{
@@ -55,6 +61,10 @@ use App\Http\Controllers\Web\{
     ThemeController
 };
 use Illuminate\Support\Facades\Artisan;
+
+
+
+
 
 Route::get('/run-migration', function () {
     // abort_if(!app()->environment('local'), 403);
@@ -424,4 +434,9 @@ Route::group(['prefix' => ''], function (): void {
 
     ## Database Migration Master Tables:
     Route::get('/religion-master', [DataCommonMigrationController::class, 'religonMaster'])->name('web.religonMaster.index');
+    Route::get('/database/migrate', [DatabaseMigrationController::class, 'migrate']);
+    Route::get('/database/shortlist/migrate',  [ShortlistMigrationController::class, 'migrate']);
+    Route::get('/database/delete-profile/migrate', [DeleteProfileMigrationController::class, 'migrate']);
+    Route::get('/database/contact-request/migrate',[ContactRequestMigrationController::class, 'migrate']);
+    Route::get('/database/assign-history/migrate',[AssignHistoryMigrationController::class, 'migrate']);
 });

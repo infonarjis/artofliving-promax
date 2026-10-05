@@ -1,0 +1,34 @@
+Master Tables 
+    - Religion - done
+    - Caste - done
+    - Country - done
+    - State - done
+    - City - done
+    - Occupation - done
+    - Education - done
+    - Highest Qualification - In old db table exits but in pro not found so skip
+    
+    - Mother Tongue  - done
+    - Designation - done
+    - Star - done
+    - Moonsign - done 
+    - Field Of Study - skip
+    - Annual Income - done
+    - Art Of Living Programs - skip
+    - FAQs - done
+    - Interest Category - skip
+    - Interest Sub Category - skip
+
+    - CMS Pages - done
+    - Blog Master - done
+    - Matrimony Data - done
+    - Event Master - done
+    - Success Story - done
+ 
+
+
+
+ Short List - done
+ delete_profile to member_delete_profile - done
+ contact_request to table=view_contact_details&pos=0
+ assign_history to assign_history - done
