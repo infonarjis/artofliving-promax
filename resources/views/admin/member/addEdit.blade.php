@@ -84,6 +84,16 @@
                       <?php echo $fromHtmlEducationStep1; ?>
                     </div>
                   </div>
+                  <h2 class="accordion-header mb-3">
+                    <button type="button" class="accordion-button member-register p-sm-2 gap-2 collapsed" data-bs-toggle="collapse" data-bs-target="#artOfLivingDetails" aria-expanded="false" aria-controls="artOfLivingDetails">
+                      <span><i class='bx bx-heart'></i></span> Art of Living Association
+                    </button>
+                  </h2>
+                  <div id="artOfLivingDetails" class="accordion-collapse collapse show" data-bs-parent="#accordionExample" style="">
+                    <div class="row">
+                      <?php echo $fromHtmlArtOfLivingStep1; ?>
+                    </div>
+                  </div>
                 <input type="hidden" name="step" id="step" value="1">
                 <button type="button" class="btn btn-primary {{ $formSubmitBtnClass }}"
                   data-formid="{{ $formSubmitBtnId1 }}" id="{{ $formSubmitBtnId1 }}">Submit</button>

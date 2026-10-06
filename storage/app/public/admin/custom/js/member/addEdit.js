@@ -144,6 +144,58 @@ $(document).ready(function () {
             $("#residence_type_other").val("");
         }
     });
+
+    setTimeout(function () {
+        $("input[type=radio]").trigger("change");
+    }, 100),
+    $("input[type=radio]").change(function () {
+        $(".teacher_name").hide(),
+            $(".teacher_mobile_no").hide(),
+            $(".art_of_living_program").hide(),
+            $(".teacher_code").hide(),
+            $(".teaching_courses").hide(),
+            $("#teacher_mobile_nomobile_country_code").prop("required", !1),
+            $("input[name=teacher_mobile_nomobile_num]").prop("required", !1);
+        let e = $("input[name=have_art_of_living_program]:checked").val(),
+            i = $("input[name=Yesart_of_living_teacher]:checked").val();
+        "" != e && "undefined" != e && "No" != e
+            ? ($(".teacher_name").show(),
+                $(".teacher_mobile_no").show(),
+                $(".art_of_living_program").show(),
+                $("#teacher_mobile_nomobile_country_code").prop("required", !0),
+                $("input[name=teacher_mobile_nomobile_num]").prop("required", !0))
+            : ($(".teacher_name").hide(),
+                $(".teacher_mobile_no").hide(),
+                $("#teacher_mobile_nomobile_country_code").prop("required", !1),
+                $("input[name=teacher_mobile_nomobile_num]").prop("required", !1),
+                $(".art_of_living_program").hide()),
+            "" != i && "undefined" != i && "No" != i
+                ? ($(".teacher_code").show(), $(".teaching_courses").show())
+                : ($(".teacher_code").hide(), $(".teaching_courses").hide());
+    }),
+    setTimeout(function () {
+        $("#have_art_of_living_program").trigger("change");
+    }, 100),
+    $(".teacher_name").hide(),
+    $(".teacher_mobile_no").hide(),
+    $(".art_of_living_program").hide(),
+    $("#have_art_of_living_program").change(function () {
+        var e = $("#have_art_of_living_program").val();
+        "" != e && "undefined" != e && "No" != e
+            ? ($(".teacher_name").show(), $(".teacher_mobile_no").show(), $(".art_of_living_program").show())
+            : ($(".teacher_name").hide(), $(".teacher_mobile_no").hide(), $(".art_of_living_program").hide());
+    }),
+    setTimeout(function () {
+        $("#Yesart_of_living_teacher").trigger("change");
+    }, 100),
+    $(".teacher_code").hide(),
+    $(".teaching_courses").hide(),
+    $("#Yesart_of_living_teacher").change(function () {
+        var e = $("#Yesart_of_living_teacher").val();
+        "" != e && "undefined" != e && "No" != e
+            ? ($(".teacher_code").show(), $(".teaching_courses").show())
+            : ($(".teacher_code").hide(), $(".teaching_courses").hide());
+    });
 });
 
 function responseAddEditMember(btn, response) {

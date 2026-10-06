@@ -1557,3 +1557,11 @@ if (! function_exists('_generateOtp')) {
         return (string) random_int(10 ** ($length - 1), (10 ** $length) - 1);
     }
 }
+
+function _yearFormat(){
+    $year = array('0 Year', 'Less than 1' => 'Less than 1 Year');
+    for ($i = 1; $i <= 40; $i++) {
+        $year[] = $i . ' Years';
+    }
+    return $year;
+}

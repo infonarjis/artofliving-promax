@@ -10,7 +10,7 @@
                             <form id="registerStepForm" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <input type="hidden" id="current_step" name="step"
-                                    value="{{ $member->register_step + 1 ?? 1 }}">
+                                    value="{{ $member->register_step ?? 1 }}">
                                 <!-- Step1 -->
                                 <div class="steps-regis-lefts {{ ($member->register_step ?? 1) == 1 ? 'active' : '' }}">
                                     @include('web.register.registerStep.step1')
@@ -43,6 +43,10 @@
                                 <div class="steps-regis-lefts {{ ($member->register_step ?? 1) == 8 ? 'active' : '' }}">
                                     @include('web.register.registerStep.step8')
                                 </div>
+                                <!-- Step9 -->
+                                <div class="steps-regis-lefts {{ ($member->register_step ?? 1) == 9 ? 'active' : '' }}">
+                                    @include('web.register.registerStep.step9')
+                                </div>
                             </form>
                         </div>
                     </div>
@@ -73,20 +77,25 @@
                                 <div class="register-steps-items" data-step="5">
                                     <div class="step-count">5</div>
                                     <p class="white-color-n fts-14 fw-5 mt-1 text-start">
-                                        {{ __('messages.lbl_family_details') }}</p>
+                                        {{ __('messages.lbl_artofliving_association') }}</p>
                                 </div>
                                 <div class="register-steps-items" data-step="6">
                                     <div class="step-count">6</div>
-                                    <p class="white-color-n fts-14 fw-5 mt-1 text-start">{{ __('messages.lbl_photos') }}
-                                    </p>
+                                    <p class="white-color-n fts-14 fw-5 mt-1 text-start">
+                                        {{ __('messages.lbl_family_details') }}</p>
                                 </div>
                                 <div class="register-steps-items" data-step="7">
                                     <div class="step-count">7</div>
-                                    <p class="white-color-n fts-14 fw-5 mt-1 text-start">{{ __('messages.lbl_id_proof') }}
+                                    <p class="white-color-n fts-14 fw-5 mt-1 text-start">{{ __('messages.lbl_photos') }}
                                     </p>
                                 </div>
                                 <div class="register-steps-items" data-step="8">
                                     <div class="step-count">8</div>
+                                    <p class="white-color-n fts-14 fw-5 mt-1 text-start">{{ __('messages.lbl_id_proof') }}
+                                    </p>
+                                </div>
+                                <div class="register-steps-items" data-step="9">
+                                    <div class="step-count">9</div>
                                     <p class="white-color-n fts-14 fw-5 mt-1 text-start">
                                         {{ __('messages.lbl_partner_preferences') }}</p>
                                 </div>

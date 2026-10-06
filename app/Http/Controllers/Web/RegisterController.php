@@ -36,6 +36,7 @@ use App\Models\AffiliateReferralClick;
 use App\Models\BloodGroupMaster;
 use App\Models\BodyTypeMaster;
 use App\Models\ComplexionMaster;
+use App\Models\CourseDetailMaster;
 use App\Models\DrinkingHabitMaster;
 use App\Models\EatingHabitMaster;
 use App\Models\Franchise;
@@ -359,7 +360,9 @@ class RegisterController extends Controller
             'complextionList' => ComplexionMaster::getDropdown($currentLanguage),
             'bloodGroupList' => BloodGroupMaster::getDropdown($currentLanguage),
 
-            'idProofTypeList' => _getStaticArr('idProofTypeArr')
+            'idProofTypeList' => _getStaticArr('idProofTypeArr'),
+            'courseList' => CourseDetailMaster::getDropdown($currentLanguage),
+            'yearList' => _yearFormat(),
         ]);
     }
 

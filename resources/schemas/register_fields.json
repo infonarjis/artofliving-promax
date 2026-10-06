@@ -482,13 +482,119 @@
       },
       {
         "step_number": 6,
+        "step_key": "art_of_living_association",
+        "title": "Art of Living Association",
+        "subtitle": "Details about your Art of Living association",
+        "endpoint": "register/next-step",
+        "http_method": "POST",
+        "extra_params": {
+          "step": 5
+        },
+        "fields": [
+          {
+            "name": "art_of_living_teacher",
+            "label": "Art of Living Teacher",
+            "type": "segment_selector",
+            "is_required": true,
+            "default_value": "No",
+            "options": [
+              { "id": "Yes", "label": "Yes" },
+              { "id": "No", "label": "No" }
+            ]
+          },
+          {
+            "name": "teacher_code",
+            "label": "Teacher Code",
+            "placeholder": "AOLTEACHER123456",
+            "type": "text",
+            "is_required": false,
+            "show_if": {
+              "field": "art_of_living_teacher",
+              "operator": "equals",
+              "value": "Yes"
+            }
+          },
+          {
+            "name": "i_teach",
+            "label": "I Teach",
+            "placeholder": "Select courses you teach",
+            "type": "multi_select_dropdown",
+            "dropdown_source": "course_list",
+            "is_required": false,
+            "show_if": {
+              "field": "art_of_living_teacher",
+              "operator": "equals",
+              "value": "Yes"
+            }
+          },
+          {
+            "name": "art_of_living_program",
+            "label": "Art Of Living Program",
+            "type": "segment_selector",
+            "is_required": true,
+            "default_value": "No",
+            "options": [
+              { "id": "Yes", "label": "Yes" },
+              { "id": "No", "label": "No" }
+            ]
+          },
+          {
+            "name": "reference_teacher",
+            "label": "Reference Teacher",
+            "placeholder": "Reference Teacher",
+            "type": "text",
+            "is_required": false,
+            "show_if": {
+              "field": "art_of_living_program",
+              "operator": "equals",
+              "value": "Yes"
+            }
+          },
+          {
+            "name": "teacher_mobile_number",
+            "label": "Teacher Mobile Number",
+            "placeholder": "Teacher Mobile Number",
+            "type": "phone_number",
+            "default_country_code": "+91",
+            "is_required": false,
+            "show_if": {
+              "field": "art_of_living_program",
+              "operator": "equals",
+              "value": "Yes"
+            }
+          },
+          {
+            "name": "course_completed",
+            "label": "Course Completed",
+            "placeholder": "Select Course Completed",
+            "type": "multi_select_dropdown",
+            "dropdown_source": "course_list",
+            "is_required": false,
+            "show_if": {
+              "field": "art_of_living_program",
+              "operator": "equals",
+              "value": "Yes"
+            }
+          },
+          {
+            "name": "years_with_art_of_living",
+            "label": "Years with Art of Living",
+            "placeholder": "Select Years",
+            "type": "single_select_dropdown",
+            "dropdown_source": "year_list",
+            "is_required": false
+          }
+        ]
+      },
+      {
+        "step_number": 7,
         "step_key": "family_details",
         "title": "lbl_family_details",
         "subtitle": "lbl_enter_your_family_details",
         "endpoint": "register/next-step",
         "http_method": "POST",
         "extra_params": {
-          "step": 5
+          "step": 6
         },
         "fields": [
           {
@@ -601,7 +707,7 @@
         ]
       },
       {
-        "step_number": 7,
+        "step_number": 8,
         "step_key": "photos",
         "title": "lbl_upload_photos",
         "subtitle": "lbl_add_photos_take_a_selfie_to_verify_your_profile",
@@ -609,7 +715,7 @@
         "http_method": "POST",
         "is_multipart": true,
         "extra_params": {
-          "step": 6
+          "step": 7
         },
         "fields": [
           {
@@ -668,7 +774,7 @@
         ]
       },
       {
-        "step_number": 8,
+        "step_number": 9,
         "step_key": "id_proof",
         "title": "lbl_upload_id_proof",
         "subtitle": "lbl_add_your_id_proof_for_verification",
@@ -676,7 +782,7 @@
         "http_method": "POST",
         "is_multipart": true,
         "extra_params": {
-          "step": 7
+          "step": 8
         },
         "fields": [
           {
@@ -702,14 +808,14 @@
         ]
       },
       {
-        "step_number": 9,
+        "step_number": 10,
         "step_key": "partner_preferences",
         "title": "lbl_partner_preferences",
         "subtitle": "lbl_enter_your_partner_preferences_details",
         "endpoint": "register/next-step",
         "http_method": "POST",
         "extra_params": {
-          "step": 8
+          "step": 9
         },
         "fields": [
           {
