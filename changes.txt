@@ -1,0 +1,129 @@
+- Static Tables : Ahesan
+    - marital_status : Done
+    - status_children : Done
+    - manglik : Done
+    - diet : Done
+    - smoke : Done
+    - drink : Done
+    - profileby : Done
+    - family_type : Done
+    - family_status : Done
+    - no_of_brothers : Done
+    - no_marri_brother : Done
+    - no_marri_sister : Done
+
+    - id_proof_type : Done
+    - payment_method : Done
+
+    - bloodGroup : No need to tranfser Already same value in master
+    - bodytype : Not field exists in old data so no need to transfer
+    - complexion : Not field exists in old data so no need to transfer
+    - reference : Not field exists in old data so no need to transfer
+    - horoscope : Not field exists in old data so no need to transfer
+    - residence : Not field exists in old data so no need to transfer
+    - employee_in : Not field exists in old data so no need to transfer
+
+----- Old Database Tables ---------------------
+- admins                                     : 
+- admin_member_status_change_logs            :
+- admin_notification_list	 	             :
+- advertisement_master	 	                 :
+- annual_income_master	 	                 : Done By Nasir Marediya
+- assign_history	 	                     : Done By Nasir Marediya
+- blog_master	 	                         : Done By Nasir Marediya
+- caste	 		 	                         : Done By Nasir Marediya
+- city_master	 	                         : Done By Nasir Marediya
+- cms_pages	 		 	                     : Done By Nasir Marediya
+- comments_of_lead_generation	 	         :
+- comment_master	 	                     :
+- contact_request	 	                     :
+- country_master	 	                     : Done By Nasir Marediya
+- coupan_code	 	                         :
+- course_detail                              : Done By Ahesanali
+- currency_master	 	                     : 
+- custom_chat_conversation                   : 
+- custom_chat_conversation_message           : 
+- delete_profile	 	                     : 
+- designation                                : Done By Nasir Marediya
+- education_detail                           : Done By Nasir Marediya
+- email_templates	 	                     : No Need to transfer
+- events	 	                             : Done By Nasir Marediya
+- events_register                            : No Need to transfer beacuse have testing data
+- excel_data	 	                         : Skip Field Not Exists
+- expressinterest                            :
+- failed_jobs	 	                         : Cannot Transfer
+- faq_master	 	                         : Done By Nasir Marediya
+- followup_system_view                       : Cannot Transfer
+- franchise	 	                             : No Need to transfer beacuse have testing data
+- highest_qualification_master               : Skip Field Not Exists
+- homepage_banner	 	                     : No Need to transfer
+- interest_category                          : Skip Field Not Exists
+- interest_subcategory                       : Skip Field Not Exists
+- leads_generation	 	                     :
+- lead_generation_assign_history_view        : Cannot Transfer
+- lead_generation_followup_system_view       : Cannot Transfer
+- match_list	 	                         :
+- matrimony_data                             : Done By Nasir Marediya
+- membership_plan	 	                     :
+- member_assign_history_view                 : Cannot Transfer
+- member_feedback	 	                     :
+- member_notification                        :
+- migrations	 	                         : No Need to transfer
+- mobile_matri_bannner                       : No Need to transfer
+- moonsign	 	                             : Done By Nasir Marediya
+- mothertongue                               : Done By Nasir Marediya
+- occupation	 	                         : Done By Nasir Marediya
+- other_banner                               : No Need to traansfer
+- other_services	 	                     : Skip Field Not Exists
+- password_resets	 	                     : No Need to transfer no data found
+- payments	 	                             :
+- payment_logs	 	                         :
+- payment_method	 	                     : No Need to transfer
+- photo_request                              :
+- programs_master                            : Skip Field Not Exists
+- reason_why_choose                          : No Need to transfer
+- registers	 	                             :
+- register_partners                          :
+- register_view	 	                         : Cannot Transfer
+- religion	 	                             : Done By Nasir Marediya
+- request_call_back                          : Skip Field Not Exists
+- send_bulk_notification                     :
+- seo_page_data	 	                         :
+- shortlisted	 	                         : Done By Nasir Marediya
+- site_config	 	                         :
+- skip_profile                               : Skip Field Not Exists
+- sms_templates	 	                         : No Need to transfer
+- staff	 	                                 :
+- staff_role                                 :
+- star	 	                                 : Done By Nasir Marediya
+- state_master                               : Done By Nasir Marediya
+- study_field_master                         : Skip Field Not Exists
+- success_story	 	                         : Done By Nasir Marediya
+- users          	 	                     : No Need to transfer beacuse have testing data
+- vendor_category                            : No Need to transfer beacuse have testing data
+- webhook_payment	 	                     : Skip Field Not Exists
+- wedding_planner                            : No Need to transfer beacuse have testing data
+
+-----------------------------------------------------------------------------------------------
+- Member Related Fields : Ahesan
+    - Registers         : registers , register_partners : Today
+        - father_occupation : Text Field
+        - mother_occupation : Text Field
+        - education_level : Mismatched
+
+    - Payments          : payments : Today
+    - Membership Plan   : membership_plan : Today
+    - Delete Profile    : delete_profile : Today
+    - Usre Notification : member_notification : Today
+
+    - Express Interest  : 
+    - Photo Request     :
+    - I Viewed Contact  : 
+    - Shortlist         : shortlisted
+    - I Viewed Profile  : Not in old project
+    - Blocklist         : Not in old project
+    
+    - custom_chat_conversation
+    - custom_chat_conversation_message
+    - contact_request
+    - expressinterest
