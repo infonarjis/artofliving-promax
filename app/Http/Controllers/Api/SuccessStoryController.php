@@ -163,7 +163,7 @@ class SuccessStoryController extends Controller
             'successmessage' => 'required|string|max:2000',
             'wedding_photo' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:5120',
             'video_link' => 'nullable|url',
-            'wedding_video_file' => 'nullable|file|mimes:mp4,webm,ogg|max:51200',
+            'wedding_video_file' => 'nullable|file|mimes:mp4,webm,ogg|max:20480',
         ]);
 
         if ($validator->fails()) {

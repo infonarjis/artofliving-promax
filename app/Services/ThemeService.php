@@ -108,6 +108,6 @@ class ThemeService
     public static function version(): string
     {
         $latest = ThemeSetting::max('updated_at');
-        return $latest ? md5((string) $latest) : 'default';
+        return $latest ? hash('sha256', (string) $latest) : 'default';
     }
 }

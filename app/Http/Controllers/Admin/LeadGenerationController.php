@@ -1816,7 +1816,7 @@ class LeadGenerationController extends Controller
     {
         try {
             $request->validate([
-                'file' => 'required|file|mimes:xlsx,xls,csv,txt|max:20480',
+                'file' => 'required|file|mimes:xlsx,xls,csv,txt|max:5120',
             ]);
 
             $file = $request->file('file');
