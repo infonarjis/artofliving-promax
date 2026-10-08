@@ -157,7 +157,8 @@ use App\Http\Controllers\Admin\{
     SelfieApprovalController,
     AppThemeSettingController,
     SetupChecklistController,
-    HomePageDesignController
+    HomePageDesignController,
+    RequestCallBackController
 };
 
 Route::get('/admin', function () {
@@ -629,7 +630,6 @@ Route::group(['prefix' => 'admin'], function (): void {
         Route::get('/report-spam', [ProfileReportSpamController::class, 'index'])->name('admin.profileReportSpam.index');
         Route::post('/report-spam/getAjaxPaginationData', [ProfileReportSpamController::class, 'getAjaxPaginationData'])->name('admin.profileReportSpam.getAjaxPaginationData');
         Route::post('/report-spam/download-report', [ProfileReportSpamController::class, 'downloadReport'])->name('admin.profileReportSpam.downloadReport');
-
 
         ## Bulk Notification :
         Route::get('/bulk-notification', [BulkNotificationController::class, 'index'])->name('admin.bulkNotification.index');
@@ -1327,5 +1327,9 @@ Route::group(['prefix' => 'admin'], function (): void {
         Route::get('/setup-checklist/status-json', [SetupChecklistController::class, 'statusJson'])->name('admin.setupChecklist.statusJson');
         Route::post('/setup-checklist/toggle-manual', [SetupChecklistController::class, 'toggleManualStatus'])->name('admin.setupChecklist.toggleManualStatus');
         Route::post('/setup-checklist/test-queue', [SetupChecklistController::class, 'testQueue'])->name('admin.setupChecklist.testQueue');
+
+        ## Request Call Back :
+        Route::get('/request-call-back', [RequestCallBackController::class, 'index'])->name('admin.requestCallBack.index');
+        Route::post('/request-call-back/getAjaxPaginationData', [RequestCallBackController::class, 'getAjaxPaginationData'])->name('admin.requestCallBack.getAjaxPaginationData');
     });
 });

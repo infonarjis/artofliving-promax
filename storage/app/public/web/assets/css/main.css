@@ -4333,7 +4333,8 @@ body {
 }
 
 .matches-calling-chats .btn-matches-call.more {
-  background: var(--common-border);
+  /* background: var(--common-border); */
+  background: #5a5a5a47;
 }
 
 .btn-matches-Shortlist {

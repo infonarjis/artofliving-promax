@@ -1170,9 +1170,9 @@ body {
     border-radius: 8px;
 }
 
-.edit_inputMain-sltr .select2-container--default .select2-selection--multiple .select2-selection__rendered {
+/* .edit_inputMain-sltr .select2-container--default .select2-selection--multiple .select2-selection__rendered {
     width: max-content;
-}
+} */
 
 .edit_inputMain-sltr .select2-container--default .select2-selection--multiple {
     color: #000;
@@ -2944,7 +2944,7 @@ td {
 }
 
 .select2-container--default .select2-selection--multiple .select2-selection__rendered {
-    width: max-content;
+    width: 100%;
 }
 
 .select2-container--default .select2-selection--multiple {

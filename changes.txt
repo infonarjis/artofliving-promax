@@ -50,7 +50,7 @@
 - events	 	                             : Done By Nasir Marediya
 - events_register                            : No Need to transfer beacuse have testing data
 - excel_data	 	                         : Skip Field Not Exists
-- expressinterest                            :
+- expressinterest                            : Done By Ahesanali
 - failed_jobs	 	                         : Cannot Transfer
 - faq_master	 	                         : Done By Nasir Marediya
 - followup_system_view                       : Cannot Transfer
@@ -90,7 +90,7 @@
 - send_bulk_notification                     : No Need to transfer
 - seo_page_data	 	                         : Done By Ahesanali
 - shortlisted	 	                         : Done By Nasir Marediya
-- site_config	 	                         :
+- site_config	 	                         : Done By Ahesanali
 - skip_profile                               : Skip Field Not Exists
 - sms_templates	 	                         : No Need to transfer
 - staff	 	                                 : Done By Ahesanali
@@ -109,12 +109,30 @@
     - Registers         : registers , register_partners : Done
         - father_occupation : Text Field
         - mother_occupation : Text Field
-        - education_level : Mismatched
-    
-    - expressinterest
-    - site_config
+        - highest education -  education_level
+        - Membership Plan
+            - View Profile Limit Plan Wise
+
 
 
 -> Below is old table :
 -> Below is new table :
 make migration controller old to new table transfer :
+
+
+check membership , usd and inr
+Auto free plan assign after verify profile and status approved
+request call back
+remove personalize from front end
+check login flow on status
+3 field show extra in admin side view profile
+login mobile with otp and password
+website registered user event matri id show check flow
+in event disable no of seat
+Users can browse and view the available event listings without logging in.
+Users can also view the profile list of registered members.
+Login/registration is required when a user wants to book an event.
+After logging in, the user can proceed with the booking and complete the payment.
+Once the payment is successfully completed, the booking will be confirmed.
+List of members to be shown only after payment
+import sheet required for sample

@@ -16,32 +16,36 @@
                         </p>
                     </div>
                     <div class="row">
-                        <div class="col-lg-2 col-12"></div>
-                        <div class="col-lg-8 col-12">
-                            <div class="common-tabs-design mt-4 mb-3">
-                                <ul class="nav nav-pills" id="pills-tab" role="tablist">
-                                    <li class="nav-item {{ $personalizePlans->isNotEmpty() ? 'w-50' : 'w-100' }}">
-                                        <button class="nav-link fts-14 fw-5 active" id="pills-matrimonial-tab"
-                                            data-bs-toggle="pill" data-bs-target="#pills-matrimonial" type="button"
-                                            role="tab" aria-controls="pills-matrimonial" aria-selected="true">
-                                            <iconify-icon icon="hugeicons:heart-check" width="20" class="me-1"
-                                                height="20"></iconify-icon>
-                                            {{ __('messages.lbl_matrimonial_plan') }}
-                                        </button>
-                                    </li>
-
-                                    @if (!blank($personalizePlans))
-                                        <li class="nav-item w-50">
-                                            <button class="nav-link fts-14 fw-5" id="pills-personlize-tab"
-                                                data-bs-toggle="pill" data-bs-target="#pills-personlize" type="button"
-                                                role="tab" aria-controls="pills-personlize" aria-selected="false">
-                                                <iconify-icon icon="hugeicons:money-send-01" width="20" class="me-1"
+                        @if(!empty($personalizePlans))
+                            <div class="col-lg-2 col-12"></div>
+                            <div class="col-lg-8 col-12">
+                                <div class="common-tabs-design mt-4 mb-3">
+                                    <ul class="nav nav-pills" id="pills-tab" role="tablist">
+                                        <li class="nav-item {{ !empty($personalizePlans) ? 'w-50' : 'w-100' }}">
+                                            <button class="nav-link fts-14 fw-5 active" id="pills-matrimonial-tab"
+                                                data-bs-toggle="pill" data-bs-target="#pills-matrimonial" type="button"
+                                                role="tab" aria-controls="pills-matrimonial" aria-selected="true">
+                                                <iconify-icon icon="hugeicons:heart-check" width="20" class="me-1"
                                                     height="20"></iconify-icon>
-                                                {{ __('messages.lbl_personalize_plan') }}
+                                                {{ __('messages.lbl_matrimonial_plan') }}
                                             </button>
                                         </li>
-                                    @endif
-                                </ul>
+
+                                        @if (!blank($personalizePlans))
+                                            <li class="nav-item w-50">
+                                                <button class="nav-link fts-14 fw-5" id="pills-personlize-tab"
+                                                    data-bs-toggle="pill" data-bs-target="#pills-personlize" type="button"
+                                                    role="tab" aria-controls="pills-personlize" aria-selected="false">
+                                                    <iconify-icon icon="hugeicons:money-send-01" width="20" class="me-1"
+                                                        height="20"></iconify-icon>
+                                                    {{ __('messages.lbl_personalize_plan') }}
+                                                </button>
+                                            </li>
+                                        @endif
+                                    </ul>
+                                </div>
+                                <div class="col-lg-2 col-12"></div>
+
                             </div>
                             <div class="col-lg-2 col-12"></div>
 
@@ -54,7 +58,7 @@
                             <div class="tab-pane fade show active" id="pills-matrimonial" role="tabpanel"
                                 aria-labelledby="pills-matrimonial-tab">
                                 <div class="col-xxl-11 mx-auto">
-                                    <div class="row px-1 mt-lg-1">
+                                    <div class="row px-1 mt-lg-1 d-flex justify-content-center">
                                         @php
                                             $i = 0;
                                             $planIconArr = ['', 'silver-plan', 'diamond-plan'];
@@ -73,7 +77,7 @@
                                                             @if ($plan->plan_type == 'FREE')
                                                                 <span class="fw-6">{{ __('messages.lbl_free') }}</span>
                                                             @else
-                                                                @if (!empty($plan->plan_discount_amount) && $plan->plan_discount_amount > 0)
+                                                                @if (!empty($plan->plan_discount_amount) && $plan->plan_discount_amount > 0 && $plan->plan_discount_amount != $plan->plan_amount)
                                                                     <div class="plan-price-wrapper">
                                                                         {{-- Original Price --}}
                                                                         <div class="plan-original-price">
@@ -245,7 +249,7 @@
                             <div class="tab-pane fade" id="pills-personlize" role="tabpanel"
                                 aria-labelledby="pills-personlize-tab">
                                 <div class="col-xxl-11 mx-auto">
-                                    <div class="row px-1 mt-lg-1">
+                                    <div class="row px-1 mt-lg-1 d-flex justify-content-center">
                                         @php
                                             $i = 0;
                                             $planIconArr = ['', 'silver-plan', 'diamond-plan'];
@@ -262,11 +266,39 @@
                                                             </h4>
                                                         </div>
                                                         <div class="plan-pricing fts-28 white-color-p">
-                                                            <span
-                                                                class="fw-6">{{ $plan->currency_code . ' ' . $plan->plan_amount }}</span>
-                                                            <span class="fts-16 fw-4 white-color-p opacity-75">/
-                                                                {{ $plan->validity_days }}
-                                                                {{ __('messages.lbl_days') }}</span>
+                                                            @if ($plan->plan_type == 'FREE')
+                                                                <span class="fw-6">{{ __('messages.lbl_free') }}</span>
+                                                            @else
+                                                                @if (!empty($plan->plan_discount_amount) && $plan->plan_discount_amount > 0 && $plan->plan_discount_amount != $plan->plan_amount)
+                                                                    <div class="plan-price-wrapper">
+                                                                        {{-- Original Price --}}
+                                                                        <div class="plan-original-price">
+                                                                            {{ $plan->currency_code }}
+                                                                            {{ number_format($plan->plan_amount, 0) }}
+                                                                        </div>
+
+                                                                        {{-- Final Price + Validity --}}
+                                                                        <div class="plan-final-price">
+                                                                            <span class="plan-amount">
+                                                                                {{ $plan->currency_code }}
+                                                                                {{ number_format($plan->plan_discount_amount, 0) }}
+                                                                            </span>
+
+                                                                            <span class="plan-validity">
+                                                                                / {{ $plan->validity_days }}
+                                                                                {{ __('messages.lbl_days') }}
+                                                                            </span>
+                                                                        </div>
+
+                                                                    </div>
+                                                                @else
+                                                                    <span
+                                                                        class="fw-6">{{ $plan->currency_code . ' ' . $plan->plan_amount }}</span>
+                                                                    <span class="fts-16 fw-4 white-color-p opacity-75">/
+                                                                        {{ $plan->validity_days }}
+                                                                        {{ __('messages.lbl_days') }}</span>
+                                                                @endif
+                                                            @endif
                                                         </div>
                                                     </div>
                                                     <div class="plans_bottomdivsvaf mt-4 px-1">
@@ -407,6 +439,8 @@
                             </div>
                         </div>
                     </div>
+                    
+                    @include('web.membershipPlan.callback_box')
 
                     @if (!empty($offlinePayment))
                         <div

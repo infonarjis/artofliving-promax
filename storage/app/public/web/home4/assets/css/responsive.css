@@ -459,3 +459,80 @@ body.drawer-open {
     padding: 0 8px;
   }
 }
+/* ===== Navbar responsive fix ===== */
+.navbar-pro-matrimony { padding: 12px clamp(12px, 2vw, 32px) !important; }
+.navbar-pro-matrimony .container-fluid { padding-left: 0; padding-right: 0; }
+
+.navbar-pro-inner { display: flex; flex-wrap: nowrap; gap: 12px; min-width: 0; }
+.navbar-pro-matrimony .vivah-brand-link { margin-left: 0; }
+.navbar-pro-inner .brand-logo { width: auto; max-width: 170px; max-height: 46px; }
+
+/* nav pill: auto width, centred, allowed to shrink */
+.navbar-desktop-nav { flex: 0 1 auto; min-width: 0; margin: 0 auto; }
+.navbar-pro-inner .navbar-desktop-nav li .nav-item { padding: 8px 12px; gap: 6px; }
+
+.navbar-desktop-actions .btn-vivah-login { padding: 10px 16px; }
+.navbar-desktop-actions .btn-vivah-register { padding: 10px 18px; }
+
+/* 1200–1399: tighten so nothing overflows */
+@media (min-width: 1200px) and (max-width: 1399.98px) {
+  .navbar-pro-inner .brand-logo { max-width: 140px; }
+  .navbar-pro-inner .navbar-desktop-nav li .nav-item { padding: 8px 9px; font-size: 13px; }
+  .navbar-desktop-nav .nav-icon { display: none; }
+  .navbar-desktop-actions .btn-arrow { display: none; }
+  .navbar-desktop-actions .btn-vivah-login,
+  .navbar-desktop-actions .btn-vivah-register { padding: 9px 14px; font-size: 13px; }
+}
+
+/* below xl: toggle on the right */
+/* below 1200px: hamburger + drawer only */
+@media (max-width: 1199.98px) {
+  .navbar-desktop-nav,
+  .navbar-desktop-actions { display: none !important; }
+  .navbar-pro-inner .navbar-toggler { display: flex !important; margin-left: auto; }
+}
+
+/* 1200px and up: desktop nav only */
+@media (min-width: 1200px) {
+  .navbar-pro-inner .navbar-toggler { display: none !important; }
+  .navbar-desktop-nav { flex-wrap: nowrap; }
+  .navbar-desktop-nav .nav-item { white-space: nowrap; }
+}
+
+/* drawer */
+.vivah-mobile-drawer { height: 100vh; height: 100dvh; }
+.vivah-drawer-brand .brand-logo { max-width: 120px; }
+.vivah-drawer-lang { margin: 4px 0 18px; padding-top: 16px; border-top: 1px solid rgba(215,195,175,.45); }
+.vivah-drawer-lang-title { font-size: 11px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: #7d6b63; margin-bottom: 10px; }
+.vivah-drawer-lang-list { display: flex; flex-wrap: wrap; gap: 8px; }
+.vivah-drawer-lang-chip { padding: 6px 14px; border-radius: 999px; font-size: 13px; font-weight: 600; color: #681628; background: #faf4eb; border: 1px solid rgba(104,22,40,.2); }
+.vivah-drawer-lang-chip.active { background: #681628; color: #fff; border-color: #681628; }
+
+/* language dropdown: use theme colours instead of pink */
+.vivah-language-count,
+.vivah-language-option:hover, .vivah-language-option.active,
+.vivah-language-option-icon { background: rgba(104, 22, 40, .08); }
+
+/* typos */
+a, a:focus { color: #000000; }
+/* true centring on desktop: logo | nav | actions */
+@media (min-width: 1200px) {
+  .navbar-pro-inner {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+  }
+  .navbar-pro-inner .vivah-brand-link { justify-self: start; }
+  .navbar-desktop-nav { margin: 0; justify-self: center; }
+  .navbar-desktop-actions { justify-self: end; }
+}
+
+/* only squeeze when it really is tight (1200–1279) */
+@media (min-width: 1200px) and (max-width: 1279.98px) {
+  .navbar-pro-inner .brand-logo { max-width: 140px; }
+  .navbar-pro-inner .navbar-desktop-nav li .nav-item { padding: 8px 9px; font-size: 13px; }
+  .navbar-desktop-nav .nav-icon,
+  .navbar-desktop-actions .btn-arrow { display: none; }
+  .navbar-desktop-actions .btn-vivah-login,
+  .navbar-desktop-actions .btn-vivah-register { padding: 9px 14px; font-size: 13px; }
+}

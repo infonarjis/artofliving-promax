@@ -50,9 +50,9 @@
     white-space: nowrap
 }
 
-.select2-container .select2-search--inline {
+/* .select2-container .select2-search--inline {
     float: left
-}
+} */
 
 .select2-container .select2-search--inline .select2-search__field {
     box-sizing: border-box;
