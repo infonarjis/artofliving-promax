@@ -90,7 +90,6 @@ class AdminNotification extends Model
 
     public function scopeForUser($query, string $userType, int $userId)
     {
-        return $query->where('admin_type', $userType)
-            ->where('admin_id', $userId);
+        return $query->where('admin_type', $userType)->where('admin_id', $userId);
     }
 }

@@ -6,7 +6,7 @@
                 <div class="row justify-content-center">
                     <div class="col-xxl-5 col-lg-6 pe-lg-0">
                         <div class="login-register-bannerbg">
-                            <img src="{{ _assetUrl('upload_path.WEB_CUSTOM_IMG_URL') . 'login-left-banner.png' }}"
+                            <img src="{{ _assetUrl('upload_path.WEB_CUSTOM_IMG_URL') . 'login-left-banner-1.png' }}"
                                 alt="Login" class="login-left-bg">
                         </div>
                     </div>

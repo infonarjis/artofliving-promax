@@ -68,7 +68,7 @@
                                                         </div>
                                                         <div class="plan-pricing fts-28 white-color-p">
                                                             @if ($plan->plan_type == 'FREE')
-                                                                <span class="fw-6">{{ __('messages.msg_free') }}</span>
+                                                                <span class="fw-6">{{ __('messages.lbl_free') }}</span>
                                                             @else
                                                                 @if (!empty($plan->plan_discount_amount) && $plan->plan_discount_amount > 0)
                                                                     <div class="plan-price-wrapper">

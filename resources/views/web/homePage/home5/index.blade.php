@@ -1498,6 +1498,15 @@
                             <li><a href="{{ route('web.login.index') }}">{{ __('messages.lbl_login') }}</a></li>
                         @endguest
                         <li><a href="{{ route('web.event.index') }}">{{ __('messages.lbl_events') }}</a></li>
+                        <li><a
+                                href="{{ route('web.weddingVendors.index') }}">{{ __('messages.lbl_wedding_vendors') }}</a>
+                        </li>
+                        <li><a target="_blank"
+                                href="{{ route('affiliate.home.index') }}">{{ __('messages.lbl_become_an_affiliate') }}</a>
+                        </li>
+                        <li><a target="_blank"
+                                href="{{ route('web.personalize.index') }}">{{ __('messages.lbl_personalize') }}</a>
+                        </li>
                     </ul>
                 </div>
 

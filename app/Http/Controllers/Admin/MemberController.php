@@ -2038,6 +2038,16 @@ class MemberController extends Controller
 
             $this->adminCommonActionModel->addPersonalizeMemberChat($memberId);
 
+            ## Member Status Change Logs:
+            DB::table('admin_member_status_change_logs')->insert([
+                'status_change_by'   => _adminUserType($authUser->type),
+                'action_by_user_logs' => json_encode($authUser),
+                'change_details'     => json_encode(
+                    $request->except(['_token', 'isPost'])
+                ),
+                'created_on'         => now(),
+            ]);
+
             $staffActivity  = $mode === 'edit' ? 'edit_profiles' : 'add_profiles';
             if ($step === '6' && $request->hasAny(['photo1', 'photo2', 'photo3', 'photo4', 'id_proof_front', 'id_proof_back'])) {
                 $staffActivity = 'upload_photos';
@@ -2202,6 +2212,17 @@ class MemberController extends Controller
                     $this->addAffiliateMemberIncome($member);
                 }
             }
+
+            ## Member Status Change Logs:
+            $authenticatedUser = Auth::user();
+            DB::table('admin_member_status_change_logs')->insert([
+                'status_change_by'   => _adminUserType($authenticatedUser->type),
+                'action_by_user_logs' => json_encode($authenticatedUser),
+                'change_details'     => json_encode(
+                    $request->except(['_token', 'isPost'])
+                ),
+                'created_on'         => now(),
+            ]);
 
             $responseArr['status'] = 'success';
             $responseArr['msg'] = _getConstant('responce_message.RECORD_UPDATED_SUCCESS');
@@ -2487,16 +2508,16 @@ class MemberController extends Controller
             }
 
             /* -------------------------------------------------
-         | 2) Mark previous other assignments as Unassigned
-         -------------------------------------------------*/
+            | 2) Mark previous other assignments as Unassigned
+            -------------------------------------------------*/
             AssignHistory::whereIn('member_id', $memberIds)
                 ->where('user_type', '!=', $assignUserType)
                 ->where('action', 'Assign')
                 ->update(['action' => 'Unassigned']);
 
             /* -------------------------------------------------
-         | 3) Bulk update Register table
-         -------------------------------------------------*/
+            | 3) Bulk update Register table
+            -------------------------------------------------*/
             if ($assignUserType === 'Staff') {
                 $updateData = [
                     'adminrole_id'        => $assignId,

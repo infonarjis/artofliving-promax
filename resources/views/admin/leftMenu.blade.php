@@ -1193,12 +1193,20 @@
                             $notifiUserType = strtolower($userType);
                             // Unread count cache (correct COUNT query, no limit)
                             $notificationUnread = App\Models\AdminNotification::approved()
-                                ->forUser($notifiUserType, $authUser->id)
+                                ->when(
+                                    $userType == 'Admin',
+                                    fn($query) => $query->where('admin_type', $notifiUserType),
+                                    fn($query) => $query->forUser($notifiUserType, $authUser->id),
+                                )
                                 ->unread()
                                 ->count();
                             // Latest 20 notifications cache (ordered + selected columns)
                             $notificationData = App\Models\AdminNotification::approved()
-                                ->forUser($notifiUserType, $authUser->id)
+                                ->when(
+                                    $userType == 'Admin',
+                                    fn($query) => $query->where('admin_type', $notifiUserType),
+                                    fn($query) => $query->forUser($notifiUserType, $authUser->id),
+                                )
                                 ->latest('id')
                                 ->limit(20)
                                 ->get();

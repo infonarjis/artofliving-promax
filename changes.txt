@@ -24,26 +24,26 @@
     - employee_in : Not field exists in old data so no need to transfer
 
 ----- Old Database Tables ---------------------
-- admins                                     : 
-- admin_member_status_change_logs            :
-- admin_notification_list	 	             :
-- advertisement_master	 	                 :
+- admins                                     : No Need to transfer
+- admin_member_status_change_logs            : No Need to transfer
+- admin_notification_list	 	             : Done By Ahesanali
+- advertisement_master	 	                 : Dummy Data No need to transfer
 - annual_income_master	 	                 : Done By Nasir Marediya
 - assign_history	 	                     : Done By Nasir Marediya
 - blog_master	 	                         : Done By Nasir Marediya
 - caste	 		 	                         : Done By Nasir Marediya
 - city_master	 	                         : Done By Nasir Marediya
 - cms_pages	 		 	                     : Done By Nasir Marediya
-- comments_of_lead_generation	 	         :
-- comment_master	 	                     :
-- contact_request	 	                     :
+- comments_of_lead_generation	 	         : Done By Ahesanali
+- comment_master	 	                     : Done By Ahesanali
+- contact_request	 	                     : Done By Nasir Marediya
 - country_master	 	                     : Done By Nasir Marediya
-- coupan_code	 	                         :
+- coupan_code	 	                         : Testing Data
 - course_detail                              : Done By Ahesanali
-- currency_master	 	                     : 
-- custom_chat_conversation                   : 
-- custom_chat_conversation_message           : 
-- delete_profile	 	                     : 
+- currency_master	 	                     : No Need to transfer 
+- custom_chat_conversation                   : Done By Ahesanali
+- custom_chat_conversation_message           : Done By Ahesanali
+- delete_profile	 	                     : Done By Nasir Marediya
 - designation                                : Done By Nasir Marediya
 - education_detail                           : Done By Nasir Marediya
 - email_templates	 	                     : No Need to transfer
@@ -59,15 +59,15 @@
 - homepage_banner	 	                     : No Need to transfer
 - interest_category                          : Skip Field Not Exists
 - interest_subcategory                       : Skip Field Not Exists
-- leads_generation	 	                     :
+- leads_generation	 	                     : Done By Ahesanali
 - lead_generation_assign_history_view        : Cannot Transfer
 - lead_generation_followup_system_view       : Cannot Transfer
-- match_list	 	                         :
+- match_list	 	                         : Done By Ahesanali
 - matrimony_data                             : Done By Nasir Marediya
-- membership_plan	 	                     :
+- membership_plan	 	                     : Done By Ahesanali
 - member_assign_history_view                 : Cannot Transfer
-- member_feedback	 	                     :
-- member_notification                        :
+- member_feedback	 	                     : Skip Field Not Exists
+- member_notification                        : Done By Ahesanali
 - migrations	 	                         : No Need to transfer
 - mobile_matri_bannner                       : No Need to transfer
 - moonsign	 	                             : Done By Nasir Marediya
@@ -76,25 +76,25 @@
 - other_banner                               : No Need to traansfer
 - other_services	 	                     : Skip Field Not Exists
 - password_resets	 	                     : No Need to transfer no data found
-- payments	 	                             :
-- payment_logs	 	                         :
+- payments	 	                             : Done By Ahesanali
+- payment_logs	 	                         : No Need to transfer
 - payment_method	 	                     : No Need to transfer
-- photo_request                              :
+- photo_request                              : Testing Data Exists
 - programs_master                            : Skip Field Not Exists
 - reason_why_choose                          : No Need to transfer
-- registers	 	                             :
-- register_partners                          :
+- registers	 	                             : Done By Ahesanali
+- register_partners                          : Done By Ahesanali
 - register_view	 	                         : Cannot Transfer
 - religion	 	                             : Done By Nasir Marediya
 - request_call_back                          : Skip Field Not Exists
-- send_bulk_notification                     :
-- seo_page_data	 	                         :
+- send_bulk_notification                     : No Need to transfer
+- seo_page_data	 	                         : Done By Ahesanali
 - shortlisted	 	                         : Done By Nasir Marediya
 - site_config	 	                         :
 - skip_profile                               : Skip Field Not Exists
 - sms_templates	 	                         : No Need to transfer
-- staff	 	                                 :
-- staff_role                                 :
+- staff	 	                                 : Done By Ahesanali
+- staff_role                                 : Done By Ahesanali
 - star	 	                                 : Done By Nasir Marediya
 - state_master                               : Done By Nasir Marediya
 - study_field_master                         : Skip Field Not Exists
@@ -106,24 +106,15 @@
 
 -----------------------------------------------------------------------------------------------
 - Member Related Fields : Ahesan
-    - Registers         : registers , register_partners : Today
+    - Registers         : registers , register_partners : Done
         - father_occupation : Text Field
         - mother_occupation : Text Field
         - education_level : Mismatched
-
-    - Payments          : payments : Today
-    - Membership Plan   : membership_plan : Today
-    - Delete Profile    : delete_profile : Today
-    - Usre Notification : member_notification : Today
-
-    - Express Interest  : 
-    - Photo Request     :
-    - I Viewed Contact  : 
-    - Shortlist         : shortlisted
-    - I Viewed Profile  : Not in old project
-    - Blocklist         : Not in old project
     
-    - custom_chat_conversation
-    - custom_chat_conversation_message
-    - contact_request
     - expressinterest
+    - site_config
+
+
+-> Below is old table :
+-> Below is new table :
+make migration controller old to new table transfer :

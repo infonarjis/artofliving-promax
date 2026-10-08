@@ -173,7 +173,6 @@ class BlogController extends Controller
     {
         $elementArr = array(
             'title' => array('is_required' => 'required', 'class' => 'required'),
-            // 'slug' => array('class' => ''),
             'content' => array('is_required' => 'required', 'type' => 'textarea', 'class' => 'required  page-editor'),
             'blog_image' => array(
                 'type' => 'file',
@@ -192,15 +191,6 @@ class BlogController extends Controller
                 'column' => '6'
             ),
             'status' => array('type' => 'radio', 'value_arr' => array('APPROVED' => 'APPROVED', 'UNAPPROVED' => 'UNAPPROVED')),
-        );
-        $langElementArr = array(
-            'lang_change' => array(
-                'is_required' => 'required',
-                'type' => 'dropdown',
-                'relation' => array('rel_model' => 'CurrencyMaster', 'key_val' => 'currency_code', 'key_disp' => 'currency_name', 'column' => '6'),
-                'class' => 'required',
-                'column' => '6'
-            )
         );
 
         ## Extra Js :
@@ -237,7 +227,6 @@ class BlogController extends Controller
             'callbackUrl' => 'admin.blog.index'
         ];
         $fromHtml = $this->adminFormBuilderService->generateFormElement($elementArr, $otherData);
-        $fromLangHtml = $this->adminFormBuilderService->generateFormElement($langElementArr, $otherData);
         $dataArr = [
             'pageName' => $this->pageName . ' ' . ucwords($mode),
             'elementArr' => $elementArr,
@@ -247,7 +236,6 @@ class BlogController extends Controller
             'formSubmitBtnClass' => 'formSubmitBtn',
             'formSubmitBtnId' => 'formSubmitBtn',
             'fromHtml' => $fromHtml,
-            'fromLangHtml' => $fromLangHtml,
             'languageDataArr' => _getActiveLanguage(),
             'rowData' => $rowData,
             'mode' => $mode,

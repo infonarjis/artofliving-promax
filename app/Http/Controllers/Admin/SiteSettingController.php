@@ -84,7 +84,7 @@ class SiteSettingController extends Controller
     public function basicSiteSettingsAddEdit(Request $request)
     {
         if (_getConstant('DISABLE_DEMO') == 'Enabled') {
-            return back()->with('active_tab', 'general')->with('error', _getConstant('responce_message.DISABLE_IN_DEMO_LABEL'));
+            return back()->with('error', _getConstant('responce_message.DISABLE_IN_DEMO_LABEL'))->with('active_tab', 'general');
         }
 
         $postData = $request->all();
@@ -117,9 +117,9 @@ class SiteSettingController extends Controller
             if ($setting) {
                 $setting->update($updateData);
             }
-            return back()->with('active_tab', 'general')->with('success', _getConstant('responce_message.DATA_UPDATED_SUCCESS'));
+            return back()->with('success', _getConstant('responce_message.DATA_UPDATED_SUCCESS'))->with('active_tab', 'general');
         } else {
-            return back()->with('active_tab', 'general')->with('error', _getConstant('responce_message.DATA_NOT_UPDATED'));
+            return back()->with('error', _getConstant('responce_message.DATA_NOT_UPDATED'))->with('active_tab', 'general');
         }
     }
 
@@ -159,7 +159,7 @@ class SiteSettingController extends Controller
     public function logoFaviconAddEdit(Request $request)
     {
         if (_getConstant('DISABLE_DEMO') == 'Enabled') {
-            return back()->with('active_tab', 'logo')->with('error', _getConstant('responce_message.DISABLE_IN_DEMO_LABEL'));
+            return back()->with('error', _getConstant('responce_message.DISABLE_IN_DEMO_LABEL'))->with('active_tab', 'logo');
         }
 
         $postData = $request->all();
@@ -187,7 +187,7 @@ class SiteSettingController extends Controller
         $validator = Validator::make($request->all(), $validateArr, $validationMsgArr);
 
         if ($validator->fails()) {
-            return back()->with('active_tab', 'logo')->with('error', ucwords($validator->errors()->first()));
+            return back()->with('error', ucwords($validator->errors()->first()))->with('active_tab', 'logo');
         } else {
             $updateArr = array(
                 'upload_logo',
@@ -231,9 +231,9 @@ class SiteSettingController extends Controller
                 if ($setting) {
                     $setting->update($updateData);
                 }
-                return back()->with('active_tab', 'logo')->with('error', _getConstant('responce_message.DATA_UPDATED_SUCCESS'));
+                return back()->with('error', _getConstant('responce_message.DATA_UPDATED_SUCCESS'))->with('active_tab', 'logo');
             }
-            return back()->with('active_tab', 'logo')->with('error', _getConstant('responce_message.DATA_NOT_UPDATED'));
+            return back()->with('error', _getConstant('responce_message.DATA_NOT_UPDATED'))->with('active_tab', 'logo');
         }
     }
 
@@ -257,7 +257,7 @@ class SiteSettingController extends Controller
     public function matriPrefixAddEdit(Request $request)
     {
         if (_getConstant('DISABLE_DEMO') == 'Enabled') {
-            return back()->with('active_tab', 'prefix')->with('error', _getConstant('responce_message.DISABLE_IN_DEMO_LABEL'));
+            return back()->with('error', _getConstant('responce_message.DISABLE_IN_DEMO_LABEL'))->with('active_tab', 'prefix');
         }
 
         $postData = $request->all();
@@ -271,10 +271,10 @@ class SiteSettingController extends Controller
             $setting = SiteSetting::find($postData['id']);
             if ($setting) {
                 $setting->update($updateData);
-                return back()->with('active_tab', 'prefix')->with('success', _getConstant('responce_message.DATA_UPDATED_SUCCESS'));
+                return back()->with('success', _getConstant('responce_message.DATA_UPDATED_SUCCESS'))->with('active_tab', 'prefix');
             }
         }
-        return back()->with('active_tab', 'prefix')->with('error', _getConstant('responce_message.DATA_NOT_UPDATED'));
+        return back()->with('error', _getConstant('responce_message.DATA_NOT_UPDATED'))->with('active_tab', 'prefix');
     }
 
     ## Analytics Code Setting :
@@ -297,20 +297,20 @@ class SiteSettingController extends Controller
     public function analyticsCodeAddEdit(Request $request)
     {
         if (_getConstant('DISABLE_DEMO') == 'Enabled') {
-            return back()->with('active_tab', 'google-analytics')->with('error', _getConstant('responce_message.DISABLE_IN_DEMO_LABEL'));
+            return back()->with('error', _getConstant('responce_message.DISABLE_IN_DEMO_LABEL'))->with('active_tab', 'google-analytics');
         }
 
         $setting = SiteSetting::find($request->id);
 
         if (!$setting) {
-            return back()->with('active_tab', 'google-analytics')->with('error', _getConstant('responce_message.DATA_NOT_UPDATED'));
+            return back()->with('error', _getConstant('responce_message.DATA_NOT_UPDATED'))->with('active_tab', 'google-analytics');
         }
 
         $setting->update([
             'google_analytics_code' => $request->input('google_analytics_code'),
         ]);
 
-        return back()->with('active_tab', 'google-analytics')->with('success', _getConstant('responce_message.DATA_UPDATED_SUCCESS'));
+        return back()->with('success', _getConstant('responce_message.DATA_UPDATED_SUCCESS'))->with('active_tab', 'google-analytics');
     }
 
     ## App Link Setting :
@@ -334,7 +334,7 @@ class SiteSettingController extends Controller
     public function appLinkAddEdit(Request $request)
     {
         if (_getConstant('DISABLE_DEMO') == 'Enabled') {
-            return back()->with('active_tab', 'app-link')->with('error', _getConstant('responce_message.DISABLE_IN_DEMO_LABEL'));
+            return back()->with('error', _getConstant('responce_message.DISABLE_IN_DEMO_LABEL'))->with('active_tab', 'app-link');
         }
 
         $postData = $request->all();
@@ -349,9 +349,9 @@ class SiteSettingController extends Controller
             if ($setting) {
                 $setting->update($updateData);
             }
-            return back()->with('active_tab', 'app-link')->with('success', _getConstant('responce_message.DATA_UPDATED_SUCCESS'));
+            return back()->with('success', _getConstant('responce_message.DATA_UPDATED_SUCCESS'))->with('active_tab', 'app-link');
         } else {
-            return back()->with('active_tab', 'app-link')->with('error', _getConstant('responce_message.DATA_NOT_UPDATED'));
+            return back()->with('error', _getConstant('responce_message.DATA_NOT_UPDATED'))->with('active_tab', 'app-link');
         }
     }
 
@@ -392,9 +392,9 @@ class SiteSettingController extends Controller
                 $setting->update($updateData);
             }
 
-            return back()->with('active_tab', 'social-site')->with('success', _getConstant('responce_message.DATA_UPDATED_SUCCESS'));
+            return back()->with('success', _getConstant('responce_message.DATA_UPDATED_SUCCESS'))->with('active_tab', 'social-site');
         } else {
-            return back()->with('active_tab', 'social-site')->with('error', _getConstant('responce_message.DATA_NOT_UPDATED'));
+            return back()->with('error', _getConstant('responce_message.DATA_NOT_UPDATED'))->with('active_tab', 'social-site');
         }
     }
 

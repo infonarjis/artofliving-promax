@@ -46,7 +46,7 @@
     <script src="https://code.iconify.design/iconify-icon/1.0.8/iconify-icon.min.js"></script>
 
     <link rel="stylesheet" href="{{ route('theme.css') }}?v={{ \App\Services\ThemeService::version() }}">
-    
+
     @stack('styles')
 
     {{-- Google Analystics Code --}}
@@ -64,7 +64,7 @@
             <span class="icon moon"><iconify-icon icon="solar:moon-bold-duotone"></iconify-icon></span>
         </label>
     </div>
-    
+
     @php
         // Banner :
         $headerSectionBanner = !empty($data['hero_main_background_banner'])
@@ -73,157 +73,143 @@
     @endphp
     <div class="main-header-bg" style="background-image: url('{{ $headerSectionBanner }}');">
         @php
-    $getActiveLanguage = _getActiveLanguage();
-    $currentLanguage = App::getLocale();
-    $currentLang = collect($getActiveLanguage)->firstWhere('lang_code', $currentLanguage);
-    $currentLangCode = $currentLang->lang_code ?? 'en';
-@endphp
+            $getActiveLanguage = _getActiveLanguage();
+            $currentLanguage = App::getLocale();
+            $currentLang = collect($getActiveLanguage)->firstWhere('lang_code', $currentLanguage);
+            $currentLangCode = $currentLang->lang_code ?? 'en';
+        @endphp
 
-<!-- Navbar Section Start -->
-<nav aria-label="navbar" class="navbar-pro-matrimony py-3">
-    <div class="container-fluid px-0 px-lg-5">
-        <div class="navbar-pro-inner d-flex align-items-center justify-content-between">
+        <!-- Navbar Section Start -->
+        <nav aria-label="navbar" class="navbar-pro-matrimony py-3">
+            <div class="container-fluid px-0 px-lg-5">
+                <div class="navbar-pro-inner d-flex align-items-center justify-content-between">
 
-            {{-- Logo --}}
-            <a href="{{ url('/') }}"
-                class="vivah-brand-link d-inline-flex align-items-center">
-                <div class="vivah-logo-component">
-                    <img src="{{ _assetUrl('upload_path.LOGO_IMAGE_URL') . $configArr['upload_logo'] }}"
-                        alt="{{ $configArr['web_name'] }} logo"
-                        class="brand-logo">
-                </div>
-            </a>
-
-            {{-- Mobile Toggle --}}
-            <button class="navbar-toggler d-lg-none"
-                type="button"
-                aria-label="Toggle navigation">
-                <iconify-icon icon="solar:hamburger-menu-linear"></iconify-icon>
-            </button>
-
-            {{-- Desktop Navigation --}}
-            <ul class="navbar-desktop-nav d-none d-lg-flex align-items-center gap-2 mb-0 list-unstyled">
-                <li class="active">
-                    <a href="{{ url('/') }}" class="nav-item active">
-                        <iconify-icon icon="fluent:grid-16-filled" class="nav-icon"></iconify-icon>
-                        <span>{{ __('messages.lbl_home') }}</span>
+                    {{-- Logo --}}
+                    <a href="{{ url('/') }}" class="vivah-brand-link d-inline-flex align-items-center">
+                        <div class="vivah-logo-component">
+                            <img src="{{ _assetUrl('upload_path.LOGO_IMAGE_URL') . $configArr['upload_logo'] }}"
+                                alt="{{ $configArr['web_name'] }} logo" class="brand-logo">
+                        </div>
                     </a>
-                </li>
 
-                <li>
-                    <a href="{{ route('web.search.type', ['type' => 'quick-search']) }}"
-                        class="nav-item">
-                        <iconify-icon icon="bx:search" class="nav-icon"></iconify-icon>
-                        <span>{{ __('messages.lbl_search') }}</span>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="{{ route('web.membershipPlan.index') }}"
-                        class="nav-item">
-                        <iconify-icon icon="mdi:crown-outline" class="nav-icon"></iconify-icon>
-                        <span>{{ __('messages.lbl_membership') }}</span>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="{{ route('web.successStory.index') }}"
-                        class="nav-item">
-                        <iconify-icon icon="mdi:heart-outline" class="nav-icon"></iconify-icon>
-                        <span>{{ __('messages.lbl_success_stories') }}</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('web.contactUs.index') }}"
-                        class="nav-item">
-                        <iconify-icon icon="ph:chats-circle-bold" class="nav-icon"></iconify-icon>
-                        <span>{{ __('messages.lbl_contact_us') }}</span>
-                    </a>
-                </li>
-            </ul>
-
-            {{-- Login, Register and Language --}}
-            <div class="navbar-desktop-actions d-none d-lg-flex align-items-center gap-2">
-
-                <a href="{{ route('web.login.index') }}" class="btn-vivah-login">
-                    <iconify-icon icon="ph:sign-in-bold"></iconify-icon>
-                    <span>{{ __('messages.lbl_login') }}</span>
-                    <iconify-icon icon="ph:arrow-right-bold"></iconify-icon>
-                </a>
-
-                <a href="{{ route('web.register.index') }}" class="btn-vivah-register">
-                    <iconify-icon icon="ph:user-plus-bold"></iconify-icon>
-                    <span>{{ __('messages.lbl_register') }}</span>
-                    <iconify-icon icon="ph:arrow-right-bold"></iconify-icon>
-                </a>
-
-                {{-- Language Dropdown --}}
-                <div class="vivah-language-wrapper" id="vivah-language-wrapper">
-                    <button type="button"
-                        class="vivah-language-btn"
-                        id="vivah-language-toggle"
-                        aria-label="{{ __('messages.lbl_change_language') }}"
-                        aria-expanded="false"
-                        aria-haspopup="true">
-
-                        <iconify-icon icon="ph:translate-bold"></iconify-icon>
-
-                        <span>{{ strtoupper($currentLangCode) }}</span>
-
-                        <iconify-icon icon="ph:caret-down-bold"
-                            class="vivah-language-caret"></iconify-icon>
+                    {{-- Mobile Toggle --}}
+                    <button class="navbar-toggler d-lg-none" type="button" aria-label="Toggle navigation">
+                        <iconify-icon icon="solar:hamburger-menu-linear"></iconify-icon>
                     </button>
 
-                    <div class="vivah-language-dropdown"
-                        id="vivah-language-dropdown"
-                        role="menu">
+                    {{-- Desktop Navigation --}}
+                    <ul class="navbar-desktop-nav d-none d-lg-flex align-items-center gap-2 mb-0 list-unstyled">
+                        <li class="active">
+                            <a href="{{ url('/') }}" class="nav-item active">
+                                <iconify-icon icon="fluent:grid-16-filled" class="nav-icon"></iconify-icon>
+                                <span>{{ __('messages.lbl_home') }}</span>
+                            </a>
+                        </li>
 
-                        <div class="vivah-language-heading">
-                            <div>
-                                <div class="vivah-language-title">
-                                    {{ __('messages.lbl_select_language') }}
+                        <li>
+                            <a href="{{ route('web.search.type', ['type' => 'quick-search']) }}" class="nav-item">
+                                <iconify-icon icon="bx:search" class="nav-icon"></iconify-icon>
+                                <span>{{ __('messages.lbl_search') }}</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="{{ route('web.membershipPlan.index') }}" class="nav-item">
+                                <iconify-icon icon="mdi:crown-outline" class="nav-icon"></iconify-icon>
+                                <span>{{ __('messages.lbl_membership') }}</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="{{ route('web.successStory.index') }}" class="nav-item">
+                                <iconify-icon icon="mdi:heart-outline" class="nav-icon"></iconify-icon>
+                                <span>{{ __('messages.lbl_success_stories') }}</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('web.contactUs.index') }}" class="nav-item">
+                                <iconify-icon icon="ph:chats-circle-bold" class="nav-icon"></iconify-icon>
+                                <span>{{ __('messages.lbl_contact_us') }}</span>
+                            </a>
+                        </li>
+                    </ul>
+
+                    {{-- Login, Register and Language --}}
+                    <div class="navbar-desktop-actions d-none d-lg-flex align-items-center gap-2">
+
+                        <a href="{{ route('web.login.index') }}" class="btn-vivah-login">
+                            <iconify-icon icon="ph:sign-in-bold"></iconify-icon>
+                            <span>{{ __('messages.lbl_login') }}</span>
+                            <iconify-icon icon="ph:arrow-right-bold"></iconify-icon>
+                        </a>
+
+                        <a href="{{ route('web.register.index') }}" class="btn-vivah-register">
+                            <iconify-icon icon="ph:user-plus-bold"></iconify-icon>
+                            <span>{{ __('messages.lbl_register') }}</span>
+                            <iconify-icon icon="ph:arrow-right-bold"></iconify-icon>
+                        </a>
+
+                        {{-- Language Dropdown --}}
+                        <div class="vivah-language-wrapper" id="vivah-language-wrapper">
+                            <button type="button" class="vivah-language-btn" id="vivah-language-toggle"
+                                aria-label="{{ __('messages.lbl_change_language') }}" aria-expanded="false"
+                                aria-haspopup="true">
+
+                                <iconify-icon icon="ph:translate-bold"></iconify-icon>
+
+                                <span>{{ strtoupper($currentLangCode) }}</span>
+
+                                <iconify-icon icon="ph:caret-down-bold" class="vivah-language-caret"></iconify-icon>
+                            </button>
+
+                            <div class="vivah-language-dropdown" id="vivah-language-dropdown" role="menu">
+
+                                <div class="vivah-language-heading">
+                                    <div>
+                                        <div class="vivah-language-title">
+                                            {{ __('messages.lbl_select_language') }}
+                                        </div>
+                                        <div class="vivah-language-subtitle">
+                                            {{ __('messages.lbl_choose_display_language') }}
+                                        </div>
+                                    </div>
+
+                                    <span class="vivah-language-count">
+                                        {{ count($getActiveLanguage) }}
+                                        {{ __('messages.lbl_languages') }}
+                                    </span>
                                 </div>
-                                <div class="vivah-language-subtitle">
-                                    {{ __('messages.lbl_choose_display_language') }}
+
+                                <div class="vivah-language-list">
+                                    @foreach ($getActiveLanguage as $value)
+                                        <a href="{{ route('language.change', $value->lang_code) }}"
+                                            class="vivah-language-option {{ $value->lang_code == $currentLanguage ? 'active' : '' }}"
+                                            role="menuitem">
+
+                                            <span class="vivah-language-option-icon">
+                                                <iconify-icon icon="akar-icons:language"></iconify-icon>
+                                            </span>
+
+                                            <span class="vivah-language-option-text">
+                                                <span>{{ $value->lang_name }}</span>
+                                                <small>{{ strtoupper($value->lang_code) }}</small>
+                                            </span>
+
+                                            @if ($value->lang_code == $currentLanguage)
+                                                <iconify-icon icon="ph:check-circle-fill"
+                                                    class="vivah-language-check"></iconify-icon>
+                                            @endif
+                                        </a>
+                                    @endforeach
                                 </div>
                             </div>
-
-                            <span class="vivah-language-count">
-                                {{ count($getActiveLanguage) }}
-                                {{ __('messages.lbl_languages') }}
-                            </span>
                         </div>
 
-                        <div class="vivah-language-list">
-                            @foreach ($getActiveLanguage as $value)
-                                <a href="{{ route('language.change', $value->lang_code) }}"
-                                    class="vivah-language-option {{ $value->lang_code == $currentLanguage ? 'active' : '' }}"
-                                    role="menuitem">
-
-                                    <span class="vivah-language-option-icon">
-                                        <iconify-icon icon="akar-icons:language"></iconify-icon>
-                                    </span>
-
-                                    <span class="vivah-language-option-text">
-                                        <span>{{ $value->lang_name }}</span>
-                                        <small>{{ strtoupper($value->lang_code) }}</small>
-                                    </span>
-
-                                    @if ($value->lang_code == $currentLanguage)
-                                        <iconify-icon icon="ph:check-circle-fill"
-                                            class="vivah-language-check"></iconify-icon>
-                                    @endif
-                                </a>
-                            @endforeach
-                        </div>
                     </div>
                 </div>
-
             </div>
-        </div>
-    </div>
-</nav>
-<!-- Navbar Section End -->
+        </nav>
+        <!-- Navbar Section End -->
 
         <!-- VivahSutra Mobile Drawer & Backdrop Overlay -->
         <div class="vivah-drawer-overlay"></div>
@@ -233,7 +219,7 @@
                 <a href="{{ url('/') }}" class="vivah-drawer-brand">
                     <div class="vivah-logo-component">
                         <img src="{{ _assetUrl('upload_path.LOGO_IMAGE_URL') . $configArr['upload_logo'] }}"
-                        alt="{{ $configArr['web_name'] }} logo" class="brand-logo">
+                            alt="{{ $configArr['web_name'] }} logo" class="brand-logo">
                     </div>
                 </a>
                 <button type="button" class="vivah-drawer-close" aria-label="Close menu">
@@ -254,7 +240,8 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('web.search.type', ['type' => 'quick-search']) }}" class="vivah-drawer-link">
+                        <a href="{{ route('web.search.type', ['type' => 'quick-search']) }}"
+                            class="vivah-drawer-link">
                             <span class="drawer-link-content">
                                 <span class="drawer-link-icon"><i class='bx bx-search-alt'></i></span>
                                 <span class="drawer-link-text">{{ __('messages.lbl_search') }}</span>
@@ -283,7 +270,8 @@
                     <li>
                         <a href="{{ route('web.contactUs.index') }}" class="vivah-drawer-link">
                             <span class="drawer-link-content">
-                                <span class="drawer-link-icon"><iconify-icon icon="ph:chats-circle-bold"></iconify-icon></span>
+                                <span class="drawer-link-icon"><iconify-icon
+                                        icon="ph:chats-circle-bold"></iconify-icon></span>
                                 <span class="drawer-link-text">{{ __('messages.lbl_contact_us') }}ss</span>
                             </span>
                             <i class='bx bx-chevron-right drawer-chevron'></i>
@@ -327,17 +315,18 @@
                     <div class="vivah-om-ornament">
                         <span class="flourish-stem left">
                             <svg width="64" height="12" viewBox="0 0 64 12" fill="none">
-                                <line x1="0" y1="6" x2="54" y2="6" stroke="var(--black-color-5)"
-                                    stroke-width="1.2" />
+                                <line x1="0" y1="6" x2="54" y2="6"
+                                    stroke="var(--black-color-5)" stroke-width="1.2" />
                                 <circle cx="58" cy="6" r="2.5" fill="var(--black-color-5)" />
                             </svg>
                         </span>
-                        <span class="om-glyph" style="color:var(--primary-color)"><i class="bx bx-church" style="color:var(--primary-color)"></i></span>
+                        <span class="om-glyph" style="color:var(--primary-color)"><i class="bx bx-church"
+                                style="color:var(--primary-color)"></i></span>
                         <span class="flourish-stem right">
                             <svg width="64" height="12" viewBox="0 0 64 12" fill="none">
                                 <circle cx="6" cy="6" r="2.5" fill="var(--black-color-5)" />
-                                <line x1="10" y1="6" x2="64" y2="6" stroke="var(--black-color-5)"
-                                    stroke-width="1.2" />
+                                <line x1="10" y1="6" x2="64" y2="6"
+                                    stroke="var(--black-color-5)" stroke-width="1.2" />
                             </svg>
                         </span>
                     </div>
@@ -418,22 +407,23 @@
                     <!-- Decorative Filigree Divider -->
                     <div class="vivah-filigree-divider">
                         <svg width="130" height="18" viewBox="0 0 130 18" fill="none">
-                            <line x1="0" y1="9" x2="44" y2="9" stroke="var(--black-color-5)"
-                                stroke-width="1" opacity="0.6" />
+                            <line x1="0" y1="9" x2="44" y2="9"
+                                stroke="var(--black-color-5)" stroke-width="1" opacity="0.6" />
                             <circle cx="48" cy="9" r="2" fill="var(--black-color-5)" />
                             <path d="M65 2 L70 9 L65 16 L60 9 Z" fill="var(--black-color-5)" />
                             <circle cx="65" cy="9" r="1.5" fill="#faf4eb" />
-                            <path d="M57 9 Q61 6 65 6 Q69 6 73 9 Q69 12 65 12 Q61 12 57 9 Z" stroke="var(--black-color-5)"
-                                stroke-width="0.8" fill="none" />
+                            <path d="M57 9 Q61 6 65 6 Q69 6 73 9 Q69 12 65 12 Q61 12 57 9 Z"
+                                stroke="var(--black-color-5)" stroke-width="0.8" fill="none" />
                             <circle cx="82" cy="9" r="2" fill="var(--black-color-5)" />
-                            <line x1="86" y1="9" x2="130" y2="9" stroke="var(--black-color-5)"
-                                stroke-width="1" opacity="0.6" />
+                            <line x1="86" y1="9" x2="130" y2="9"
+                                stroke="var(--black-color-5)" stroke-width="1" opacity="0.6" />
                         </svg>
                     </div>
 
                     <!-- Search Form Card -->
                     <div class="vivah-search-card">
-                        <form action="{{ route('web.search.searchResult') }}" method="GET" class="vivah-search-form">
+                        <form action="{{ route('web.search.searchResult') }}" method="GET"
+                            class="vivah-search-form">
                             <!-- Field 1: Looking for -->
                             <div class="vivah-search-cell">
                                 <div class="cell-icon">
@@ -447,8 +437,10 @@
                                 <div class="cell-content">
                                     <span class="cell-caption">{{ __('messages.lbl_i_m_looking_for_a') }}</span>
                                     <select name="gender" id="gender" class="vivah-select2 select2-looking">
-                                        <option value="Female" title="Bride">{{ __('messages.field_lbl_female') }}</option>
-                                        <option value="Male" title="Groom">{{ __('messages.field_lbl_male') }}</option>
+                                        <option value="Female" title="Bride">{{ __('messages.field_lbl_female') }}
+                                        </option>
+                                        <option value="Male" title="Groom">{{ __('messages.field_lbl_male') }}
+                                        </option>
                                     </select>
                                 </div>
                             </div>
@@ -481,7 +473,8 @@
                                         <select name="part_to_age" class="vivah-select2 select2-age">
                                             @foreach ($age as $key => $valueArr)
                                                 @php $selected = ($key == '30') ? 'selected' : ''; @endphp
-                                                <option value="{{ $key }}" {{ $selected }}>{{ $valueArr }}</option>
+                                                <option value="{{ $key }}" {{ $selected }}>
+                                                    {{ $valueArr }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -503,7 +496,8 @@
                                 <div class="cell-content">
                                     <span class="cell-caption">{{ __('messages.field_lbl_country') }}</span>
                                     <select name="country_id" class="vivah-select2 select2-country">
-                                        <option value="" selected>{{ __('messages.field_lbl_select_country') }}</option>
+                                        <option value="" selected>{{ __('messages.field_lbl_select_country') }}
+                                        </option>
                                         @foreach ($religionList as $id => $name)
                                             <option value="{{ $id }}">{{ $name }}</option>
                                         @endforeach
@@ -533,17 +527,18 @@
                 <div class="vivah-om-ornament mb-2">
                     <span class="flourish-stem left">
                         <svg width="48" height="10" viewBox="0 0 48 10" fill="none">
-                            <line x1="0" y1="5" x2="38" y2="5" stroke="var(--black-color-5)"
-                                stroke-width="1" />
+                            <line x1="0" y1="5" x2="38" y2="5"
+                                stroke="var(--black-color-5)" stroke-width="1" />
                             <circle cx="42" cy="5" r="2" fill="var(--black-color-5)" />
                         </svg>
                     </span>
-                    <span class="om-glyph" style="font-size: 20px;"><i class="bx bx-church" style="color:var(--primary-color)"></i></span>
+                    <span class="om-glyph" style="font-size: 20px;"><i class="bx bx-church"
+                            style="color:var(--primary-color)"></i></span>
                     <span class="flourish-stem right">
                         <svg width="48" height="10" viewBox="0 0 48 10" fill="none">
                             <circle cx="6" cy="5" r="2" fill="var(--black-color-5)" />
-                            <line x1="10" y1="5" x2="48" y2="5" stroke="var(--black-color-5)"
-                                stroke-width="1" />
+                            <line x1="10" y1="5" x2="48" y2="5"
+                                stroke="var(--black-color-5)" stroke-width="1" />
                         </svg>
                     </span>
                 </div>
@@ -561,13 +556,13 @@
                 <!-- Filigree Divider -->
                 <div class="vivah-filigree-divider mt-2 mb-0">
                     <svg width="100" height="14" viewBox="0 0 100 14" fill="none">
-                        <line x1="0" y1="7" x2="36" y2="7" stroke="var(--black-color-5)"
-                            stroke-width="1" opacity="0.6" />
+                        <line x1="0" y1="7" x2="36" y2="7"
+                            stroke="var(--black-color-5)" stroke-width="1" opacity="0.6" />
                         <circle cx="40" cy="7" r="2" fill="var(--black-color-5)" />
                         <path d="M50 2 L54 7 L50 12 L46 7 Z" fill="var(--black-color-5)" />
                         <circle cx="60" cy="7" r="2" fill="var(--black-color-5)" />
-                        <line x1="64" y1="7" x2="100" y2="7" stroke="var(--black-color-5)"
-                            stroke-width="1" opacity="0.6" />
+                        <line x1="64" y1="7" x2="100" y2="7"
+                            stroke="var(--black-color-5)" stroke-width="1" opacity="0.6" />
                     </svg>
                 </div>
             </div>
@@ -602,14 +597,19 @@
                                 <div class="step-icon-wrapper">
                                     <div class="step-mandala-ring">
                                         <svg viewBox="0 0 110 110" class="rotating-mandala" fill="none">
-                                            <circle cx="55" cy="55" r="50" stroke="var(--black-color-5)"
-                                                stroke-width="1.2" stroke-dasharray="4 4" opacity="0.6" />
-                                            <circle cx="55" cy="55" r="44" stroke="var(--black-color-5)"
-                                                stroke-width="0.8" opacity="0.4" />
-                                            <circle cx="55" cy="5" r="2.5" fill="var(--black-color-5)" />
-                                            <circle cx="105" cy="55" r="2.5" fill="var(--black-color-5)" />
-                                            <circle cx="55" cy="105" r="2.5" fill="var(--black-color-5)" />
-                                            <circle cx="5" cy="55" r="2.5" fill="var(--black-color-5)" />
+                                            <circle cx="55" cy="55" r="50"
+                                                stroke="var(--black-color-5)" stroke-width="1.2"
+                                                stroke-dasharray="4 4" opacity="0.6" />
+                                            <circle cx="55" cy="55" r="44"
+                                                stroke="var(--black-color-5)" stroke-width="0.8" opacity="0.4" />
+                                            <circle cx="55" cy="5" r="2.5"
+                                                fill="var(--black-color-5)" />
+                                            <circle cx="105" cy="55" r="2.5"
+                                                fill="var(--black-color-5)" />
+                                            <circle cx="55" cy="105" r="2.5"
+                                                fill="var(--black-color-5)" />
+                                            <circle cx="5" cy="55" r="2.5"
+                                                fill="var(--black-color-5)" />
                                             <circle cx="90" cy="20" r="2" fill="#c48834" />
                                             <circle cx="90" cy="90" r="2" fill="#c48834" />
                                             <circle cx="20" cy="90" r="2" fill="#c48834" />
@@ -634,7 +634,8 @@
                                             <!-- Swastik / Auspicious Mark on Kalash -->
                                             <path
                                                 d="M22 26 V31 M20 28 H24 M20 26 H20.5 M23.5 31 H24 M24 26 V26.5 M20 30.5 V31"
-                                                stroke="var(--primary-color)" stroke-width="1.1" stroke-linecap="round" />
+                                                stroke="var(--primary-color)" stroke-width="1.1"
+                                                stroke-linecap="round" />
                                             <!-- Base of Kalash -->
                                             <path d="M18 36 L26 36 L27 38 L17 38 Z" fill="#c48834" />
                                         </svg>
@@ -670,14 +671,19 @@
                                 <div class="step-icon-wrapper">
                                     <div class="step-mandala-ring">
                                         <svg viewBox="0 0 110 110" class="rotating-mandala" fill="none">
-                                            <circle cx="55" cy="55" r="50" stroke="var(--black-color-5)"
-                                                stroke-width="1.2" stroke-dasharray="4 4" opacity="0.6" />
-                                            <circle cx="55" cy="55" r="44" stroke="var(--black-color-5)"
-                                                stroke-width="0.8" opacity="0.4" />
-                                            <circle cx="55" cy="5" r="2.5" fill="var(--black-color-5)" />
-                                            <circle cx="105" cy="55" r="2.5" fill="var(--black-color-5)" />
-                                            <circle cx="55" cy="105" r="2.5" fill="var(--black-color-5)" />
-                                            <circle cx="5" cy="55" r="2.5" fill="var(--black-color-5)" />
+                                            <circle cx="55" cy="55" r="50"
+                                                stroke="var(--black-color-5)" stroke-width="1.2"
+                                                stroke-dasharray="4 4" opacity="0.6" />
+                                            <circle cx="55" cy="55" r="44"
+                                                stroke="var(--black-color-5)" stroke-width="0.8" opacity="0.4" />
+                                            <circle cx="55" cy="5" r="2.5"
+                                                fill="var(--black-color-5)" />
+                                            <circle cx="105" cy="55" r="2.5"
+                                                fill="var(--black-color-5)" />
+                                            <circle cx="55" cy="105" r="2.5"
+                                                fill="var(--black-color-5)" />
+                                            <circle cx="5" cy="55" r="2.5"
+                                                fill="var(--black-color-5)" />
                                             <circle cx="90" cy="20" r="2" fill="#c48834" />
                                             <circle cx="90" cy="90" r="2" fill="#c48834" />
                                             <circle cx="20" cy="90" r="2" fill="#c48834" />
@@ -701,7 +707,8 @@
                                                 stroke="#ffd56b" stroke-width="1" opacity="0.8" />
                                             <!-- Central Auspicious Star / Sun -->
                                             <circle cx="22" cy="22" r="3.5" fill="#ffd56b" />
-                                            <circle cx="22" cy="22" r="1.5" fill="var(--primary-color)" />
+                                            <circle cx="22" cy="22" r="1.5"
+                                                fill="var(--primary-color)" />
                                             <circle cx="22" cy="6" r="1.5" fill="#f8e7b9" />
                                             <circle cx="22" cy="38" r="1.5" fill="#f8e7b9" />
                                             <circle cx="6" cy="22" r="1.5" fill="#f8e7b9" />
@@ -739,14 +746,19 @@
                                 <div class="step-icon-wrapper">
                                     <div class="step-mandala-ring">
                                         <svg viewBox="0 0 110 110" class="rotating-mandala" fill="none">
-                                            <circle cx="55" cy="55" r="50" stroke="var(--black-color-5)"
-                                                stroke-width="1.2" stroke-dasharray="4 4" opacity="0.6" />
-                                            <circle cx="55" cy="55" r="44" stroke="var(--black-color-5)"
-                                                stroke-width="0.8" opacity="0.4" />
-                                            <circle cx="55" cy="5" r="2.5" fill="var(--black-color-5)" />
-                                            <circle cx="105" cy="55" r="2.5" fill="var(--black-color-5)" />
-                                            <circle cx="55" cy="105" r="2.5" fill="var(--black-color-5)" />
-                                            <circle cx="5" cy="55" r="2.5" fill="var(--black-color-5)" />
+                                            <circle cx="55" cy="55" r="50"
+                                                stroke="var(--black-color-5)" stroke-width="1.2"
+                                                stroke-dasharray="4 4" opacity="0.6" />
+                                            <circle cx="55" cy="55" r="44"
+                                                stroke="var(--black-color-5)" stroke-width="0.8" opacity="0.4" />
+                                            <circle cx="55" cy="5" r="2.5"
+                                                fill="var(--black-color-5)" />
+                                            <circle cx="105" cy="55" r="2.5"
+                                                fill="var(--black-color-5)" />
+                                            <circle cx="55" cy="105" r="2.5"
+                                                fill="var(--black-color-5)" />
+                                            <circle cx="5" cy="55" r="2.5"
+                                                fill="var(--black-color-5)" />
                                             <circle cx="90" cy="20" r="2" fill="#c48834" />
                                             <circle cx="90" cy="90" r="2" fill="#c48834" />
                                             <circle cx="20" cy="90" r="2" fill="#c48834" />
@@ -762,13 +774,16 @@
                                                 stroke-width="2.5" stroke-linecap="round" stroke-dasharray="1 3.5" />
                                             <!-- Central Golden Mangalsutra / Pendant -->
                                             <path d="M22 34 L20 38 L22 41 L24 38 Z" fill="#ffd56b" />
-                                            <circle cx="22" cy="35" r="2" fill="var(--primary-color)" />
+                                            <circle cx="22" cy="35" r="2"
+                                                fill="var(--primary-color)" />
                                             <!-- Sacred Heart with Paisley flourish in center -->
                                             <path
                                                 d="M22 14 C19 10, 14 11, 14 16 C14 22, 22 26, 22 26 C22 26, 30 22, 30 16 C30 11, 25 10, 22 14 Z"
                                                 fill="#ffd56b" />
-                                            <circle cx="18" cy="16" r="1.5" fill="var(--primary-color)" />
-                                            <circle cx="26" cy="16" r="1.5" fill="var(--primary-color)" />
+                                            <circle cx="18" cy="16" r="1.5"
+                                                fill="var(--primary-color)" />
+                                            <circle cx="26" cy="16" r="1.5"
+                                                fill="var(--primary-color)" />
                                             <!-- Decorative Top Rose knots -->
                                             <circle cx="10" cy="12" r="3" fill="#e5ad42" />
                                             <circle cx="34" cy="12" r="3" fill="#e5ad42" />
@@ -806,17 +821,18 @@
                     <div class="vivah-om-ornament mb-2">
                         <span class="flourish-stem left">
                             <svg width="48" height="10" viewBox="0 0 48 10" fill="none">
-                                <line x1="0" y1="5" x2="38" y2="5" stroke="var(--black-color-5)"
-                                    stroke-width="1" />
+                                <line x1="0" y1="5" x2="38" y2="5"
+                                    stroke="var(--black-color-5)" stroke-width="1" />
                                 <circle cx="42" cy="5" r="2" fill="var(--black-color-5)" />
                             </svg>
                         </span>
-                        <span class="om-glyph" style="font-size: 20px;"><i class="bx bx-church" style="color:var(--primary-color)"></i></span>
+                        <span class="om-glyph" style="font-size: 20px;"><i class="bx bx-church"
+                                style="color:var(--primary-color)"></i></span>
                         <span class="flourish-stem right">
                             <svg width="48" height="10" viewBox="0 0 48 10" fill="none">
                                 <circle cx="6" cy="5" r="2" fill="var(--black-color-5)" />
-                                <line x1="10" y1="5" x2="48" y2="5" stroke="var(--black-color-5)"
-                                    stroke-width="1" />
+                                <line x1="10" y1="5" x2="48" y2="5"
+                                    stroke="var(--black-color-5)" stroke-width="1" />
                             </svg>
                         </span>
                     </div>
@@ -834,13 +850,13 @@
                     <!-- Filigree Divider -->
                     <div class="vivah-filigree-divider mt-2 mb-0">
                         <svg width="100" height="14" viewBox="0 0 100 14" fill="none">
-                            <line x1="0" y1="7" x2="36" y2="7" stroke="var(--black-color-5)"
-                                stroke-width="1" opacity="0.6" />
+                            <line x1="0" y1="7" x2="36" y2="7"
+                                stroke="var(--black-color-5)" stroke-width="1" opacity="0.6" />
                             <circle cx="40" cy="7" r="2" fill="var(--black-color-5)" />
                             <path d="M50 2 L54 7 L50 12 L46 7 Z" fill="var(--black-color-5)" />
                             <circle cx="60" cy="7" r="2" fill="var(--black-color-5)" />
-                            <line x1="64" y1="7" x2="100" y2="7" stroke="var(--black-color-5)"
-                                stroke-width="1" opacity="0.6" />
+                            <line x1="64" y1="7" x2="100" y2="7"
+                                stroke="var(--black-color-5)" stroke-width="1" opacity="0.6" />
                         </svg>
                     </div>
                 </div>
@@ -861,9 +877,11 @@
                                 <div class="profile-photo-frame">
                                     <a href="{{ route('web.userProfile.index', _encrypt($profile->id)) }}">
                                         @if (!$canView && $hasPhoto)
-                                            <img src="{{ _getProtectedImage($profile->gender) }}" alt="{{ _profileTitle($profile) }}" class="profile-img">
+                                            <img src="{{ _getProtectedImage($profile->gender) }}"
+                                                alt="{{ _profileTitle($profile) }}" class="profile-img">
                                         @else
-                                            <img src="{{ $profileImage }}" alt="{{ _profileTitle($profile) }}" class="profile-img">
+                                            <img src="{{ $profileImage }}" alt="{{ _profileTitle($profile) }}"
+                                                class="profile-img">
                                         @endif
                                     </a>
                                     <div class="profile-photo-overlay"></div>
@@ -873,20 +891,26 @@
                                 </div>
 
                                 <div class="profile-card-details text-center">
-                                    <h4 class="profile-name"><a href="{{ route('web.userProfile.index', _encrypt($profile->id)) }}">{{ _profileTitle($profile) }}</a></h4>
+                                    <h4 class="profile-name"><a
+                                            href="{{ route('web.userProfile.index', _encrypt($profile->id)) }}">{{ _profileTitle($profile) }}</a>
+                                    </h4>
                                     <div class="profile-meta-chips">
-                                        <span class="meta-chip">{{ _birthdateDisplay($profile->birthdate, 0) }}</span>
+                                        <span
+                                            class="meta-chip">{{ _birthdateDisplay($profile->birthdate, 0) }}</span>
                                         <span class="meta-sep">•</span>
                                         <span class="meta-chip">{{ _displayHeight($profile->height) }}</span>
                                         <span class="meta-sep">•</span>
-                                        <span class="meta-chip">{{ optional($profile->casteData)->translated_name }}</span>
+                                        <span
+                                            class="meta-chip">{{ optional($profile->casteData)->translated_name }}</span>
                                     </div>
                                     <div class="profile-sub-tag">
                                         <i class='bx bx-map'></i>{{ _getMemberLocation($profile) }}
                                     </div>
                                     <div class="profile-action-wrapper mt-3">
-                                        <a href="{{ route('web.userProfile.index', _encrypt($profile->id)) }}" class="btn-vivah-connect">
-                                            <i class='bx bx-send'></i> <span>{{ __('messages.lbl_view_profile') }}</span>
+                                        <a href="{{ route('web.userProfile.index', _encrypt($profile->id)) }}"
+                                            class="btn-vivah-connect">
+                                            <i class='bx bx-send'></i>
+                                            <span>{{ __('messages.lbl_view_profile') }}</span>
                                         </a>
                                     </div>
                                 </div>
@@ -907,17 +931,18 @@
                     <div class="vivah-om-ornament mb-2">
                         <span class="flourish-stem left">
                             <svg width="48" height="10" viewBox="0 0 48 10" fill="none">
-                                <line x1="0" y1="5" x2="38" y2="5" stroke="var(--black-color-5)"
-                                    stroke-width="1" />
+                                <line x1="0" y1="5" x2="38" y2="5"
+                                    stroke="var(--black-color-5)" stroke-width="1" />
                                 <circle cx="42" cy="5" r="2" fill="var(--black-color-5)" />
                             </svg>
                         </span>
-                        <span class="om-glyph" style="font-size: 20px;"><i class="bx bx-church" style="color:var(--primary-color)"></i></span>
+                        <span class="om-glyph" style="font-size: 20px;"><i class="bx bx-church"
+                                style="color:var(--primary-color)"></i></span>
                         <span class="flourish-stem right">
                             <svg width="48" height="10" viewBox="0 0 48 10" fill="none">
                                 <circle cx="6" cy="5" r="2" fill="var(--black-color-5)" />
-                                <line x1="10" y1="5" x2="48" y2="5" stroke="var(--black-color-5)"
-                                    stroke-width="1" />
+                                <line x1="10" y1="5" x2="48" y2="5"
+                                    stroke="var(--black-color-5)" stroke-width="1" />
                             </svg>
                         </span>
                     </div>
@@ -930,13 +955,13 @@
                     </p>
                     <div class="vivah-filigree-divider mt-2 mb-0">
                         <svg width="100" height="14" viewBox="0 0 100 14" fill="none">
-                            <line x1="0" y1="7" x2="36" y2="7" stroke="var(--black-color-5)"
-                                stroke-width="1" opacity="0.6" />
+                            <line x1="0" y1="7" x2="36" y2="7"
+                                stroke="var(--black-color-5)" stroke-width="1" opacity="0.6" />
                             <circle cx="40" cy="7" r="2" fill="var(--black-color-5)" />
                             <path d="M50 2 L54 7 L50 12 L46 7 Z" fill="var(--black-color-5)" />
                             <circle cx="60" cy="7" r="2" fill="var(--black-color-5)" />
-                            <line x1="64" y1="7" x2="100" y2="7" stroke="var(--black-color-5)"
-                                stroke-width="1" opacity="0.6" />
+                            <line x1="64" y1="7" x2="100" y2="7"
+                                stroke="var(--black-color-5)" stroke-width="1" opacity="0.6" />
                         </svg>
                     </div>
                 </div>
@@ -950,20 +975,21 @@
                                 !blank($story->wedding_photo) &&
                                 _checkStorageFileExists('upload_path.SUCCESS_STORY_IMAGE_URL', $story->wedding_photo)
                             ) {
-                                $weddingImage = _assetUrl('upload_path.SUCCESS_STORY_IMAGE_URL') . $story->wedding_photo;
+                                $weddingImage =
+                                    _assetUrl('upload_path.SUCCESS_STORY_IMAGE_URL') . $story->wedding_photo;
                             }
                             $bridegroomName = $story->groomname . ' & ' . $story->bridename;
                             $storyDesc = Str::limit(strip_tags($story->successmessage), 200);
                         @endphp
                         <div class="single-stories-box mx-2 mx-lg-3 position-relative">
                             <div class="top-stories-img">
-                                <img src="{{ $weddingImage }}" alt="{{ $bridegroomName }}"
-                                    class="story-img-cpl">
+                                <img src="{{ $weddingImage }}" alt="{{ $bridegroomName }}" class="story-img-cpl">
                                 <div class="story-badge-vivah">
                                     <i class='bx bxs-heart'></i> {{ _displayDate($story->marriagedate, 'M Y') }}
                                 </div>
                                 <div class="bottom-stories-contents p-3 p-lg-4">
-                                    <div class="story-couple-meta">{{ optional($story->religionData)->translated_name }}</div>
+                                    <div class="story-couple-meta">
+                                        {{ optional($story->religionData)->translated_name }}</div>
                                     <h4 class="story-couple-title">{{ $bridegroomName }}</h4>
                                     <p class="story-couple-quote">
                                         "{{ $storyDesc }}"
@@ -985,17 +1011,18 @@
                 <div class="vivah-om-ornament mb-2">
                     <span class="flourish-stem left">
                         <svg width="48" height="10" viewBox="0 0 48 10" fill="none">
-                            <line x1="0" y1="5" x2="38" y2="5" stroke="var(--black-color-5)"
-                                stroke-width="1" />
+                            <line x1="0" y1="5" x2="38" y2="5"
+                                stroke="var(--black-color-5)" stroke-width="1" />
                             <circle cx="42" cy="5" r="2" fill="var(--black-color-5)" />
                         </svg>
                     </span>
-                    <span class="om-glyph" style="font-size: 20px;"><i class="bx bx-church" style="color:var(--primary-color)"></i></span>
+                    <span class="om-glyph" style="font-size: 20px;"><i class="bx bx-church"
+                            style="color:var(--primary-color)"></i></span>
                     <span class="flourish-stem right">
                         <svg width="48" height="10" viewBox="0 0 48 10" fill="none">
                             <circle cx="6" cy="5" r="2" fill="var(--black-color-5)" />
-                            <line x1="10" y1="5" x2="48" y2="5" stroke="var(--black-color-5)"
-                                stroke-width="1" />
+                            <line x1="10" y1="5" x2="48" y2="5"
+                                stroke="var(--black-color-5)" stroke-width="1" />
                         </svg>
                     </span>
                 </div>
@@ -1008,13 +1035,13 @@
                 </p>
                 <div class="vivah-filigree-divider mt-2 mb-0">
                     <svg width="100" height="14" viewBox="0 0 100 14" fill="none">
-                        <line x1="0" y1="7" x2="36" y2="7" stroke="var(--black-color-5)"
-                            stroke-width="1" opacity="0.6" />
+                        <line x1="0" y1="7" x2="36" y2="7"
+                            stroke="var(--black-color-5)" stroke-width="1" opacity="0.6" />
                         <circle cx="40" cy="7" r="2" fill="var(--black-color-5)" />
                         <path d="M50 2 L54 7 L50 12 L46 7 Z" fill="var(--black-color-5)" />
                         <circle cx="60" cy="7" r="2" fill="var(--black-color-5)" />
-                        <line x1="64" y1="7" x2="100" y2="7" stroke="var(--black-color-5)"
-                            stroke-width="1" opacity="0.6" />
+                        <line x1="64" y1="7" x2="100" y2="7"
+                            stroke="var(--black-color-5)" stroke-width="1" opacity="0.6" />
                     </svg>
                 </div>
             </div>
@@ -1060,14 +1087,22 @@
                             {{ $data['about_features_subtitle'] ?? '' }}
                         </p>
                         <div class="featured-home-textgroup d-flex gap-2 gap-md-3 flex-wrap">
-                            <span class="feature-common-btn"><i class='bx bxs-check-circle'></i> {{ $data['about_feature_tag1'] ?? '' }}</span>
-                            <span class="feature-common-btn"><i class='bx bxs-check-circle'></i> {{ $data['about_feature_tag2'] ?? '' }}</span>
-                            <span class="feature-common-btn"><i class='bx bxs-check-circle'></i> {{ $data['about_feature_tag3'] ?? '' }}</span>
-                            <span class="feature-common-btn"><i class='bx bxs-check-circle'></i> {{ $data['about_feature_tag4'] ?? '' }}</span>
-                            <span class="feature-common-btn"><i class='bx bxs-check-circle'></i> {{ $data['about_feature_tag5'] ?? '' }}</span>
-                            <span class="feature-common-btn"><i class='bx bxs-check-circle'></i> {{ $data['about_feature_tag6'] ?? '' }}</span>
-                            <span class="feature-common-btn"><i class='bx bxs-check-circle'></i> {{ $data['about_feature_tag7'] ?? '' }}</span>
-                            <span class="feature-common-btn"><i class='bx bxs-check-circle'></i> {{ $data['about_feature_tag8'] ?? '' }}</span>
+                            <span class="feature-common-btn"><i class='bx bxs-check-circle'></i>
+                                {{ $data['about_feature_tag1'] ?? '' }}</span>
+                            <span class="feature-common-btn"><i class='bx bxs-check-circle'></i>
+                                {{ $data['about_feature_tag2'] ?? '' }}</span>
+                            <span class="feature-common-btn"><i class='bx bxs-check-circle'></i>
+                                {{ $data['about_feature_tag3'] ?? '' }}</span>
+                            <span class="feature-common-btn"><i class='bx bxs-check-circle'></i>
+                                {{ $data['about_feature_tag4'] ?? '' }}</span>
+                            <span class="feature-common-btn"><i class='bx bxs-check-circle'></i>
+                                {{ $data['about_feature_tag5'] ?? '' }}</span>
+                            <span class="feature-common-btn"><i class='bx bxs-check-circle'></i>
+                                {{ $data['about_feature_tag6'] ?? '' }}</span>
+                            <span class="feature-common-btn"><i class='bx bxs-check-circle'></i>
+                                {{ $data['about_feature_tag7'] ?? '' }}</span>
+                            <span class="feature-common-btn"><i class='bx bxs-check-circle'></i>
+                                {{ $data['about_feature_tag8'] ?? '' }}</span>
                         </div>
                     </div>
                 </div>
@@ -1149,11 +1184,15 @@
                         </p>
                         <div class="apps-playstore d-flex gap-3 mt-3">
                             @if (isset($configArr['ios_app_link']) && !blank($configArr['ios_app_link']))
-                                <a target="_blank" href="{{ $configArr['ios_app_link'] }}" class="app-store-badge"><img src="{{ asset('storage/web/home4') }}/assets/images/icon-app-store.png"
+                                <a target="_blank" href="{{ $configArr['ios_app_link'] }}"
+                                    class="app-store-badge"><img
+                                        src="{{ asset('storage/web/home4') }}/assets/images/icon-app-store.png"
                                         alt="Download on App Store"></a>
                             @endif
                             @if (isset($configArr['android_app_link']) && !blank($configArr['android_app_link']))
-                                <a target="_blank" href="{{ $configArr['android_app_link'] }}" class="app-store-badge"><img src="{{ asset('storage/web/home4') }}/assets/images/icon-playstore.png"
+                                <a target="_blank" href="{{ $configArr['android_app_link'] }}"
+                                    class="app-store-badge"><img
+                                        src="{{ asset('storage/web/home4') }}/assets/images/icon-playstore.png"
                                         alt="Get it on Google Play"></a>
                             @endif
                         </div>
@@ -1183,17 +1222,18 @@
                 <div class="vivah-om-ornament mb-2">
                     <span class="flourish-stem left">
                         <svg width="48" height="10" viewBox="0 0 48 10" fill="none">
-                            <line x1="0" y1="5" x2="38" y2="5" stroke="var(--black-color-5)"
-                                stroke-width="1" />
+                            <line x1="0" y1="5" x2="38" y2="5"
+                                stroke="var(--black-color-5)" stroke-width="1" />
                             <circle cx="42" cy="5" r="2" fill="var(--black-color-5)" />
                         </svg>
                     </span>
-                    <span class="om-glyph" style="font-size: 20px;"><i class="bx bx-church" style="color:var(--primary-color)"></i></span>
+                    <span class="om-glyph" style="font-size: 20px;"><i class="bx bx-church"
+                            style="color:var(--primary-color)"></i></span>
                     <span class="flourish-stem right">
                         <svg width="48" height="10" viewBox="0 0 48 10" fill="none">
                             <circle cx="6" cy="5" r="2" fill="var(--black-color-5)" />
-                            <line x1="10" y1="5" x2="48" y2="5" stroke="var(--black-color-5)"
-                                stroke-width="1" />
+                            <line x1="10" y1="5" x2="48" y2="5"
+                                stroke="var(--black-color-5)" stroke-width="1" />
                         </svg>
                     </span>
                 </div>
@@ -1206,13 +1246,13 @@
                 </p>
                 <div class="vivah-filigree-divider mt-2 mb-0">
                     <svg width="100" height="14" viewBox="0 0 100 14" fill="none">
-                        <line x1="0" y1="7" x2="36" y2="7" stroke="var(--black-color-5)"
-                            stroke-width="1" opacity="0.6" />
+                        <line x1="0" y1="7" x2="36" y2="7"
+                            stroke="var(--black-color-5)" stroke-width="1" opacity="0.6" />
                         <circle cx="40" cy="7" r="2" fill="var(--black-color-5)" />
                         <path d="M50 2 L54 7 L50 12 L46 7 Z" fill="var(--black-color-5)" />
                         <circle cx="60" cy="7" r="2" fill="var(--black-color-5)" />
-                        <line x1="64" y1="7" x2="100" y2="7" stroke="var(--black-color-5)"
-                            stroke-width="1" opacity="0.6" />
+                        <line x1="64" y1="7" x2="100" y2="7"
+                            stroke="var(--black-color-5)" stroke-width="1" opacity="0.6" />
                     </svg>
                 </div>
             </div>
@@ -1229,18 +1269,25 @@
                             @endphp
                             <div class="col-lg-6">
                                 <div class="single-community-str">
-                                    <button class="accordion-button {{ $loop->first ? '' : 'collapsed' }}" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#community-{{ $tabId }}" aria-expanded="{{ $loop->first ? 'true' : 'false' }}"
+                                    <button class="accordion-button {{ $loop->first ? '' : 'collapsed' }}"
+                                        type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#community-{{ $tabId }}"
+                                        aria-expanded="{{ $loop->first ? 'true' : 'false' }}"
                                         aria-controls="community-{{ $tabId }}">
-                                        <span class="acc-title-wrap"><i class='bx bxs-user-detail'></i> {{ $items['label'] }}</span>
+                                        <span class="acc-title-wrap"><i class='bx bxs-user-detail'></i>
+                                            {{ $items['label'] }}</span>
                                     </button>
-                                    <div id="community-{{ $tabId }}" class="accordion-collapse collapse {{ $loop->first ? 'show' : '' }}"
+                                    <div id="community-{{ $tabId }}"
+                                        class="accordion-collapse collapse {{ $loop->first ? 'show' : '' }}"
                                         data-bs-parent="#accordionExample">
                                         <div class="matri-comunity-s mt-3">
                                             @foreach ($items['items'] as $item)
-                                                <a href="{{ route('web.matrimony.index', $item['slug']) }}">{{ $item['matrimony_name'] ?: $item['matrimony_name_old'] ?? 'N/A' }}</a><span class="lvg"></span>
+                                                <a
+                                                    href="{{ route('web.matrimony.index', $item['slug']) }}">{{ $item['matrimony_name'] ?: $item['matrimony_name_old'] ?? 'N/A' }}</a><span
+                                                    class="lvg"></span>
                                             @endforeach
-                                            <a href="{{ route('web.matrimony.moreDetails', Str::slug($type)) }}" class="btn-more-details">{{ __('messages.lbl_more_details') }} →</a>
+                                            <a href="{{ route('web.matrimony.moreDetails', Str::slug($type)) }}"
+                                                class="btn-more-details">{{ __('messages.lbl_more_details') }} →</a>
                                         </div>
                                     </div>
                                 </div>
@@ -1261,7 +1308,8 @@
                 <div class="col-lg-4 col-md-6">
                     <div class="footer-brand-wrap">
                         <a href="{{ url('/') }}">
-                            <img src="{{ _assetUrl('upload_path.LOGO_IMAGE_URL') . $configArr['upload_logo'] }}" class="footer-logo mb-3" alt="{{ $configArr['web_name'] }}">
+                            <img src="{{ _assetUrl('upload_path.LOGO_IMAGE_URL') . $configArr['upload_logo'] }}"
+                                class="footer-logo mb-3" alt="{{ $configArr['web_name'] }}">
                         </a>
                         <p class="footer-brand-desc">
                             {{ $data['footer_desc'] ?? '' }}
@@ -1278,9 +1326,26 @@
                     <div class="footer_linking-mng">
                         <h5 class="footer-col-title">{{ __('messages.lbl_others') }}</h5>
                         <ul class="footerlist mt-3">
-                            <li><a href="{{ route('web.search.type', ['type' => 'quick-search']) }}">{{ __('messages.lbl_search') }}</a></li>
-                            <li><a href="{{ route('web.membershipPlan.index') }}">{{ __('messages.lbl_membership') }}</a></li>
-                            <li><a href="{{ route('web.successStory.index') }}">{{ __('messages.lbl_success_stories') }}</a></li>
+                            <li><a
+                                    href="{{ route('web.search.type', ['type' => 'quick-search']) }}">{{ __('messages.lbl_search') }}</a>
+                            </li>
+                            <li><a
+                                    href="{{ route('web.membershipPlan.index') }}">{{ __('messages.lbl_membership') }}</a>
+                            </li>
+                            <li><a
+                                    href="{{ route('web.successStory.index') }}">{{ __('messages.lbl_success_stories') }}</a>
+                            </li>
+                            <li><a href="{{ route('web.blog.index') }}">{{ __('messages.lbl_blog') }}</a></li>
+                            <li><a href="{{ route('web.event.index') }}">{{ __('messages.lbl_events') }}</a></li>
+                            <li><a
+                                    href="{{ route('web.weddingVendors.index') }}">{{ __('messages.lbl_wedding_vendors') }}</a>
+                            </li>
+                            <li><a target="_blank"
+                                    href="{{ route('affiliate.home.index') }}">{{ __('messages.lbl_become_an_affiliate') }}</a>
+                            </li>
+                            <li><a target="_blank"
+                                    href="{{ route('web.personalize.index') }}">{{ __('messages.lbl_personalize') }}</a>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -1290,9 +1355,12 @@
                     <div class="footer_linking-mng">
                         <h5 class="footer-col-title">{{ __('messages.lbl_information') }}</h5>
                         <ul class="footerlist mt-3">
-                            <li><a href="{{ route('web.aboutUs.index') }}">{{ __('messages.lbl_about_us') }}</a></li>
+                            <li><a href="{{ route('web.aboutUs.index') }}">{{ __('messages.lbl_about_us') }}</a>
+                            </li>
                             @foreach ($cmsPages as $page)
-                                <li><a href="{{ route('web.cmsPages.index', $page->page_url) }}">{{ $page->page_title }}</a></li>
+                                <li><a
+                                        href="{{ route('web.cmsPages.index', $page->page_url) }}">{{ $page->page_title }}</a>
+                                </li>
                             @endforeach
                             <li><a href="{{ route('web.faq.index') }}">{{ __('messages.lbl_faqs') }}</a></li>
                         </ul>
@@ -1311,7 +1379,8 @@
                                 <i class='bx bx-phone-call'></i>
                                 <div>
                                     <span class="contact-sub-label">{{ __('messages.lbl_phone_number') }}</span>
-                                    <a href="tel:{{ $configArr['contact_no'] }}" class="contact-val d-block">{{ $configArr['contact_no'] }}</a>
+                                    <a href="tel:{{ $configArr['contact_no'] }}"
+                                        class="contact-val d-block">{{ $configArr['contact_no'] }}</a>
                                 </div>
                             </div>
                             <div class="footer-contact-suport d-flex gap-3 align-items-center mb-2">
@@ -1337,20 +1406,22 @@
                     </div>
                     <div class="social-footers-home d-flex justify-content-center gap-2 flex-wrap">
                         @if (!empty($configArr['instagram_link']))
-                            <a href="{{ $configArr['instagram_link'] }}" target="_blank" rel="noopener noreferrer" class="social-circle" title="Instagram"><i
+                            <a href="{{ $configArr['instagram_link'] }}" target="_blank"
+                                rel="noopener noreferrer" class="social-circle" title="Instagram"><i
                                     class='bx bxl-instagram'></i></a>
                         @endif
                         @if (!empty($configArr['facebook_link']))
-                            <a href="{{ $configArr['facebook_link'] }}" target="_blank" rel="noopener noreferrer" class="social-circle" title="Facebook"><i
+                            <a href="{{ $configArr['facebook_link'] }}" target="_blank"
+                                rel="noopener noreferrer" class="social-circle" title="Facebook"><i
                                     class='bx bxl-facebook'></i></a>
                         @endif
                         @if (!empty($configArr['youtube_link']))
-                            <a href="{{ $configArr['youtube_link'] }}" target="_blank" rel="noopener noreferrer" class="social-circle" title="YouTube"><i
-                                    class='bx bxl-youtube'></i></a>
+                            <a href="{{ $configArr['youtube_link'] }}" target="_blank" rel="noopener noreferrer"
+                                class="social-circle" title="YouTube"><i class='bx bxl-youtube'></i></a>
                         @endif
                         @if (!empty($configArr['twitter_link']))
-                            <a href="{{ $configArr['twitter_link'] }}" target="_blank" rel="noopener noreferrer" class="social-circle" title="Twitter"><i
-                                    class='bx bxl-twitter'></i></a>
+                            <a href="{{ $configArr['twitter_link'] }}" target="_blank" rel="noopener noreferrer"
+                                class="social-circle" title="Twitter"><i class='bx bxl-twitter'></i></a>
                         @endif
                     </div>
                 </div>

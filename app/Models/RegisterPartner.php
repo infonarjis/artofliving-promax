@@ -26,7 +26,10 @@ class RegisterPartner extends Model
         'part_education',
         'part_occupation',
         'part_mothertongue',
-        'part_manglik'
+        'part_manglik',
+        'part_diet',
+        'part_smoke',
+        'part_drink',
     ];
 
     protected $casts = [
@@ -45,6 +48,9 @@ class RegisterPartner extends Model
         'part_occupation',
         'part_mothertongue',
         'part_manglik',
+        'part_diet',
+        'part_smoke',
+        'part_drink',
     ];
 
     public function setAttribute($key, $value)

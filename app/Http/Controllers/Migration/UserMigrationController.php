@@ -31,6 +31,12 @@ class UserMigrationController extends Controller
         'family_status'   => ['family_status_masters', 'family_status_name'],
         'married_brother' => ['no_of_bro_sis_masters', 'no_of_bro_sis_name'],
         'married_sister'  => ['no_of_bro_sis_masters', 'no_of_bro_sis_name'],
+
+        'manglik'         => ['manglik_masters', 'manglik_name'],
+        'moonsign'        => ['moonsign_master', 'moonsign_name'],
+        'diet'            => ['eating_habit_masters', 'eating_habit_name'],
+        'smoke'           => ['smoking_habit_masters', 'smoking_habit_name'],
+        'drink'           => ['drinking_habit_masters', 'drinking_habit_name'],
     ];
 
     /**
@@ -206,15 +212,15 @@ class UserMigrationController extends Controller
             'religion'               => $this->fk($o->religion),
             'caste'                  => $this->fk($o->caste),
             'subcaste'               => $this->cut($o->subcaste, 255),
-            'manglik'                => $this->cut($o->manglik, 10),
+            'manglik'                => $this->lookup($o->manglik, $maps['manglik']),
             'star'                   => $this->fk($o->star),
             'gothra'                 => $this->cut($o->gothra, 255),
-            'moonsign'               => $this->cut($o->moonsign, 10),
+            'moonsign'               => $this->lookup($o->moonsign, $maps['moonsign']),
             'mother_tongue'          => $this->fk($o->mother_tongue),
 
-            'diet'                   => $this->cut($o->diet, 50),
-            'smoke'                  => $this->cut($o->smoke, 50),
-            'drink'                  => $this->cut($o->drink, 50),
+            'diet'                   => $this->lookup($o->diet, $maps['diet']),
+            'smoke'                  => $this->lookup($o->smoke, $maps['smoke']),
+            'drink'                  => $this->lookup($o->drink, $maps['drink']),
 
             // 'education_level'        => $this->cut($o->highest_qualification, 255),
             'education_details'      => $educationDetails,
@@ -294,6 +300,7 @@ class UserMigrationController extends Controller
             'commented'             => $o->commented === '1' ? '1' : '0',
             'adminrole_view_status' => $o->adminrole_view_status === 'Yes' ? 'Yes' : 'No',
 
+            'is_verify'             => $o->is_verify === 'Yes' ? 'Yes' : 'No',
             // old enum('0','1') / enum('0','1','2')  ->  new tinyint
             'contact_visibility'    => (int) $o->contact_visibility,
             'photo_visibility'      => (int) $o->photo_visibility,
@@ -403,6 +410,10 @@ class UserMigrationController extends Controller
             'part_occupation'     => null,
             'part_mothertongue'   => $this->nz($o->part_mothertongue),
             'part_manglik'        => null,
+
+            'part_diet'           => $this->nz($o->part_diet),
+            'part_smoke'          => $this->nz($o->part_smoke),
+            'part_drink'          => $this->nz($o->part_drink),
 
             'part_art_of_living_teacher'      => $this->nz($o->part_art_of_living_teacher),
             'part_have_art_of_living_program' => $this->nz($o->part_have_art_of_living_program),
@@ -629,5 +640,47 @@ class UserMigrationController extends Controller
         $value = $this->nz($value);
 
         return $value === null ? null : mb_substr($value, 0, $length);
+    }
+
+    public function partnerNotExistData()
+    {
+        $migrated = 0;
+
+        try {
+            DB::table('registers as r')
+                ->whereNotExists(function ($query) {
+                    $query->select(DB::raw(1))
+                        ->from('register_partners as rp')
+                        ->whereColumn('rp.member_id', 'r.id');
+                })
+                ->select('r.id')
+                ->chunkById(
+                    self::CHUNK,
+                    function ($registers) use (&$migrated) {
+
+                        foreach ($registers as $register) {
+                            DB::table('register_partners')->insert([
+                                'member_id' => $register->id,
+                            ]);
+
+                            $migrated++;
+                        }
+                    },
+                    'r.id',
+                    'id'
+                );
+
+            return response()->json([
+                'status'   => true,
+                'message'  => 'Migrated successfully.',
+                'migrated' => $migrated,
+            ]);
+        } catch (\Exception $e) {
+
+            return response()->json([
+                'status'  => false,
+                'message' => $e->getMessage(),
+            ], 500);
+        }
     }
 }

@@ -94,6 +94,9 @@
                         <li><a target="_blank" href="{{ route('affiliate.home.index') }}"
                                 class="fts-14 fw-4 white-color70-p mb-lg-2 d-inline-block py-1">{{ __('messages.lbl_become_an_affiliate') }}</a>
                         </li>
+                        <li><a target="_blank" href="{{ route('web.personalize.index') }}"
+                                class="fts-14 fw-4 white-color70-p mb-lg-2 d-inline-block py-1">{{ __('messages.lbl_personalize') }}</a>
+                        </li>
                     </ul>
                 </div>
             </div>

@@ -373,6 +373,7 @@ body {
   width: fit-content;
   transition: all 0.4s ease;
   font-weight: 500;
+    gap: 5px;
 }
 
 .comman-bg-btn:focus-visible {
@@ -1570,12 +1571,12 @@ body {
   font-weight: 400;
 }
 
-.login-register-bannerbg .login-left-bg {
+/* .login-register-bannerbg .login-left-bg {
   height: 100%;
   width: 100%;
   object-fit: cover;
   border-radius: 16px;
-}
+} */
 
 .offcanvas-backdrop {
   background-color: #00000091;
@@ -11066,7 +11067,7 @@ video::-webkit-media-controls-enclosure {
   width: 132px;
 } */
 .brand-logo-text .brand-logo {
-  width: 132px;
+  width: 150px;
   max-width: 100%;
   height: auto;
 }
@@ -11105,7 +11106,7 @@ video::-webkit-media-controls-enclosure {
 .manage-way-leftside .apps-playstore {
   display: flex !important;
   gap: 12px !important;
-  justify-content: space-between;
+  justify-content: flex-start;
   margin-top: 1rem !important;
 }
 
@@ -11160,4 +11161,28 @@ video::-webkit-media-controls-enclosure {
   background: linear-gradient(90deg, #f59e0b, #ef4444);
   border-radius: 0 20px 20px 0;
   box-shadow: 0 2px 8px rgba(0, 0, 0, .3);
+}
+/* Keep the couple banner fully visible and the same height as the form card on every tab/screen */
+.login-position-section .row { align-items: stretch; }
+.login-position-section .row > [class*="col-"]:first-child { display: flex; }
+.login-register-bannerbg {
+    width: 100%;
+    height: 100%;
+    min-height: 380px;
+    overflow: hidden;
+    border-radius: 20px;
+}
+.login-register-bannerbg .login-left-bg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    min-height: 380px;
+    object-fit: cover;
+    object-position: 40% center; /* keeps the couple in view when the card overlaps the right edge */
+}
+@media (max-width: 991.98px) {
+    .login-position-section .row > [class*="col-"]:first-child { display: block; }
+    .login-register-bannerbg,
+    .login-register-bannerbg .login-left-bg { height: 260px; min-height: 260px; }
+    .login-register-bannerbg .login-left-bg { object-position: center 30%; }
 }

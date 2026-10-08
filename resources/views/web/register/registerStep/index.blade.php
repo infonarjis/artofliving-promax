@@ -10,7 +10,7 @@
                             <form id="registerStepForm" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <input type="hidden" id="current_step" name="step"
-                                    value="{{ $member->register_step + 1 ?? 1 }}">
+                                    value="{{ $member->register_step ?? 1 }}">
                                 <!-- Step1 -->
                                 <div class="steps-regis-lefts {{ ($member->register_step ?? 1) == 1 ? 'active' : '' }}">
                                     @include('web.register.registerStep.step1')

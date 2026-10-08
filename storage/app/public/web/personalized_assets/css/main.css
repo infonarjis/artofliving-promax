@@ -145,9 +145,13 @@ body {
 }
 
 .brand-logo {
+  width: 152px;
   font-size: 28px;
   font-weight: 800;
   color: var(--white-color);
+}
+.footer-logo{
+  width: 152px;
 }
 
 .brand-logo span {

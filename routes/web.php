@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\Migration\DataCommonMigrationController;
 use App\Http\Controllers\Migration\DatabaseMigrationController;
 use App\Http\Controllers\Migration\ShortlistMigrationController;
 use App\Http\Controllers\Migration\DeleteProfileMigrationController;
@@ -8,6 +7,18 @@ use App\Http\Controllers\Migration\ContactRequestMigrationController;
 use App\Http\Controllers\Migration\AssignHistoryMigrationController;
 use App\Http\Controllers\Migration\UserMigrationController;
 use App\Http\Controllers\Migration\StaticMasterMigrationController;
+use App\Http\Controllers\Migration\PaymentMigrationController;
+use App\Http\Controllers\Migration\MembershipPlanMigrationController;
+use App\Http\Controllers\Migration\CommentMasterMigrationController;
+use App\Http\Controllers\Migration\LeadCommentMigrationController;
+use App\Http\Controllers\Migration\LeadGenerationMigrationController;
+use App\Http\Controllers\Migration\ChatMigrationController;
+use App\Http\Controllers\Migration\SeoPageMigrationController;
+use App\Http\Controllers\Migration\NotificationMigrationController;
+use App\Http\Controllers\Migration\AdminNotificationMigrationController;
+use App\Http\Controllers\Migration\MatchListMigrationController;
+use App\Http\Controllers\Migration\StaffMigrationController;
+use App\Http\Controllers\Migration\StaffRoleMigrationController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -192,10 +203,11 @@ Route::group(['prefix' => ''], function (): void {
     ## Verify Email:
     Route::get('confirm-email/{token}', [LoginController::class, 'verifyEmail'])->name('web.confirm.email');
 
+    Route::get('/personalize', [PersonalizeHomeController::class, 'index'])->name('web.personalize.index');
+    Route::post('/personalized-enquiry', [PersonalizeHomeController::class, 'storeEnquiry'])->name('web.personalize.storeEnquiry');
+
     Route::group(['middleware' => 'web.guest'], function (): void {
         Route::get('/', [HomeController::class, 'index'])->name('web.home.index');
-        Route::get('/personalize', [PersonalizeHomeController::class, 'index'])->name('web.personalize.index');
-        Route::post('/personalized-enquiry', [PersonalizeHomeController::class, 'storeEnquiry'])->name('web.personalize.storeEnquiry');
 
         ## Login With Email, Matri Id and Otp :
         Route::prefix('login')->name('web.login.')->group(function () {
@@ -439,16 +451,42 @@ Route::group(['prefix' => ''], function (): void {
         Route::get('/database/migrate', [DatabaseMigrationController::class, 'migrate']);
         Route::get('/database/shortlist/migrate',  [ShortlistMigrationController::class, 'migrate']);
         Route::get('/database/delete-profile/migrate', [DeleteProfileMigrationController::class, 'migrate']);
-        Route::get('/database/contact-request/migrate',[ContactRequestMigrationController::class, 'migrate']);
-        Route::get('/database/assign-history/migrate',[AssignHistoryMigrationController::class, 'migrate']);
+        Route::get('/database/contact-request/migrate', [ContactRequestMigrationController::class, 'migrate']);
+        Route::get('/database/assign-history/migrate', [AssignHistoryMigrationController::class, 'migrate']);
 
         ## Static arrays -> tables :
-        Route::get('static-masters',    [StaticMasterMigrationController::class, 'databaseMIgration']);
+        Route::get('database/static-masters',    [StaticMasterMigrationController::class, 'databaseMIgration']);
 
         ## Register Migration Old Data to new database :
-        Route::get('registers',          [UserMigrationController::class, 'registers']);
-        Route::get('register-partners',  [UserMigrationController::class, 'registerPartners']);
-        Route::get('users-all',          [UserMigrationController::class, 'all']); // both, in order
+        Route::get('database/registers',          [UserMigrationController::class, 'registers']);
+        Route::get('database/register-partners',  [UserMigrationController::class, 'registerPartners']);
+        Route::get('database/users-all',          [UserMigrationController::class, 'all']); // both, in order
+        Route::get('database/partners-not-exists-data',          [UserMigrationController::class, 'partnerNotExistData']);
+        // Route::get('migrate/fill-missing-partners', [UserMigrationController::class, 'fillMissingPartners']);
+
+        Route::get('database/payments', [PaymentMigrationController::class, 'payments']);
+
+        Route::get('/database/membership-plan', [MembershipPlanMigrationController::class, 'databaseMigration']);
+
+        Route::get('lead-generations', [LeadGenerationMigrationController::class, 'leadGenerations']);
+        ## Comment Of lead generation :
+        Route::get('comment-master', [CommentMasterMigrationController::class, 'commentMaster']);
+        Route::get('lead-comments', [LeadCommentMigrationController::class, 'leadComments']);
+
+        ## Chat Migrations :
+        Route::get('chat-conversations', [ChatMigrationController::class, 'conversations']);
+        Route::get('chat-messages',      [ChatMigrationController::class, 'messages']);
+        Route::get('chat-all',           [ChatMigrationController::class, 'all']); // both, in order
+
+        Route::get('seo-pages', [SeoPageMigrationController::class, 'seoPages']);
+
+        Route::get('member-notifications', [NotificationMigrationController::class, 'memberNotifications']);
+        Route::get('admin-notifications', [AdminNotificationMigrationController::class, 'adminNotifications']);
+
+        Route::get('match-list', [MatchListMigrationController::class, 'matchList']);
+
+        Route::get('staff', [StaffMigrationController::class, 'staff']);
+
+        Route::get('staff-roles', [StaffRoleMigrationController::class, 'staffRoles']);
     });
-    
 });

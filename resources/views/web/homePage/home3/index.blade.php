@@ -1242,6 +1242,9 @@
                         <li><a target="_blank"
                                 href="{{ route('affiliate.home.index') }}">{{ __('messages.lbl_become_an_affiliate') }}</a>
                         </li>
+                        <li><a target="_blank"
+                                href="{{ route('web.personalize.index') }}">{{ __('messages.lbl_personalize') }}</a>
+                        </li>
                     </ul>
                 </div>
                 <div class="col-lg-2 col-md-4 col-6">
