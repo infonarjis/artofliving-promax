@@ -2,28 +2,43 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
-        Schema::table('registers', function (Blueprint $table) {
-            $table->enum('photo5_status', ['APPROVED', 'UNAPPROVED'])->nullable()->default('UNAPPROVED')->change();
-            $table->enum('photo6_status', ['APPROVED', 'UNAPPROVED'])->nullable()->default('UNAPPROVED')->change();
-        });
+        // First convert existing TINYINT values to temporary valid text values
+        DB::statement("
+            ALTER TABLE registers
+            MODIFY photo5_status VARCHAR(20) NULL
+        ");
+
+        DB::statement("
+            UPDATE registers
+            SET photo5_status = CASE
+                WHEN photo5_status = '1' THEN 'APPROVED'
+                ELSE 'UNAPPROVED'
+            END
+        ");
+
+        // Now convert VARCHAR to ENUM
+        DB::statement("
+            ALTER TABLE registers
+            MODIFY photo5_status
+            ENUM('APPROVED', 'UNAPPROVED')
+            NULL
+            DEFAULT 'UNAPPROVED'
+        ");
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
-        Schema::table('registers', function (Blueprint $table) {
-            // Restore the previous column definitions here if needed.
-        });
+        // Convert ENUM back to TINYINT
+        DB::statement("
+            ALTER TABLE registers
+            MODIFY photo5_status TINYINT(1) NULL DEFAULT 0
+        ");
     }
 };

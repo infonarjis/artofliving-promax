@@ -21,6 +21,7 @@ class Register extends Authenticatable implements CanResetPasswordContract
     protected $table = 'registers';
 
     protected $fillable = [
+        'is_verify',
         'user_type',
         'matri_id',
         'prefix',
@@ -73,6 +74,14 @@ class Register extends Authenticatable implements CanResetPasswordContract
         'employee_in',
         'occupation',
         'income',
+        'Yesart_of_living_teacher',
+        'teacher_code',
+        'teaching_courses',
+        'have_art_of_living_program',
+        'teacher_name',
+        'teacher_mobile_no',
+        'art_of_living_program',
+        'no_of_years_in_artofliving',
         'family_type',
         'father_name',
         'father_occupation',
@@ -97,6 +106,12 @@ class Register extends Authenticatable implements CanResetPasswordContract
         'photo4',
         'photo4_status',
         'photo4_uploaded_on',
+        'photo5',
+        'photo5_status',
+        'photo5_uploaded_on',
+        'photo6',
+        'photo6_status',
+        'photo6_uploaded_on',
         'selfie_photo',
         'selfie_photo_status',
         'selfie_photo_uploaded_on',
@@ -181,7 +196,9 @@ class Register extends Authenticatable implements CanResetPasswordContract
     ];
 
     protected $multiSelectFields = [
-        'education_level'
+        'education_level',
+        'teaching_courses',
+        'art_of_living_program'
     ];
 
     public function setAttribute($key, $value)
@@ -445,6 +462,40 @@ class Register extends Authenticatable implements CanResetPasswordContract
             ->get()
             ->map(function ($education) {
                 return $education->translated_name;
+            })
+            ->toArray();
+    }
+
+    public function getTeachingCoursesNamesAttribute()
+    {
+        if (blank($this->teaching_courses)) {
+            return [];
+        }
+
+        $ids = array_filter(array_map('trim', explode(',', $this->teaching_courses)));
+
+        return CourseDetailMaster::query()
+            ->whereIn('id', $ids)
+            ->get()
+            ->map(function ($course) {
+                return $course->translated_name;
+            })
+            ->toArray();
+    }
+
+    public function getArtOfLivingProgramNamesAttribute()
+    {
+        if (blank($this->art_of_living_program)) {
+            return [];
+        }
+
+        $ids = array_filter(array_map('trim', explode(',', $this->art_of_living_program)));
+
+        return CourseDetailMaster::query()
+            ->whereIn('id', $ids)
+            ->get()
+            ->map(function ($course) {
+                return $course->translated_name;
             })
             ->toArray();
     }

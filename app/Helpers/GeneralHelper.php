@@ -1308,7 +1308,7 @@ function _getAdminUnreadAlertCount(array|string|null $columns = []): bool
 
     sort($checkColumns);
     $version  = Cache::get("admin_alerts_v_{$adminId}", 0);
-    $cacheKey = "admin_unread_alerts_{$adminId}_v{$version}_" . md5(implode(',', $checkColumns));
+    $cacheKey = "admin_unread_alerts_{$adminId}_v{$version}_" . hash('sha256', implode(',', $checkColumns));
 
     return Cache::remember($cacheKey, 60, function () use ($adminId, $checkColumns) {
         return AdminAlert::where('admin_id', $adminId)
@@ -1332,7 +1332,7 @@ function _getLangNamesFromIds($modelClass, $idsString, $nameColumn, $langCode = 
     $defaultLang = _getDefaultLanguage();
     $langCode = $langCode ?: app()->getLocale();
 
-    $cacheKey = "names_from_ids_{$modelClass}_{$langCode}_" . md5($idsString);
+    $cacheKey = "names_from_ids_{$modelClass}_{$langCode}_" . hash('sha256', $idsString);
 
     return Cache::rememberForever($cacheKey, function () use ($modelClass, $ids, $nameColumn, $langCode, $defaultLang) {
 
@@ -1556,4 +1556,18 @@ if (! function_exists('_generateOtp')) {
         }
         return (string) random_int(10 ** ($length - 1), (10 ** $length) - 1);
     }
+}
+
+function _yearFormat($key = null, $forDisplay = false){
+    $year = array('0 Year', 'Less than 1' => 'Less than 1 Year');
+    for ($i = 1; $i <= 40; $i++) {
+        $year[] = $i . ' Years';
+    }
+    if (!blank($key) && isset($year[$key])) {
+        return $year[$key];
+    }
+    if ($forDisplay == false) {
+        return $year;
+    }
+    return '';
 }

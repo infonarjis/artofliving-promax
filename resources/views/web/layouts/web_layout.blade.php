@@ -72,8 +72,23 @@
     <!-- navbar start -->
     @include(_getConstant('dir_path.WEB_DIR_PATH') . '.layouts.header')
 
-    {{-- Main Conent --}}
-    @yield('web_content')
+    {{-- Main Content --}}
+    @php
+        $loginUserData = auth()->user();
+        $currentRouteAction = request()->route() ? request()->route()->getActionName() : '';
+        $isMembershipOrPayment = str_contains($currentRouteAction, 'MembershipPlanController') || str_contains($currentRouteAction, 'PaymentController');
+    @endphp
+    @if(Auth::check() && ($loginUserData->plan_status !== 'Paid') && !$isMembershipOrPayment && $loginUserData->is_verify == 'No')
+        <script>window.location.href = "{{ route('web.membershipPlan.index') }}";</script>
+        @php
+            header('Location: ' . route('web.membershipPlan.index'));
+            exit;
+        @endphp
+    @elseif(isset($loginUserData->plan_status) && $loginUserData->plan_status == 'Paid' && isset($loginUserData->is_verify) && $loginUserData->is_verify == 'No')
+        @include('web.isVerifyProfile')
+    @else
+        @yield('web_content')
+    @endif
 
     <!-- footer section start -->
     @include(_getConstant('dir_path.WEB_DIR_PATH') . '.layouts.footer')

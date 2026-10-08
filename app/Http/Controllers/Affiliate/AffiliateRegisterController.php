@@ -59,7 +59,7 @@ class AffiliateRegisterController extends Controller
             File::makeDirectory($qrFolder, 0755, true);
         }
         /* ---------- QR File ---------- */
-        $qrFileName = 'qr_' . time() . '_' . rand(100, 999) . '.svg';
+        $qrFileName = 'qr_' . time() . '_' . bin2hex(random_bytes(8)) . '.svg';
         $qrFullPath = $qrFolder . '/' . $qrFileName;
 
         /* ---------- Generate QR SVG ---------- */

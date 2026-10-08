@@ -1045,6 +1045,62 @@ class MemberController extends Controller
                 )
             ),
         );
+        ## Section 4
+        $year = _yearFormat();
+        $fromHtmlArtOfLivingStep1 = array(
+            'Yesart_of_living_teacher' => array(
+                'is_required' => 'required',
+                'type' => 'radio', 'value_arr' => array('Yes' => 'Yes', 'No' => 'No'),
+                'value' => 'No', 'label' => 'Art of Living Teacher',
+                'form_group_class' => ' Yesart_of_living_teacher',
+                'is_register' => 'yes', 'class' => 'required'
+            ),
+            'teacher_code' => array(
+                'label' => 'Teacher Code',
+                'form_group_class' => ' teacher_code',
+                'other' => "pattern='[a-zA-Z0-9]+' minlength='4'",
+                'is_register' => 'yes'
+            ),
+            'teaching_courses' => array(
+                'form_register_class' => 'teaching_courses',
+                'label' => 'I Teach', 'type' => 'dropdown', 'is_register' => 'yes',
+                'is_multiple' => 'yes', 'display_placeholder' => 'No',
+                'class' => 'single', 'relation' => array(
+                    'rel_model' => 'CourseDetailMaster',
+                    'key_val' => 'id', 'class' => 'required', 'key_disp' => 'course_name'
+                ),
+            ),
+            'have_art_of_living_program' => array(
+                'is_required' => 'required',
+                'type' => 'radio', 'value_arr' => array('Yes' => 'Yes', 'No' => 'No'),
+                'value' => 'No', 'label' => 'Art Of Living Program', 'is_register' => 'yes',
+                'class' => 'required'
+            ),
+            'teacher_name' => array(
+                'class' => '', 'is_register' => 'yes',
+                'form_group_class' => ' teacher_name', 'label' => 'Reference Teacher'
+            ),
+            'teacher_mobile_no' => array(
+                'type' => 'mobile', 'class' => '',
+                'form_group_class' => ' teacher_mobile_no', 'label' => 'Teacher Mobile Number',
+                'is_register' => 'yes'
+            ),
+            'art_of_living_program' => array(
+                'form_group_class' => ' art_of_living_program',
+                'label' => 'Course Completed', 'type' => 'dropdown', 'is_register' => 'yes',
+                'is_multiple' => 'yes', 'display_placeholder' => 'No', 'class' => 'single',
+                'relation' => array(
+                    'rel_model' => 'CourseDetailMaster', 'key_val' => 'id',
+                    'class' => 'required', 'key_disp' => 'course_name'
+                ),
+            ),
+            'no_of_years_in_artofliving' => array(
+                'type' => 'dropdown',
+                'display_placeholder' => 'No',
+                'class' => 'single', 'value_arr' => $year,
+                'label' => 'Years with Art of Living', 'is_register' => 'yes'
+            ),
+        );
         ## Step : 2
         $elementArrStep2 = array(
             'country_id' => array(
@@ -1508,6 +1564,20 @@ class MemberController extends Controller
                 'label' => 'Partner Manglik',
                 'is_register' => 'yes'
             ),
+            'part_art_of_living_teacher' => array(
+                'type' => 'dropdown', 'is_multiple' => 'yes',
+                'display_placeholder' => 'No', 'is_register' => 'yes',
+                'class' => 'single disbaledValue',
+                'value_arr' => array('Does Not Matter' => 'Does Not Matter', 'Yes' => 'Yes', 'No' => 'No'),
+                'label' => 'Partner Art Of Living Teacher'
+            ),
+            'part_have_art_of_living_program' => array(
+                'type' => 'dropdown', 'is_multiple' => 'yes',
+                'display_placeholder' => 'No', 'is_register' => 'yes',
+                'class' => 'single disbaledValue',
+                'value_arr' => array('Does Not Matter' => 'Does Not Matter', 'Yes' => 'Yes', 'No' => 'No'),
+                'label' => 'Partner Art Of Living Program'
+            ),
         );
         ## Selfie Photo:
         $statusArr = array('APPROVED' => 'APPROVED', 'UNAPPROVED' => 'UNAPPROVED');
@@ -1647,6 +1717,7 @@ class MemberController extends Controller
         $fromHtmlStep1 = $this->adminFormBuilderService->generateFormElement($elementArrStep1, $otherData);
         $fromHtmlReligionStep1 = $this->adminFormBuilderService->generateFormElement($elementArrReligionStep1, $otherData);
         $fromHtmlEducationStep1 = $this->adminFormBuilderService->generateFormElement($elementArrEducationStep1, $otherData);
+        $fromHtmlArtOfLivingStep1 = $this->adminFormBuilderService->generateFormElement($fromHtmlArtOfLivingStep1, $otherData);
         $fromHtmlStep2 = $this->adminFormBuilderService->generateFormElement($elementArrStep2, $otherData);
         $fromHtmlStep3 = $this->adminFormBuilderService->generateFormElement($elementArrStep3, $otherData);
         $fromHtmlAboutStep3 = $this->adminFormBuilderService->generateFormElement($elementArrAboutStep3, $otherData);
@@ -1665,6 +1736,7 @@ class MemberController extends Controller
             'fromHtmlStep1' => $fromHtmlStep1,
             'fromHtmlReligionStep1' => $fromHtmlReligionStep1,
             'fromHtmlEducationStep1' => $fromHtmlEducationStep1,
+            'fromHtmlArtOfLivingStep1' => $fromHtmlArtOfLivingStep1,
             'formId1' => 'addEditForm1',
             'formName1' => 'addEditForm1',
             'formSubmitBtnId1' => 'formSubmitBtn1',
@@ -1742,6 +1814,8 @@ class MemberController extends Controller
                         'caste'               => 'required|string',
                         'education_level'     => 'required',
                         'occupation'          => 'required|string',
+                        'Yesart_of_living_teacher'          => 'required',
+                        'have_art_of_living_program'          => 'required',
                     ];
 
                     if ($mode === 'edit') {
@@ -1783,8 +1857,12 @@ class MemberController extends Controller
                         'income'               => $postData['income'] ?? null,
                         'mobile_verify_status' => $postData['mobile_verify_status'] ?? null,
                         'email_verify_status'  => $postData['email_verify_status'] ?? null,
+                        'Yesart_of_living_teacher'  => $postData['Yesart_of_living_teacher'] ?? null,
+                        'teacher_code'  => $postData['teacher_code'] ?? null,
+                        'have_art_of_living_program'  => $postData['have_art_of_living_program'] ?? null,
+                        'teacher_name'  => $postData['teacher_name'] ?? null,
+                        'no_of_years_in_artofliving'  => $postData['no_of_years_in_artofliving'] ?? null,
                     ];
-
                     ## Gender :
                     if (!empty($postData['gender'])) {
                         $updateData['gender'] =  $postData['gender'] ?? null;
@@ -1807,6 +1885,30 @@ class MemberController extends Controller
                     }
                     if (isset($postData['status_children'])) {
                         $updateData['status_children'] = $postData['status_children'];
+                    }
+
+                     ## Teaching courses can arrive as a single value or an array. :
+                    if (!empty($postData['teaching_courses'])) {
+                        $teachingCourses = is_array($postData['teaching_courses']) ? $postData['teaching_courses'] : [$postData['teaching_courses']];
+                        $updateData['teaching_courses'] = implode(',', array_filter($teachingCourses));
+                    }
+                    if (!empty($postData['art_of_living_program'])) {
+                        $artOfLivingProgram = is_array($postData['art_of_living_program']) ? $postData['art_of_living_program'] : [$postData['art_of_living_program']];
+                        $updateData['art_of_living_program'] = implode(',', array_filter($artOfLivingProgram));
+                    }
+                    ## Teacher number: combine country code + number. :
+                    if (!blank($postData['teacher_mobile_no_country_code'] ?? null) && !blank($postData['teacher_mobile_no'] ?? null)) {
+                        $updateData['teacher_mobile_no'] = $postData['teacher_mobile_no_country_code'] . '-' . $postData['teacher_mobile_no'];
+                    }
+
+                    if ($postData['Yesart_of_living_teacher'] == 'No') {
+                        $updateData['teacher_code'] = null;
+                        $updateData['teaching_courses'] = null;
+                    }
+                    if ($postData['have_art_of_living_program'] == 'No') {
+                        $updateData['teacher_name'] = null;
+                        $updateData['teacher_mobile_no'] = null;
+                        $updateData['art_of_living_program'] = null;
                     }
 
                     break;
@@ -1896,6 +1998,8 @@ class MemberController extends Controller
                         'part_occupation'     => $postData['part_occupation'] ?? null,
                         'part_state'          => $postData['part_state'] ?? null,
                         'part_manglik'        => $postData['part_manglik'] ?? null,
+                        'part_art_of_living_teacher'        => $postData['part_art_of_living_teacher'] ?? null,
+                        'part_have_art_of_living_program'        => $postData['part_have_art_of_living_program'] ?? null,
                     ];
                     break;
                 ## Step 6: Photos / ID proof / horoscope uploads :
@@ -2414,6 +2518,8 @@ class MemberController extends Controller
                 ['key' => 'part_occupation', 'label' => 'Partner Occupation', 'value' => $registerPartnerArr->part_occupation ?? null],
                 ['key' => 'part_mothertongue', 'label' => 'Partner Mother Tongue', 'value' => $registerPartnerArr->part_mothertongue ?? null],
                 ['key' => 'part_manglik', 'label' => 'Partner Manglik', 'value' => $registerPartnerArr->part_manglik ?? null],
+                ['key' => 'part_art_of_living_teacher', 'label' => 'Partner Manglik', 'value' => $registerPartnerArr->part_art_of_living_teacher ?? null],
+                ['key' => 'part_have_art_of_living_program', 'label' => 'Partner Manglik', 'value' => $registerPartnerArr->part_have_art_of_living_program ?? null],
             ],
         ];
 

@@ -86,7 +86,7 @@ class SuccessStoryController extends Controller
                 'required_if:video_type,video',
                 'file',
                 'mimes:mp4,mov,avi,wmv,webm',
-                'max:51200',
+                'max:20480',
             ],
             'video_link' => [
                 'nullable',

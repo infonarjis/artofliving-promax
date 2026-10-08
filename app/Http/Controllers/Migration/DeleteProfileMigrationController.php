@@ -149,6 +149,7 @@ class DeleteProfileMigrationController extends Controller
 
                     $senderExists = $source->table('registers')
                         ->where('id', $row->sender)
+                        ->where('is_deleted', 'No')
                         ->exists();
 
                     if (!$senderExists) {

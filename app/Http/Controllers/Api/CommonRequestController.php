@@ -11,6 +11,7 @@ use App\Models\CasteMaster;
 use App\Models\CityMaster;
 use App\Models\ComplexionMaster;
 use App\Models\CountryMaster;
+use App\Models\CourseDetailMaster;
 use App\Models\CurrencyMaster;
 use App\Models\DesignationMaster;
 use App\Models\DrinkingHabitMaster;
@@ -229,6 +230,7 @@ class CommonRequestController extends Controller
             'weight_list'           => _weightList(),
             'height_list'           => _heightList(),
             'report_types'          => _getStaticArr('reportTypes'),
+            'year_list'             => _yearFormat(),
         ];
 
         ## Database Dropdowns :
@@ -269,6 +271,7 @@ class CommonRequestController extends Controller
             'body_type_list'       => BodyTypeMaster::getDropdown($currentLanguage),
             'complexion_list'      => ComplexionMaster::getDropdown($currentLanguage),
             'blood_group_list'     => BloodGroupMaster::getDropdown($currentLanguage),
+            'course_list'          => CourseDetailMaster::getDropdown($currentLanguage),
         ];
 
         $data = [];

@@ -428,6 +428,130 @@
       },
       {
         "step_number": 6,
+        "step_key": "art_of_living_association",
+        "title": "lbl_artofliving_association",
+        "subtitle": "lbl_enter_your_artofliving_association",
+        "endpoint": "my-profile/edit",
+        "http_method": "POST",
+        "extra_params": {
+          "form_type": "art_of_living_association"
+        },
+        "fields": [
+          {
+            "name": "Yesart_of_living_teacher",
+            "label": "field_lbl_artofliving_teacher",
+            "type": "segment_selector",
+            "is_required": true,
+            "default_value": "Yes",
+            "options": [
+              {
+                "id": "Yes",
+                "label": "Yes"
+              },
+              {
+                "id": "No",
+                "label": "No"
+              }
+            ]
+          },
+          {
+            "name": "teacher_code",
+            "label": "field_lbl_artofliving_teacher_code",
+            "placeholder": "field_lbl_enter_artofliving_teacher_code",
+            "type": "text",
+            "is_required": false,
+            "default_value": "AOLTEACHER123456",
+            "show_if": {
+              "field": "Yesart_of_living_teacher",
+              "operator": "equals",
+              "value": "Yes"
+            }
+          },
+          {
+            "name": "teaching_courses",
+            "label": "field_lbl_artofliving_i_teach",
+            "placeholder": "field_lbl_select_artofliving_i_teach",
+            "type": "multi_select_dropdown",
+            "dropdown_source": "course_list",
+            "is_required": false,
+            "default_value": [],
+            "show_if": {
+              "field": "Yesart_of_living_teacher",
+              "operator": "equals",
+              "value": "Yes"
+            }
+          },
+          {
+            "name": "have_art_of_living_program",
+            "label": "field_lbl_artofliving_program",
+            "type": "segment_selector",
+            "is_required": true,
+            "default_value": "Yes",
+            "options": [
+              {
+                "id": "Yes",
+                "label": "Yes"
+              },
+              {
+                "id": "No",
+                "label": "No"
+              }
+            ]
+          },
+          {
+            "name": "teacher_name",
+            "label": "field_lbl_artofliving_reference_teacher",
+            "placeholder": "field_lbl_enter_artofliving_reference_teacher",
+            "type": "text",
+            "is_required": false,
+            "default_value": "Swami Pragyapad",
+            "show_if": {
+              "field": "have_art_of_living_program",
+              "operator": "equals",
+              "value": "Yes"
+            }
+          },
+          {
+            "name": "teacher_mobile_no",
+            "label": "field_lbl_artofliving_teacher_mobile_no",
+            "placeholder": "field_lbl_enter_artofliving_teacher_mobile_no",
+            "type": "phone_number",
+            "default_country_code": "+91",
+            "is_required": false,
+            "default_value": "9876543210",
+            "show_if": {
+              "field": "have_art_of_living_program",
+              "operator": "equals",
+              "value": "Yes"
+            }
+          },
+          {
+            "name": "art_of_living_program",
+            "label": "field_lbl_artofliving_course_completed",
+            "placeholder": "field_lbl_select_artofliving_course_completed",
+            "type": "multi_select_dropdown",
+            "dropdown_source": "course_list",
+            "is_required": false,
+            "default_value": [],
+            "show_if": {
+              "field": "have_art_of_living_program",
+              "operator": "equals",
+              "value": "Yes"
+            }
+          },
+          {
+            "name": "no_of_years_in_artofliving",
+            "label": "field_lbl_artofliving_years_with_artofliving",
+            "placeholder": "field_lbl_select_artofliving_years_with_artofliving",
+            "type": "single_select_dropdown",
+            "dropdown_source": "year_list",
+            "is_required": false,
+            "default_value": "2 Years"
+          }
+        ]
+      },
+      {
+        "step_number": 7,
         "step_key": "family_details",
         "title": "lbl_family_details",
         "subtitle": "lbl_enter_your_family_details",
@@ -558,7 +682,7 @@
         ]
       },
       {
-        "step_number": 7,
+        "step_number": 8,
         "step_key": "partner_preference",
         "title": "lbl_partner_preferences",
         "subtitle": "lbl_enter_your_partner_preferences_details",
@@ -685,6 +809,50 @@
             "dropdown_source": "manglik_list",
             "is_required": false,
             "default_value": ""
+          },
+          {
+            "name": "part_art_of_living_teacher",
+            "label": "field_lbl_artofliving_partner_teacher",
+            "placeholder": "field_lbl_select_artofliving_partner_teacher",
+            "type": "single_select_dropdown",
+            "options": [
+              {
+                "id": "Doesn't Matter",
+                "label": "Doesn't Matter"
+              },
+              {
+                "id": "Yes",
+                "label": "Yes"
+              },
+              {
+                "id": "No",
+                "label": "No"
+              }
+            ],
+            "default_value": "",
+            "is_required": false
+          },
+          {
+            "name": "part_have_art_of_living_program",
+            "label": "field_lbl_artofliving_partner_program",
+            "placeholder": "field_lbl_select_artofliving_partner_program",
+            "type": "single_select_dropdown",
+            "options": [
+              {
+                "id": "Doesn't Matter",
+                "label": "Doesn't Matter"
+              },
+              {
+                "id": "Yes",
+                "label": "Yes"
+              },
+              {
+                "id": "No",
+                "label": "No"
+              }
+            ],
+            "default_value": "",
+            "is_required": false
           }
         ]
       }

@@ -277,6 +277,28 @@ class RegisterController extends Controller
                     break;
                 case 5:
                     $validator = Validator::make($request->all(), [
+                        'Yesart_of_living_teacher' => 'required',
+                        'have_art_of_living_program' => 'required',
+                    ]);
+
+                    if ($validator->fails()) {
+                        return ApiResponseService::validationError($validator);
+                    }
+                    $register->update([
+                        'register_step' => 5,
+                        'Yesart_of_living_teacher' => $request->Yesart_of_living_teacher,
+                        'teacher_code' => $request->teacher_code,
+                        'teaching_courses' => $request->teaching_courses,
+                        'have_art_of_living_program' => $request->have_art_of_living_program,
+                        'teacher_name' => $request->teacher_name,
+                        'teacher_mobile_no' => $request->teacher_mobile_no,
+                        'art_of_living_program' => $request->art_of_living_program,
+                        'no_of_years_in_artofliving' => $request->no_of_years_in_artofliving,
+                    ]);
+
+                    break;
+                case 6:
+                    $validator = Validator::make($request->all(), [
                         'father_name' => 'required',
                         'father_occupation' => 'required',
                         'mother_name' => 'required',
@@ -287,7 +309,7 @@ class RegisterController extends Controller
                         return ApiResponseService::validationError($validator);
                     }
                     $register->update([
-                        'register_step' => 5,
+                        'register_step' => 6,
                         'family_type' => $request->family_type,
                         'family_status' => $request->family_status,
                         'father_name' => $request->father_name,
@@ -302,7 +324,7 @@ class RegisterController extends Controller
                     ]);
 
                     break;
-                case 6:
+                case 7:
                     $imageRule = 'image|mimes:jpeg,jpg,png,webp,heic,heif|max:5120';
                     $validator = Validator::make($request->all(), [
                         'selfie_photo' => $register->selfie_photo ? "nullable|{$imageRule}" : "required|{$imageRule}",
@@ -362,7 +384,7 @@ class RegisterController extends Controller
 
                     $register->update($updateData);
                     break;
-                case 7:
+                case 8:
                     $rules = [
                         'id_proof_type' => 'required',
                     ];
@@ -433,7 +455,7 @@ class RegisterController extends Controller
 
                     $register->update($updateData);
                     break;
-                case 8:
+                case 9:
                     RegisterPartner::updateOrCreate(
                         ['member_id' => $register->id],
                         [
@@ -451,6 +473,8 @@ class RegisterController extends Controller
                             'part_occupation' => $request->part_occupation ?? null,
                             'part_mothertongue' => $request->part_mothertongue ?? null,
                             'part_manglik' => $request->part_manglik ?? null,
+                            'part_art_of_living_teacher' => $request->part_art_of_living_teacher ?? null,
+                            'part_have_art_of_living_program' => $request->part_have_art_of_living_program ?? null,
                         ]
                     );
                     $register->update(['register_step' => 9]);

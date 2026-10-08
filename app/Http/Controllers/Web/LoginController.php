@@ -52,17 +52,18 @@ class LoginController extends Controller
     public function authenticate(Request $request)
     {
         $request->validate([
-            'login' => 'required|string',
+            'country_code' => 'required|string',
+            'mobile' => 'required',
             'password' => 'required|string',
             'captcha_code' => 'required|string'
         ]);
-
+        
         if (!CaptchaHelper::validate($request->captcha_code, 'login_captcha')) {
             return $this->captchaError();
         }
 
-        $field = filter_var($request->login, FILTER_VALIDATE_EMAIL) ? 'email' : 'matri_id';
-        $credentials = [$field => $request->login, 'password' => $request->password];
+        $mobile = $request->country_code . '-' . $request->mobile;
+        $credentials = ['mobile' => $mobile, 'password' => $request->password];
 
         if (!Auth::guard('web')->attempt($credentials, $request->remember ?? false)) {
             return $this->invalidLogin();

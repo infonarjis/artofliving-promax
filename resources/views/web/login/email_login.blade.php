@@ -6,12 +6,22 @@
     <input type="password" name="fake_pass" autocomplete="new-password" tabindex="-1"
         style="position:absolute; opacity:0; height:0; width:0; pointer-events:none;">
 
-    <div class="comman_inputfield_main position-relative mb-3">
-        <label for="login">{{ __('messages.field_enter_matri_id_or_email_id') }}</label>
-        <div class="position-relative">
-            <input type="text" name="login" id="login" autocomplete="off" readonly
-                onfocus="this.removeAttribute('readonly');"
-                placeholder="{{ __('messages.field_enter_your_matri_id_or_email_id') }}" class="input_comman_field">
+    <div class="comman_inputfield_main position-relative w-100">
+        <label for="mobile">{{ __('messages.field_lbl_mobile_number') }}
+            <span class="required-field">*</span>
+        </label>
+        <div class="d-flex gap-3">
+            <div class="custom-select2-div country-code">
+                <div class="edit_inputMain-sltr w-100">
+                    <select name="country_code" id="country_code1" class="Single_searchDv">
+                        @php echo _defaultCountryCode() @endphp
+                    </select>
+                </div>
+            </div>
+            <div class="position-relative w-100">
+                <input type="text" name="mobile" id="mobile" maxlength="12" inputmode="numeric"
+                    class="input_comman_field" placeholder="{{ __('messages.field_lbl_enter_mobile_number') }}">
+            </div>
         </div>
     </div>
 

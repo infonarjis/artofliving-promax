@@ -76,7 +76,7 @@ class SeoSettingsController extends Controller
         // Create file if not exists
         if (!File::exists($path)) {
             File::put($path, '');
-            chmod($path, 0664);
+            chmod($path, 0644);
         }
 
         // Write content

@@ -1,7 +1,7 @@
 <div class="topcolleps-edtbar d-flex align-items-center justify-content-between py-lg-1">
     <h4 class="fts-16 fw-7 white-color-n w-100">{{ __('messages.lbl_religious_information') }}</h4>
 </div>
-<form id="formReligionInformation" method="POST" enctype="multipart/form-data">
+<form id="formReligionInformation" method="POST">
     @csrf
     <div class="row px-1 mt-3">
         @if (_checkFieldEnable('religion', 'edit_profile'))
