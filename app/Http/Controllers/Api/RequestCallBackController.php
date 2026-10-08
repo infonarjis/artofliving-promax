@@ -20,7 +20,7 @@ class RequestCallBackController extends Controller
             $authUser = auth()->guard('api')->user();
 
             $rules = [
-                'mobile' => ['required', 'string', 'max:20'],
+                'mobile'       => ['required', 'digits_between:6,15'],
             ];
 
             $validator = Validator::make($request->all(), $rules);
