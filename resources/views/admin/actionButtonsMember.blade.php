@@ -174,6 +174,12 @@
                         <i class='bx bx-block text-white'></i>
                     </button>
                 @endif
+                @if (isset($actionBtnArr['verifyBtn']) && $actionBtnArr['verifyBtn'] == 1)
+                    <button class="btn_verify actionBtn" data-column="is_verify" data-value="Yes"
+                        data-bs-toggle="tooltip" data-bs-placement="top" title="Verify">
+                        <i class='bx bx-check-shield text-white'></i>
+                    </button>
+                @endif
                 @if (isset($actionBtnArr['fstatus']) && $actionBtnArr['fstatus'] == 1)
                     <button class="btn_fstatus-sd actionBtn" data-column="fstatus" data-value="Featured"
                         data-bs-toggle="tooltip" data-bs-placement="top" title="Featured">
@@ -185,7 +191,7 @@
                     </button>
                 @endif
                 @if (isset($actionBtnArr['affiliateVerify']) && $actionBtnArr['affiliateVerify'] == 1)
-                    <button class="fw-bold mb-4 btn btn-success actionBtn" data-column="is_verify" data-value="Yes"
+                    <button class="fw-bold mb-4 btn btn-success actionBtn" data-column="is_affiliate_verify" data-value="Yes"
                         data-bs-toggle="tooltip" data-bs-placement="top" title="Verify Member">
                         <i class='bx bxs-check-shield text-white'></i>
                     </button>

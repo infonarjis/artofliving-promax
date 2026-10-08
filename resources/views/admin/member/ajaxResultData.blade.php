@@ -205,6 +205,10 @@
                                 <button class="btn_aprunge btn_unapproved"><i
                                         class='bx bxs-credit-card text-white'></i>Expired</button>
                             @endif
+                            @if ($paginationData->is_verify == 'Yes')
+                                <button class="btn_aprunge btn_approved"><i
+                                        class='bx bxs-check-shield text-white'></i>Verified</button>
+                            @endif
 
                             @if ($paginationData->fstatus == 'Featured')
                                 <button class="btn_AllGroup featured_btn " data-bs-toggle="tooltip"

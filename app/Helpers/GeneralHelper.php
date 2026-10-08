@@ -167,6 +167,7 @@ function _getStaticArr($arrName = '', $id = "")
         'horoscope_file',
         'selfie_photo_status',
         'selfie_photo',
+        'is_affiliate_verify',
         'is_verify'
     );
 

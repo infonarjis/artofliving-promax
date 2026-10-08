@@ -912,7 +912,7 @@ class MemberController extends Controller
             ),
             'caste' => array(
                 'is_required' => 'required',
-                'label' => 'Caste',
+                'label' => 'Community',
                 'type' => 'dropdown',
                 'is_register' => 'yes',
                 'class' => 'single required',
@@ -925,7 +925,7 @@ class MemberController extends Controller
                     'cus_rel_col_val' => 'religion'
                 )
             ),
-            'subcaste' => array('label' => 'Sub Caste', 'is_register' => 'yes', 'placeholder' => 'Enter Sub Caste'),
+            'subcaste' => array('label' => 'Sub Community', 'is_register' => 'yes', 'placeholder' => 'Enter Sub Community'),
             'manglik' => array(
                 'type' => 'dropdown',
                 'class' => 'single',
@@ -2229,7 +2229,7 @@ class MemberController extends Controller
         $postData = $request->all();
         if (!empty($postData)) {
             $updateData = _getRequestData(_getStaticArr('statusUpdateArr'), $postData);
-            if (!isset($postData['is_verify'])) {
+            if (!isset($postData['is_affiliate_verify'])) {
                 unset($updateData['id']);
                 if (isset($postData['id_proof_front']) && empty($postData['id_proof_front']) && $postData['id_proof_front'] == '') {
                     $updateData['id_proof_front'] = '';
@@ -2353,7 +2353,7 @@ class MemberController extends Controller
                 }
 
                 ## Verification Affiliate Income :
-            } elseif (isset($postData['is_verify']) && $postData['is_verify'] == 'Yes') {
+            } elseif (isset($postData['is_affiliate_verify']) && $postData['is_affiliate_verify'] == 'Yes') {
                 $ids = $postData['id'] ?? [];
                 // Convert to array safely
                 if (!is_array($ids)) {
@@ -2479,8 +2479,8 @@ class MemberController extends Controller
             ],
             'Religious Information' => [
                 ['key' => 'religion', 'label' => 'Religion', 'value' => $registerArr->religionData->religion_name ?? null],
-                ['key' => 'caste', 'label' => 'Caste', 'value' => $registerArr->casteData->caste_name ?? null],
-                ['key' => 'subcaste', 'label' => 'Sub Caste', 'value' => $registerArr->subcaste ?? null],
+                ['key' => 'caste', 'label' => 'Community', 'value' => $registerArr->casteData->caste_name ?? null],
+                ['key' => 'subcaste', 'label' => 'Sub Community', 'value' => $registerArr->subcaste ?? null],
                 ['key' => 'manglik', 'label' => 'Manglik', 'value' => $registerArr->manglikData->manglik_name ?? null],
                 ['key' => 'gothra', 'label' => 'Gothra', 'value' => $registerArr->gothra ?? null],
                 ['key' => 'moonsign', 'label' => 'Moonsign', 'value' => $registerArr->moonsignData->moonsign_name ?? null],
@@ -3678,8 +3678,8 @@ class MemberController extends Controller
             'dataStep2' => [
                 'Religious Information' => [
                     'Religion' => $memberData->religionData->religion_name ?? null,
-                    'Caste' => $memberData->casteData->caste_name ?? null,
-                    'Sub Caste' => $memberData->subcaste ?? null,
+                    'Community' => $memberData->casteData->caste_name ?? null,
+                    'Sub Community' => $memberData->subcaste ?? null,
                     'Manglik' => $memberData->manglikData->manglik_name ?? null,
                     'Gothra' => $memberData->gothra ?? null,
                     'Moonsign' => $memberData->moonsignData->moonsign_name ?? null,
