@@ -81,6 +81,8 @@ Route::group(['middleware' => ['auth:sanctum', 'app.check.deleted']], function (
     ## Logout :
     Route::post('logout', [LoginController::class, 'logout']);
 
+    Route::get('get-verify-content', [LoginController::class, 'getVerifyContent']);
+
     ## Dashboard :
     Route::get('dashboard', [DashboardController::class, 'index']);
 

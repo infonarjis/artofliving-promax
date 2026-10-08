@@ -336,4 +336,35 @@ class LoginController extends Controller
             return ApiResponseService::error(_getLangApi($request, 'msg_something_went_wrong'));
         }
     }
+
+    ## Get Tocken List Api:
+    public function getVerifyContent(Request $request): JsonResponse
+    {
+        try {
+            $resultArr = [
+                'lbl_under_review' => __('messages.lbl_under_review'),
+                'lbl_pending_verification' => __('messages.lbl_pending_verification'),
+                'lbl_thank_you_signing_up_verification' => __('messages.lbl_thank_you_signing_up_verification'),
+                'lbl_registration_submitted' => __('messages.lbl_registration_submitted'),
+                'lbl_registration_submitted_desc' => __('messages.lbl_registration_submitted_desc'),
+                'lbl_profile_verification' => __('messages.lbl_profile_verification'),
+                'lbl_profile_verification_desc' => __('messages.lbl_profile_verification_desc'),
+                'lbl_access_activation' => __('messages.lbl_access_activation'),
+                'lbl_access_activation_desc' => __('messages.lbl_access_activation_desc'),
+                'lbl_phone_support' => __('messages.lbl_phone_support'),
+                'mobile' => '(+91) 9900038442/2',
+                'lbl_email_support' => __('messages.lbl_email_support'),
+                'email' => 'info@artofliving.org',
+            ];
+
+            return ApiResponseService::success(_getLangApi($request, 'msg_data_get_success'), $resultArr);
+        } catch (Throwable $e) {
+            Log::error('Get Tocken API failed.', [
+                'message' => $e->getMessage(),
+                'file'    => $e->getFile(),
+                'line'    => $e->getLine(),
+            ]);
+            return ApiResponseService::error(_getLangApi($request, 'msg_something_went_wrong'));
+        }
+    }
 }
