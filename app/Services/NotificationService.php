@@ -121,7 +121,7 @@ class NotificationService
         $payload = [
             'type'      => $notiType,
             'viewer_id' => (string) $viewer->id,
-            // 'viewer_image' => ''
+            'viewer_image' => (string) _getMemberProfileImage($viewer)
         ];
         if (isset($dataArr['conversation_id'])) {
             $payload['conversation_id'] = $dataArr['conversation_id'];

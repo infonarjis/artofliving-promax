@@ -45,7 +45,8 @@ use App\Http\Controllers\Api\{
     ReportProfileController,
     SuccessStoryController,
     AiAutoInterestController,
-    AiMatchMakingController
+    AiMatchMakingController,
+    RequestCallBackController
 };
 
 ## Common-Request :
@@ -221,4 +222,7 @@ Route::group(['middleware' => ['auth:sanctum', 'app.check.deleted']], function (
     ## AI Match :
     Route::post('ai-match-making/list', [AiMatchMakingController::class, 'index']);
     Route::get('ai-match-making/best-matches-today', [AiMatchMakingController::class, 'bestMatchesToday']);
+
+    ## Request Call Back :
+    Route::post('request-call-back', [RequestCallBackController::class, 'submit']);
 });

@@ -278,6 +278,10 @@
                     'label' => 'Profile Report Spam',
                     'routeUrl' => route('admin.profileReportSpam.index'),
                 ],
+                [
+                    'label' => 'Request Call Back',
+                    'routeUrl' => route('admin.requestCallBack.index'),
+                ],
             ],
         ],
         [

@@ -93,7 +93,7 @@
                     </a>
 
                     {{-- Mobile Toggle --}}
-                    <button class="navbar-toggler d-lg-none" type="button" aria-label="Toggle navigation">
+                    <button class="navbar-toggler d-xl-none" type="button" aria-label="Toggle navigation">
                         <iconify-icon icon="solar:hamburger-menu-linear"></iconify-icon>
                     </button>
 
@@ -204,7 +204,6 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>

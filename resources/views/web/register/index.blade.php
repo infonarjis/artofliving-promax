@@ -53,7 +53,7 @@
                                         <label for="fullname">{{ __('messages.field_lbl_fullname') }}
                                             <span class="required-field">*</span></label>
                                         <div class="position-relative">
-                                            <input type="text" maxlength="250" name="fullname" id="fullname" maxlength="150"
+                                            <input type="text" maxlength="250" name="fullname" id="callback_fullname" maxlength="150"
                                                 placeholder="{{ __('messages.field_lbl_enter_full_name') }}"
                                                 class="input_comman_field">
                                         </div>
@@ -85,7 +85,7 @@
                                         <label for="email">{{ __('messages.field_lbl_email_id') }}
                                             <span class="required-field">*</span></label>
                                         <div class="position-relative">
-                                            <input type="email" name="email" id="email" autocomplete="off"
+                                            <input type="email" name="email" id="callback_email" autocomplete="off"
                                                 placeholder="{{ __('messages.field_lbl_enter_your_email_id') }}"
                                                 class="input_comman_field">
                                         </div>

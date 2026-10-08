@@ -20,13 +20,16 @@ class MembershipPlanController extends Controller
 
         $standardPlans = MembershipPlan::active()
             ->standard()
+            ->paid()
             ->get()
             ->each(fn($plan) => $this->applyDiscount($plan));
 
-        $personalizePlans = MembershipPlan::active()
-            ->personalized()
-            ->get()
-            ->each(fn($plan) => $this->applyDiscount($plan));
+        // $personalizePlans = MembershipPlan::active()
+        //     ->personalized()
+        //     ->paid()
+        //     ->get()
+        //     ->each(fn($plan) => $this->applyDiscount($plan));
+        $personalizePlans = [];
 
         return view('web.membershipPlan.index', compact(
             'offlinePayment',

@@ -162,6 +162,9 @@ class PaymentMigrationController extends Controller
                 'carried_forward_interest' => 0,
                 'interests_total'          => $interests,
                 'interests_used'           => $this->int($o->connect_used),
+                
+                'plan_view_profile'        => '10000',
+                'view_profile_total'       => '10000',
 
                 // old plan_view_contacts / view_contacts_used -> contact views
                 'plan_contact_views'       => $contactViews,

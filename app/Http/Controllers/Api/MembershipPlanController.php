@@ -25,7 +25,7 @@ class MembershipPlanController extends Controller
             $authUser = auth()->guard('api')->user();
             $currencyCode = $authUser->country_id == 101 ? 'INR' : 'USD';
 
-            $membershipPlan = MembershipPlan::active()
+            $membershipPlan = MembershipPlan::active()->paid()
                 ->when($currencyCode, function ($query) use ($currencyCode) {
                     $query->where('currency_code', $currencyCode);
                 })

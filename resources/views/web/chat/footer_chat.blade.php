@@ -192,7 +192,7 @@
         {!! $configArr['firebase_configuration'] !!}
         firebase.initializeApp(firebaseConfig);
 
-        // ✅ THIS WILL WORK
+        // THIS WILL WORK
         const db = firebase.database();
 
         window.currentUserId = {{ auth()->guard('web')->id() }};

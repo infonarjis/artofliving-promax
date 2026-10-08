@@ -720,6 +720,9 @@ function _getAdminFilterWhereStr($filterData, $table = 'registers')
 ## get SiteSetting Data :
 function _getSiteSetting($key = null)
 {
+    $currentMemberData = auth()->guard('web')->user();
+    // echo $currentMemberData; exit;
+    
     $settings = SiteSetting::getSettings();
     if (!$settings) return null;
     return $key ? ($settings[$key] ?? null) : $settings;

@@ -208,9 +208,9 @@ class ThirdPartySettingController extends Controller
     public function zegoCloudSetting()
     {
         $elementArr = array(
-            'zegocloud_appid' => array('is_required' => 'required', 'label' => 'App ID', 'column' => '4', 'modeType' => 'edit', 'isDisableInDemo' => 'Yes'),
-            'zegocloud_server_secret_key' => array('is_required' => 'required', 'label' => 'Server Secret Key', 'class' => 'required', 'column' => '4', 'modeType' => 'edit', 'isDisableInDemo' => 'Yes'),
-            'zegocloud_appsign_key' => array('is_required' => 'required', 'label' => 'App Sign Key', 'class' => 'required', 'column' => '4', 'modeType' => 'edit', 'isDisableInDemo' => 'Yes'),
+            'zegocloud_appid' => array('label' => 'App ID', 'column' => '4', 'modeType' => 'edit', 'isDisableInDemo' => 'Yes'),
+            'zegocloud_server_secret_key' => array('label' => 'Server Secret Key', 'class' => 'required', 'column' => '4', 'modeType' => 'edit', 'isDisableInDemo' => 'Yes'),
+            'zegocloud_appsign_key' => array('label' => 'App Sign Key', 'class' => 'required', 'column' => '4', 'modeType' => 'edit', 'isDisableInDemo' => 'Yes'),
             'zego_video_call_setting' => array('label' => 'Video Call Setting', 'type' => 'radio', 'is_register' => 'Yes', 'modeType' => 'edit', 'isDisableInDemo' => 'Yes', 'value_arr' => array('APPROVED' => 'APPROVED', 'UNAPPROVED' => 'UNAPPROVED'), 'column' => '6'),
             'zego_voice_call_setting' => array('label' => 'Voice Call Setting', 'type' => 'radio', 'is_register' => 'Yes', 'modeType' => 'edit', 'isDisableInDemo' => 'Yes', 'value_arr' => array('APPROVED' => 'APPROVED', 'UNAPPROVED' => 'UNAPPROVED'), 'column' => '6')
         );

@@ -151,30 +151,6 @@ class UserMigrationController extends Controller
 
     private function mapRegister(object $o, array $maps): array
     {
-        /* ---- family text that has no column in the new table is kept in family_details ---- */
-        $fatherOccId = $this->fk($o->father_occupation);
-        $motherOccId = $this->fk($o->mother_occupation);
-
-        $notes = [];
-        if ($fatherOccId === null && ($v = $this->nz($o->father_occupation)) !== null) {
-            $notes[] = "Father's occupation: {$v}";
-        }
-        if ($motherOccId === null && ($v = $this->nz($o->mother_occupation)) !== null) {
-            $notes[] = "Mother's occupation: {$v}";
-        }
-        if (($v = $this->nz($o->no_of_siblings)) !== null) {
-            $notes[] = "Number of siblings: {$v}";
-        }
-        $children = $this->nz($o->details_of_children);
-        if ($children !== null && !is_numeric($children)) {
-            $notes[] = "Children: {$children}";
-        }
-
-        $familyDetails = implode("\n", array_filter([
-            $this->nz($o->family_details),
-            $notes ? implode('; ', $notes) : null,
-        ]));
-
         /* ---- education ---- */
         $educationDetails = $this->nz($o->education_level);
         if ($o->other_education_level === 'Yes' && ($v = $this->nz($o->other_education_level_name)) !== null) {
@@ -207,7 +183,7 @@ class UserMigrationController extends Controller
             'profileby'              => $this->lookup($o->profileby, $maps['profileby']),
             'height'                 => $o->height === null ? null : (string) $o->height,
             'marital_status'         => $this->lookup($o->marital_status, $maps['marital_status']),
-            // 'total_children'         => is_numeric($children) ? (int) $children : null,
+            'details_of_children'    => $this->nz($o->details_of_children),
 
             'religion'               => $this->fk($o->religion),
             'caste'                  => $this->fk($o->caste),
@@ -222,20 +198,22 @@ class UserMigrationController extends Controller
             'smoke'                  => $this->lookup($o->smoke, $maps['smoke']),
             'drink'                  => $this->lookup($o->drink, $maps['drink']),
 
-            // 'education_level'        => $this->cut($o->highest_qualification, 255),
-            'education_details'      => $educationDetails,
+            'education_level'        => $this->cut($o->highest_qualification, 255),
+            'education_details'      => $this->nz($o->education_level),
             'occupation'             => $this->fk($o->occupation),
             'income'                 => $this->fk($o->income),
 
             'family_type'            => $this->lookup($o->family_type, $maps['family_type']),
             'father_name'            => $this->cut($o->father_name, 255),
-            // 'father_occupation'      => $fatherOccId,
-            'mother_name'            => $this->cut($o->mother_name, 255),
-            // 'mother_occupation'      => $motherOccId,
+            'father_occupation_other' => $this->nz($o->father_occupation),
+            // 'father_occupation'      => '',
+            'mother_name'             => $this->cut($o->mother_name, 255),
+            'mother_occupation_other' => $this->nz($o->mother_occupation),
+            // 'mother_occupation'      => '',
             'family_status'          => $this->lookup($o->family_status, $maps['family_status']),
             'no_of_married_brother'  => $this->siblingCount($o->no_of_married_brother, $maps['married_brother']),
             'no_of_married_sister'   => $this->siblingCount($o->no_of_married_sister, $maps['married_sister']),
-            'family_details'         => $familyDetails !== '' ? $familyDetails : null,
+            'family_details'         => $this->nz($o->family_details),
 
             // old profile_text -> new about_me_description
             'about_me_description'   => $this->nz($o->profile_text),
@@ -249,6 +227,14 @@ class UserMigrationController extends Controller
             'no_of_years_in_artofliving' => $this->nz($o->no_of_years_in_artofliving),
             'teacher_name'               => $this->nz($o->teacher_name),
             'teacher_mobile_no'          => $this->nz($o->teacher_mobile_no),
+
+            // Extra Field Added To Field Not Exist In New Project :
+            'field_of_study'            => $this->nz($o->field_of_study),
+            'job_title'                 => $this->nz($o->job_title),
+            'company_name'              => $this->nz($o->company_name),
+            'disbalities'               => $this->nz($o->disbalities),
+            'disabilites_details'       => $this->nz($o->disabilites_details),
+            'interest'                  => $this->nz($o->interest),
         ];
 
         /* ---- photos : Yes/No -> APPROVED/UNAPPROVED ---- */
@@ -411,9 +397,9 @@ class UserMigrationController extends Controller
             'part_mothertongue'   => $this->nz($o->part_mothertongue),
             'part_manglik'        => null,
 
-            'part_diet'           => $this->nz($o->part_diet),
-            'part_smoke'          => $this->nz($o->part_smoke),
-            'part_drink'          => $this->nz($o->part_drink),
+            'part_diet'           => $this->csvIds($o->part_diet, $maps['diet']),
+            'part_smoke'          => $this->csvIds($o->part_smoke, $maps['smoke']),
+            'part_drink'          => $this->csvIds($o->part_drink, $maps['drink']),
 
             'part_art_of_living_teacher'      => $this->nz($o->part_art_of_living_teacher),
             'part_have_art_of_living_program' => $this->nz($o->part_have_art_of_living_program),

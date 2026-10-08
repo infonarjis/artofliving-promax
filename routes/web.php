@@ -20,6 +20,9 @@ use App\Http\Controllers\Migration\MatchListMigrationController;
 use App\Http\Controllers\Migration\StaffMigrationController;
 use App\Http\Controllers\Migration\StaffRoleMigrationController;
 use App\Http\Controllers\Migration\ExpressInterestMigrationController;
+use App\Http\Controllers\Migration\RequestCallBackMigrationController;
+use App\Http\Controllers\Migration\SiteConfigMigrationController;
+use App\Http\Controllers\Migration\EducationMasterMigrationController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -71,7 +74,8 @@ use App\Http\Controllers\Web\{
     PersonalizeChatController,
     FcmController,
     AiAutoInterestController,
-    AiMatchMakingController
+    AiMatchMakingController,
+    RequestCallBackController
 };
 use Illuminate\Support\Facades\Artisan;
 
@@ -200,6 +204,8 @@ Route::group(['prefix' => ''], function (): void {
 
     Route::get('/personalize', [PersonalizeHomeController::class, 'index'])->name('web.personalize.index');
     Route::post('/personalized-enquiry', [PersonalizeHomeController::class, 'storeEnquiry'])->name('web.personalize.storeEnquiry');
+
+    Route::post('/request-call-back', [RequestCallBackController::class, 'store'])->name('web.requestCallBack.submit');
 
     Route::group(['middleware' => 'web.guest'], function (): void {
         Route::get('/', [HomeController::class, 'index'])->name('web.home.index');
@@ -485,5 +491,9 @@ Route::group(['prefix' => ''], function (): void {
         Route::get('staff-roles', [StaffRoleMigrationController::class, 'staffRoles']);
 
         Route::get('express-interest', [ExpressInterestMigrationController::class, 'expressInterest']);
+        // Route::get('site-config', [SiteConfigMigrationController::class, 'siteConfig']);
+        Route::get('request-call-back', [RequestCallBackMigrationController::class, 'requestCallBack']);
+
+        Route::get('education-master', [EducationMasterMigrationController::class, 'educationMaster']);
     });
 });

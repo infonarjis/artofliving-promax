@@ -1404,4 +1404,12 @@ return [
     "lbl_phone_support" => "Phone Support",
     "lbl_email_support" => "Email Support",
     "lbl_personalize"     => "Personalize",
+    "lbl_free"     => "Free",
+    'lbl_looking_assisted_matchmaking' => 'Looking for Assisted Matchmaking?',
+    'lbl_request_call_back'            => 'Request a call back',
+    'lbl_assisted_matrimony'           => 'ASSISTED Matrimony',
+    'lbl_assisted_matrimony_desc'      => 'Assisted Matrimony is ONLY by invitation. Request you to kindly fill the form and our team will get back to you. Once registered, this plan will allow you Advanced Privacy Settings, Personal Messages and Unlimited Contacts. Your profile will be visible only to members on this plan. You will have exclusive personalised Relationship Manager.',
+    'lbl_request_call_back_btn'        => 'Request a call back',
+    'lbl_callback_sub' => 'Our relationship manager will personally call you and guide you to the right plan.',
+    'lbl_request_call_back_msg' => 'Thank you! Our team will call you back shortly.',
 ];
