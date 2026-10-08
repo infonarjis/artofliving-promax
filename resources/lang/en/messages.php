@@ -174,6 +174,12 @@ return [
     "field_lbl_select_partner_mother_tongue" => "Select Partner Mother Tongue",
     "field_lbl_partner_manglik" => "Partner Manglik",
     "field_lbl_select_partner_manglik" => "Select Partner Manglik",
+    "field_lbl_partner_eating_habits" => "Partner Eating Habits",
+    "field_lbl_partner_select_eating_habits" => "Select Partner  Eating Habits",
+    "field_lbl_partner_smoking" => "Partner Smoking Habit",
+    "field_lbl_partner_select_smoking" => "Select Partner Smoking Habit",
+    "field_lbl_partner_drinking" => "Partner Drinking Habit",
+    "field_lbl_partner_select_drinking" => "Select Partner Drinking Habit",
     "field_lbl_create_new_password" => "Create new password",
     "field_lbl_enter_new_password" => "Enter new password",
     "field_lbl_enter_old_password" => "Enter old password",
@@ -1397,4 +1403,5 @@ return [
     "lbl_access_activation_desc" => "You will receive an email & SMS notification upon approval",
     "lbl_phone_support" => "Phone Support",
     "lbl_email_support" => "Email Support",
+    "lbl_personalize"     => "Personalize",
 ];
