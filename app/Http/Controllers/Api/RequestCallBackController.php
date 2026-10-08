@@ -20,8 +20,7 @@ class RequestCallBackController extends Controller
             $authUser = auth()->guard('api')->user();
 
             $rules = [
-                'country_code' => ['required', 'string', 'max:10'],
-                'mobile'       => ['required', 'digits_between:6,15'],
+                'mobile' => ['required', 'string', 'max:20'],
             ];
 
             $validator = Validator::make($request->all(), $rules);
@@ -31,14 +30,13 @@ class RequestCallBackController extends Controller
             }
 
             $data   = $validator->validated();
-            $mobile = $data['country_code'] . '-' . $data['mobile'];
 
             RequestCallBack::create([
                 'member_id' => $authUser->id       ?? null,
                 'matri_id'  => $authUser->matri_id ?? null,
                 'name'      => $authUser->fullname ?? $data['fullname'],
                 'email'     => $authUser->email    ?? $data['email'],
-                'mobile'    => $mobile,
+                'mobile'    => $data['mobile'],
             ]);
 
             return ApiResponseService::success(_getLangApi($request, 'lbl_request_call_back_msg'));
