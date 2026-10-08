@@ -20,38 +20,38 @@
                                 <div class="common-tabs-design mt-3">
                                     <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                                         <li class="nav-item w-50">
-                                            <button class="nav-link fts-14 fw-5 active" id="pills-email-tab"
-                                                data-bs-toggle="pill" data-bs-target="#pills-email" type="button"
-                                                role="tab" aria-controls="pills-email" aria-selected="true">
-                                                <iconify-icon icon="hugeicons:mail-01" width="20" class="me-2"
-                                                    height="20"></iconify-icon>{{ __('messages.lbl_login_with_email_or_matri_id') }}
-                                            </button>
-                                        </li>
-                                        <li class="nav-item w-50">
-                                            <button class="nav-link fts-14 fw-5" id="pills-otp-tab" data-bs-toggle="pill"
+                                            <button class="nav-link fts-14 fw-5 active" id="pills-otp-tab" data-bs-toggle="pill"
                                                 data-bs-target="#pills-otp" type="button" role="tab"
                                                 aria-controls="pills-otp" aria-selected="false">
                                                 <iconify-icon icon="hugeicons:smart-phone-01" width="20" class="me-2"
                                                     height="20"></iconify-icon>{{ __('messages.lbl_login_with_otp') }}
                                             </button>
                                         </li>
+                                        <li class="nav-item w-50">
+                                            <button class="nav-link fts-14 fw-5" id="pills-email-tab"
+                                                data-bs-toggle="pill" data-bs-target="#pills-email" type="button"
+                                                role="tab" aria-controls="pills-email" aria-selected="true">
+                                                <iconify-icon icon="hugeicons:mail-01" width="20" class="me-2"
+                                                    height="20"></iconify-icon>{{ __('messages.lbl_login_with_email_or_matri_id') }}
+                                            </button>
+                                        </li>
                                     </ul>
                                 </div>
 
                                 <div class="tab-content" id="pills-tabContent">
-                                    <div class="tab-pane fade show active" id="pills-email" role="tabpanel"
-                                        aria-labelledby="pills-email-tab">
-                                        @include(_getConstant('dir_path.WEB_DIR_PATH') . '.login.email_login',
-                                            ['captchaCode' => $captchaCode]
-                                        )
-                                    </div>
-                                    <div class="tab-pane fade" id="pills-otp" role="tabpanel"
+                                    <div class="tab-pane fade show active" id="pills-otp" role="tabpanel"
                                         aria-labelledby="pills-otp-tab">
                                         @include(_getConstant('dir_path.WEB_DIR_PATH') . '.login.otp_login',
                                             [
                                                 'otpLoginMethod' => $otpLoginMethod,
                                                 'firebaseConfig' => $firebaseConfig,
                                             ]
+                                        )
+                                    </div>
+                                    <div class="tab-pane fade" id="pills-email" role="tabpanel"
+                                        aria-labelledby="pills-email-tab">
+                                        @include(_getConstant('dir_path.WEB_DIR_PATH') . '.login.email_login',
+                                            ['captchaCode' => $captchaCode]
                                         )
                                     </div>
                                 </div>

@@ -483,8 +483,8 @@
       {
         "step_number": 6,
         "step_key": "art_of_living_association",
-        "title": "Art of Living Association",
-        "subtitle": "Details about your Art of Living association",
+        "title": "lbl_artofliving_association",
+        "subtitle": "lbl_enter_your_artofliving_association",
         "endpoint": "register/next-step",
         "http_method": "POST",
         "extra_params": {
@@ -492,8 +492,8 @@
         },
         "fields": [
           {
-            "name": "art_of_living_teacher",
-            "label": "Art of Living Teacher",
+            "name": "Yesart_of_living_teacher",
+            "label": "field_lbl_artofliving_teacher",
             "type": "segment_selector",
             "is_required": true,
             "default_value": "No",
@@ -504,32 +504,32 @@
           },
           {
             "name": "teacher_code",
-            "label": "Teacher Code",
-            "placeholder": "AOLTEACHER123456",
+            "label": "field_lbl_artofliving_teacher_code",
+            "placeholder": "field_lbl_enter_artofliving_teacher_code",
             "type": "text",
             "is_required": false,
             "show_if": {
-              "field": "art_of_living_teacher",
+              "field": "Yesart_of_living_teacher",
               "operator": "equals",
               "value": "Yes"
             }
           },
           {
-            "name": "i_teach",
-            "label": "I Teach",
-            "placeholder": "Select courses you teach",
+            "name": "teaching_courses",
+            "label": "field_lbl_artofliving_i_teach",
+            "placeholder": "field_lbl_select_artofliving_i_teach",
             "type": "multi_select_dropdown",
             "dropdown_source": "course_list",
             "is_required": false,
             "show_if": {
-              "field": "art_of_living_teacher",
+              "field": "Yesart_of_living_teacher",
               "operator": "equals",
               "value": "Yes"
             }
           },
           {
-            "name": "art_of_living_program",
-            "label": "Art Of Living Program",
+            "name": "have_art_of_living_program",
+            "label": "field_lbl_artofliving_program",
             "type": "segment_selector",
             "is_required": true,
             "default_value": "No",
@@ -539,47 +539,47 @@
             ]
           },
           {
-            "name": "reference_teacher",
-            "label": "Reference Teacher",
-            "placeholder": "Reference Teacher",
+            "name": "teacher_name",
+            "label": "field_lbl_artofliving_reference_teacher",
+            "placeholder": "field_lbl_enter_artofliving_reference_teacher",
             "type": "text",
             "is_required": false,
             "show_if": {
-              "field": "art_of_living_program",
+              "field": "have_art_of_living_program",
               "operator": "equals",
               "value": "Yes"
             }
           },
           {
-            "name": "teacher_mobile_number",
-            "label": "Teacher Mobile Number",
-            "placeholder": "Teacher Mobile Number",
+            "name": "teacher_mobile_no",
+            "label": "field_lbl_artofliving_teacher_mobile_no",
+            "placeholder": "field_lbl_enter_artofliving_teacher_mobile_no",
             "type": "phone_number",
             "default_country_code": "+91",
             "is_required": false,
             "show_if": {
-              "field": "art_of_living_program",
+              "field": "have_art_of_living_program",
               "operator": "equals",
               "value": "Yes"
             }
           },
           {
-            "name": "course_completed",
-            "label": "Course Completed",
-            "placeholder": "Select Course Completed",
+            "name": "art_of_living_program",
+            "label": "field_lbl_artofliving_course_completed",
+            "placeholder": "field_lbl_select_artofliving_course_completed",
             "type": "multi_select_dropdown",
             "dropdown_source": "course_list",
             "is_required": false,
             "show_if": {
-              "field": "art_of_living_program",
+              "field": "have_art_of_living_program",
               "operator": "equals",
               "value": "Yes"
             }
           },
           {
-            "name": "years_with_art_of_living",
-            "label": "Years with Art of Living",
-            "placeholder": "Select Years",
+            "name": "no_of_years_in_artofliving",
+            "label": "field_lbl_artofliving_years_with_artofliving",
+            "placeholder": "field_lbl_select_artofliving_years_with_artofliving",
             "type": "single_select_dropdown",
             "dropdown_source": "year_list",
             "is_required": false
@@ -922,6 +922,50 @@
             "placeholder": "field_lbl_select_partner_manglik",
             "type": "multi_select_dropdown",
             "dropdown_source": "manglik_list",
+            "is_required": false
+          },
+          {
+            "name": "part_art_of_living_teacher",
+            "label": "field_lbl_artofliving_partner_teacher",
+            "placeholder": "field_lbl_select_artofliving_partner_teacher",
+            "type": "single_select_dropdown",
+            "options": [
+              {
+                "id": "Doesn't Matter",
+                "label": "Doesn't Matter"
+              },
+              {
+                "id": "Yes",
+                "label": "Yes"
+              },
+              {
+                "id": "No",
+                "label": "No"
+              }
+            ],
+            "default_value": "Doesn't Matter",
+            "is_required": false
+          },
+          {
+            "name": "part_have_art_of_living_program",
+            "label": "field_lbl_artofliving_partner_program",
+            "placeholder": "field_lbl_select_artofliving_partner_program",
+            "type": "single_select_dropdown",
+            "options": [
+              {
+                "id": "Doesn't Matter",
+                "label": "Doesn't Matter"
+              },
+              {
+                "id": "Yes",
+                "label": "Yes"
+              },
+              {
+                "id": "No",
+                "label": "No"
+              }
+            ],
+            "default_value": "Doesn't Matter",
             "is_required": false
           }
         ]

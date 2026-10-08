@@ -25,6 +25,7 @@ class MyProfileSectionService
             self::locationDetails($member),
             self::educationCareer($member),
             self::physicalInformation($member),
+            self::teacherInformation($member),
             self::familyDetails($member),
         ];
     }
@@ -408,6 +409,73 @@ class MyProfileSectionService
         ];
     }
 
+    public static function teacherInformation($member): array
+    {
+        $fields = [
+            [
+                'key'   => 'Yesart_of_living_teacher',
+                'label' => __('messages.field_lbl_artofliving_teacher'),
+                'selected_ids'  => $member->Yesart_of_living_teacher ?? null,
+                'value' => $member->Yesart_of_living_teacher ?? null,
+                'isRequired' => true
+            ]
+        ];
+        if ($member->Yesart_of_living_teacher === 'Yes') {
+            $fields[] = [
+                'key'   => 'teacher_code',
+                'label' => __('messages.field_lbl_artofliving_teacher_code'),
+                'selected_ids'  => $member->teacher_code ?? null,
+                'value' => $member->teacher_code ?? null,
+            ];
+            $fields[] = [
+                'key'   => 'teaching_courses',
+                'label' => __('messages.field_lbl_artofliving_i_teach'),
+                'selected_ids'  => $member->teaching_courses ?? null,
+                'value' => implode(', ', $member->teaching_courses_names) ?? null,
+            ];
+        }
+        $fields[] = [
+            'key'   => 'have_art_of_living_program',
+            'label' => __('messages.field_lbl_artofliving_course_completed'),
+            'selected_ids'  => $member->have_art_of_living_program ?? null,
+            'value' => $member->have_art_of_living_program ?? null,
+            'isRequired' => true
+        ];
+        if ($member->have_art_of_living_program === 'Yes') {
+            $fields[] = [
+                'key'   => 'teacher_name',
+                'label' => __('messages.field_lbl_artofliving_reference_teacher'),
+                'selected_ids'  => $member->teacher_name ?? null,
+                'value' => $member->teacher_name ?? null,
+            ];
+            $fields[] = [
+                'key'   => 'teacher_mobile_no',
+                'label' => __('messages.field_lbl_artofliving_teacher_mobile_no'),
+                'selected_ids'  => $member->teacher_mobile_no ?? null,
+                'value' => $member->teacher_mobile_no ?? null,
+            ];
+            $fields[] = [
+                'key'   => 'art_of_living_program',
+                'label' => __('messages.field_lbl_artofliving_course_completed'),
+                'selected_ids'  => $member->art_of_living_program ?? null,
+                'value' => implode(', ', $member->art_of_living_program_names) ?? null,
+            ];
+        }
+
+        $fields[] = [
+            'key'   => 'no_of_years_in_artofliving',
+            'label' => __('messages.field_lbl_artofliving_years_with_artofliving'),
+            'selected_ids'  => $member->no_of_years_in_artofliving ?? null,
+            'value' => _yearFormat($member->no_of_years_in_artofliving,1) ?? null,
+        ];
+
+        return [
+            'section_key' => 'art_of_living_association',
+            'label'       => __('messages.lbl_artofliving_association'),
+            'fields'      => $fields
+        ];
+    }
+
     private static function familyDetails($member): array
     {
         $fields = [
@@ -614,13 +682,26 @@ class MyProfileSectionService
                 'label'         => __('messages.field_lbl_partner_manglik'),
                 'selected_ids'  => $registerPartner->part_manglik ?? null,
                 'value'         => $displayPartnerValue->part_manglik ?? null,
-            ],
+            ]
         ];
 
         $fields = array_values(array_filter($fields, function ($item) {
             return _checkFieldEnable($item['key'], 'my_profile_list');
         }));
 
+        $fields[] = [
+            'key'           => 'part_art_of_living_teacher',
+            'label'         => __('messages.field_lbl_artofliving_partner_teacher'),
+            'selected_ids'  => $registerPartner->part_art_of_living_teacher ?? null,
+            'value'         => $registerPartner->part_art_of_living_teacher ?? null,
+        ];
+        $fields[] = [
+            'key'           => 'part_have_art_of_living_program',
+            'label'         => __('messages.field_lbl_artofliving_partner_program'),
+            'selected_ids'  => $registerPartner->part_have_art_of_living_program ?? null,
+            'value'         => $registerPartner->part_have_art_of_living_program ?? null,
+        ];
+        
         return [
             'section_key' => 'partner_preference',
             'label' => __('messages.lbl_partner_preferences'),

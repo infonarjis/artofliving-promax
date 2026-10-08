@@ -377,7 +377,7 @@ class RegisterController extends Controller
         }
 
         $request->validate([
-            'step' => 'required|integer|min:1|max:8'
+            'step' => 'required|integer|min:1|max:9'
         ]);
 
         $register = Register::findOrFail($memberId);
@@ -474,6 +474,24 @@ class RegisterController extends Controller
                 break;
             case 5:
                 $request->validate([
+                    'Yesart_of_living_teacher' => 'required',
+                    'have_art_of_living_program' => 'required',
+                ]);
+
+                $register->update([
+                    'register_step' => $step,
+                    'Yesart_of_living_teacher' => $request->Yesart_of_living_teacher,
+                    'teacher_code' => $request->teacher_code,
+                    'teaching_courses' => $request->teaching_courses,
+                    'have_art_of_living_program' => $request->have_art_of_living_program,
+                    'teacher_name' => $request->teacher_name,
+                    'teacher_mobile_no' => $request->teacher_mobile_no,
+                    'art_of_living_program' => $request->art_of_living_program,
+                    'no_of_years_in_artofliving' => $request->no_of_years_in_artofliving,
+                ]);
+                break;
+            case 6:
+                $request->validate([
                     'father_name' => 'required',
                     'father_occupation' => 'required',
                     'mother_name' => 'required',
@@ -500,7 +518,7 @@ class RegisterController extends Controller
                     'family_details' => $request->family_details
                 ]);
                 break;
-            case 6:
+            case 7:
                 $imageRule = 'image|mimes:jpeg,jpg,png,webp,heic,heif|max:5120';
                 $request->validate(
                     [
@@ -562,7 +580,7 @@ class RegisterController extends Controller
                 }
                 $register->update($updateData);
                 break;
-            case 7:
+            case 8:
                 $rules = [
                     'id_proof_type' => 'required'
                 ];
@@ -607,7 +625,7 @@ class RegisterController extends Controller
                 $updateData['register_step'] = $step;
                 $register->update($updateData);
                 break;
-            case 8:
+            case 9:
                 RegisterPartner::updateOrCreate(
                     ['member_id' => $memberId],
                     [
@@ -629,6 +647,8 @@ class RegisterController extends Controller
                         'part_occupation'       => implode(',', (array) $request->part_occupation),
                         'part_mothertongue'     => implode(',', (array) $request->part_mothertongue),
                         'part_manglik'          => implode(',', (array) $request->part_manglik),
+                        'part_art_of_living_teacher' => implode(',', (array) $request->part_art_of_living_teacher),
+                        'part_have_art_of_living_program' => implode(',', (array) $request->part_have_art_of_living_program),
                     ]
                 );
 

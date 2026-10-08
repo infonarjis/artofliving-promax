@@ -297,6 +297,52 @@
             </div>
         </div>
     @endif
+    <div class="col-md-6 px-2 mb-3">
+        <div class="custom-select2-div">
+            <div class="edit_inputMain-sltr w-100">
+                @php
+                    $selectedArtOfLivingTeacher = !empty($member->partnerPreference->part_art_of_living_teacher)
+                        ? explode(',', $member->partnerPreference->part_art_of_living_teacher)
+                        : [];
+                @endphp
+                <label for="part_art_of_living_teacher">{{ __('messages.field_lbl_artofliving_partner_teacher') }}</label>
+                <select name="part_art_of_living_teacher[]" id="part_art_of_living_teacher" class="js-example-basic-multiple does-not-matter"
+                    data-placeholder="{{ _getLang('field_lbl_select_artofliving_partner_teacher') }}" multiple="multiple">
+                    <option value="Does Not Matter"
+                        {{ in_array('Does Not Matter', $selectedArtOfLivingTeacher) ? 'selected' : '' }}>
+                        {{ _getLang('lbl_does_not_matter') }}
+                    </option>
+                    @foreach (['Yes', 'No'] as $id => $name)
+                        <option {{ in_array($name, $selectedArtOfLivingTeacher) ? 'selected' : '' }}
+                            value="{{ $name }}">{{ $name }}</option>
+                    @endforeach
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 px-2 mb-3">
+        <div class="custom-select2-div">
+            <div class="edit_inputMain-sltr w-100">
+                @php
+                    $selectedArtOfLivingProgram = !empty($member->partnerPreference->part_have_art_of_living_program)
+                        ? explode(',', $member->partnerPreference->part_have_art_of_living_program)
+                        : [];
+                @endphp
+                <label for="part_have_art_of_living_program">{{ __('messages.field_lbl_artofliving_partner_program') }}</label>
+                <select name="part_have_art_of_living_program[]" id="part_have_art_of_living_program" class="js-example-basic-multiple does-not-matter"
+                    data-placeholder="{{ _getLang('field_lbl_select_artofliving_partner_program') }}" multiple="multiple">
+                    <option value="Does Not Matter"
+                        {{ in_array('Does Not Matter', $selectedArtOfLivingProgram) ? 'selected' : '' }}>
+                        {{ _getLang('lbl_does_not_matter') }}
+                    </option>
+                    @foreach (['Yes', 'No'] as $id => $name)
+                        <option {{ in_array($name, $selectedArtOfLivingProgram) ? 'selected' : '' }}
+                            value="{{ $name }}">{{ $name }}</option>
+                    @endforeach
+                </select>
+            </div>
+        </div>
+    </div>
 </div>
 <div class="d-flex justify-content-center justify-content-lg-end gap-2 gap-lg-3 mt-0 mt-md-2">
     <button type="button" class="form-border-btn fts-15 prev-step">{{ __('messages.lbl_back') }}</button>

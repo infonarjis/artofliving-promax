@@ -1558,10 +1558,16 @@ if (! function_exists('_generateOtp')) {
     }
 }
 
-function _yearFormat(){
+function _yearFormat($key = null, $forDisplay = false){
     $year = array('0 Year', 'Less than 1' => 'Less than 1 Year');
     for ($i = 1; $i <= 40; $i++) {
         $year[] = $i . ' Years';
     }
-    return $year;
+    if (!blank($key) && isset($year[$key])) {
+        return $year[$key];
+    }
+    if ($forDisplay == false) {
+        return $year;
+    }
+    return '';
 }

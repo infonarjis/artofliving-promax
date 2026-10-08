@@ -10,6 +10,7 @@ use App\Models\BodyTypeMaster;
 use App\Models\CasteMaster;
 use App\Models\ComplexionMaster;
 use App\Models\CountryMaster;
+use App\Models\CourseDetailMaster;
 use App\Models\DesignationMaster;
 use App\Models\DrinkingHabitMaster;
 use App\Models\EatingHabitMaster;
@@ -111,7 +112,9 @@ class MyProfileController extends Controller
             'complextionList' => ComplexionMaster::getDropdown($currentLanguage),
             'bloodGroupList' => BloodGroupMaster::getDropdown($currentLanguage),
 
-            'idProofTypeList' => _getStaticArr('idProofTypeArr')
+            'idProofTypeList' => _getStaticArr('idProofTypeArr'),
+            'courseList' => CourseDetailMaster::getDropdown($currentLanguage),
+            'yearList' => _yearFormat(),
         ]);
     }
 
@@ -232,6 +235,23 @@ class MyProfileController extends Controller
                     'about_me_description' => $request->about_me_description,
                 ]);
                 break;
+            case 'art_of_living_association':
+                    $request->validate([
+                        'Yesart_of_living_teacher' => 'required',
+                        'have_art_of_living_program' => 'required',
+                    ]);
+                    $member->update([
+                        'Yesart_of_living_teacher' => $request->Yesart_of_living_teacher,
+                        'teacher_code' => $request->teacher_code,
+                        'teaching_courses' => $request->teaching_courses,
+                        'have_art_of_living_program' => $request->have_art_of_living_program,
+                        'teacher_name' => $request->teacher_name,
+                        'teacher_mobile_no' => $request->teacher_mobile_no,
+                        'art_of_living_program' => $request->art_of_living_program,
+                        'no_of_years_in_artofliving' => $request->no_of_years_in_artofliving,
+                    ]);
+
+                    break;
             case 'family_details':
                 $request->validate([
                     'father_name' => 'required',
@@ -282,6 +302,8 @@ class MyProfileController extends Controller
                         'part_occupation'     => implode(',', (array) $request->part_occupation),
                         'part_mothertongue'   => implode(',', (array) $request->part_mothertongue),
                         'part_manglik'        => implode(',', (array) $request->part_manglik),
+                        'part_art_of_living_teacher' => implode(',', (array) $request->part_art_of_living_teacher),
+                        'part_have_art_of_living_program' => implode(',', (array) $request->part_have_art_of_living_program),
                     ]
                 );
                 break;

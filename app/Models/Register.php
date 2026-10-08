@@ -21,6 +21,7 @@ class Register extends Authenticatable implements CanResetPasswordContract
     protected $table = 'registers';
 
     protected $fillable = [
+        'is_verify',
         'user_type',
         'matri_id',
         'prefix',
@@ -195,7 +196,9 @@ class Register extends Authenticatable implements CanResetPasswordContract
     ];
 
     protected $multiSelectFields = [
-        'education_level'
+        'education_level',
+        'teaching_courses',
+        'art_of_living_program'
     ];
 
     public function setAttribute($key, $value)
@@ -459,6 +462,40 @@ class Register extends Authenticatable implements CanResetPasswordContract
             ->get()
             ->map(function ($education) {
                 return $education->translated_name;
+            })
+            ->toArray();
+    }
+
+    public function getTeachingCoursesNamesAttribute()
+    {
+        if (blank($this->teaching_courses)) {
+            return [];
+        }
+
+        $ids = array_filter(array_map('trim', explode(',', $this->teaching_courses)));
+
+        return CourseDetailMaster::query()
+            ->whereIn('id', $ids)
+            ->get()
+            ->map(function ($course) {
+                return $course->translated_name;
+            })
+            ->toArray();
+    }
+
+    public function getArtOfLivingProgramNamesAttribute()
+    {
+        if (blank($this->art_of_living_program)) {
+            return [];
+        }
+
+        $ids = array_filter(array_map('trim', explode(',', $this->art_of_living_program)));
+
+        return CourseDetailMaster::query()
+            ->whereIn('id', $ids)
+            ->get()
+            ->map(function ($course) {
+                return $course->translated_name;
             })
             ->toArray();
     }

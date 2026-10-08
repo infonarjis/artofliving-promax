@@ -232,6 +232,27 @@ class MyProfileController extends Controller
                         'blood_group_id' => $request->blood_group_id,
                     ]);
                     break;
+                case 'art_of_living_association':
+                    $validator = Validator::make($request->all(), [
+                        'Yesart_of_living_teacher' => 'required',
+                        'have_art_of_living_program' => 'required',
+                    ]);
+
+                    if ($validator->fails()) {
+                        return ApiResponseService::validationError($validator);
+                    }
+                    $member->update([
+                        'Yesart_of_living_teacher' => $request->Yesart_of_living_teacher,
+                        'teacher_code' => $request->teacher_code,
+                        'teaching_courses' => $request->teaching_courses,
+                        'have_art_of_living_program' => $request->have_art_of_living_program,
+                        'teacher_name' => $request->teacher_name,
+                        'teacher_mobile_no' => $request->teacher_mobile_no,
+                        'art_of_living_program' => $request->art_of_living_program,
+                        'no_of_years_in_artofliving' => $request->no_of_years_in_artofliving,
+                    ]);
+
+                    break;
                 case 'family_details':
                     $validator = Validator::make($request->all(), [
                         'father_name' => 'required',
@@ -281,7 +302,9 @@ class MyProfileController extends Controller
                             'part_education' => $request->part_education ?? null,
                             'part_occupation' => $request->part_occupation ?? null,
                             'part_mothertongue' => $request->part_mothertongue ?? null,
-                            'part_manglik' => $request->part_manglik ?? null
+                            'part_manglik' => $request->part_manglik ?? null,
+                            'part_art_of_living_teacher' => $request->part_art_of_living_teacher ?? null,
+                            'part_have_art_of_living_program' => $request->part_have_art_of_living_program ?? null,
                         ]
                     );
                     break;
