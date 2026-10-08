@@ -302,6 +302,9 @@ class MyProfileController extends Controller
                         'part_occupation'     => implode(',', (array) $request->part_occupation),
                         'part_mothertongue'   => implode(',', (array) $request->part_mothertongue),
                         'part_manglik'        => implode(',', (array) $request->part_manglik),
+                        'part_diet'           => implode(',', (array) $request->part_diet),
+                        'part_smoke'          => implode(',', (array) $request->part_smoke),
+                        'part_drink'          => implode(',', (array) $request->part_drink),
                         'part_art_of_living_teacher' => implode(',', (array) $request->part_art_of_living_teacher),
                         'part_have_art_of_living_program' => implode(',', (array) $request->part_have_art_of_living_program),
                     ]

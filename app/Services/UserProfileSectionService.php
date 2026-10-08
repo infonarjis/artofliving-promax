@@ -5,12 +5,15 @@ namespace App\Services;
 use App\Models\AnnualIncomeMaster;
 use App\Models\CasteMaster;
 use App\Models\CountryMaster;
+use App\Models\DrinkingHabitMaster;
+use App\Models\EatingHabitMaster;
 use App\Models\EducationMaster;
 use App\Models\ManglikMaster;
 use App\Models\MaritalStatusMaster;
 use App\Models\MotherTongueMaster;
 use App\Models\OccupationMaster;
 use App\Models\ReligionMaster;
+use App\Models\SmokingHabitMaster;
 use App\Models\StateMaster;
 use stdClass;
 
@@ -464,6 +467,9 @@ class UserProfileSectionService
                 'part_occupation'     => [OccupationMaster::class, 'occupation_name'],
                 'part_mothertongue'   => [MotherTongueMaster::class, 'mtongue_name'],
                 'part_manglik'        => [ManglikMaster::class, 'manglik_name'],
+                'part_diet'        => [EatingHabitMaster::class, 'eating_habit_name'],
+                'part_smoke'        => [SmokingHabitMaster::class, 'smoking_habit_name'],
+                'part_drink'        => [DrinkingHabitMaster::class, 'drinking_habit_name'],
             ];
             foreach ($partnerFields as $field => [$model, $column]) {
                 $value = $registerPartner->{$field};
@@ -547,6 +553,24 @@ class UserProfileSectionService
                 'label'         => __('messages.field_lbl_partner_manglik'),
                 'selected_ids'  => $registerPartner->part_manglik ?? null,
                 'value'         => $displayPartnerValue->part_manglik ?? null,
+            ],
+            [
+                'key'           => 'part_diet',
+                'label'         => __('messages.field_lbl_partner_eating_habits'),
+                'selected_ids'  => $registerPartner->part_diet ?? null,
+                'value'         => $displayPartnerValue->part_diet ?? null,
+            ],
+            [
+                'key'           => 'part_smoke',
+                'label'         => __('messages.field_lbl_partner_smoking'),
+                'selected_ids'  => $registerPartner->part_smoke ?? null,
+                'value'         => $displayPartnerValue->part_smoke ?? null,
+            ],
+            [
+                'key'           => 'part_drink',
+                'label'         => __('messages.field_lbl_partner_drinking'),
+                'selected_ids'  => $registerPartner->part_drink ?? null,
+                'value'         => $displayPartnerValue->part_drink ?? null,
             ],
         ];
 

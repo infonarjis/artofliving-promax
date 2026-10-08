@@ -40,10 +40,12 @@ class PartnerPreferenceService
             'part_state'        => 'state_id',
             'part_mothertongue' => 'mother_tongue',
             'part_income'       => 'income',
-            'part_diet'         => 'diet',
             'part_occupation'   => 'occupation',
             'part_manglik'      => 'manglik',
             'part_education'    => 'education_level',
+            'part_diet'         => 'diet',
+            'part_smoke'        => 'smoke',
+            'part_drink'        => 'drink',
         ];
 
         foreach ($map as $pf => $db) {

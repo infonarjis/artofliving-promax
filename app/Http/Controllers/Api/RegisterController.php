@@ -473,6 +473,9 @@ class RegisterController extends Controller
                             'part_occupation' => $request->part_occupation ?? null,
                             'part_mothertongue' => $request->part_mothertongue ?? null,
                             'part_manglik' => $request->part_manglik ?? null,
+                            'part_diet' => $request->part_diet ?? null,
+                            'part_smoke' => $request->part_smoke ?? null,
+                            'part_drink' => $request->part_drink ?? null,
                             'part_art_of_living_teacher' => $request->part_art_of_living_teacher ?? null,
                             'part_have_art_of_living_program' => $request->part_have_art_of_living_program ?? null,
                         ]

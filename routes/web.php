@@ -19,6 +19,7 @@ use App\Http\Controllers\Migration\AdminNotificationMigrationController;
 use App\Http\Controllers\Migration\MatchListMigrationController;
 use App\Http\Controllers\Migration\StaffMigrationController;
 use App\Http\Controllers\Migration\StaffRoleMigrationController;
+use App\Http\Controllers\Migration\ExpressInterestMigrationController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -70,21 +71,15 @@ use App\Http\Controllers\Web\{
     PersonalizeChatController,
     FcmController,
     AiAutoInterestController,
-    AiMatchMakingController,
-    ThemeController
+    AiMatchMakingController
 };
 use Illuminate\Support\Facades\Artisan;
-
-
-
-
 
 Route::get('/run-migration', function () {
     // abort_if(!app()->environment('local'), 403);
     Artisan::call('migrate', ['--force' => true]);
     return "Migrations have been run!";
 });
-
 
 ## For Storage Link:
 Route::get('/link-storage/{key}', function ($key) {
@@ -488,5 +483,7 @@ Route::group(['prefix' => ''], function (): void {
         Route::get('staff', [StaffMigrationController::class, 'staff']);
 
         Route::get('staff-roles', [StaffRoleMigrationController::class, 'staffRoles']);
+
+        Route::get('express-interest', [ExpressInterestMigrationController::class, 'expressInterest']);
     });
 });
