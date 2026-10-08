@@ -20,6 +20,8 @@ use App\Models\AssignHistory;
 use App\Models\CasteMaster;
 use App\Models\CommentMaster;
 use App\Models\CountryMaster;
+use App\Models\DrinkingHabitMaster;
+use App\Models\EatingHabitMaster;
 use App\Models\EducationMaster;
 use App\Models\ExpressInterest;
 use App\Models\Franchise;
@@ -35,6 +37,7 @@ use App\Models\PhotoRequest;
 use App\Models\Register;
 use App\Models\RegisterPartner;
 use App\Models\ReligionMaster;
+use App\Models\SmokingHabitMaster;
 use App\Models\Staff;
 use App\Models\StaffActivity;
 use App\Models\StateMaster;
@@ -1564,6 +1567,47 @@ class MemberController extends Controller
                 'label' => 'Partner Manglik',
                 'is_register' => 'yes'
             ),
+
+            'part_diet' => array(
+                'type' => 'dropdown',
+                'is_multiple' => 'yes',
+                'display_placeholder' => 'No',
+                'class' => 'single disbaledValue',
+                'relation' => array(
+                    'rel_model' => 'EatingHabitMaster',
+                    'key_val' => 'id',
+                    'key_disp' => 'eating_habit_name'
+                ),
+                'label' => 'Partner Eating Habit',
+                'is_register' => 'yes'
+            ),
+            'part_smoke' => array(
+                'type' => 'dropdown',
+                'is_multiple' => 'yes',
+                'display_placeholder' => 'No',
+                'class' => 'single disbaledValue',
+                'relation' => array(
+                    'rel_model' => 'SmokingHabitMaster',
+                    'key_val' => 'id',
+                    'key_disp' => 'smoking_habit_name'
+                ),
+                'label' => 'Partner Smoking Habit',
+                'is_register' => 'yes'
+            ),
+            'part_drink' => array(
+                'type' => 'dropdown',
+                'is_multiple' => 'yes',
+                'display_placeholder' => 'No',
+                'class' => 'single disbaledValue',
+                'relation' => array(
+                    'rel_model' => 'DrinkingHabitMaster',
+                    'key_val' => 'id',
+                    'key_disp' => 'drinking_habit_name'
+                ),
+                'label' => 'Partner Drinking Habit',
+                'is_register' => 'yes'
+            ),
+
             'part_art_of_living_teacher' => array(
                 'type' => 'dropdown', 'is_multiple' => 'yes',
                 'display_placeholder' => 'No', 'is_register' => 'yes',
@@ -1998,6 +2042,11 @@ class MemberController extends Controller
                         'part_occupation'     => $postData['part_occupation'] ?? null,
                         'part_state'          => $postData['part_state'] ?? null,
                         'part_manglik'        => $postData['part_manglik'] ?? null,
+
+                        'part_diet'         => $postData['part_diet'] ?? null,
+                        'part_smoke'        => $postData['part_smoke'] ?? null,
+                        'part_drink'        => $postData['part_drink'] ?? null,
+
                         'part_art_of_living_teacher'        => $postData['part_art_of_living_teacher'] ?? null,
                         'part_have_art_of_living_program'        => $postData['part_have_art_of_living_program'] ?? null,
                     ];
@@ -2494,6 +2543,10 @@ class MemberController extends Controller
                 'part_occupation'     => [OccupationMaster::class, 'occupation_name'],
                 'part_mothertongue'   => [MotherTongueMaster::class, 'mtongue_name'],
                 'part_manglik'        => [ManglikMaster::class, 'manglik_name'],
+
+                'part_diet'        => [EatingHabitMaster::class, 'eating_habit_name'],
+                'part_smoke'        => [SmokingHabitMaster::class, 'smoking_habit_name'],
+                'part_drink'        => [DrinkingHabitMaster::class, 'drinking_habit_name'],
             ];
             foreach ($partnerFields as $field => [$model, $column]) {
                 $value = $registerPartnerArr->{$field};
@@ -2518,6 +2571,9 @@ class MemberController extends Controller
                 ['key' => 'part_occupation', 'label' => 'Partner Occupation', 'value' => $registerPartnerArr->part_occupation ?? null],
                 ['key' => 'part_mothertongue', 'label' => 'Partner Mother Tongue', 'value' => $registerPartnerArr->part_mothertongue ?? null],
                 ['key' => 'part_manglik', 'label' => 'Partner Manglik', 'value' => $registerPartnerArr->part_manglik ?? null],
+                ['key' => 'part_diet', 'label' => 'Partner Eating Habits', 'value' => $registerPartnerArr->part_diet ?? null],
+                ['key' => 'part_smoke', 'label' => 'Partner Smoking Habit', 'value' => $registerPartnerArr->part_smoke ?? null],
+                ['key' => 'part_drink', 'label' => 'Partner Drinking Habit', 'value' => $registerPartnerArr->part_drink ?? null],
                 ['key' => 'part_art_of_living_teacher', 'label' => 'Partner Manglik', 'value' => $registerPartnerArr->part_art_of_living_teacher ?? null],
                 ['key' => 'part_have_art_of_living_program', 'label' => 'Partner Manglik', 'value' => $registerPartnerArr->part_have_art_of_living_program ?? null],
             ],
