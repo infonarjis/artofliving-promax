@@ -37,13 +37,26 @@ class MembershipPlanController extends Controller
 
     private function applyDiscount(MembershipPlan $plan): void
     {
+        $user = auth()->user();
+
+        // Default amount
+        $currencyCode = $plan->currency_code;
         $originalAmount = (float) $plan->plan_amount;
+
+        // If user is logged in and mobile matches, use international amount
+        if ($user && str_starts_with($user->mobile, '+1-')) {
+            $currencyCode = $plan->international_currency_code;
+            $originalAmount = (float) $plan->international_plan_amount;
+        }
+
         $discountPercent = (float) $plan->plan_discount;
 
         $discountValue = $discountPercent > 0
             ? ($originalAmount * $discountPercent) / 100
             : 0;
 
+        $plan->plan_amount = $originalAmount;
+        $plan->currency_code = $currencyCode;
         $plan->plan_discount_amount = $originalAmount - $discountValue;
     }
 
@@ -76,7 +89,7 @@ class MembershipPlanController extends Controller
             ]);
             return response()->json([
                 'success'         => true,
-                'currency'        => $plan->currency_code,
+                'currency'        => $result['currency_code'],
                 'plan_amount'     => round($result['plan_amount'], 2),
                 'plan_discount'   => round($result['plan_discount'], 2),
                 'addon_total'     => round($result['add_on_amount'], 2),

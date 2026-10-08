@@ -72,17 +72,27 @@ class LoginController extends Controller
         /** @var \App\Models\Register|null $user */
         $user = Auth::guard('web')->user();
 
-        if ($user->status !== 'APPROVED' || $user->trashed()) {
+        if ($user->trashed()) {
             Auth::guard('web')->logout();
-            if ($user->trashed()) {
-                return $this->invalidLogin('msg_account_deactivated');
-            }
-            if ($user->status === 'UNAPPROVED') {
-                return $this->invalidLogin('msg_account_not_approved');
-            }
-            if ($user->status === 'Suspended') {
-                return $this->invalidLogin('msg_account_suspended');
-            }
+            return $this->invalidLogin('msg_account_deactivated');
+        }
+
+        if ($user->status === 'Suspended') {
+            Auth::guard('web')->logout();
+            return $this->invalidLogin('msg_account_suspended');
+        }
+
+        if ($user->status === 'UNAPPROVED' && $user->is_verify === 'Yes') {
+            Auth::guard('web')->logout();
+            return $this->invalidLogin('msg_account_not_approved');
+        }
+
+        $canLogin = ($user->status === 'APPROVED' && $user->is_verify === 'Yes')
+            || ($user->status === 'UNAPPROVED' && $user->is_verify === 'No')
+            || ($user->status === 'APPROVED' && $user->is_verify === 'No');
+            
+        if (!$canLogin) {
+            Auth::guard('web')->logout();
             return $this->invalidLogin();
         }
 
@@ -117,11 +127,41 @@ class LoginController extends Controller
 
         $mobile = $request->country_code . '-' . $request->mobile;
 
-        $user = Register::where('mobile', $mobile)
-            ->where('status', 'APPROVED')
-            ->first();
+        $user = Register::where('mobile', $mobile)->first();
 
         if (!$user) {
+            return response()->json([
+                'status' => false,
+                'message' => __('messages.msg_invalid_mobile_number')
+            ]);
+        }
+
+        if ($user->trashed()) {
+            return response()->json([
+                'status' => false,
+                'message' => __('messages.msg_account_deactivated')
+            ]);
+        }
+
+        if ($user->status === 'Suspended') {
+            return response()->json([
+                'status' => false,
+                'message' => __('messages.msg_account_suspended')
+            ]);
+        }
+
+        if ($user->status === 'UNAPPROVED' && $user->is_verify === 'Yes') {
+            return response()->json([
+                'status' => false,
+                'message' => __('messages.msg_account_not_approved')
+            ]);
+        }
+
+        $canLogin = ($user->status === 'APPROVED' && $user->is_verify === 'Yes')
+            || ($user->status === 'UNAPPROVED' && $user->is_verify === 'No')
+            || ($user->status === 'APPROVED' && $user->is_verify === 'No');
+
+        if (!$canLogin) {
             return response()->json([
                 'status' => false,
                 'message' => __('messages.msg_invalid_mobile_number')

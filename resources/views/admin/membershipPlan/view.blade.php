@@ -66,13 +66,6 @@
                             </div>
 
                             <div class="mb-3">
-                                <div class="text-muted small">Plan Amount</div>
-                                <div class="fw-semibold">
-                                    {{ _displayNotAvailable($resultArr->plan_amount) }}
-                                </div>
-                            </div>
-
-                            <div class="mb-3">
                                 <div class="text-muted small">Plan Type</div>
                                 <div class="fw-semibold">
                                     {{ _displayNotAvailable($resultArr->plan_type) }}
@@ -80,9 +73,16 @@
                             </div>
 
                             <div class="mb-3">
-                                <div class="text-muted small">Currency</div>
+                                <div class="text-muted small">Plan Amount</div>
                                 <div class="fw-semibold">
-                                    {{ _displayNotAvailable($resultArr->currency_code) }}
+                                    {{ _displayNotAvailable($resultArr->currency_code) }} {{ _displayNotAvailable($resultArr->plan_amount) }}
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <div class="text-muted small">International Plan Amount</div>
+                                <div class="fw-semibold">
+                                    {{ _displayNotAvailable($resultArr->international_currency_code) }} {{ _displayNotAvailable($resultArr->international_plan_amount) }}
                                 </div>
                             </div>
 

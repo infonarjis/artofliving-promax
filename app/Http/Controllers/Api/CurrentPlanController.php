@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\AddOnPackage;
 use App\Models\AddOnPayment;
 use App\Models\Payment;
 use App\Services\Api\ApiResponseService;
@@ -31,7 +32,8 @@ class CurrentPlanController extends Controller
 
             $dataArr = [
                 'current_plan' => $currentPlan,
-                'add_on_plan' => $addOnPlan
+                'add_on_plan' => $addOnPlan,
+                'is_addon_package_enabled' => AddOnPackage::active()->exists(),
             ];
 
             return ApiResponseService::success(_getLangApi($request, 'msg_data_get_success'), $dataArr);

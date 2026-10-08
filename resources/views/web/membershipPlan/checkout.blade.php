@@ -31,7 +31,7 @@
                                                 <div class="plan-final-price">
                                                     <span class="plan-amount">
                                                         {{ $planDetail->currency_code }}
-                                                        {{ number_format($planDetail->plan_discount_amount, 0) }}
+                                                        {{ number_format($planDetail->plan_discount_amount, 2) }}
                                                     </span>
 
                                                     <span class="plan-validity">
@@ -96,30 +96,38 @@
                                             @endif
                                             {{ __('messages.lbl_live_chat') }}
                                         </li>
-                                        <li class="fts-15 fw-4 white-color70-n d-flex gap-1 mt-lg-2 mt-1">
-                                            @if ($planDetail->audio_minutes_limit > 0)
-                                                <iconify-icon icon="material-symbols:check"
-                                                    class="text-success fts-20"></iconify-icon>
-                                                {{ __('messages.lbl_audio_calls') }} -
-                                                {{ $planDetail->audio_minutes_limit }} min
-                                            @else
-                                                <iconify-icon icon="material-symbols:close"
-                                                    class="text-danger fts-20"></iconify-icon>
-                                                {{ __('messages.lbl_audio_calls') }}
-                                            @endif
-                                        </li>
-                                        <li class="fts-15 fw-4 white-color70-n d-flex gap-1 mt-lg-2 mt-1">
-                                            @if ($planDetail->video_minutes_limit > 0)
-                                                <iconify-icon icon="material-symbols:check"
-                                                    class="text-success fts-20"></iconify-icon>
-                                                {{ __('messages.lbl_video_calls') }} -
-                                                {{ $planDetail->video_minutes_limit }} min
-                                            @else
-                                                <iconify-icon icon="material-symbols:close"
-                                                    class="text-danger fts-20"></iconify-icon>
-                                                {{ __('messages.lbl_video_calls') }}
-                                            @endif
-                                        </li>
+                                        @php
+                                            $voiceApproved = $configArr['zego_voice_call_setting'] === 'APPROVED';
+                                            $videoApproved = $configArr['zego_video_call_setting'] === 'APPROVED';
+                                        @endphp
+                                        @if ($voiceApproved)
+                                            <li class="fts-15 fw-4 white-color70-n d-flex gap-1 mt-lg-2 mt-1">
+                                                @if ($planDetail->audio_minutes_limit > 0)
+                                                    <iconify-icon icon="material-symbols:check"
+                                                        class="text-success fts-20"></iconify-icon>
+                                                    {{ __('messages.lbl_audio_calls') }} -
+                                                    {{ $planDetail->audio_minutes_limit }} min
+                                                @else
+                                                    <iconify-icon icon="material-symbols:close"
+                                                        class="text-danger fts-20"></iconify-icon>
+                                                    {{ __('messages.lbl_audio_calls') }}
+                                                @endif
+                                            </li>
+                                        @endif
+                                        @if ($videoApproved)
+                                            <li class="fts-15 fw-4 white-color70-n d-flex gap-1 mt-lg-2 mt-1">
+                                                @if ($planDetail->video_minutes_limit > 0)
+                                                    <iconify-icon icon="material-symbols:check"
+                                                        class="text-success fts-20"></iconify-icon>
+                                                    {{ __('messages.lbl_video_calls') }} -
+                                                    {{ $planDetail->video_minutes_limit }} min
+                                                @else
+                                                    <iconify-icon icon="material-symbols:close"
+                                                        class="text-danger fts-20"></iconify-icon>
+                                                    {{ __('messages.lbl_video_calls') }}
+                                                @endif
+                                            </li>
+                                        @endif
                                         @if (_getConstant('AI_MODE') == 'Enabled')
                                             <li class="fts-15 fw-4 white-color70-n d-flex gap-1 mt-lg-2 mt-1">
                                                 @if ($planDetail->ai_interest)
@@ -197,8 +205,9 @@
 
                                         {{-- If Addon then this div show  --}}
                                         <div id="selectedAddonsContainer"></div>
+                                        @php $user = auth()->user(); @endphp
 
-                                        @if (isset($configArr['tax_applicable']) && $configArr['tax_applicable'] == 'Yes' && $configArr['service_tax'] > 0)
+                                        @if (isset($configArr['tax_applicable']) && $configArr['tax_applicable'] == 'Yes' && $configArr['service_tax'] > 0 && $user && str_starts_with($user->mobile, '+91-'))
                                             <div class="d-flex justify-content-between mb-lg-1 pb-2">
                                                 <div class="fts-14 fw-5 white-color70-n">
                                                     {{ _getLang('lbl_sales_tax') }}({{ $configArr['service_tax'] }}%)

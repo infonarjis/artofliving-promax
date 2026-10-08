@@ -9341,7 +9341,7 @@ video::-webkit-media-controls-enclosure {
 }
 
 .custom-otp-modal .comman-bg-btn {
-  background: #0d56de;
+  background: var(--primary-color);
   border-radius: 14px;
   font-size: 18px;
   transition: transform 0.2s;

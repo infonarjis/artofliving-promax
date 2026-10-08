@@ -241,6 +241,23 @@ class AddOnPackageController extends Controller
     ## Popup Update :
     public function addEditForm($id = '')
     {
+        $packedCategoryArr = array(
+            'Allowed View Contacts' => 'Allowed View Contacts',
+            'Allowed View Profiles' => 'Allowed View Profiles',
+            'Allowed Interest Profiles' => 'Allowed Interest Profiles',
+            'Allowed Duration' => 'Allowed Duration',
+            'Allowed Video Call' => 'Allowed Video Call',
+            'Allowed Audio Call' => 'Allowed Audio Call',
+            'WhatsApp Group' => 'WhatsApp Group',
+        );
+        $siteSetting = _getSiteSetting();
+        ## Check Zego-Cloud Setting Enabled:
+        if ($siteSetting['zego_video_call_setting'] == 'UNAPPROVED') {
+            unset($packedCategoryArr['Allowed Video Call']);
+        }
+        if ($siteSetting['zego_voice_call_setting'] == 'UNAPPROVED') {
+            unset($packedCategoryArr['Allowed Audio Call']);
+        }
         $elementArr = array(
             'package_title' => array(
                 'is_required' => 'required',
@@ -252,15 +269,7 @@ class AddOnPackageController extends Controller
                 'label' => 'Package',
                 'column' => '6',
                 'class' => 'select2',
-                'value_arr' => array(
-                    'Allowed View Contacts' => 'Allowed View Contacts',
-                    'Allowed View Profiles' => 'Allowed View Profiles',
-                    'Allowed Interest Profiles' => 'Allowed Interest Profiles',
-                    'Allowed Duration' => 'Allowed Duration',
-                    'Allowed Video Call' => 'Allowed Video Call',
-                    'Allowed Audio Call' => 'Allowed Audio Call',
-                    'WhatsApp Group' => 'WhatsApp Group',
-                ),
+                'value_arr' => $packedCategoryArr,
             ),
             'package_count' => array(
                 'is_required' => 'required',

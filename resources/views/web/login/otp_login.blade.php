@@ -46,8 +46,8 @@
             <div class="modal-body text-center pt-0">
                 <div class="otp-icon-wrap mb-4">
                     <div class="otp-circle">
-                        <img src="{{ asset('storage/web/') }}/assets/images/otp.png" alt="otp"
-                            class="otp-img-icon">
+                        <iconify-icon icon="mdi:cellphone-check" width="30" height="30"
+                            class="primary-color-n otp-img-icon"></iconify-icon>
                     </div>
                 </div>
                 <p class="white-color-n fts-15 fw-5 mb-2 px-lg-5 px-3">

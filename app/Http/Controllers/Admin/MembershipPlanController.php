@@ -263,33 +263,56 @@ class MembershipPlanController extends Controller
                 'column' => '6',
                 'form_group_class' => 'plan_amount'
             ],
+            'international_currency_code' => [
+                'is_required' => 'required',
+                'class' => 'required select2',
+                'type' => 'dropdown',
+                'label' => 'International Plan Currency',
+                'relation' => ['rel_model' => 'CurrencyMaster', 'key_val' => 'currency_code', 'key_disp' => 'currency_code'],
+                'column' => '6',
+                // 'form_group_class' => 'currency_code'
+            ],
+            'international_plan_amount' => [
+                'is_required' => 'required',
+                'class' => 'required',
+                'input_type' => 'number',
+                'column' => '6',
+                'form_group_class' => 'plan_amount',
+                'value' => '0.00'
+            ],
 
             'in_app_purchase_android_id' => [
-                'is_required' => 'required',
-                'class' => 'required',
                 'label' => 'In App Product ID (Android)',
-                'column' => '6',
+                'column' => '4',
             ],
             'in_app_purchase_android_amount' => [
-                'is_required' => 'required',
-                'class' => 'required',
                 'label' => 'In App Plan Amount (Android)',
                 'input_type' => 'number',
-                'column' => '6'
+                'column' => '4',
+                'value' => '0.00'
+            ],
+            'international_in_app_purchase_android_amount' => [
+                'label' => 'International In App Plan Amount (Android)',
+                'input_type' => 'number',
+                'column' => '4',
+                'value' => '0.00'
             ],
 
             'in_app_purchase_ios_id' => [
-                'is_required' => 'required',
-                'class' => 'required',
                 'label' => 'In App Product ID (IOS)',
-                'column' => '6',
+                'column' => '4',
             ],
             'in_app_purchase_ios_amount' => [
-                'is_required' => 'required',
-                'class' => 'required',
                 'label' => 'In App Plan Amount (IOS)',
                 'input_type' => 'number',
-                'column' => '6'
+                'column' => '4',
+                'value' => '0.00'
+            ],
+            'international_in_app_purchase_ios_amount' => [
+                'label' => 'International In App Plan Amount (IOS)',
+                'input_type' => 'number',
+                'column' => '4',
+                'value' => '0.00'
             ],
 
             'plan_discount' => [
@@ -431,6 +454,8 @@ class MembershipPlanController extends Controller
             'plan_name',
             'plan_type',
             'plan_amount',
+            'international_currency_code',
+            'international_plan_amount',
             'plan_discount',
             'currency_code',
             'validity_days',
@@ -446,8 +471,10 @@ class MembershipPlanController extends Controller
 
             'in_app_purchase_android_id',
             'in_app_purchase_android_amount',
+            'international_in_app_purchase_android_amount',
             'in_app_purchase_ios_id',
             'in_app_purchase_ios_amount',
+            'international_in_app_purchase_ios_amount',
 
             'status',
         );
@@ -455,6 +482,7 @@ class MembershipPlanController extends Controller
         if (!empty($updateData)) {
             if (isset($postData['plan_type']) && $postData['plan_type'] == 'FREE') {
                 $updateData['plan_amount'] = '0';
+                $updateData['international_plan_amount'] = '0';
                 $updateData['plan_discount'] = '0';
             }
             ## Update Record :

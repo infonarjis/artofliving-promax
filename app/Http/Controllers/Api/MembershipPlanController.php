@@ -21,16 +21,19 @@ class MembershipPlanController extends Controller
     public function index(Request $request): JsonResponse
     {
         try {
-            $currencyCode = null;
-            $authUser = auth()->guard('api')->user();
-            $currencyCode = $authUser->country_id == 101 ? 'INR' : 'USD';
+            $user = auth()->guard('api')->user();
 
-            $membershipPlan = MembershipPlan::active()
-                ->when($currencyCode, function ($query) use ($currencyCode) {
-                    $query->where('currency_code', $currencyCode);
-                })
+            $membershipPlan = MembershipPlan::active()->paid()
                 ->get();
+        
+            foreach ($membershipPlan as $plan) {
 
+                if ($user && str_starts_with($user->mobile, '+1-')) {
+                    $plan->currency_code = $plan->international_currency_code;
+                    $plan->plan_amount = $plan->international_plan_amount;
+                }
+            }
+            
             $offlinePayment = OfflinePayment::active()->first();
 
             // Payment Gateway :
@@ -52,7 +55,7 @@ class MembershipPlanController extends Controller
             $dataArr = [
                 'membership_plans' => $membershipPlan,
                 'offline_payment' => $offlinePayment,
-                'payment_methods' => $paymentMethod
+                'payment_methods' => $paymentMethod,
             ];
 
             return ApiResponseService::success(_getLangApi($request, 'msg_data_get_success'), $dataArr);
@@ -93,15 +96,15 @@ class MembershipPlanController extends Controller
                 return ApiResponseService::validationError($validator);
             }
 
-            $authUser = auth()->guard('api')->user();
-            $currencyCode = $authUser->country_id == 101 ? 'INR' : 'USD';
-
             $resultList = MembershipPlan::active()
-                ->when($currencyCode, function ($query) use ($currencyCode) {
-                    $query->where('currency_code', $currencyCode);
-                })
                 ->where('id', $request->plan_id)
                 ->first();
+
+            $user = auth()->guard('api')->user();
+            if ($user && str_starts_with($user->mobile, '+1-')) {
+                $resultList->currency_code = $resultList->international_currency_code;
+                $resultList->plan_amount = (float) $resultList->international_plan_amount;
+            }
 
             ## Admin Packages :
             $addPackages = AddOnPackage::active()->get();
@@ -152,7 +155,7 @@ class MembershipPlanController extends Controller
 
             $dataArr = [
                 'success'         => true,
-                'currency'        => $plan->currency_code,
+                'currency'        => $result['currency_code'],
                 'plan_amount'     => round($result['plan_amount'], 2),
                 'plan_discount'   => round($result['plan_discount'], 2),
                 'addon_total'     => round($result['add_on_amount'], 2),
