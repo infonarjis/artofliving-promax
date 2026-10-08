@@ -175,7 +175,7 @@ return [
     "field_lbl_partner_manglik" => "Partner Manglik",
     "field_lbl_select_partner_manglik" => "Select Partner Manglik",
     "field_lbl_partner_eating_habits" => "Partner Eating Habits",
-    "field_lbl_partner_select_eating_habits" => "Select Partner  Eating Habits",
+    "field_lbl_partner_select_eating_habits" => "Select Partner Eating Habits",
     "field_lbl_partner_smoking" => "Partner Smoking Habit",
     "field_lbl_partner_select_smoking" => "Select Partner Smoking Habit",
     "field_lbl_partner_drinking" => "Partner Drinking Habit",

@@ -297,6 +297,85 @@
             </div>
         </div>
     @endif
+    @if (_checkFieldEnable('part_diet', 'edit_profile'))
+        <div class="col-md-6 px-2 mb-3">
+            <div class="custom-select2-div">
+                <div class="edit_inputMain-sltr w-100">
+                    @php
+                        $selectedPartnerDiet = !empty($member->partnerPreference->part_diet)
+                            ? explode(',', $member->partnerPreference->part_diet)
+                            : [];
+                    @endphp
+                    <label for="part_diet">{{ __('messages.field_lbl_partner_eating_habits') }}</label>
+                    <select name="part_diet[]" id="part_diet" class="js-example-basic-multiple does-not-matter"
+                        data-placeholder="{{ _getLang('field_lbl_partner_select_eating_habits') }}"
+                        multiple="multiple">
+                        <option value="Does Not Matter"
+                            {{ in_array('Does Not Matter', $selectedPartnerDiet) ? 'selected' : '' }}>
+                            {{ _getLang('lbl_does_not_matter') }}
+                        </option>
+                        @foreach ($eatingHabitList as $id => $name)
+                            <option {{ in_array($id, $selectedPartnerDiet) ? 'selected' : '' }}
+                                value="{{ $id }}">
+                                {{ $name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+        </div>
+    @endif
+    @if (_checkFieldEnable('part_smoke', 'edit_profile'))
+        <div class="col-md-6 px-2 mb-3">
+            <div class="custom-select2-div">
+                <div class="edit_inputMain-sltr w-100">
+                    @php
+                        $selectedPartnerSmoke = !empty($member->partnerPreference->part_smoke)
+                            ? explode(',', $member->partnerPreference->part_smoke)
+                            : [];
+                    @endphp
+                    <label for="part_smoke">{{ __('messages.field_lbl_partner_smoking') }}</label>
+                    <select name="part_smoke[]" id="part_smoke" class="js-example-basic-multiple does-not-matter"
+                        data-placeholder="{{ _getLang('field_lbl_partner_select_smoking') }}" multiple="multiple">
+                        <option value="Does Not Matter"
+                            {{ in_array('Does Not Matter', $selectedPartnerSmoke) ? 'selected' : '' }}>
+                            {{ _getLang('lbl_does_not_matter') }}
+                        </option>
+                        @foreach ($smokingHabitList as $id => $name)
+                            <option {{ in_array($id, $selectedPartnerSmoke) ? 'selected' : '' }}
+                                value="{{ $id }}">
+                                {{ $name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+        </div>
+    @endif
+    @if (_checkFieldEnable('part_drink', 'edit_profile'))
+        <div class="col-md-6 px-2 mb-3">
+            <div class="custom-select2-div">
+                <div class="edit_inputMain-sltr w-100">
+                    @php
+                        $selectedPartnerDrink = !empty($member->partnerPreference->part_drink)
+                            ? explode(',', $member->partnerPreference->part_drink)
+                            : [];
+                    @endphp
+                    <label for="part_drink">{{ __('messages.field_lbl_partner_drinking') }}</label>
+                    <select name="part_drink[]" id="part_drink" class="js-example-basic-multiple does-not-matter"
+                        data-placeholder="{{ _getLang('field_lbl_partner_select_drinking') }}" multiple="multiple">
+                        <option value="Does Not Matter"
+                            {{ in_array('Does Not Matter', $selectedPartnerDrink) ? 'selected' : '' }}>
+                            {{ _getLang('lbl_does_not_matter') }}
+                        </option>
+                        @foreach ($drinkingHabitList as $id => $name)
+                            <option {{ in_array($id, $selectedPartnerDrink) ? 'selected' : '' }}
+                                value="{{ $id }}">
+                                {{ $name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+        </div>
+    @endif
     <div class="col-md-6 px-2 mb-3">
         <div class="custom-select2-div">
             <div class="edit_inputMain-sltr w-100">
@@ -305,9 +384,12 @@
                         ? explode(',', $member->partnerPreference->part_art_of_living_teacher)
                         : [];
                 @endphp
-                <label for="part_art_of_living_teacher">{{ __('messages.field_lbl_artofliving_partner_teacher') }}</label>
-                <select name="part_art_of_living_teacher[]" id="part_art_of_living_teacher" class="js-example-basic-multiple does-not-matter"
-                    data-placeholder="{{ _getLang('field_lbl_select_artofliving_partner_teacher') }}" multiple="multiple">
+                <label
+                    for="part_art_of_living_teacher">{{ __('messages.field_lbl_artofliving_partner_teacher') }}</label>
+                <select name="part_art_of_living_teacher[]" id="part_art_of_living_teacher"
+                    class="js-example-basic-multiple does-not-matter"
+                    data-placeholder="{{ _getLang('field_lbl_select_artofliving_partner_teacher') }}"
+                    multiple="multiple">
                     <option value="Does Not Matter"
                         {{ in_array('Does Not Matter', $selectedArtOfLivingTeacher) ? 'selected' : '' }}>
                         {{ _getLang('lbl_does_not_matter') }}
@@ -328,9 +410,12 @@
                         ? explode(',', $member->partnerPreference->part_have_art_of_living_program)
                         : [];
                 @endphp
-                <label for="part_have_art_of_living_program">{{ __('messages.field_lbl_artofliving_partner_program') }}</label>
-                <select name="part_have_art_of_living_program[]" id="part_have_art_of_living_program" class="js-example-basic-multiple does-not-matter"
-                    data-placeholder="{{ _getLang('field_lbl_select_artofliving_partner_program') }}" multiple="multiple">
+                <label
+                    for="part_have_art_of_living_program">{{ __('messages.field_lbl_artofliving_partner_program') }}</label>
+                <select name="part_have_art_of_living_program[]" id="part_have_art_of_living_program"
+                    class="js-example-basic-multiple does-not-matter"
+                    data-placeholder="{{ _getLang('field_lbl_select_artofliving_partner_program') }}"
+                    multiple="multiple">
                     <option value="Does Not Matter"
                         {{ in_array('Does Not Matter', $selectedArtOfLivingProgram) ? 'selected' : '' }}>
                         {{ _getLang('lbl_does_not_matter') }}

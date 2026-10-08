@@ -811,6 +811,33 @@
             "default_value": ""
           },
           {
+            "name": "part_diet",
+            "label": "field_lbl_partner_eating_habits",
+            "placeholder": "field_lbl_partner_select_eating_habits",
+            "type": "multi_select_dropdown",
+            "dropdown_source": "eating_habit_list",
+            "is_required": false,
+            "default_value": ""
+          },
+          {
+            "name": "part_smoke",
+            "label": "field_lbl_partner_smoking",
+            "placeholder": "field_lbl_partner_select_smoking",
+            "type": "multi_select_dropdown",
+            "dropdown_source": "smoking_habit_list",
+            "is_required": false,
+            "default_value": ""
+          },
+          {
+            "name": "part_drink",
+            "label": "field_lbl_partner_drinking",
+            "placeholder": "field_lbl_partner_select_drinking",
+            "type": "multi_select_dropdown",
+            "dropdown_source": "drinking_habit_list",
+            "is_required": false,
+            "default_value": ""
+          },
+          {
             "name": "part_art_of_living_teacher",
             "label": "field_lbl_artofliving_partner_teacher",
             "placeholder": "field_lbl_select_artofliving_partner_teacher",

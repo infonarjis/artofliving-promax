@@ -2543,7 +2543,6 @@ class MemberController extends Controller
                 'part_occupation'     => [OccupationMaster::class, 'occupation_name'],
                 'part_mothertongue'   => [MotherTongueMaster::class, 'mtongue_name'],
                 'part_manglik'        => [ManglikMaster::class, 'manglik_name'],
-
                 'part_diet'        => [EatingHabitMaster::class, 'eating_habit_name'],
                 'part_smoke'        => [SmokingHabitMaster::class, 'smoking_habit_name'],
                 'part_drink'        => [DrinkingHabitMaster::class, 'drinking_habit_name'],

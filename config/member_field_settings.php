@@ -99,6 +99,10 @@ return [
         'part_occupation'     => ['label' => 'Partner Occupation', 'field_disable' => 'No', 'field_show_in_search' => 'No'],
         'part_mothertongue'   => ['label' => 'Partner Mother Tongue', 'field_disable' => 'No', 'field_show_in_search' => 'No'],
         'part_manglik'        => ['label' => 'Partner Manglik', 'field_disable' => 'No', 'field_show_in_search' => 'No'],
+
+        'part_diet'        => ['label' => 'Partner Eating Habits', 'field_disable' => 'No', 'field_show_in_search' => 'No'],
+        'part_smoke'        => ['label' => 'Partner Smoking Habits', 'field_disable' => 'No', 'field_show_in_search' => 'No'],
+        'part_drink'        => ['label' => 'Partner Drinking Habits', 'field_disable' => 'No', 'field_show_in_search' => 'No'],
     ],
 
     'Member Photos' => [
