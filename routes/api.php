@@ -50,6 +50,7 @@ use App\Http\Controllers\Api\{
 };
 
 ## Common-Request :
+Route::post('/recommended-match', [CommonRequestController::class, 'getMymatches']); // Old APP Force Update
 Route::post('common-request/get-token', [CommonRequestController::class, 'getToken']);
 Route::get('common-request/get-common-dropdown-list', [CommonRequestController::class, 'getCommonDropdownList']);
 

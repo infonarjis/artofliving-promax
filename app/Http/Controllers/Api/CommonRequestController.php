@@ -406,4 +406,25 @@ class CommonRequestController extends Controller
             );
         }
     }
+
+    public function getMymatches(Request $request): JsonResponse
+    {
+        $postData = $request->all();
+        $returnData['imagePath'] = '';
+        $returnDataArr = [];
+        ## APP Force Update :
+        $returnData['is_android_force_update'] = 1;
+        $returnData['is_ios_force_update'] = 1;
+        $returnData['is_ios_in_review'] = 1;
+
+        $returnData['resultCount'] = 0;
+        $returnData['resultArr'] = $returnDataArr;
+        $message = 'DATA_GET_SUCCESS';
+        return response()->json([
+            'code' => 200,
+            'status' => 'success',
+            'message' => $message,
+            'data' => $returnData
+        ]);
+    }
 }
