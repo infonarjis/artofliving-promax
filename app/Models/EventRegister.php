@@ -15,6 +15,8 @@ class EventRegister extends Model
 
     protected $fillable = [
         'event_id',
+        'member_id',
+        'matri_id',
         'name',
         'mobile',
         'email',

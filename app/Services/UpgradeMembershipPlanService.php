@@ -40,7 +40,14 @@ class UpgradeMembershipPlanService
      */
     public function calculatePlanAmount(MembershipPlan $plan, array $data = []): array
     {
+        $currencyCode = $plan->currency_code;
         $originalPlanAmount = (float) $plan->plan_amount;
+        $user = auth()->user();
+        // If user is logged in and mobile matches, use international amount
+        if ($user && str_starts_with($user->mobile, '+1-')) {
+            $currencyCode = $plan->international_currency_code;
+            $originalPlanAmount = (float) $plan->international_plan_amount;
+        }
         /*
         |--------------------------------------------------------------------------
         | Plan Discount
@@ -174,6 +181,9 @@ class UpgradeMembershipPlanService
         $taxName = '';
         $taxPercentage = 0;
         $config = _getSiteSetting();
+        if ($user && str_starts_with($user->mobile, '+1-')) {
+            $config['tax_applicable'] = 'No';
+        }
         if (!empty($config['tax_applicable']) && $config['tax_applicable'] == 'Yes') {
             $taxName = $config['tax_name'];
             $taxPercentage = (float) $config['service_tax'];
@@ -186,6 +196,7 @@ class UpgradeMembershipPlanService
         */
         $grandTotal = $subTotal + $taxAmount;
         return [
+            'currency_code' => $currencyCode,
             'plan_amount' => $originalPlanAmount,
             'plan_discount' => $planDiscount,
             'plan_amount_after_discount' => $planAmountAfterDiscount,
@@ -405,7 +416,7 @@ class UpgradeMembershipPlanService
 
                 // Corrected billing fields
                 'plan_amount' => $calculated['plan_amount'] - $calculated['plan_discount'],
-                'currency_code' => $plan->currency_code,
+                'currency_code' => $calculated['currency_code'],
                 'discount_detail' => $calculated['discount_detail'],
                 'discount_amount' => $calculated['discount_amount'],
                 // 'coupon_id' => $calculated['coupon_id'] ?? null,

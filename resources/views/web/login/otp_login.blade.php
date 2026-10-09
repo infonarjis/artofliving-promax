@@ -54,8 +54,6 @@
                             data-bs-dismiss="modal"
                             class="white-color-n fts-62">
                         </iconify-icon>
-                        {{-- <img src="{{ asset('storage/web/') }}/assets/images/otp.png" alt="otp"
-                            class="otp-img-icon"> --}}
                     </div>
                 </div>
                 <p class="white-color-n fts-15 fw-5 mb-2 px-lg-5 px-3">

@@ -58,13 +58,13 @@ class PaymentController extends Controller
             ]);
 
             $gatewayName = strtolower(trim($gateway->name));
-
+            $currencyCode = $calculated['currency_code'] ?? 'INR';
             if ($gatewayName === 'razorpay') {
                 $api = new RazorpayApi($gateway->client_id, $gateway->client_secret);
                 $order = $api->order->create([
                     'receipt' => 'MP_' . $payment->id,
                     'amount' => (int) round($payment->amount * 100),
-                    'currency' => 'INR',
+                    'currency' => $currencyCode,
                     'notes' => ['payment_id' => $payment->id, 'user_id' => $authUser->id],
                 ]);
                 return view('web.membershipPlan.payments.razorpay_redirect', compact('order', 'gateway', 'payment'));

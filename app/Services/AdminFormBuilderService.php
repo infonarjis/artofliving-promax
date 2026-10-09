@@ -948,13 +948,15 @@ class AdminFormBuilderService
             $countryCodeList = CountryMaster::active()
                 ->whereNotNull('country_code')
                 ->whereNotNull('country_name')
+                ->selectRaw('
+                    country_code,
+                    MAX(country_name) as country_name,
+                    MAX(is_top_country) as is_top_country
+                ')
+                ->groupBy('country_code')
                 ->orderByDesc('is_top_country')
                 ->orderBy('country_name')
-                ->get([
-                    'country_code',
-                    'country_name',
-                    'is_top_country',
-                ]);
+                ->get();
             $topCountryCodes = $countryCodeList->where('is_top_country', 1);
             $allCountryCodes = $countryCodeList->where('is_top_country', 0);
 

@@ -25,7 +25,8 @@ class LoginController extends Controller
     {
         // try {
         $validator = Validator::make($request->all(), [
-            'username'          => 'required|string',
+            'country_code' => 'required|string',
+            'mobile' => 'required',
             'password'          => 'required|string',
             'user_agent'        => 'required|string',
             'android_device_id' => 'nullable|string',
@@ -37,8 +38,8 @@ class LoginController extends Controller
         }
 
         ## Login by Email / Matri ID :
-        $field = filter_var($request->username, FILTER_VALIDATE_EMAIL) ? 'email' : 'matri_id';
-        $user = Register::where($field, $request->username)->first();
+        $mobile = $request->country_code . '-' . $request->mobile;
+        $user = Register::where('mobile', $mobile)->first();
         // Check whether the user exists before accessing properties.
         if (!$user) {
             return ApiResponseService::error(
@@ -65,20 +66,22 @@ class LoginController extends Controller
         }
 
         ## Status Check :
-        if ($user->status !== 'APPROVED' || (method_exists($user, 'trashed') && $user->trashed())) {
-            // Soft-deleted account
-            if (method_exists($user, 'trashed') && $user->trashed()) {
-                return ApiResponseService::error(__('messages.msg_account_deactivated'));
-            }
-            // Account not approved
-            if ($user->status === 'UNAPPROVED') {
-                return ApiResponseService::error(__('messages.msg_account_not_approved'));
-            }
-            // Account suspended
-            if ($user->status === 'Suspended') {
-                return ApiResponseService::error(__('messages.msg_account_suspended'));
-            }
-            // Other invalid/inactive status
+        if (method_exists($user, 'trashed') && $user->trashed()) {
+            return ApiResponseService::error(_getLangApi($request, 'msg_account_deactivated'));
+        }
+
+        if ($user->status === 'Suspended') {
+            return ApiResponseService::error(_getLangApi($request, 'msg_account_suspended'));
+        }
+
+        if ($user->status === 'UNAPPROVED' && $user->is_verify === 'Yes') {
+            return ApiResponseService::error(_getLangApi($request, 'msg_account_not_approved'));
+        }
+
+        $canLogin = ($user->status === 'APPROVED' && $user->is_verify === 'Yes')
+            || ($user->status === 'UNAPPROVED' && $user->is_verify === 'No') || ($user->status === 'APPROVED' && $user->is_verify === 'No');
+
+        if (!$canLogin) {
             return ApiResponseService::error(_getLangApi($request, 'msg_incorrect_login_details'));
         }
 

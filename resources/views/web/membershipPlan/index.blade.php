@@ -49,7 +49,11 @@
                             </div>
                             <div class="col-lg-2 col-12"></div>
                         @endif
-
+                        </div>
+                        @php
+                            $voiceApproved = $configArr['zego_voice_call_setting'] === 'APPROVED';
+                            $videoApproved = $configArr['zego_video_call_setting'] === 'APPROVED';
+                        @endphp
                         <div class="tab-content" id="pills-tabContent">
                             <div class="tab-pane fade show active" id="pills-matrimonial" role="tabpanel"
                                 aria-labelledby="pills-matrimonial-tab">
@@ -85,7 +89,7 @@
                                                                         <div class="plan-final-price">
                                                                             <span class="plan-amount">
                                                                                 {{ $plan->currency_code }}
-                                                                                {{ number_format($plan->plan_discount_amount, 0) }}
+                                                                                {{ number_format($plan->plan_discount_amount, 2) }}
                                                                             </span>
 
                                                                             <span class="plan-validity">
@@ -156,32 +160,36 @@
                                                                 @endif
                                                                 {{ __('messages.lbl_live_chat') }}
                                                             </li>
-                                                            <li
-                                                                class="fts-15 fw-4 white-color70-n d-flex gap-1 mt-lg-2 mt-1">
-                                                                @if ($plan->audio_minutes_limit > 0)
-                                                                    <iconify-icon icon="material-symbols:check"
-                                                                        class="text-success fts-20"></iconify-icon>
-                                                                    {{ __('messages.lbl_audio_calls') }} -
-                                                                    {{ $plan->audio_minutes_limit }} min
-                                                                @else
-                                                                    <iconify-icon icon="material-symbols:close"
-                                                                        class="text-danger fts-20"></iconify-icon>
-                                                                    {{ __('messages.lbl_audio_calls') }}
-                                                                @endif
-                                                            </li>
-                                                            <li
-                                                                class="fts-15 fw-4 white-color70-n d-flex gap-1 mt-lg-2 mt-1">
-                                                                @if ($plan->video_minutes_limit > 0)
-                                                                    <iconify-icon icon="material-symbols:check"
-                                                                        class="text-success fts-20"></iconify-icon>
-                                                                    {{ __('messages.lbl_video_calls') }} -
-                                                                    {{ $plan->video_minutes_limit }} min
-                                                                @else
-                                                                    <iconify-icon icon="material-symbols:close"
-                                                                        class="text-danger fts-20"></iconify-icon>
-                                                                    {{ __('messages.lbl_video_calls') }}
-                                                                @endif
-                                                            </li>
+                                                            @if ($voiceApproved)
+                                                                <li
+                                                                    class="fts-15 fw-4 white-color70-n d-flex gap-1 mt-lg-2 mt-1">
+                                                                    @if ($plan->audio_minutes_limit > 0)
+                                                                        <iconify-icon icon="material-symbols:check"
+                                                                            class="text-success fts-20"></iconify-icon>
+                                                                        {{ __('messages.lbl_audio_calls') }} -
+                                                                        {{ $plan->audio_minutes_limit }} min
+                                                                    @else
+                                                                        <iconify-icon icon="material-symbols:close"
+                                                                            class="text-danger fts-20"></iconify-icon>
+                                                                        {{ __('messages.lbl_audio_calls') }}
+                                                                    @endif
+                                                                </li>
+                                                            @endif
+                                                            @if ($videoApproved)
+                                                                <li
+                                                                    class="fts-15 fw-4 white-color70-n d-flex gap-1 mt-lg-2 mt-1">
+                                                                    @if ($plan->video_minutes_limit > 0)
+                                                                        <iconify-icon icon="material-symbols:check"
+                                                                            class="text-success fts-20"></iconify-icon>
+                                                                        {{ __('messages.lbl_video_calls') }} -
+                                                                        {{ $plan->video_minutes_limit }} min
+                                                                    @else
+                                                                        <iconify-icon icon="material-symbols:close"
+                                                                            class="text-danger fts-20"></iconify-icon>
+                                                                        {{ __('messages.lbl_video_calls') }}
+                                                                    @endif
+                                                                </li>
+                                                            @endif
                                                             @if (_getConstant('AI_MODE') == 'Enabled')
                                                                 <li
                                                                     class="fts-15 fw-4 white-color70-n d-flex gap-1 mt-lg-2 mt-1">
@@ -344,32 +352,36 @@
                                                                 @endif
                                                                 {{ __('messages.lbl_live_chat') }}
                                                             </li>
-                                                            <li
-                                                                class="fts-15 fw-4 white-color70-n d-flex gap-1 mt-lg-2 mt-1">
-                                                                @if ($plan->audio_minutes_limit > 0)
-                                                                    <iconify-icon icon="material-symbols:check"
-                                                                        class="text-success fts-20"></iconify-icon>
-                                                                    {{ __('messages.lbl_audio_calls') }} -
-                                                                    {{ $plan->audio_minutes_limit }} min
-                                                                @else
-                                                                    <iconify-icon icon="material-symbols:close"
-                                                                        class="text-danger fts-20"></iconify-icon>
-                                                                    {{ __('messages.lbl_audio_calls') }}
-                                                                @endif
-                                                            </li>
-                                                            <li
-                                                                class="fts-15 fw-4 white-color70-n d-flex gap-1 mt-lg-2 mt-1">
-                                                                @if ($plan->video_minutes_limit > 0)
-                                                                    <iconify-icon icon="material-symbols:check"
-                                                                        class="text-success fts-20"></iconify-icon>
-                                                                    {{ __('messages.lbl_video_calls') }} -
-                                                                    {{ $plan->video_minutes_limit }} min
-                                                                @else
-                                                                    <iconify-icon icon="material-symbols:close"
-                                                                        class="text-danger fts-20"></iconify-icon>
-                                                                    {{ __('messages.lbl_video_calls') }}
-                                                                @endif
-                                                            </li>
+                                                            @if ($videoApproved)
+                                                                <li
+                                                                    class="fts-15 fw-4 white-color70-n d-flex gap-1 mt-lg-2 mt-1">
+                                                                    @if ($plan->audio_minutes_limit > 0)
+                                                                        <iconify-icon icon="material-symbols:check"
+                                                                            class="text-success fts-20"></iconify-icon>
+                                                                        {{ __('messages.lbl_audio_calls') }} -
+                                                                        {{ $plan->audio_minutes_limit }} min
+                                                                    @else
+                                                                        <iconify-icon icon="material-symbols:close"
+                                                                            class="text-danger fts-20"></iconify-icon>
+                                                                        {{ __('messages.lbl_audio_calls') }}
+                                                                    @endif
+                                                                </li>
+                                                            @endif
+                                                            @if ($videoApproved)
+                                                                <li
+                                                                    class="fts-15 fw-4 white-color70-n d-flex gap-1 mt-lg-2 mt-1">
+                                                                    @if ($plan->video_minutes_limit > 0)
+                                                                        <iconify-icon icon="material-symbols:check"
+                                                                            class="text-success fts-20"></iconify-icon>
+                                                                        {{ __('messages.lbl_video_calls') }} -
+                                                                        {{ $plan->video_minutes_limit }} min
+                                                                    @else
+                                                                        <iconify-icon icon="material-symbols:close"
+                                                                            class="text-danger fts-20"></iconify-icon>
+                                                                        {{ __('messages.lbl_video_calls') }}
+                                                                    @endif
+                                                                </li>
+                                                            @endif
                                                             @if (_getConstant('AI_MODE') == 'Enabled')
                                                             <li
                                                                 class="fts-15 fw-4 white-color70-n d-flex gap-1 mt-lg-2 mt-1">

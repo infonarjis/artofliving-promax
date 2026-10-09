@@ -130,42 +130,50 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-lg-4 col-md-6 col-sm-6 col-6 mb-2 mb-lg-3 mb-md-3 p-0">
-                                            <div class="plansingle-details">
-                                                <div class="fts-14 fw-4 white-color70-n">
-                                                    {{ __('messages.lbl_audio_calls') }} (
-                                                    {{ __('messages.lbl_min_remaining') }} )</div>
-                                                <div class="fts-15 fw-5 white-color-n mt-1">
-                                                    {{ $currentPlan->audio_minutes_remaining }}
-                                                    {{ __('messages.lbl_out_of') }}
-                                                    {{ $currentPlan->audio_minutes_total }}
-                                                    @if ($currentPlan->carried_forward_audio_minutes > 0)
-                                                        <span class="d-block fts-13 fw-4 saleText-color-n">
-                                                            (+{{ $currentPlan->carried_forward_audio_minutes }}
-                                                            {{ __('messages.lbl_carried_forward') }})
-                                                        </span>
-                                                    @endif
+                                        @php
+                                            $voiceApproved = $configArr['zego_voice_call_setting'] === 'APPROVED';
+                                            $videoApproved = $configArr['zego_video_call_setting'] === 'APPROVED';
+                                        @endphp
+                                        @if ($voiceApproved)
+                                            <div class="col-lg-4 col-md-6 col-sm-6 col-6 mb-2 mb-lg-3 mb-md-3 p-0">
+                                                <div class="plansingle-details">
+                                                    <div class="fts-14 fw-4 white-color70-n">
+                                                        {{ __('messages.lbl_audio_calls') }} (
+                                                        {{ __('messages.lbl_min_remaining') }} )</div>
+                                                    <div class="fts-15 fw-5 white-color-n mt-1">
+                                                        {{ $currentPlan->audio_minutes_remaining }}
+                                                        {{ __('messages.lbl_out_of') }}
+                                                        {{ $currentPlan->audio_minutes_total }}
+                                                        @if ($currentPlan->carried_forward_audio_minutes > 0)
+                                                            <span class="d-block fts-13 fw-4 saleText-color-n">
+                                                                (+{{ $currentPlan->carried_forward_audio_minutes }}
+                                                                {{ __('messages.lbl_carried_forward') }})
+                                                            </span>
+                                                        @endif
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="col-lg-4 col-md-6 col-sm-6 col-6 mb-2 mb-lg-3 mb-md-3 p-0">
-                                            <div class="plansingle-details">
-                                                <div class="fts-14 fw-4 white-color70-n">
-                                                    {{ __('messages.lbl_video_calls') }} (
-                                                    {{ __('messages.lbl_min_remaining') }} )</div>
-                                                <div class="fts-15 fw-5 white-color-n mt-1">
-                                                    {{ $currentPlan->video_minutes_remaining }}
-                                                    {{ __('messages.lbl_out_of') }}
-                                                    {{ $currentPlan->video_minutes_total }}
-                                                    @if ($currentPlan->carried_forward_video_minutes > 0)
-                                                        <span class="d-block fts-13 fw-4 saleText-color-n">
-                                                            (+{{ $currentPlan->carried_forward_video_minutes }}
-                                                            {{ __('messages.lbl_carried_forward') }})
-                                                        </span>
-                                                    @endif
+                                        @endif
+                                        @if ($videoApproved)
+                                            <div class="col-lg-4 col-md-6 col-sm-6 col-6 mb-2 mb-lg-3 mb-md-3 p-0">
+                                                <div class="plansingle-details">
+                                                    <div class="fts-14 fw-4 white-color70-n">
+                                                        {{ __('messages.lbl_video_calls') }} (
+                                                        {{ __('messages.lbl_min_remaining') }} )</div>
+                                                    <div class="fts-15 fw-5 white-color-n mt-1">
+                                                        {{ $currentPlan->video_minutes_remaining }}
+                                                        {{ __('messages.lbl_out_of') }}
+                                                        {{ $currentPlan->video_minutes_total }}
+                                                        @if ($currentPlan->carried_forward_video_minutes > 0)
+                                                            <span class="d-block fts-13 fw-4 saleText-color-n">
+                                                                (+{{ $currentPlan->carried_forward_video_minutes }}
+                                                                {{ __('messages.lbl_carried_forward') }})
+                                                            </span>
+                                                        @endif
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        @endif
                                         @if (_getConstant('AI_MODE') == 'Enabled')
                                             <div class="col-lg-4 col-md-6 col-sm-6 col-6 mb-2 mb-lg-3 mb-md-3 p-0">
                                                 <div class="plansingle-details">

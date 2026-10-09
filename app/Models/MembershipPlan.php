@@ -15,6 +15,8 @@ class MembershipPlan extends Model
         'plan_name',
         'plan_type',
         'plan_amount',
+        'international_currency_code',
+        'international_plan_amount',
         'plan_discount',
         'plan_description',
         'currency_code',
@@ -29,8 +31,10 @@ class MembershipPlan extends Model
 
         'in_app_purchase_android_id',
         'in_app_purchase_android_amount',
+        'international_in_app_purchase_android_amount',
         'in_app_purchase_ios_id',
         'in_app_purchase_ios_amount',
+        'international_in_app_purchase_ios_amount',
 
         'status'
     ];

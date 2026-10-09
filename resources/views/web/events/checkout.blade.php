@@ -66,6 +66,22 @@
                                             action="{{ route('web.event.checkout.store', $event->id) }}" method="POST"
                                             class="mt-3 mt-lg-4" novalidate>
                                             @csrf
+                                            @php
+                                                $name = '';
+                                                $email = '';
+                                                $mobileNumber = '';
+                                                $mobile = '';
+                                                $countryCode = '';
+                                                if(Auth::check()) {
+                                                    $authUser = Auth::user();
+                                                    $name = $authUser->fullname;
+                                                    $email = $authUser->email;
+                                                    $mobileNumber = $authUser->mobile;
+                                                    $mobileArr = explode('-', $mobileNumber);
+                                                    $mobile = end($mobileArr);
+                                                    $countryCode = $mobileArr[0];
+                                                }
+                                            @endphp
                                             {{-- Pass qty so it's included in the POST --}}
                                             <input type="hidden" name="ticket_qty" value="{{ $qty }}">
                                             <div class="row">
@@ -75,7 +91,7 @@
                                                         <label for="name">{{ __('messages.field_lbl_name') }} <span
                                                                 class="required-field">*</span></label>
                                                         <input type="text" name="name" id="name"
-                                                            value="{{ old('name') }}"
+                                                            value="{{ old('name', $name) }}"
                                                             placeholder="{{ __('messages.field_lbl_enter_name') }}"
                                                             class="input_comman_field @error('name') is-invalid @enderror"
                                                             required>
@@ -90,7 +106,7 @@
                                                         <label for="email_id">{{ __('messages.field_lbl_email_id') }} <span
                                                                 class="required-field">*</span></label>
                                                         <input type="email" name="email" id="email_id"
-                                                            value="{{ old('email') }}"
+                                                            value="{{ old('email', $email) }}"
                                                             placeholder="{{ __('messages.field_lbl_enter_your_email_id') }}"
                                                             class="input_comman_field @error('email') is-invalid @enderror"
                                                             required>
@@ -114,7 +130,7 @@
                                                                 <div class="edit_inputMain-sltr w-100">
                                                                     <select name="country_code" id="country_code"
                                                                         class="Single_searchDv">
-                                                                        @php echo _defaultCountryCode() @endphp
+                                                                        @php echo _defaultCountryCode($countryCode) @endphp
                                                                     </select>
                                                                 </div>
                                                             </div>
@@ -123,7 +139,7 @@
                                                             <div class="mobile-input-wrapper flex-grow-1">
                                                                 <div class="icon-input position-relative">
                                                                     <input type="number" name="mobile" id="Mobile_numb"
-                                                                        value="{{ old('mobile') }}"
+                                                                        value="{{ old('mobile', $mobile) }}"
                                                                         placeholder="{{ __('messages.field_lbl_enter_mobile_number') }}"
                                                                         class="input_comman_field @error('mobile') is-invalid @enderror"
                                                                         required>

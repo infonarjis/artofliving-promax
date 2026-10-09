@@ -6,9 +6,123 @@
             font-size: 14px;
         }
 
-        .event-planer-contents p {
-            color: var(--white-color) !important;
-            font-size: 14px;
+        /* Registered Attendees Card */
+        .attendees-card {
+            border: 1px solid var(--common-border, rgba(255, 255, 255, 0.1));
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+        .attendees-card:hover {
+            border-color: rgba(var(--primary-color-rgb, 13, 86, 222), 0.35);
+        }
+        .attendees-icon-badge {
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            background: rgba(var(--primary-color-rgb, 13, 86, 222), 0.12);
+            color: var(--primary-color);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+        .attendee-search-input {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--common-border, rgba(255, 255, 255, 0.12));
+            color: var(--white-color);
+            border-radius: 30px;
+            padding: 5px 14px 5px 34px;
+            font-size: 12px;
+            outline: none;
+            transition: all 0.25s ease;
+            width: 170px;
+        }
+        .attendee-search-input:focus {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: var(--primary-color);
+            width: 210px;
+            color: var(--white-color);
+            box-shadow: 0 0 0 3px rgba(var(--primary-color-rgb, 13, 86, 222), 0.15);
+        }
+        .attendee-search-input::placeholder {
+            color: var(--white-color70-n, rgba(255, 255, 255, 0.5));
+        }
+        .attendees-chips-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            max-height: 220px;
+            overflow-y: auto;
+            padding-right: 4px;
+        }
+        .attendees-chips-grid::-webkit-scrollbar {
+            width: 5px;
+        }
+        .attendees-chips-grid::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 10px;
+        }
+        .attendees-chips-grid::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 10px;
+        }
+        .attendee-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            padding: 6px 14px;
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: 500;
+            letter-spacing: 0.3px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--white-color);
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            user-select: none;
+        }
+        .attendee-chip:hover {
+            transform: translateY(-2px);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.25);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+        .attendee-chip.attendee-self {
+            background: linear-gradient(135deg, var(--primary-color) 0%, rgba(var(--primary-color-rgb, 13, 86, 222), 0.85) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: #ffffff !important;
+            box-shadow: 0 4px 14px rgba(var(--primary-color-rgb, 13, 86, 222), 0.35);
+        }
+        .attendee-chip.attendee-self:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(var(--primary-color-rgb, 13, 86, 222), 0.45);
+        }
+        .attendee-self-pill {
+            background: rgba(255, 255, 255, 0.25);
+            padding: 1px 7px;
+            border-radius: 12px;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+        .attendee-avatar-dot {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.12);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: 600;
+        }
+        .attendee-self .attendee-avatar-dot {
+            background: rgba(255, 255, 255, 0.25);
+            color: #ffffff;
         }
     </style>
 @endpush
@@ -82,6 +196,65 @@
                                                 {!! _displayNotAvailable($event->description) !!}
                                             </p>
                                         </div>
+
+                                        {{-- Registered Members / Attendees --}}
+                                        @if (!empty($allUsersRegisteredMatriId) && count($allUsersRegisteredMatriId) > 0)
+                                            <div class="attendees-card p-3 p-lg-4 mt-4">
+                                                <div class="d-flex align-items-center justify-content-between flex-wrap gap-3 pb-3 border-bottom border-white border-opacity-10">
+                                                    <div class="d-flex align-items-center gap-2">
+                                                        <div class="attendees-icon-badge">
+                                                            <iconify-icon icon="solar:users-group-two-rounded-bold-duotone"></iconify-icon>
+                                                        </div>
+                                                        <div>
+                                                            <h5 class="fts-16 fw-7 white-color-n mb-0 d-flex align-items-center gap-2">
+                                                                {{ __('messages.lbl_registered_members') }}
+                                                                <span class="badge rounded-pill bg-primary px-2 py-1 fts-11 fw-6">
+                                                                    {{ count($allUsersRegisteredMatriId) }}
+                                                                </span>
+                                                            </h5>
+                                                            <p class="fts-12 white-color70-n mb-0 mt-1">
+                                                                {{ __('messages.lbl_members_who_booked') ?? 'Members registered for this event' }}
+                                                            </p>
+                                                        </div>
+                                                    </div>
+
+                                                    {{-- Search filter if multiple attendees --}}
+                                                    @if (count($allUsersRegisteredMatriId) > 4)
+                                                        <div class="position-relative">
+                                                            <iconify-icon icon="solar:magnifer-linear" class="position-absolute text-muted" style="left: 12px; top: 50%; transform: translateY(-50%); font-size: 14px; pointer-events: none;"></iconify-icon>
+                                                            <input type="text" id="searchAttendeeInput" class="attendee-search-input" placeholder="Search Matri ID...">
+                                                        </div>
+                                                    @endif
+                                                </div>
+
+                                                <div class="attendees-chips-grid mt-3" id="attendeesGrid">
+                                                    @php
+                                                        $currentMatriId = auth()->user()?->matri_id;
+                                                        // Put the logged-in user at the beginning if present
+                                                        $orderedMatriIds = collect($allUsersRegisteredMatriId)->sortByDesc(fn($id) => $currentMatriId && $id === $currentMatriId)->values()->all();
+                                                    @endphp
+                                                    @foreach ($orderedMatriIds as $matriId)
+                                                        @php $isSelf = ($currentMatriId && $matriId === $currentMatriId); @endphp
+                                                        <div class="attendee-chip {{ $isSelf ? 'attendee-self' : '' }}" data-matri-id="{{ strtolower($matriId) }}">
+                                                            <span class="attendee-avatar-dot">
+                                                                @if ($isSelf)
+                                                                    <iconify-icon icon="solar:user-check-bold" style="font-size: 13px;"></iconify-icon>
+                                                                @else
+                                                                    <iconify-icon icon="solar:user-bold" style="font-size: 12px; opacity: 0.7;"></iconify-icon>
+                                                                @endif
+                                                            </span>
+                                                            <span>{{ $matriId }}</span>
+                                                            @if ($isSelf)
+                                                                <span class="attendee-self-pill">You</span>
+                                                            @endif
+                                                        </div>
+                                                    @endforeach
+                                                </div>
+                                                <div id="noAttendeeMatch" class="d-none text-center py-3">
+                                                    <p class="fts-13 white-color70-n mb-0">No matching Matri ID found</p>
+                                                </div>
+                                            </div>
+                                        @endif
                                     </div>
 
                                 </div>
@@ -95,10 +268,15 @@
                                 {{-- Book now button + contact info --}}
                                 <div class="common-bgtransparent-main p-3">
                                     @if ($event->available_tickets > 0)
-                                        <button class="comman-bg-btn fts-15 w-100" type="button" data-bs-toggle="modal"
-                                            data-bs-target="#events-book">
-                                            {{ __('messages.lbl_book_now') }}
-                                        </button>
+                                        @auth('web')
+                                            <button class="comman-bg-btn fts-15 w-100" type="button" id="authBookNowBtn">
+                                                {{ __('messages.lbl_book_now') }}
+                                            </button>
+                                        @else
+                                            <a href="{{ route('web.login.index') }}" class="comman-bg-btn fts-15 w-100 text-center text-decoration-none d-block">
+                                                {{ __('messages.lbl_book_now') }}
+                                            </a>
+                                        @endauth
                                     @else
                                         <button class="comman-bg-btn fts-15 w-100 opacity-50" type="button" disabled>
                                             {{ __('messages.lbl_sold_out') }}
@@ -316,5 +494,47 @@
                 showToastMessage('error', '{{ __('messages.lbl_select_qty') ?? 'Please select a quantity.' }}');
             }
         });
+
+        // Search attendee Matri IDs
+        const searchInput = document.getElementById('searchAttendeeInput');
+        if (searchInput) {
+            searchInput.addEventListener('input', function() {
+                const term = this.value.trim().toLowerCase();
+                const chips = document.querySelectorAll('#attendeesGrid .attendee-chip');
+                let matchCount = 0;
+
+                chips.forEach(chip => {
+                    const matriId = chip.getAttribute('data-matri-id') || '';
+                    if (matriId.includes(term)) {
+                        chip.classList.remove('d-none');
+                        chip.style.display = 'inline-flex';
+                        matchCount++;
+                    } else {
+                        chip.classList.add('d-none');
+                        chip.style.display = 'none';
+                    }
+                });
+
+                const noMatchEl = document.getElementById('noAttendeeMatch');
+                if (noMatchEl) {
+                    if (matchCount === 0) {
+                        noMatchEl.classList.remove('d-none');
+                    } else {
+                        noMatchEl.classList.add('d-none');
+                    }
+                }
+            });
+        }
+        // If logged in, clicking Book Now bypasses the modal and submits bookTicketForm with fix qty 1
+        const authBookNowBtn = document.getElementById('authBookNowBtn');
+        if (authBookNowBtn) {
+            authBookNowBtn.addEventListener('click', function() {
+                const qtySelect = document.getElementById('ticket_qty');
+                if (qtySelect) {
+                    qtySelect.value = '1';
+                }
+                document.getElementById('bookTicketForm').submit();
+            });
+        }
     </script>
 @endpush

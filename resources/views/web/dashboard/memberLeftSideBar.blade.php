@@ -467,53 +467,61 @@
 
                     {{-- Audio Calls --}}
                     @php
-                        $audioTotal = (int) ($currentPlan->audio_minutes_total ?? 0);
-                        $audioRemaining = (int) ($currentPlan->audio_minutes_remaining ?? 0);
-                        $audioProgress = $audioTotal > 0 ? min(100, round(($audioRemaining / $audioTotal) * 100)) : 0;
+                        $voiceApproved = $configArr['zego_voice_call_setting'] === 'APPROVED';
+                        $videoApproved = $configArr['zego_video_call_setting'] === 'APPROVED';
                     @endphp
+                        @if ($voiceApproved)
+                        @php
+                            $audioTotal = (int) ($currentPlan->audio_minutes_total ?? 0);
+                            $audioRemaining = (int) ($currentPlan->audio_minutes_remaining ?? 0);
+                            $audioProgress = $audioTotal > 0 ? min(100, round(($audioRemaining / $audioTotal) * 100)) : 0;
+                        @endphp
 
-                    <div class="quota-stat-item">
-                        <div class="quota-label-row">
-                            <span class="quota-name">
-                                <iconify-icon icon="ph:phone-call-fill" class="quota-icon green"></iconify-icon>
-                                {{ __('messages.lbl_audio_calls') }}
-                            </span>
+                        <div class="quota-stat-item">
+                            <div class="quota-label-row">
+                                <span class="quota-name">
+                                    <iconify-icon icon="ph:phone-call-fill" class="quota-icon green"></iconify-icon>
+                                    {{ __('messages.lbl_audio_calls') }}
+                                </span>
 
-                            <span class="quota-val">
-                                <strong>{{ $audioRemaining }}</strong> / {{ $audioTotal }} left
-                            </span>
-                        </div>
+                                <span class="quota-val">
+                                    <strong>{{ $audioRemaining }}</strong> / {{ $audioTotal }} left
+                                </span>
+                            </div>
 
-                        <div class="quota-progress-track">
-                            <div class="quota-progress-fill green" style="width: {{ $audioProgress }}%;">
+                            <div class="quota-progress-track">
+                                <div class="quota-progress-fill green" style="width: {{ $audioProgress }}%;">
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    @endif
 
                     {{-- Video Calls --}}
-                    @php
-                        $videoTotal = (int) ($currentPlan->video_minutes_total ?? 0);
-                        $videoRemaining = (int) ($currentPlan->video_minutes_remaining ?? 0);
-                        $videoProgress = $videoTotal > 0 ? min(100, round(($videoRemaining / $videoTotal) * 100)) : 0;
-                    @endphp
+                    @if ($videoApproved)
+                        @php
+                            $videoTotal = (int) ($currentPlan->video_minutes_total ?? 0);
+                            $videoRemaining = (int) ($currentPlan->video_minutes_remaining ?? 0);
+                            $videoProgress = $videoTotal > 0 ? min(100, round(($videoRemaining / $videoTotal) * 100)) : 0;
+                        @endphp
 
-                    <div class="quota-stat-item">
-                        <div class="quota-label-row">
-                            <span class="quota-name">
-                                <iconify-icon icon="ph:video-camera-fill" class="quota-icon green"></iconify-icon>
-                                {{ __('messages.lbl_video_calls') }}
-                            </span>
+                        <div class="quota-stat-item">
+                            <div class="quota-label-row">
+                                <span class="quota-name">
+                                    <iconify-icon icon="ph:video-camera-fill" class="quota-icon green"></iconify-icon>
+                                    {{ __('messages.lbl_video_calls') }}
+                                </span>
 
-                            <span class="quota-val">
-                                <strong>{{ $videoRemaining }}</strong> / {{ $videoTotal }} left
-                            </span>
-                        </div>
+                                <span class="quota-val">
+                                    <strong>{{ $videoRemaining }}</strong> / {{ $videoTotal }} left
+                                </span>
+                            </div>
 
-                        <div class="quota-progress-track">
-                            <div class="quota-progress-fill green" style="width: {{ $videoProgress }}%;">
+                            <div class="quota-progress-track">
+                                <div class="quota-progress-fill green" style="width: {{ $videoProgress }}%;">
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    @endif
 
                     {{-- Chat --}}
                     <div class="quota-stat-item">

@@ -1019,7 +1019,7 @@ class MemberController extends Controller
                     'class' => 'required',
                     'key_disp' => 'occupation_name'
                 ),
-                'label' => 'Occupation'
+                'label' => 'Industry'
             ),
             'income' => array(
                 'is_required' => 'required',
@@ -1200,7 +1200,7 @@ class MemberController extends Controller
                 'label' => 'Weight'
             ),
             'diet' => array(
-                'label' => 'Eating Habits',
+                'label' => 'Dietary Preferences',
                 'is_register' => 'yes',
                 'class' => 'single ',
                 'type' => 'dropdown',
@@ -1212,7 +1212,7 @@ class MemberController extends Controller
             ),
             'smoke' => array(
                 'type' => 'dropdown',
-                'label' => 'Smoking Habit',
+                'label' => 'Smoke',
                 'relation' => array(
                     'rel_model' => 'SmokingHabitMaster',
                     'key_val' => 'id',
@@ -1224,7 +1224,7 @@ class MemberController extends Controller
             'drink' => array(
                 'type' => 'dropdown',
                 'is_register' => 'yes',
-                'label' => 'Drinking Habit',
+                'label' => 'Drink',
                 'relation' => array(
                     'rel_model' => 'DrinkingHabitMaster',
                     'key_val' => 'id',
@@ -1271,15 +1271,15 @@ class MemberController extends Controller
             'about_me_description' => array(
                 'type' => 'textarea',
                 'class' => 'form-textarea',
-                'label' => 'About Me',
+                'label' => 'Bio',
                 'is_register' => 'yes',
                 'button_display' => _getConstant('AI_MODE') == 'Enabled'
                     ? '<button type="button" id="generateAboutMeBtn" class="generate-about-me-btn">Generate With AI</button>'
                     : '',
                 'maxlength' => '500',
-                'placeholder' => 'Enter About Me',
+                'placeholder' => 'Enter Bio',
                 'display_note' => _getConstant('AI_MODE') == 'Enabled'
-                    ? 'Note: The AI will create your “About Me” using your full name, birth date, education, occupation, employer, and designation details.'
+                    ? 'Note: The AI will create your “Bio” using your full name, birth date, education, occupation, employer, and designation details.'
                     : ''
             ),
         );
@@ -1313,7 +1313,7 @@ class MemberController extends Controller
                 'type' => 'dropdown',
                 'is_register' => 'yes',
                 'class' => 'single required',
-                'label' => 'Father Occupation',
+                'label' => 'Father Industry',
                 'relation' => array(
                     'rel_model' => 'OccupationMaster',
                     'key_val' => 'id',
@@ -1333,7 +1333,7 @@ class MemberController extends Controller
                 'type' => 'dropdown',
                 'is_register' => 'yes',
                 'class' => 'single required',
-                'label' => 'Mother Occupation',
+                'label' => 'Mother Industry',
                 'relation' => array(
                     'rel_model' => 'OccupationMaster',
                     'key_val' => 'id',
@@ -1488,7 +1488,7 @@ class MemberController extends Controller
             'part_marital_status' => array(
                 'type' => 'dropdown',
                 'is_register' => 'yes',
-                'label' => 'Partner Marital status',
+                'label' => 'Looking For',
                 'relation' => array(
                     'rel_model' => 'MaritalStatusMaster',
                     'key_val' => 'id',
@@ -1538,7 +1538,7 @@ class MemberController extends Controller
                     'class' => 'required',
                     'key_disp' => 'occupation_name'
                 ),
-                'label' => 'Partner Occupation'
+                'label' => 'Partner Industry'
             ),
             'part_mothertongue' => array(
                 'display_placeholder' => 'No',
@@ -1591,7 +1591,7 @@ class MemberController extends Controller
                     'key_val' => 'id',
                     'key_disp' => 'smoking_habit_name'
                 ),
-                'label' => 'Partner Smoking Habit',
+                'label' => 'Partner Smoke',
                 'is_register' => 'yes'
             ),
             'part_drink' => array(
@@ -1604,7 +1604,7 @@ class MemberController extends Controller
                     'key_val' => 'id',
                     'key_disp' => 'drinking_habit_name'
                 ),
-                'label' => 'Partner Drinking Habit',
+                'label' => 'Partner Drink',
                 'is_register' => 'yes'
             ),
 
@@ -2221,7 +2221,7 @@ class MemberController extends Controller
     }
 
     ## Change Status Data :
-    public function changeStatus(Request $request)
+    public function changeStatus(Request $request, UpgradeMembershipPlanService $assignPlanService)
     {
         $responseArr['status'] = 'error';
         $responseArr['msg'] = _getConstant('responce_message.SOMETHING_WENT_WRONG');
@@ -2231,6 +2231,9 @@ class MemberController extends Controller
             $updateData = _getRequestData(_getStaticArr('statusUpdateArr'), $postData);
             if (!isset($postData['is_affiliate_verify'])) {
                 unset($updateData['id']);
+                if (isset($postData['is_verify']) && $postData['is_verify'] == 'Yes') {
+                    $updateData['status'] = 'APPROVED';
+                }
                 if (isset($postData['id_proof_front']) && empty($postData['id_proof_front']) && $postData['id_proof_front'] == '') {
                     $updateData['id_proof_front'] = '';
                 }
@@ -2348,6 +2351,27 @@ class MemberController extends Controller
                             }
                             ## Update Pause Status :
                             MemberDeleteProfile::where('id', $isExistPause->id)->update('is_pause_plan', 0);
+                        }
+                    }
+                }
+
+                ## For Free Plan :
+                if (isset($postData['is_verify']) && $postData['is_verify'] == 'Yes') {
+                    $freePlan = MembershipPlan::where('plan_type', 'Free')->where('plan_amount', 0)->first();
+                    if (!empty($freePlan)) {
+                        foreach (explode(',', $postData['id']) as $memberId) {
+                            ## Get Member Data :
+                            $memberData = Register::where('id', $memberId)->first();
+                            if ($memberData->plan_status == 'Not Paid') {
+                                $authenticatedUser = Auth::user();
+                                $userType = _adminUserType($authenticatedUser->type);
+                                $assignPlan = $assignPlanService->assign($memberData, $freePlan, null, [
+                                    'package_ids'  => [],
+                                    'payment_mode' => '',
+                                    'payment_note' => 'Assign Free Plan by Admin',
+                                    'assign_by'    => json_encode(['id' => $authenticatedUser->id, 'user_type' => $userType]),
+                                ]);
+                            }
                         }
                     }
                 }
@@ -2501,30 +2525,30 @@ class MemberController extends Controller
                 ['key' => 'education', 'label' => 'Education', 'value' => implode(', ', $registerArr->education_level_names) ?? null],
                 ['key' => 'education_details', 'label' => 'Education Details', 'value' => $registerArr->education_details ?? null],
                 ['key' => 'employee_in', 'label' => 'Employee In', 'value' => $registerArr->occupationData->occupation_name ?? null],
-                ['key' => 'occupation', 'label' => 'Occupation', 'value' => $registerArr->employeeInData->employee_name ?? null],
+                ['key' => 'occupation', 'label' => 'Industry', 'value' => $registerArr->employeeInData->employee_name ?? null],
                 ['key' => 'annual_income', 'label' => 'Annual Income', 'value' => $registerArr->incomeData->annual_income_name ?? null],
                 ['key' => 'designation', 'label' => 'Designation', 'value' => $registerArr->designationLevelData->designation_name ?? null],
             ],
             'Physical Information' => [
                 ['key' => 'height', 'label' => 'Height', 'value' => _displayHeight($registerArr->height) ?? null],
                 ['key' => 'weight', 'label' => 'Weight', 'value' => $registerArr->weight ? $registerArr->weight . ' Kg' : null],
-                ['key' => 'eating_habits', 'label' => 'Eating Habits', 'value' => $registerArr->dietData->eating_habit_name ?? null],
-                ['key' => 'smoking', 'label' => 'Smoking Habit', 'value' => $registerArr->smokeData->smoking_habit_name ?? null],
-                ['key' => 'drinking', 'label' => 'Drinking Habit', 'value' => $registerArr->drinkingData->drinking_habit_name ?? null],
+                ['key' => 'eating_habits', 'label' => 'Dietary Preferences', 'value' => $registerArr->dietData->eating_habit_name ?? null],
+                ['key' => 'smoking', 'label' => 'Smoke', 'value' => $registerArr->smokeData->smoking_habit_name ?? null],
+                ['key' => 'drinking', 'label' => 'Drink', 'value' => $registerArr->drinkingData->drinking_habit_name ?? null],
                 ['key' => 'body_type', 'label' => 'Body type', 'value' => $registerArr->bodyTypeData->body_type_name ?? null],
                 ['key' => 'complexion', 'label' => 'Complexion', 'value' => $registerArr->complexionData->complexion_name ?? null],
                 ['key' => 'blood_group_id', 'label' => 'Blood Group', 'value' => $registerArr->bloodGroupData->blood_group_name ?? null],
-                ['key' => 'about_me', 'label' => 'About Me', 'value' => $registerArr->about_me_description ?? null],
+                ['key' => 'about_me', 'label' => 'Bio', 'value' => $registerArr->about_me_description ?? null],
             ],
             'Family Details' => [
                 ['key' => 'family_type', 'label' => 'Family Type', 'value' => $registerArr->familyTypeData->family_type_name ?? null],
                 ['key' => 'family_status', 'label' => 'Family Status', 'value' => $registerArr->familyStatusData->family_status_name ?? null],
                 ['key' => 'father_name', 'label' => 'Father Name', 'value' => $registerArr->father_name ?? null],
-                ['key' => 'father_occupation', 'label' => 'Father Occupation', 'value' => $registerArr->fatherOccupationData->occupation_name ?? null],
-                ['key' => 'father_occupation_other', 'label' => 'Father Occupation Other (OLD Field)', 'value' => $registerArr->father_occupation_other ?? null],
+                ['key' => 'father_occupation', 'label' => 'Father Industry', 'value' => $registerArr->fatherOccupationData->occupation_name ?? null],
+                ['key' => 'father_occupation_other', 'label' => 'Father Industry Other (OLD Field)', 'value' => $registerArr->father_occupation_other ?? null],
                 ['key' => 'mother_name', 'label' => 'Mother Name', 'value' => $registerArr->mother_name ?? null],
-                ['key' => 'mother_occupation', 'label' => 'Mother Occupation', 'value' => $registerArr->motherOccupationData->occupation_name ?? null],
-                ['key' => 'mother_occupation_other', 'label' => 'Mother Occupation Other (OLD Field)', 'value' => $registerArr->mother_occupation_other ?? null],
+                ['key' => 'mother_occupation', 'label' => 'Mother Industry', 'value' => $registerArr->motherOccupationData->occupation_name ?? null],
+                ['key' => 'mother_occupation_other', 'label' => 'Mother Industry Other (OLD Field)', 'value' => $registerArr->mother_occupation_other ?? null],
                 ['key' => 'no_of_brothers', 'label' => 'No Of Brothers', 'value' => $registerArr->noOfBrotherData->no_of_bro_sis_name ?? null],
                 ['key' => 'no_of_married_brothers', 'label' => 'No Of Married Brothers', 'value' => $registerArr->noOfMarriedBrotherData->married_bro_name ?? null],
                 ['key' => 'no_of_sisters', 'label' => 'No Of Sisters', 'value' => $registerArr->noOfSisterData->no_of_bro_sis_name ?? null],
@@ -2568,14 +2592,14 @@ class MemberController extends Controller
                 ['key' => 'part_country', 'label' => 'Partner Country', 'value' => $registerPartnerArr->part_country ?? null],
                 ['key' => 'part_state', 'label' => 'Partner State', 'value' => $registerPartnerArr->part_state ?? null],
                 ['key' => 'part_income', 'label' => 'Partner Annual Income', 'value' => $registerPartnerArr->part_income ?? null],
-                ['key' => 'part_marital_status', 'label' => 'Partner Marital status', 'value' => $registerPartnerArr->part_marital_status ?? null],
+                ['key' => 'part_marital_status', 'label' => 'Looking For', 'value' => $registerPartnerArr->part_marital_status ?? null],
                 ['key' => 'part_education', 'label' => 'Partner Education', 'value' => $registerPartnerArr->part_education ?? null],
-                ['key' => 'part_occupation', 'label' => 'Partner Occupation', 'value' => $registerPartnerArr->part_occupation ?? null],
+                ['key' => 'part_occupation', 'label' => 'Partner Industry', 'value' => $registerPartnerArr->part_occupation ?? null],
                 ['key' => 'part_mothertongue', 'label' => 'Partner Mother Tongue', 'value' => $registerPartnerArr->part_mothertongue ?? null],
                 ['key' => 'part_manglik', 'label' => 'Partner Manglik', 'value' => $registerPartnerArr->part_manglik ?? null],
-                ['key' => 'part_diet', 'label' => 'Partner Eating Habits', 'value' => $registerPartnerArr->part_diet ?? null],
-                ['key' => 'part_smoke', 'label' => 'Partner Smoking Habit', 'value' => $registerPartnerArr->part_smoke ?? null],
-                ['key' => 'part_drink', 'label' => 'Partner Drinking Habit', 'value' => $registerPartnerArr->part_drink ?? null],
+                ['key' => 'part_diet', 'label' => 'Partner Dietary Preferences', 'value' => $registerPartnerArr->part_diet ?? null],
+                ['key' => 'part_smoke', 'label' => 'Partner Smoke', 'value' => $registerPartnerArr->part_smoke ?? null],
+                ['key' => 'part_drink', 'label' => 'Partner Drink', 'value' => $registerPartnerArr->part_drink ?? null],
                 ['key' => 'part_art_of_living_teacher', 'label' => 'Partner Manglik', 'value' => $registerPartnerArr->part_art_of_living_teacher ?? null],
                 ['key' => 'part_have_art_of_living_program', 'label' => 'Partner Manglik', 'value' => $registerPartnerArr->part_have_art_of_living_program ?? null],
             ],
@@ -3440,6 +3464,7 @@ class MemberController extends Controller
                     'display_placeholder' => 'No',
                     'is_register' => 'yes',
                     'class' => 'single ',
+                    'label' => 'Community',
                     'relation' => array(
                         'rel_model' => 'CasteMaster',
                         'key_val' => 'id',
@@ -3519,10 +3544,10 @@ class MemberController extends Controller
                         'class' => '',
                         'key_disp' => 'occupation_name'
                     ),
-                    'label' => 'Occupation'
+                    'label' => 'Industry'
                 ),
                 'diet' => array(
-                    'label' => 'Eating Habits',
+                    'label' => 'Dietary Preferences',
                     'class' => 'single ',
                     'type' => 'dropdown',
                     'is_register' => 'yes',
@@ -3551,7 +3576,7 @@ class MemberController extends Controller
                     'is_multiple' => 'yes',
                     'class' => 'single ',
                     'display_placeholder' => 'No',
-                    'label' => 'Drinking Habit',
+                    'label' => 'Drink',
                     'relation' => array(
                         'rel_model' => 'DrinkingHabitMaster',
                         'key_val' => 'id',
@@ -3690,7 +3715,7 @@ class MemberController extends Controller
                 'Education & Other Details' => [
                     'Education' => implode(', ', $memberData->education_level_names) ?? null,
                     'Education Details' => $memberData->education_details ?? null,
-                    'Occupation' => $memberData->occupationData->occupation_name ?? null,
+                    'Industry' => $memberData->occupationData->occupation_name ?? null,
                     'Annual Income' => $memberData->incomeData->annual_income_name ?? null,
                 ],
                 'Location Details' => [
@@ -3701,9 +3726,9 @@ class MemberController extends Controller
                 'Physical Information' => [
                     'Height' => _displayHeight($memberData->height) ?? null,
                     'Weight' => $memberData->weight ? $memberData->weight . ' Kg' : null,
-                    'Eating Habits' => $memberData->dietData->eating_habit_name ?? null,
-                    'Smoking Habit' => $memberData->smokeData->smoking_habit_name ?? null,
-                    'Drinking Habit' => $memberData->drinkingData->drinking_habit_name ?? null,
+                    'Dietary Preferences' => $memberData->dietData->eating_habit_name ?? null,
+                    'Smoke' => $memberData->smokeData->smoking_habit_name ?? null,
+                    'Drink' => $memberData->drinkingData->drinking_habit_name ?? null,
                 ],
             ]
         ];
@@ -3860,7 +3885,7 @@ class MemberController extends Controller
             'Date of Birth',
             'Marital Status',
             'Education Name',
-            'Occupation Name',
+            'Industry Name',
             'Income',
             'Religion',
             'Caste',
