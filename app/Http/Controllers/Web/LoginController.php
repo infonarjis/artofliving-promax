@@ -23,7 +23,7 @@ use Throwable;
 class LoginController extends Controller
 {
     /** +91 => custom SMS, every other country code => Firebase */
-    private const SMS_COUNTRY_CODE = '+1';
+    private const SMS_COUNTRY_CODE = '+91';
 
     public function index()
     {

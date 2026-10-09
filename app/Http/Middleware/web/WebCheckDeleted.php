@@ -19,7 +19,7 @@ class WebCheckDeleted
         if ($guard->check()) {
             $user = $guard->user();
 
-            if ($user->trashed() || $user->status !== 'APPROVED') {
+            if ($user->trashed() || $user->status == 'Suspended') {
                 $guard->logout();
 
                 $otherGuards = ['web', 'admin', 'staff', 'franchise', 'affiliate'];

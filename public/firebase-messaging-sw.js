@@ -2,13 +2,14 @@ importScripts('https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js'
 importScripts('https://www.gstatic.com/firebasejs/10.7.0/firebase-messaging-compat.js');
 
 const firebaseConfig = {
-    apiKey: "AIzaSyDPBSPLuBeJo2I9n6cfqBXJzEDVs5pXp68",
-    authDomain: "idealjodi-android.firebaseapp.com",
-    projectId: "idealjodi-android",
-    storageBucket: "idealjodi-android.appspot.com",
-    messagingSenderId: "82567876602",
-    appId: "1:82567876602:web:7a3499d5a0edafe7bc5e43",
-    measurementId: "G-B7RXHF8RGM"
+  apiKey: "AIzaSyBXlbX73xVzqFPoopL-WXWaxdtPqhXNKcU",
+  authDomain: "art-of-living-matrimony.firebaseapp.com",
+  databaseURL: "https://art-of-living-matrimony-default-rtdb.firebaseio.com",
+  projectId: "art-of-living-matrimony",
+  storageBucket: "art-of-living-matrimony.firebasestorage.app",
+  messagingSenderId: "317171670340",
+  appId: "1:317171670340:web:029b1a615c9d5d98984b11",
+  measurementId: "G-GGP5FYTEMW"
 };
 firebase.initializeApp(firebaseConfig);
 

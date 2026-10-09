@@ -120,7 +120,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.21.0/jquery.validate.min.js"></script>
 
     <script>
-        const SMS_COUNTRY_CODE = '+1';
+        const SMS_COUNTRY_CODE = '+91';
 
         let resendSeconds = 30;
         let resendInterval = null;
