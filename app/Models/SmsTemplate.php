@@ -54,7 +54,11 @@ class SmsTemplate extends Model
         $content = $this->sms_content;
 
         foreach ($replacements as $key => $value) {
-            $content = str_replace($key, $value, $content);
+            $content = str_replace(
+                '{{' . $key . '}}',
+                (string) $value,
+                $content
+            );
         }
 
         return $content;

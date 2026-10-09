@@ -43,7 +43,6 @@
                                         aria-labelledby="pills-otp-tab">
                                         @include(_getConstant('dir_path.WEB_DIR_PATH') . '.login.otp_login',
                                             [
-                                                'otpLoginMethod' => $otpLoginMethod,
                                                 'firebaseConfig' => $firebaseConfig,
                                             ]
                                         )
@@ -72,10 +71,10 @@
 
 @push('scripts')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
-    @if ($otpLoginMethod === 'firebase')
+    {{-- @if ($otpLoginMethod === 'firebase') --}}
         <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
         <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
-    @endif
+    {{-- @endif --}}
 
     <script>
         navigator.geolocation.getCurrentPosition(function(position) {

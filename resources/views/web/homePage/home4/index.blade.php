@@ -140,13 +140,11 @@
                         <a href="{{ route('web.login.index') }}" class="btn-vivah-login">
                             <iconify-icon icon="ph:sign-in-bold"></iconify-icon>
                             <span>{{ __('messages.lbl_login') }}</span>
-                            <iconify-icon icon="ph:arrow-right-bold"></iconify-icon>
                         </a>
 
                         <a href="{{ route('web.register.index') }}" class="btn-vivah-register">
                             <iconify-icon icon="ph:user-plus-bold"></iconify-icon>
                             <span>{{ __('messages.lbl_register') }}</span>
-                            <iconify-icon icon="ph:arrow-right-bold"></iconify-icon>
                         </a>
 
                         {{-- Language Dropdown --}}

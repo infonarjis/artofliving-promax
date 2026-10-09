@@ -9342,11 +9342,11 @@ video::-webkit-media-controls-enclosure {
 }
 
 .custom-otp-modal .comman-bg-btn {
-  background: #0d56de;
+  background: var(--primary-color);
   border-radius: 14px;
-  font-size: 18px;
+  font-size: 14px;
   transition: transform 0.2s;
-  padding: 14px 30px 14px 30px;
+  padding: 11px 36px;
   display: flex;
   justify-content: center;
   align-items: center;

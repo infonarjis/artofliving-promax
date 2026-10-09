@@ -23,9 +23,9 @@
     </div>
 
     {{-- Required for Firebase invisible reCAPTCHA --}}
-    @if ($otpLoginMethod === 'firebase')
-        <div id="recaptcha-container"></div>
-    @endif
+    {{-- @if ($otpLoginMethod === 'firebase') --}}
+    <div id="recaptcha-container"></div>
+    {{-- @endif --}}
 
     <button type="submit" id="otpSendBtn"
         class="comman-bg-btn fts-15 w-100">{{ __('messages.lbl_generate_otp') }}</button>
@@ -46,8 +46,16 @@
             <div class="modal-body text-center pt-0">
                 <div class="otp-icon-wrap mb-4">
                     <div class="otp-circle">
-                        <img src="{{ asset('storage/web/') }}/assets/images/otp.png" alt="otp"
-                            class="otp-img-icon">
+                        <iconify-icon icon="streamline-freehand-color:mobilephone-action-otp-message-1"
+                            data-bs-dismiss="modal" class="white-color-n fts-62">
+                        </iconify-icon>
+                        <iconify-icon
+                            icon="streamline-freehand-color:mobile-phone"
+                            data-bs-dismiss="modal"
+                            class="white-color-n fts-62">
+                        </iconify-icon>
+                        {{-- <img src="{{ asset('storage/web/') }}/assets/images/otp.png" alt="otp"
+                            class="otp-img-icon"> --}}
                     </div>
                 </div>
                 <p class="white-color-n fts-15 fw-5 mb-2 px-lg-5 px-3">
@@ -61,7 +69,8 @@
                             <span class="demo-otp-title">{{ __('messages.lbl_demo_mode') }}</span>
                             <span class="demo-otp-msg">
                                 {{ __('messages.msg_use_demo_otp') }}
-                                <strong class="demo-otp-code" id="demoOtpCode">{{ _getConstant('DEMO_CREDENTIALS.demo_otp') }}</strong>
+                                <strong class="demo-otp-code"
+                                    id="demoOtpCode">{{ _getConstant('DEMO_CREDENTIALS.demo_otp') }}</strong>
                             </span>
                         </div>
                         <button type="button" class="demo-otp-fill" id="fillDemoOtp">
@@ -90,7 +99,7 @@
                         </a>
                     </div>
                     <div class="d-flex justify-content-center mt-1 mb-4 ">
-                        <button type="button" class="comman-bg-btn fts-15 py-3 verify-otp-btn">
+                        <button type="button" class="comman-bg-btn fts-15 verify-otp-btn">
                             {{ __('messages.lbl_verify') }}
                         </button>
                     </div>
@@ -112,28 +121,49 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.21.0/jquery.validate.min.js"></script>
 
     <script>
+        /* =========================================================
+               CONFIG
+               +91  => custom SMS (backend)
+               else => Firebase
+            ========================================================= */
+        const SMS_COUNTRY_CODE = '+91';
+
         let resendSeconds = 30;
         let resendInterval = null;
-        const otpLoginMethod = @json($otpLoginMethod);
+        let currentMethod = 'sms'; // 'sms' | 'firebase' (set when OTP is sent)
 
-        @if ($otpLoginMethod === 'firebase')
-            /* =========================================================
-               FIREBASE INIT
-            ========================================================= */
-            const firebaseConfig = @json($firebaseConfig ?? []);
-            firebase.initializeApp(firebaseConfig);
+        /* =========================================================
+           FIREBASE INIT (always initialised, used for non +91)
+        ========================================================= */
+        const firebaseConfig = @json($firebaseConfig ?? []);
+        let recaptchaVerifier = null;
+        let confirmationResult = null;
 
-            let recaptchaVerifier = null;
-            let confirmationResult = null;
-
-            function ensureRecaptcha() {
-                if (recaptchaVerifier) return recaptchaVerifier;
-                recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container', {
-                    size: 'invisible'
-                });
-                return recaptchaVerifier;
+        if (typeof firebase !== 'undefined' && firebaseConfig && Object.keys(firebaseConfig).length) {
+            if (!firebase.apps.length) {
+                firebase.initializeApp(firebaseConfig);
             }
-        @endif
+        }
+
+        function ensureRecaptcha() {
+            if (recaptchaVerifier) return recaptchaVerifier;
+            recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container', {
+                size: 'invisible'
+            });
+            return recaptchaVerifier;
+        }
+
+        function resetRecaptcha() {
+            if (recaptchaVerifier) {
+                recaptchaVerifier.render().then(function(widgetId) {
+                    grecaptcha.reset(widgetId);
+                });
+            }
+        }
+
+        function getMethodByCountry(countryCode) {
+            return countryCode === SMS_COUNTRY_CODE ? 'sms' : 'firebase';
+        }
 
         let sendValidator = null;
         let otpValidator = null;
@@ -173,7 +203,7 @@
             if (isLoading) {
                 $btn.prop('disabled', true).html(
                     '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>' +
-                    '{{ __('messages.lbl_verifying') }}' // e.g. "Verifying..."
+                    '{{ __('messages.lbl_verifying') }}'
                 );
             } else {
                 $btn.prop('disabled', false).text(verifyBtnText);
@@ -186,65 +216,68 @@
         function sendOtp() {
             const countryCode = $('#country_code').val();
             const mobileNumber = $('#mobile').val().trim();
+            const $btn = $('#otpSendBtn');
+            const btnText = '{{ __('messages.lbl_generate_otp') }}';
 
-            let $btn = $('#otpSendBtn');
+            currentMethod = getMethodByCountry(countryCode);
             $btn.prop('disabled', true).text('{{ __('messages.lbl_sending_btn') }}');
 
-            @if ($otpLoginMethod === 'firebase')
-                const e164 = countryCode + mobileNumber; // e.g. +91 + 9876543210
-                const verifier = ensureRecaptcha();
+            const onSent = function(message) {
+                const mobile = countryCode + '-' + mobileNumber;
+                $('#full_mobile').val(mobile);
+                $('#display_mobile_number').text(mobile);
 
-                firebase.auth().signInWithPhoneNumber(e164, verifier)
+                resetOtpBoxes();
+                $('#otpVerifyModal').modal('show');
+                startResendTimer(30);
+
+                showToastMessage('success', message);
+            };
+
+            if (currentMethod === 'firebase') {
+                /* ---------- FIREBASE (non +91) ---------- */
+                if (typeof firebase === 'undefined') {
+                    $btn.prop('disabled', false).text(btnText);
+                    sendValidator.showErrors({
+                        mobile: '{{ __('messages.msg_unexpected_error_occured') }}'
+                    });
+                    return;
+                }
+
+                const e164 = countryCode + mobileNumber; // e.g. +1 + 2025550123
+
+                firebase.auth().signInWithPhoneNumber(e164, ensureRecaptcha())
                     .then(function(result) {
                         confirmationResult = result;
-
-                        $('#full_mobile').val(countryCode + '-' + mobileNumber);
-                        $('#display_mobile_number').text(countryCode + '-' + mobileNumber);
-
-                        resetOtpBoxes();
-                        $('#otpVerifyModal').modal('show');
-                        startResendTimer(30);
-
-                        showToastMessage('success', '{{ __('messages.msg_otp_has_sent_successfully') }}');
+                        onSent('{{ __('messages.msg_otp_has_sent_successfully') }}');
                     })
                     .catch(function(error) {
                         sendValidator.showErrors({
                             mobile: error.message || '{{ __('messages.msg_unexpected_error_occured') }}'
                         });
-                        if (recaptchaVerifier) {
-                            recaptchaVerifier.render().then(function(widgetId) {
-                                grecaptcha.reset(widgetId);
-                            });
-                        }
+                        resetRecaptcha();
                     })
                     .finally(function() {
-                        $btn.prop('disabled', false).text('{{ __('messages.lbl_generate_otp') }}');
+                        $btn.prop('disabled', false).text(btnText);
                     });
-            @else
+            } else {
+                /* ---------- CUSTOM SMS (+91) ---------- */
                 $.post("{{ route('web.login.sendOtp') }}", $('#otpSendForm').serialize(), function(res) {
-                    $btn.prop('disabled', false).text('{{ __('messages.lbl_generate_otp') }}');
+                    $btn.prop('disabled', false).text(btnText);
                     if (res.status) {
-                        let mobile = countryCode + '-' + mobileNumber;
-                        $('#full_mobile').val(mobile);
-                        $('#display_mobile_number').text(mobile);
-
-                        resetOtpBoxes();
-                        $('#otpVerifyModal').modal('show');
-                        startResendTimer(30);
-
-                        showToastMessage('success', res.message);
+                        onSent(res.message);
                     } else {
                         sendValidator.showErrors({
                             mobile: res.message
                         });
                     }
                 }).fail(function() {
-                    $btn.prop('disabled', false).text('{{ __('messages.lbl_generate_otp') }}');
+                    $btn.prop('disabled', false).text(btnText);
                     sendValidator.showErrors({
                         mobile: '{{ __('messages.msg_unexpected_error_occured') }}'
                     });
                 });
-            @endif
+            }
         }
 
         $(document).ready(function() {
@@ -261,10 +294,10 @@
             $.validator.addMethod('mobileByCountry', function(value, element) {
                 if (this.optional(element)) return true;
                 const cc = $('#country_code').val();
-                if (cc === '+91') return /^[6-9][0-9]{9}$/.test(value);
+                if (cc === SMS_COUNTRY_CODE) return /^[6-9][0-9]{9}$/.test(value);
                 return /^[0-9]{6,12}$/.test(value);
             }, function() {
-                return $('#country_code').val() === '+91' ?
+                return $('#country_code').val() === SMS_COUNTRY_CODE ?
                     'Please enter a valid 10-digit mobile number.' :
                     'Please enter a valid mobile number (6-12 digits).';
             });
@@ -346,11 +379,11 @@
                 const countryCode = parts[0];
                 const mobileNumber = parts.slice(1).join('-');
 
-                @if ($otpLoginMethod === 'firebase')
+                if (currentMethod === 'firebase') {
+                    /* ---------- FIREBASE ---------- */
                     const e164 = countryCode + mobileNumber;
-                    const verifier = ensureRecaptcha();
 
-                    firebase.auth().signInWithPhoneNumber(e164, verifier)
+                    firebase.auth().signInWithPhoneNumber(e164, ensureRecaptcha())
                         .then(function(result) {
                             confirmationResult = result;
                             resetOtpBoxes();
@@ -361,8 +394,10 @@
                         .catch(function(error) {
                             showOtpError(error.message ||
                                 '{{ __('messages.msg_unexpected_error_occured') }}');
+                            resetRecaptcha();
                         });
-                @else
+                } else {
+                    /* ---------- CUSTOM SMS (+91) ---------- */
                     $.post("{{ route('web.login.resendOtp') }}", {
                         mobile: fullMobile
                     }, function(res) {
@@ -376,7 +411,7 @@
                     }).fail(function() {
                         showOtpError('{{ __('messages.msg_unexpected_error_occured') }}');
                     });
-                @endif
+                }
             });
 
             /* =========================================================
@@ -390,7 +425,8 @@
                 const otp = getOtpValue();
                 setVerifyLoading(true);
 
-                @if ($otpLoginMethod === 'firebase')
+                if (currentMethod === 'firebase') {
+                    /* ---------- FIREBASE ---------- */
                     if (!confirmationResult) {
                         showOtpError('{{ __('messages.msg_invalid_or_expired_otp') }}');
                         setVerifyLoading(false);
@@ -418,7 +454,8 @@
                             showOtpError('{{ __('messages.msg_invalid_or_expired_otp') }}');
                             setVerifyLoading(false);
                         });
-                @else
+                } else {
+                    /* ---------- CUSTOM SMS (+91) ---------- */
                     $.post("{{ route('web.login.verifyOtp') }}", {
                         mobile: $('#full_mobile').val(),
                         otp: otp
@@ -433,7 +470,7 @@
                         showOtpError('{{ __('messages.msg_unexpected_error_occured') }}');
                         setVerifyLoading(false);
                     });
-                @endif
+                }
             });
 
             /* =========================================================
@@ -493,6 +530,9 @@
             }, 1000);
         }
 
+        /* =========================================================
+           DEMO OTP AUTOFILL (SMS / +91 path)
+        ========================================================= */
         $(document).on('click', '#fillDemoOtp', function() {
             const code = $('#demoOtpCode').text().trim();
             $('.otp-input').each(function(i) {

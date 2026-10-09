@@ -304,7 +304,9 @@ class SmsTemplatesController extends Controller
     public function smsConfigurationAddEditForm()
     {
         $elementArr = array(
-            'sms_api' => array('is_required' => 'required', 'class' => 'required','modeType' => 'edit', 'isDisableInDemo' => 'Yes'),
+            'sms_api_url' => array('is_required' => 'required', 'class' => 'required','modeType' => 'edit', 'isDisableInDemo' => 'Yes'),
+            'sms_api' => array('is_required' => 'required', 'class' => 'required','modeType' => 'edit', 'isDisableInDemo' => 'Yes','column'=> '6'),
+            'sms_api_sender_id' => array('is_required' => 'required', 'class' => 'required','modeType' => 'edit', 'isDisableInDemo' => 'Yes','column'=> '6'),
             'sms_api_status' => array(
                 'type' => 'radio',
                 'value_arr' => array('APPROVED' => 'APPROVED', 'UNAPPROVED' => 'UNAPPROVED')
@@ -342,7 +344,9 @@ class SmsTemplatesController extends Controller
         }
 
         $updateArr = array(
+            'sms_api_url',
             'sms_api',
+            'sms_api_sender_id',
             'sms_api_status'
         );
         $updateData = _getRequestData($updateArr, $postData);

@@ -42,6 +42,8 @@ class SiteSetting extends Model
         'tax_name',
         'service_tax',
         'sms_api',
+        'sms_api_url',
+        'sms_api_sender_id',
         'sms_api_status',
         'android_app_link',
         'ios_app_link',

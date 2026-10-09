@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\MemberAlertSetting;
 use App\Models\Register;
 use App\Models\SmsTemplate;
+use Illuminate\Support\Facades\Log;
 
 class SmsSendService
 {
@@ -51,36 +52,88 @@ class SmsSendService
         );
     }
 
-    public function sendRawSms(string $mobile, string $message, ?string $templateId = null): void
-    {
+    public function sendRawSms(
+        string $mobile,
+        string $message,
+        ?string $templateId = null
+    ): void {
         $settings = _getSiteSetting();
 
+        // Check whether SMS is approved/enabled
         if (($settings['sms_api_status'] ?? '') !== 'APPROVED') {
             return;
         }
 
+        // Format and validate Indian mobile number
         $formattedNumber = $this->formatIndianNumber($mobile);
 
         if (!$formattedNumber) {
+            Log::warning('Pinnacle SMS skipped: Invalid mobile number.');
             return;
         }
 
-        $apiUrl = $this->buildApiUrl(
-            apiTemplate: $settings['sms_api'],
-            mobile: $formattedNumber,
-            message: $message,
-            templateId: $templateId
-        );
+        $apiUrl = $settings['sms_api_url'] ?? '';
+        $apiKey = $settings['sms_api'] ?? '';
+        $senderId = $settings['sms_api_sender_id'] ?? '';
+
+        if (empty($apiKey)) {
+            Log::error('Pinnacle SMS failed: API key is missing.');
+            return;
+        }
 
         $curl = curl_init($apiUrl);
+
         curl_setopt_array($curl, [
             CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_POST => true,
+            CURLOPT_POSTFIELDS => '{
+            "sender":"'.$senderId.'",
+            "message":[
+                    {
+                        "number":"' . $formattedNumber . '",
+                        "text":"' . $message . '"
+                    }
+                ],
+                "messagetype":"TXT",
+                "dlttempid":"' . $templateId . '"
+            }',
+            CURLOPT_HTTPHEADER => [
+                'Content-Type: application/json',
+                'Accept: application/json',
+                'apikey: ' . $apiKey,
+            ],
             CURLOPT_CONNECTTIMEOUT => 5,
-            CURLOPT_TIMEOUT        => 5,
+            CURLOPT_TIMEOUT => 10,
         ]);
 
-        curl_exec($curl);
+        $response = curl_exec($curl);
+        $curlError = curl_error($curl);
+        $httpCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+
         curl_close($curl);
+
+        if ($response === false) {
+            Log::error('Pinnacle SMS connection failed', [
+                'error' => $curlError,
+                'http_code' => $httpCode,
+            ]);
+
+            return;
+        }
+
+        if ($httpCode < 200 || $httpCode >= 300) {
+            Log::error('Pinnacle SMS HTTP error', [
+                'http_code' => $httpCode,
+                'response' => $response,
+            ]);
+
+            return;
+        }
+
+        Log::info('Pinnacle SMS API response received', [
+            'http_code' => $httpCode,
+            'response' => $response,
+        ]);
     }
 
     private function formatIndianNumber(string $mobile): ?string

@@ -25,7 +25,7 @@
         </div>
     </div>
 
-    <div class="comman_inputfield_main position-relative mb-3">
+    <div class="comman_inputfield_main position-relative mb-3 mt-1">
         <label for="password">{{ __('messages.field_lbl_enter_password') }}</label>
         <div class="position-relative icon-display">
             <input type="password" name="password" id="password" autocomplete="new-password" readonly

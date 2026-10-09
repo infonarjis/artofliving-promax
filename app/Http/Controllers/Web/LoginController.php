@@ -26,22 +26,14 @@ class LoginController extends Controller
     {
         $captchaCode = CaptchaHelper::generate('login_captcha');
 
-        $otpLoginMethod = $this->getOtpLoginMethod(); // 'sms' | 'firebase'
-
-        $firebaseConfig = null;
-        if ($otpLoginMethod === 'firebase') {
-            $siteSetting = _getSiteSetting();
-            // Front-end safe web config (apiKey, authDomain, projectId, appId, etc.)
-            // NOTE: this is DIFFERENT from firebase_json (service account) used server-side.
-            $firebaseConfig = $siteSetting['firebase_configuration'] ?? null;
-            if (is_string($firebaseConfig)) {
-                $firebaseConfig = json_decode($firebaseConfig, true) ?: null;
-            }
+        $siteSetting = _getSiteSetting();
+        $firebaseConfig = $siteSetting['firebase_configuration'] ?? null;
+        if (is_string($firebaseConfig)) {
+            $firebaseConfig = json_decode($firebaseConfig, true) ?: null;
         }
 
         return view(_getConstant('dir_path.WEB_DIR_PATH') . '.login.index', compact(
             'captchaCode',
-            'otpLoginMethod',
             'firebaseConfig'
         ));
     }
@@ -57,7 +49,7 @@ class LoginController extends Controller
             'password' => 'required|string',
             'captcha_code' => 'required|string'
         ]);
-        
+
         if (!CaptchaHelper::validate($request->captcha_code, 'login_captcha')) {
             return $this->captchaError();
         }
@@ -99,21 +91,18 @@ class LoginController extends Controller
      */
     public function sendOtp(Request $request)
     {
-        if ($this->getOtpLoginMethod() !== 'sms') {
+        $request->validate([
+            'country_code' => ['required', 'string', 'exists:country_master,country_code'],
+            'mobile' => 'required|digits_between:8,12'
+        ]);
+
+        // Custom SMS is only for +91
+        if ($request->country_code !== self::SMS_COUNTRY_CODE) {
             return response()->json([
                 'status' => false,
                 'message' => __('messages.msg_invalid_request')
             ]);
         }
-
-        $request->validate([
-            'country_code' => [
-                'required',
-                'string',
-                'exists:country_master,country_code',
-            ],
-            'mobile' => 'required|digits_between:8,12'
-        ]);
 
         $mobile = $request->country_code . '-' . $request->mobile;
 
@@ -150,7 +139,9 @@ class LoginController extends Controller
      */
     public function resendOtp(Request $request)
     {
-        if ($this->getOtpLoginMethod() !== 'sms') {
+        $request->validate(['mobile' => 'required|string']); // (verifyOtp also validates otp)
+
+        if (!$this->isSmsMobile($request->mobile)) {
             return response()->json([
                 'status' => false,
                 'message' => __('messages.msg_invalid_request')
@@ -206,7 +197,9 @@ class LoginController extends Controller
      */
     public function verifyOtp(Request $request)
     {
-        if ($this->getOtpLoginMethod() !== 'sms') {
+        $request->validate(['mobile' => 'required|string']); // (verifyOtp also validates otp)
+
+        if (!$this->isSmsMobile($request->mobile)) {
             return response()->json([
                 'status' => false,
                 'message' => __('messages.msg_invalid_request')
@@ -259,12 +252,12 @@ class LoginController extends Controller
 
     public function verifyFirebaseOtp(Request $request)
     {
-        if ($this->getOtpLoginMethod() !== 'firebase') {
-            return response()->json([
-                'status' => false,
-                'message' => __('messages.msg_invalid_request')
-            ]);
-        }
+        // if ($this->getOtpLoginMethod() !== 'firebase') {
+        //     return response()->json([
+        //         'status' => false,
+        //         'message' => __('messages.msg_invalid_request')
+        //     ]);
+        // }
 
         $request->validate([
             'id_token' => 'required|string',
@@ -281,7 +274,7 @@ class LoginController extends Controller
 
         $mobile = $this->normalizeFirebasePhone($phoneNumber);
 
-        if (!$mobile) {
+        if (!$mobile || $this->isSmsMobile($mobile)) {
             return response()->json([
                 'status' => false,
                 'message' => __('messages.msg_invalid_mobile_number')
@@ -327,12 +320,17 @@ class LoginController extends Controller
         return null;
     }
 
-    private function getOtpLoginMethod(): string
-    {
-        $siteSetting = _getSiteSetting();
-        $method = $siteSetting['otp_login_method'] ?? 'sms';
+    // private function getOtpLoginMethod(): string
+    // {
+    //     $siteSetting = _getSiteSetting();
+    //     $method = $siteSetting['otp_login_method'] ?? 'sms';
 
-        return in_array($method, ['sms', 'firebase'], true) ? $method : 'sms';
+    //     return in_array($method, ['sms', 'firebase'], true) ? $method : 'sms';
+    // }
+    private const SMS_COUNTRY_CODE = '+91';
+    private function isSmsMobile(string $mobile): bool
+    {
+        return str_starts_with($mobile, self::SMS_COUNTRY_CODE . '-');
     }
 
     private function logHistory($request)

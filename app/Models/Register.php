@@ -159,7 +159,6 @@ class Register extends Authenticatable implements CanResetPasswordContract
         'photo_visibility',
         'video_call_setting',
         'voice_call_setting',
-        'profile_setting',
         'auto_interest_enabled',
         'daily_interest_limit',
         'min_match_percentage',

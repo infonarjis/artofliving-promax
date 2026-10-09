@@ -205,7 +205,7 @@ Route::group(['prefix' => ''], function (): void {
     Route::get('/personalize', [PersonalizeHomeController::class, 'index'])->name('web.personalize.index');
     Route::post('/personalized-enquiry', [PersonalizeHomeController::class, 'storeEnquiry'])->name('web.personalize.storeEnquiry');
 
-    Route::post('/request-call-back', [RequestCallBackController::class, 'store'])->name('web.requestCallBack.submit');
+    Route::post('/request-call-bacl', [RequestCallBackController::class, 'store'])->name('web.requestCallBack.submit');
 
     Route::group(['middleware' => 'web.guest'], function (): void {
         Route::get('/', [HomeController::class, 'index'])->name('web.home.index');

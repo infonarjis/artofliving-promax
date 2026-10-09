@@ -14,7 +14,7 @@
     </button>
 </div>
 
-<div class="customsmallmodel_light photo-request modal fade" id="callbackModal" tabindex="-1"
+<div class="customsmallmodel_light request-call-back modal fade" id="callbackModal" tabindex="-1"
     aria-labelledby="callbackModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -119,118 +119,176 @@
 </div>
 
 @push('scripts')
-    <script>
-        $(function() {
-            const $modal = $('#callbackModal');
-            const $form = $('#callbackForm');
-            const $btn = $('#callbackSubmit');
-            const $code = $('#callback_country_code');
-            const isGuest = $('#callback_fullname').length > 0;
-            const btnHtml = $btn.html();
-            let submitted = false;
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
+    @push('scripts')
+        <script>
+            $(function() {
+                const $modal = $('#callbackModal');
+                const $form = $('#callbackForm');
+                const $btn = $('#callbackSubmit');
+                const $code = $('#callback_country_code');
+                const isGuest = $('#callback_fullname').length > 0;
+                const btnHtml = $btn.html();
+                let submitted = false;
 
-            /* ---------- select2 inside modal ---------- */
-            if ($.fn.select2) {
-                if ($code.hasClass('select2-hidden-accessible')) {
-                    $code.select2('destroy');
+                /* ---------- select2 inside modal ---------- */
+                if ($.fn.select2) {
+                    if ($code.hasClass('select2-hidden-accessible')) {
+                        $code.select2('destroy');
+                    }
+                    $code.select2({
+                        dropdownParent: $modal,
+                        width: '100%'
+                    });
                 }
-                $code.select2({
-                    dropdownParent: $modal,
-                    width: '100%'
+
+                /* ---------- helpers ---------- */
+                function showError(msg) {
+                    showToastMessage('error', msg);
+                }
+
+                function hideModal() {
+                    const inst = window.bootstrap ? bootstrap.Modal.getInstance($modal[0]) : null;
+                    inst ? inst.hide() : $modal.modal('hide');
+                }
+
+                function setLoading(on) {
+                    $btn.prop('disabled', on)
+                        .html(on ?
+                            '<span class="spinner-border spinner-border-sm me-1"></span>' + $.trim($btn.text()) :
+                            btnHtml);
+                }
+
+                /* ---------- custom validation methods ---------- */
+                // jQuery Validate's built-in "email" accepts "a@b", so use a stricter one
+                $.validator.addMethod('strictEmail', function(value, element) {
+                    return this.optional(element) || /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(value);
                 });
-            }
 
-            /* ---------- helpers ---------- */
-            function showError(msg) {
-                showToastMessage('error', msg);
-            }
+                // 6-15 digits after stripping spaces, dashes and +
+                $.validator.addMethod('mobileDigits', function(value, element) {
+                    const digits = value.replace(/\D/g, '');
+                    return this.optional(element) || /^\d{6,15}$/.test(digits);
+                });
 
-            function hideModal() {
-                const inst = window.bootstrap ? bootstrap.Modal.getInstance($modal[0]) : null;
-                inst ? inst.hide() : $modal.modal('hide');
-            }
+                /* ---------- rules ---------- */
+                const rules = {
+                    mobile: {
+                        required: true,
+                        mobileDigits: true
+                    }
+                };
 
-            function setLoading(on) {
-                $btn.prop('disabled', on)
-                    .html(on ?
-                        '<span class="spinner-border spinner-border-sm me-1"></span>' + $.trim($btn.text()) :
-                        btnHtml);
-            }
-
-            /* ---------- reset when modal opens ---------- */
-            $modal.on('show.bs.modal', function() {
-                submitted = false;
-                setLoading(false);
-            });
-
-            /* ---------- submit ---------- */
-            $form.on('submit', function(e) {
-                e.preventDefault();
-                if ($btn.prop('disabled')) return; // prevent double submit
-
-                // client-side validation
                 if (isGuest) {
-                    if ($.trim($('#callback_fullname').val()) === '') {
-                        return showError('Please enter your full name.');
-                    }
-                    const email = $.trim($('#callback_email').val());
-                    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-                        return showError('Please enter a valid email address.');
-                    }
+                    rules.fullname = {
+                        required: true,
+                        minlength: 2,
+                        maxlength: 150
+                    };
+                    rules.email = {
+                        required: true,
+                        strictEmail: true,
+                        maxlength: 150
+                    };
                 }
 
-                // keep digits only (prefilled numbers may contain spaces or +)
-                const mobile = $('#callback_mobile').val().replace(/\D/g, '');
-                if (!/^\d{6,15}$/.test(mobile)) {
-                    return showError('Please enter a valid mobile number.');
-                }
-                $('#callback_mobile').val(mobile);
-
-                $.ajax({
-                    url: "{{ route('web.requestCallBack.submit') }}",
-                    type: 'POST',
-                    dataType: 'json',
-                    data: $form
-                .serialize(), // _token, country_code, mobile (+ fullname, email for guests)
-                    beforeSend: function() {
-                        setLoading(true);
-                    },
-                    success: function(res) {
-                        if (res.status) {
-                            submitted = true;
-                            showToastMessage('success', res.message);
-                            if (isGuest) {
-                                $form[0].reset();
-                                $code.trigger('change');
-                            }
-                            setTimeout(hideModal, 1500);
+                /* ---------- validator ---------- */
+                const validator = $form.validate({
+                    rules: rules,
+                    errorElement: 'div',
+                    onkeyup: false, // validate on blur/submit, not every keystroke
+                    errorPlacement: function(error, element) {
+                        if (element.attr('name') === 'mobile') {
+                            error.insertAfter(element.closest('.d-flex'));
                         } else {
-                            showError(res.message || 'Something went wrong. Please try again.');
+                            error.insertAfter(element.closest('.position-relative'));
                         }
                     },
-                    error: function(xhr) {
-                        let msg = 'Something went wrong. Please try again.';
+                    submitHandler: function(form) {
+                        if ($btn.prop('disabled')) return; // prevent double submit
 
-                        if (xhr.status === 422 && xhr.responseJSON && xhr.responseJSON.errors) {
-                            msg = Object.values(xhr.responseJSON.errors)[0][0];
-                        } else if (xhr.status === 419) {
-                            msg =
-                                'Your session has expired. Please refresh the page and try again.';
-                        } else if (xhr.status === 429) {
-                            msg = 'Too many attempts. Please wait a minute and try again.';
-                        } else if (xhr.responseJSON && xhr.responseJSON.message) {
-                            msg = xhr.responseJSON.message;
-                        }
-                        showError(msg);
-                    },
-                    complete: function() {
-                        // after success keep the button disabled until the modal closes
-                        if (!submitted) setLoading(false);
+                        // send digits only
+                        const $mobile = $('#callback_mobile');
+                        $mobile.val($mobile.val().replace(/\D/g, ''));
+
+                        $.ajax({
+                            url: "{{ route('web.requestCallBack.submit') }}",
+                            type: 'POST',
+                            dataType: 'json',
+                            data: $form.serialize(),
+                            beforeSend: function() {
+                                setLoading(true);
+                            },
+                            success: function(res) {
+                                if (res.status) {
+                                    submitted = true;
+                                    showToastMessage('success', res.message);
+                                    if (isGuest) {
+                                        form.reset();
+                                        $code.trigger('change');
+                                    }
+                                    validator.resetForm();
+                                    setTimeout(hideModal, 1500);
+                                } else {
+                                    showError(res.message ||
+                                        'Something went wrong. Please try again.');
+                                }
+                            },
+                            error: function(xhr) {
+                                // field-level server errors -> show under the matching input
+                                if (xhr.status === 422 && xhr.responseJSON && xhr.responseJSON
+                                    .errors) {
+                                    const serverErrors = {};
+                                    $.each(xhr.responseJSON.errors, function(field, list) {
+                                        if ($form.find('[name="' + field + '"]')
+                                            .length) {
+                                            serverErrors[field] = list[0];
+                                        }
+                                    });
+
+                                    if (!$.isEmptyObject(serverErrors)) {
+                                        validator.showErrors(serverErrors);
+                                    } else {
+                                        showError(Object.values(xhr.responseJSON.errors)[0][0]);
+                                    }
+                                    return;
+                                }
+
+                                let msg = 'Something went wrong. Please try again.';
+                                if (xhr.status === 419) {
+                                    msg =
+                                        'Your session has expired. Please refresh the page and try again.';
+                                } else if (xhr.status === 429) {
+                                    msg =
+                                        'Too many attempts. Please wait a minute and try again.';
+                                } else if (xhr.responseJSON && xhr.responseJSON.message) {
+                                    msg = xhr.responseJSON.message;
+                                }
+                                showError(msg);
+                            },
+                            complete: function() {
+                                // after success keep the button disabled until the modal closes
+                                if (!submitted) setLoading(false);
+                            }
+                        });
                     }
                 });
+
+                /* ---------- strip non-digits live while typing the mobile ---------- */
+                $('#callback_mobile').on('input', function() {
+                    this.value = this.value.replace(/[^\d]/g, '');
+                });
+
+                /* ---------- reset when modal opens ---------- */
+                $modal.on('show.bs.modal', function() {
+                    submitted = false;
+                    validator.resetForm();
+                    $form.find('.cb-error, .cb-valid').removeClass('cb-error cb-valid');
+                    setLoading(false);
+                });
             });
-        });
-    </script>
+        </script>
+    @endpush
 @endpush
 
 @push('styles')
