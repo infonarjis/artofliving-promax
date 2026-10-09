@@ -91,4 +91,9 @@ class EventRegister extends Model
     {
         return $this->currency . ' ' . number_format($this->grand_total, 2);
     }
+
+    public function user()
+    {
+        return $this->belongsTo(Register::class, 'member_id');
+    }
 }

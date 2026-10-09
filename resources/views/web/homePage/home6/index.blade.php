@@ -48,6 +48,1224 @@
     <link rel="stylesheet" href="{{ route('theme.css') }}?v={{ \App\Services\ThemeService::version() }}">
 
     @stack('styles')
+    <style>
+        /* ==========================================================================
+           Home6 Membership Pricing Section (Dual Dark & Light Mode)
+           ========================================================================== */
+        .fc-pricing-section {
+            background: linear-gradient(180deg, rgba(10, 15, 29, 0.98) 0%, rgba(13, 21, 40, 1) 50%, rgba(10, 15, 29, 0.98) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .fc-pricing-atmosphere-glow {
+            position: absolute;
+            top: 20%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 750px;
+            height: 450px;
+            background: radial-gradient(circle, rgba(13, 86, 222, 0.16) 0%, rgba(124, 58, 237, 0.1) 40%, transparent 70%);
+            pointer-events: none;
+            z-index: 0;
+            filter: blur(40px);
+        }
+
+        .fc-pricing-header {
+            max-width: 680px;
+            margin: 0 auto 50px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .fc-pricing-title {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 2.35rem;
+            font-weight: 700;
+            color: #ffffff;
+            line-height: 1.25;
+            margin-bottom: 14px;
+            letter-spacing: -0.02em;
+        }
+
+        .fc-pricing-subtitle {
+            font-size: 1.02rem;
+            color: rgba(255, 255, 255, 0.72);
+            line-height: 1.6;
+            margin: 0 auto;
+        }
+
+        /* Plan Card */
+        .fc-plan-card {
+            background: rgba(21, 29, 47, 0.88);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 24px;
+            padding: 34px 28px 28px;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            position: relative;
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+            box-shadow: 0 16px 36px -16px rgba(0, 0, 0, 0.55);
+            z-index: 1;
+        }
+
+        .fc-plan-card:hover {
+            transform: translateY(-7px);
+            border-color: rgba(13, 86, 222, 0.45);
+            box-shadow: 0 24px 48px -18px rgba(13, 86, 222, 0.25), 0 0 1px 1px rgba(13, 86, 222, 0.3);
+        }
+
+        /* Featured / Recommended Plan */
+        .fc-plan-card-featured {
+            background: linear-gradient(180deg, rgba(22, 33, 58, 0.95) 0%, rgba(17, 25, 45, 0.95) 100%);
+            border: 1.5px solid rgba(13, 86, 222, 0.65);
+            box-shadow: 0 20px 45px -15px rgba(13, 86, 222, 0.32);
+        }
+
+        .fc-plan-popular-ribbon {
+            position: absolute;
+            top: -13px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, var(--primary-color) 0%, #2563eb 100%);
+            color: #ffffff;
+            font-size: 0.76rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.07em;
+            padding: 4px 16px;
+            border-radius: 20px;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            box-shadow: 0 6px 18px rgba(13, 86, 222, 0.4);
+            white-space: nowrap;
+        }
+
+        .fc-plan-popular-ribbon i {
+            font-size: 0.9rem;
+        }
+
+        /* Plan Header */
+        .fc-plan-name {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 1.45rem;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        .fc-plan-tier-badge {
+            font-size: 0.76rem;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.65);
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.09);
+            padding: 3px 10px;
+            border-radius: 12px;
+        }
+
+        /* Pricing */
+        .fc-plan-pricing-box {
+            margin-top: 14px;
+        }
+
+        .fc-plan-discount-wrap {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 2px;
+        }
+
+        .fc-plan-original-price {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.45);
+            text-decoration: line-through;
+            font-weight: 500;
+        }
+
+        .fc-discount-tag {
+            background: rgba(239, 68, 68, 0.15);
+            color: #f87171;
+            font-size: 0.72rem;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 8px;
+            border: 1px solid rgba(239, 68, 68, 0.25);
+        }
+
+        .fc-plan-price-main {
+            display: flex;
+            align-items: baseline;
+            gap: 4px;
+        }
+
+        .fc-price-currency {
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .fc-price-num {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #ffffff;
+            line-height: 1;
+        }
+
+        .fc-price-period {
+            font-size: 0.88rem;
+            color: rgba(255, 255, 255, 0.65);
+            font-weight: 500;
+            margin-left: 2px;
+        }
+
+        .fc-plan-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.12) 50%, transparent 100%);
+            margin: 22px 0 20px;
+        }
+
+        /* Features */
+        .fc-features-title {
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: rgba(255, 255, 255, 0.85);
+            margin-bottom: 14px;
+        }
+
+        .fc-features-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .fc-feature-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-size: 0.91rem;
+            line-height: 1.45;
+            color: rgba(255, 255, 255, 0.78);
+        }
+
+        .fc-feature-item.is-disabled {
+            color: rgba(255, 255, 255, 0.38);
+        }
+
+        .fc-feature-icon {
+            flex-shrink: 0;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.95rem;
+            margin-top: 1px;
+        }
+
+        .fc-feature-item.is-available .fc-feature-icon {
+            background: rgba(16, 185, 129, 0.15);
+            color: #10b981;
+        }
+
+        .fc-feature-item.is-disabled .fc-feature-icon {
+            background: rgba(239, 68, 68, 0.12);
+            color: #ef4444;
+        }
+
+        .fc-feature-text strong {
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        .fc-feature-item.is-disabled .fc-feature-text strong {
+            color: rgba(255, 255, 255, 0.45);
+        }
+
+        /* Description */
+        .fc-plan-description-wrap {
+            margin-top: 18px;
+            padding-top: 14px;
+            border-top: 1px dashed rgba(255, 255, 255, 0.1);
+        }
+
+        .fc-plan-desc {
+            font-size: 0.85rem;
+            line-height: 1.55;
+            color: rgba(255, 255, 255, 0.65);
+        }
+
+        .fc-read-more-link {
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-left: 4px;
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+
+        .fc-read-more-link:hover {
+            text-decoration: underline;
+            color: #60a5fa;
+        }
+
+        /* Plan CTA Button */
+        .fc-plan-action {
+            margin-top: auto;
+            padding-top: 24px;
+        }
+
+        .btn-fc-plan-cta {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 13px 20px;
+            background: rgba(255, 255, 255, 0.08);
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            border-radius: 30px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.25s ease;
+        }
+
+        .btn-fc-plan-cta:hover {
+            background: var(--primary-color);
+            border-color: var(--primary-color);
+            color: #ffffff;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 24px -6px rgba(13, 86, 222, 0.45);
+        }
+
+        .btn-fc-plan-cta i {
+            font-size: 1.15rem;
+            transition: transform 0.2s ease;
+        }
+
+        .btn-fc-plan-cta:hover i {
+            transform: translateX(4px);
+        }
+
+        .btn-fc-plan-featured {
+            background: var(--primary-color);
+            border-color: var(--primary-color);
+            color: #ffffff;
+            box-shadow: 0 8px 20px -6px rgba(13, 86, 222, 0.4);
+        }
+
+        .btn-fc-plan-featured:hover {
+            background: #1d4ed8;
+            border-color: #1d4ed8;
+            box-shadow: 0 12px 28px -6px rgba(13, 86, 222, 0.55);
+        }
+
+        /* Callback Banner Styles (Global & Home6 Support) */
+        .callback-banner {
+            max-width: 960px;
+            margin: 40px auto 10px;
+            padding: 24px 28px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            background: rgba(21, 29, 47, 0.92);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-left: 5px solid var(--primary-color);
+            border-radius: 18px;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            box-shadow: 0 18px 36px -16px rgba(0, 0, 0, 0.55);
+        }
+
+        .callback-banner__icon {
+            flex: 0 0 54px;
+            width: 54px;
+            height: 54px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(13, 86, 222, 0.15);
+            color: var(--primary-color);
+        }
+
+        .callback-banner__text {
+            flex: 1 1 auto;
+            min-width: 0;
+        }
+
+        .callback-banner__title {
+            margin: 0 0 4px;
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        .callback-banner__sub {
+            margin: 0;
+            font-size: 0.92rem;
+            line-height: 1.5;
+            color: rgba(255, 255, 255, 0.72);
+        }
+
+        .callback-banner__btn {
+            flex: 0 0 auto;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            border: 0;
+            border-radius: 30px;
+            background: var(--primary-color);
+            color: #ffffff;
+            font-size: 0.95rem;
+            font-weight: 600;
+            white-space: nowrap;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+            box-shadow: 0 8px 20px -6px rgba(13, 86, 222, 0.45);
+        }
+
+        .callback-banner__btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 26px -6px rgba(13, 86, 222, 0.55);
+            background: #1d4ed8;
+            color: #ffffff;
+        }
+
+        .fc-callback-container {
+            max-width: 1040px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* ==========================================================================
+           LIGHT MODE OVERRIDES
+           ========================================================================== */
+        .light-mode .fc-pricing-section {
+            background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 50%, #f8fafc 100%);
+        }
+
+        .light-mode .fc-pricing-atmosphere-glow {
+            background: radial-gradient(circle, rgba(13, 86, 222, 0.08) 0%, rgba(124, 58, 237, 0.05) 40%, transparent 70%);
+        }
+
+        .light-mode .fc-pricing-title {
+            color: #0f172a;
+        }
+
+        .light-mode .fc-pricing-subtitle {
+            color: #475569;
+        }
+
+        .light-mode .fc-plan-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 10px 30px -10px rgba(15, 23, 42, 0.08);
+        }
+
+        .light-mode .fc-plan-card:hover {
+            border-color: rgba(13, 86, 222, 0.45);
+            box-shadow: 0 20px 40px -15px rgba(13, 86, 222, 0.16);
+        }
+
+        .light-mode .fc-plan-card-featured {
+            background: #ffffff;
+            border: 2px solid var(--primary-color);
+            box-shadow: 0 16px 36px -12px rgba(13, 86, 222, 0.2);
+        }
+
+        .light-mode .fc-plan-name {
+            color: #0f172a;
+        }
+
+        .light-mode .fc-plan-tier-badge {
+            color: #64748b;
+            background: #f1f5f9;
+            border: 1px solid #e2e8f0;
+        }
+
+        .light-mode .fc-plan-original-price {
+            color: #94a3b8;
+        }
+
+        .light-mode .fc-price-num {
+            color: #0f172a;
+        }
+
+        .light-mode .fc-price-period {
+            color: #64748b;
+        }
+
+        .light-mode .fc-plan-divider {
+            background: linear-gradient(90deg, transparent 0%, #e2e8f0 50%, transparent 100%);
+        }
+
+        .light-mode .fc-features-title {
+            color: #334155;
+        }
+
+        .light-mode .fc-feature-item {
+            color: #475569;
+        }
+
+        .light-mode .fc-feature-item.is-disabled {
+            color: #94a3b8;
+        }
+
+        .light-mode .fc-feature-text strong {
+            color: #0f172a;
+        }
+
+        .light-mode .fc-feature-item.is-disabled .fc-feature-text strong {
+            color: #94a3b8;
+        }
+
+        .light-mode .fc-plan-description-wrap {
+            border-top: 1px dashed #e2e8f0;
+        }
+
+        .light-mode .fc-plan-desc {
+            color: #64748b;
+        }
+
+        .light-mode .btn-fc-plan-cta {
+            background: #f1f5f9;
+            color: #0f172a;
+            border-color: #cbd5e1;
+        }
+
+        .light-mode .btn-fc-plan-cta:hover {
+            background: var(--primary-color);
+            border-color: var(--primary-color);
+            color: #ffffff;
+        }
+
+        .light-mode .btn-fc-plan-featured {
+            background: var(--primary-color);
+            border-color: var(--primary-color);
+            color: #ffffff;
+        }
+
+        .light-mode .btn-fc-plan-featured:hover {
+            background: #1d4ed8;
+            border-color: #1d4ed8;
+        }
+
+        .light-mode .callback-banner {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-left: 5px solid var(--primary-color);
+            box-shadow: 0 10px 30px -10px rgba(15, 23, 42, 0.08);
+        }
+
+        .light-mode .callback-banner__icon {
+            background: #eff6ff;
+            color: var(--primary-color);
+        }
+
+        .light-mode .callback-banner__title {
+            color: #0f172a;
+        }
+
+        .light-mode .callback-banner__sub {
+            color: #64748b;
+        }
+
+        .light-mode .callback-banner__btn {
+            background: var(--primary-color);
+            color: #ffffff;
+        }
+
+        /* ==========================================================================
+           Callback Modal Theming (Dark & Light Mode Support in Home6)
+           ========================================================================== */
+        #callbackModal .modal-content {
+            background: #131c30;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            color: #ffffff;
+            box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.7);
+        }
+
+        #callbackModal .modal-header {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        #callbackModal .modal-header h2 {
+            color: #ffffff;
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        #callbackModal .icon-circle.teal {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: rgba(13, 86, 222, 0.15);
+            color: var(--primary-color);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #callbackModal .btn-close {
+            filter: invert(1) grayscale(100%) brightness(200%);
+            opacity: 0.75;
+            transition: opacity 0.2s;
+        }
+
+        #callbackModal .btn-close:hover {
+            opacity: 1;
+        }
+
+        #callbackModal .modal_liteBody p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.92rem;
+            line-height: 1.55;
+        }
+
+        #callbackModal label {
+            font-size: 0.88rem;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.85);
+            margin-bottom: 6px;
+        }
+
+        #callbackModal .required-field {
+            color: #f87171;
+        }
+
+        #callbackModal .input_comman_field {
+            width: 100%;
+            height: 46px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            border-radius: 12px;
+            color: #ffffff;
+            padding: 10px 16px;
+            font-size: 0.92rem;
+            transition: all 0.2s ease;
+        }
+
+        #callbackModal .input_comman_field:focus {
+            outline: none;
+            background: rgba(255, 255, 255, 0.08);
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(13, 86, 222, 0.25);
+        }
+
+        #callbackModal .input_comman_field::placeholder {
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        #callbackModal .custom-select2-div .select2-container--default .select2-selection--single {
+            height: 46px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+        }
+
+        #callbackModal .select2-container--default .select2-selection--single .select2-selection__rendered {
+            color: #ffffff;
+            line-height: 44px;
+            padding-left: 14px;
+        }
+
+        #callbackModal .select2-container--default .select2-selection--single .select2-selection__arrow {
+            height: 44px;
+            right: 10px;
+        }
+
+        #callbackModal .select2-dropdown {
+            background: #182238;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 16px 36px rgba(0, 0, 0, 0.6);
+        }
+
+        #callbackModal .select2-container--default .select2-search--dropdown .select2-search__field {
+            background: #111827;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #ffffff;
+            border-radius: 8px;
+            padding: 8px 12px;
+        }
+
+        #callbackModal .select2-container--default .select2-results__option--highlighted.select2-results__option--selectable {
+            background: var(--primary-color);
+            color: #ffffff;
+        }
+
+        #callbackModal .modal-buttonsGroup {
+            margin-top: 24px;
+        }
+
+        #callbackModal .click-changeButton {
+            background: var(--primary-color);
+            color: #ffffff;
+            border: none;
+            border-radius: 30px;
+            padding: 10px 24px;
+            font-size: 0.92rem;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+
+        #callbackModal .click-changeButton:hover {
+            background: #1d4ed8;
+            transform: translateY(-1px);
+        }
+
+        #callbackModal .clickClosebutton {
+            background: rgba(255, 255, 255, 0.08);
+            color: rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            border-radius: 30px;
+            padding: 10px 22px;
+            font-size: 0.92rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        #callbackModal .clickClosebutton:hover {
+            background: rgba(255, 255, 255, 0.14);
+            color: #ffffff;
+        }
+
+        #callbackModal div.error {
+            color: #f87171;
+            font-size: 0.8rem;
+            margin-top: 4px;
+        }
+
+        /* Modal Light Mode Overrides */
+        .light-mode #callbackModal .modal-content {
+            background: #ffffff;
+            border-color: #e2e8f0;
+            color: #0f172a;
+            box-shadow: 0 25px 60px -15px rgba(15, 23, 42, 0.2);
+        }
+
+        .light-mode #callbackModal .modal-header {
+            border-bottom-color: #f1f5f9;
+        }
+
+        .light-mode #callbackModal .modal-header h2 {
+            color: #0f172a;
+        }
+
+        .light-mode #callbackModal .icon-circle.teal {
+            background: #eff6ff;
+            color: var(--primary-color);
+        }
+
+        .light-mode #callbackModal .btn-close {
+            filter: none;
+            opacity: 0.55;
+        }
+
+        .light-mode #callbackModal .btn-close:hover {
+            opacity: 0.85;
+        }
+
+        .light-mode #callbackModal .modal_liteBody p {
+            color: #64748b;
+        }
+
+        .light-mode #callbackModal label {
+            color: #334155;
+        }
+
+        .light-mode #callbackModal .input_comman_field {
+            background: #f8fafc;
+            border-color: #cbd5e1;
+            color: #0f172a;
+        }
+
+        .light-mode #callbackModal .input_comman_field:focus {
+            background: #ffffff;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(13, 86, 222, 0.18);
+        }
+
+        .light-mode #callbackModal .input_comman_field::placeholder {
+            color: #94a3b8;
+        }
+
+        .light-mode #callbackModal .custom-select2-div .select2-container--default .select2-selection--single {
+            background: #f8fafc;
+            border-color: #cbd5e1;
+        }
+
+        .light-mode #callbackModal .select2-container--default .select2-selection--single .select2-selection__rendered {
+            color: #0f172a;
+        }
+
+        .light-mode #callbackModal .select2-dropdown {
+            background: #ffffff;
+            border-color: #cbd5e1;
+            color: #0f172a;
+            box-shadow: 0 16px 36px rgba(15, 23, 42, 0.12);
+        }
+
+        .light-mode #callbackModal .select2-container--default .select2-search--dropdown .select2-search__field {
+            background: #f8fafc;
+            border-color: #cbd5e1;
+            color: #0f172a;
+        }
+
+        .light-mode #callbackModal .clickClosebutton {
+            background: #f1f5f9;
+            border-color: #e2e8f0;
+            color: #475569;
+        }
+
+        .light-mode #callbackModal .clickClosebutton:hover {
+            background: #e2e8f0;
+            color: #0f172a;
+        }
+
+        /* Responsive */
+        @media (max-width: 991px) {
+            .fc-pricing-section {
+                padding: 70px 0 60px;
+            }
+            .fc-pricing-title {
+                font-size: 1.95rem;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .callback-banner {
+                flex-direction: column;
+                text-align: center;
+                padding: 24px 20px;
+                border-left: 1px solid rgba(255, 255, 255, 0.08);
+                border-top: 5px solid var(--primary-color);
+            }
+            .light-mode .callback-banner {
+                border-left: 1px solid #e2e8f0;
+                border-top: 5px solid var(--primary-color);
+            }
+            .callback-banner__btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 575px) {
+            .fc-pricing-section {
+                padding: 60px 0 50px;
+            }
+            .fc-plan-card {
+                padding: 28px 20px 22px;
+            }
+            .fc-price-num {
+                font-size: 1.85rem;
+            }
+            #callbackModal .modal-dialog {
+                margin: 12px;
+            }
+            #callbackModal .modal_liteBody {
+                padding: 16px 14px;
+            }
+        }
+
+        /* ==========================================================================
+           Home6 Upcoming Events Section (Dual Dark & Light Mode)
+           ========================================================================== */
+        .fc-events-section {
+            padding: 85px 0 95px;
+            background: linear-gradient(180deg, rgba(13, 21, 40, 0.98) 0%, rgba(10, 15, 29, 1) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .fc-events-glow {
+            position: absolute;
+            top: 25%;
+            right: 10%;
+            width: 550px;
+            height: 380px;
+            background: radial-gradient(circle, rgba(13, 86, 222, 0.14) 0%, rgba(147, 51, 234, 0.08) 50%, transparent 70%);
+            pointer-events: none;
+            filter: blur(50px);
+            z-index: 0;
+        }
+
+        .fc-events-header-wrap {
+            margin-bottom: 38px;
+        }
+
+        .fc-events-title {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 2.25rem;
+            font-weight: 700;
+            color: #ffffff;
+            line-height: 1.25;
+            margin-bottom: 8px;
+            letter-spacing: -0.01em;
+        }
+
+        .btn-fc-view-all {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 11px 24px;
+            border-radius: 30px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #ffffff;
+            font-size: 0.92rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            white-space: nowrap;
+        }
+
+        .btn-fc-view-all:hover {
+            background: var(--primary-color);
+            border-color: var(--primary-color);
+            color: #ffffff;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 24px -6px rgba(13, 86, 222, 0.45);
+        }
+
+        .btn-fc-view-all iconify-icon {
+            font-size: 1.15rem;
+            transition: transform 0.2s ease;
+        }
+
+        .btn-fc-view-all:hover iconify-icon {
+            transform: translateX(4px);
+        }
+
+        /* Event Card */
+        .fc-event-card {
+            background: rgba(21, 29, 47, 0.88);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+            box-shadow: 0 16px 36px -16px rgba(0, 0, 0, 0.55);
+            position: relative;
+        }
+
+        .fc-event-card:hover {
+            transform: translateY(-7px);
+            border-color: rgba(13, 86, 222, 0.45);
+            box-shadow: 0 24px 48px -18px rgba(13, 86, 222, 0.28), 0 0 1px 1px rgba(13, 86, 222, 0.25);
+        }
+
+        .fc-event-media {
+            position: relative;
+            width: 100%;
+            height: 215px;
+            overflow: hidden;
+            background: #0b1120;
+        }
+
+        .fc-event-media a {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+
+        .fc-event-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.45s ease;
+        }
+
+        .fc-event-card:hover .fc-event-img {
+            transform: scale(1.06);
+        }
+
+        .fc-event-date-chip {
+            position: absolute;
+            top: 14px;
+            left: 14px;
+            background: rgba(15, 23, 42, 0.82);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            border-radius: 12px;
+            padding: 6px 12px;
+            text-align: center;
+            min-width: 52px;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+            z-index: 2;
+        }
+
+        .fc-event-date-day {
+            font-size: 1.15rem;
+            font-weight: 800;
+            line-height: 1;
+            color: #ffffff;
+            display: block;
+        }
+
+        .fc-event-date-month {
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--primary-color);
+            display: block;
+            margin-top: 2px;
+        }
+
+        .fc-event-price-chip {
+            position: absolute;
+            bottom: 14px;
+            right: 14px;
+            background: rgba(13, 86, 222, 0.9);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            color: #ffffff;
+            font-size: 0.8rem;
+            font-weight: 700;
+            padding: 5px 12px;
+            border-radius: 20px;
+            box-shadow: 0 4px 14px rgba(13, 86, 222, 0.4);
+            z-index: 2;
+        }
+
+        .fc-event-body {
+            padding: 22px 22px 20px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .fc-event-meta-bar {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            font-size: 0.82rem;
+            color: rgba(255, 255, 255, 0.65);
+            margin-bottom: 10px;
+        }
+
+        .fc-event-meta-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .fc-event-meta-item iconify-icon {
+            font-size: 1rem;
+            color: var(--primary-color);
+        }
+
+        .fc-event-card-title {
+            font-size: 1.12rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 8px;
+            line-height: 1.4;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .fc-event-card-title a {
+            color: inherit;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .fc-event-card-title a:hover {
+            color: #60a5fa;
+        }
+
+        .fc-event-card-desc {
+            font-size: 0.88rem;
+            line-height: 1.55;
+            color: rgba(255, 255, 255, 0.68);
+            margin-bottom: 16px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .fc-event-card-desc * {
+            margin: 0;
+            display: inline;
+            color: inherit !important;
+            font-size: inherit !important;
+        }
+
+        .fc-event-footer {
+            margin-top: auto;
+            padding-top: 14px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        .fc-event-venue {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.82rem;
+            color: rgba(255, 255, 255, 0.6);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 60%;
+        }
+
+        .fc-event-venue iconify-icon {
+            font-size: 1rem;
+            color: var(--primary-color);
+            flex-shrink: 0;
+        }
+
+        .btn-fc-event-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 0.86rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: gap 0.2s ease, color 0.2s ease;
+        }
+
+        .btn-fc-event-link:hover {
+            color: #60a5fa;
+            gap: 8px;
+        }
+
+        /* Light Mode Overrides for Events */
+        .light-mode .fc-events-section {
+            background: linear-gradient(180deg, #f1f5f9 0%, #ffffff 100%);
+        }
+
+        .light-mode .fc-events-glow {
+            background: radial-gradient(circle, rgba(13, 86, 222, 0.07) 0%, rgba(147, 51, 234, 0.04) 50%, transparent 70%);
+        }
+
+        .light-mode .fc-events-title {
+            color: #0f172a;
+        }
+
+        .light-mode .btn-fc-view-all {
+            background: #ffffff;
+            border: 1px solid #cbd5e1;
+            color: #0f172a;
+            box-shadow: 0 2px 6px rgba(15, 23, 42, 0.04);
+        }
+
+        .light-mode .btn-fc-view-all:hover {
+            background: var(--primary-color);
+            border-color: var(--primary-color);
+            color: #ffffff;
+        }
+
+        .light-mode .fc-event-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 10px 30px -10px rgba(15, 23, 42, 0.08);
+        }
+
+        .light-mode .fc-event-card:hover {
+            border-color: rgba(13, 86, 222, 0.45);
+            box-shadow: 0 20px 40px -15px rgba(13, 86, 222, 0.16);
+        }
+
+        .light-mode .fc-event-media {
+            background: #f1f5f9;
+        }
+
+        .light-mode .fc-event-date-chip {
+            background: rgba(255, 255, 255, 0.92);
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+        }
+
+        .light-mode .fc-event-date-day {
+            color: #0f172a;
+        }
+
+        .light-mode .fc-event-meta-bar {
+            color: #64748b;
+        }
+
+        .light-mode .fc-event-card-title {
+            color: #0f172a;
+        }
+
+        .light-mode .fc-event-card-title a:hover {
+            color: var(--primary-color);
+        }
+
+        .light-mode .fc-event-card-desc {
+            color: #475569;
+        }
+
+        .light-mode .fc-event-footer {
+            border-top-color: #f1f5f9;
+        }
+
+        .light-mode .fc-event-venue {
+            color: #64748b;
+        }
+
+        .light-mode .btn-fc-event-link:hover {
+            color: #1d4ed8;
+        }
+
+        @media (max-width: 991px) {
+            .fc-events-section {
+                padding: 65px 0 75px;
+            }
+            .fc-events-title {
+                font-size: 1.95rem;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .fc-events-header-wrap {
+                margin-bottom: 28px;
+            }
+            .fc-events-header-wrap .d-flex {
+                flex-direction: column;
+                align-items: flex-start !important;
+                gap: 16px;
+            }
+            .btn-fc-view-all {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
 
     {{-- Google Analystics Code --}}
     {!! $configArr['google_analytics_code'] !!}
@@ -100,65 +1318,6 @@
                             <iconify-icon icon="fluent:grid-16-filled" class="nav-icon"></iconify-icon><span
                                     class="nav-label">{{ __('messages.lbl_home') }}</span><span
                                     class="active-indicator"></span></a></li>
-                        <li class="nav-dropdown-wrap">
-                            <a href="#search" class="nav-item dropdown-toggle-fc">
-                                <iconify-icon icon="bx:search" class="nav-icon"></iconify-icon>
-                                <span class="nav-label">{{ __('messages.lbl_search') }}</span>
-                                <i class="bx bx-chevron-down nav-arrow"></i>
-                            </a>
-                            <ul class="fc-dropdown-menu">
-                                <li>
-                                    <a href="{{ route('web.search.type', ['type' => 'quick-search']) }}"
-                                        class="fc-dropdown-item">
-                                        <span class="dropdown-item-icon">
-                                            <i class="bx bx-bolt-circle"></i>
-                                        </span>
-                                        <div class="dropdown-item-text">
-                                            <span
-                                                class="dropdown-item-title">{{ __('messages.lbl_quick_search') }}</span>
-                                            <span class="dropdown-item-desc">{{ __('messages.lbl_quick_search_description') }}</span>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="{{ route('web.search.type', ['type' => 'advance-search']) }}"
-                                        class="fc-dropdown-item">
-                                        <span class="dropdown-item-icon">
-                                            <i class="bx bx-slider-alt"></i>
-                                        </span>
-                                        <div class="dropdown-item-text">
-                                            <span
-                                                class="dropdown-item-title">{{ __('messages.lbl_advance_search') }}</span>
-                                            <span class="dropdown-item-desc">{{ __('messages.lbl_advance_search_description') }}</span>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="{{ route('web.search.type', ['type' => 'keyword-search']) }}"
-                                        class="fc-dropdown-item">
-                                        <span class="dropdown-item-icon">
-                                            <i class="bx bx-id-card"></i>
-                                        </span>
-                                        <div class="dropdown-item-text">
-                                            <span class="dropdown-item-title">{{ __('messages.lbl_keyword_search') }}</span>
-                                            <span class="dropdown-item-desc">{{ __('messages.lbl_find_profiles_by_interests_words_hobbies') }}</span>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="{{ route('web.search.type', ['type' => 'id-search']) }}"
-                                        class="fc-dropdown-item">
-                                        <span class="dropdown-item-icon">
-                                            <i class="bx bx-id-card"></i>
-                                        </span>
-                                        <div class="dropdown-item-text">
-                                            <span class="dropdown-item-title">{{ __('messages.lbl_id_search') }}</span>
-                                            <span class="dropdown-item-desc">{{ __('messages.lbl_id_search') }}</span>
-                                        </div>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
                         <li><a href="{{ route('web.membershipPlan.index') }}" class="nav-item"><iconify-icon icon="mdi:crown-outline"
                                         class="nav-icon"></iconify-icon><span class="nav-label">
                                     {{ __('messages.lbl_membership') }}</span></a>
@@ -305,7 +1464,7 @@
                             </a>
                         </div>
 
-                        <div class="hero-trust d-flex align-items-center gap-3">
+                        <div class="hero-trust d-flex align-items-center gap-3 mb-3">
                             <div class="avatar-stack">
                                 <img src="{{ asset('storage/web/home6') }}/assets/images/avatar-1.png"
                                     alt="Christian member">
@@ -320,6 +1479,29 @@
                                 <div class="trust-title">{{ $data['hero_trust_title'] ?? '' }}</div>
                                 <div class="trust-desc">{{ $data['hero_trust_desc'] ?? '' }}</div>
                             </div>
+                        </div>
+                        <!-- Store Badges -->
+                        <div class="d-flex flex-wrap align-items-center gap-3 mt-2 pt-2">
+                            @if (isset($configArr['ios_app_link']) && !blank($configArr['ios_app_link']))
+                                <a target="_blank" href="{{ $configArr['ios_app_link'] }}"
+                                    class="fc-store-button">
+                                    <i class="bx bxl-apple"></i>
+                                    <div class="text-start">
+                                        <small>{{ __('messages.lbl_download_on_the') }}</small>
+                                        <strong>{{ __('messages.lbl_app_store') }}</strong>
+                                    </div>
+                                </a>
+                            @endif
+                            @if (isset($configArr['android_app_link']) && !blank($configArr['android_app_link']))
+                                <a target="_blank" href="{{ $configArr['android_app_link'] }}"
+                                    class="fc-store-button">
+                                    <i class="bx bxl-play-store"></i>
+                                    <div class="text-start">
+                                        <small>{{ __('messages.lbl_get_it_on') }}</small>
+                                        <strong>{{ __('messages.lbl_play_store') }}</strong>
+                                    </div>
+                                </a>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -396,115 +1578,6 @@
             </div>
         </div>
     </header>
-
-    <!-- header search form / filter band -->
-    <div class="search-band" id="search">
-        <div class="container">
-            <div class="search-card-fc">
-                <form action="{{ route('web.search.searchResult') }}" method="GET" class="search-form-grid">
-
-                    <!-- Field 1: Looking For -->
-                    <div class="search-col">
-                        <label class="fc-field-label">
-                            <i class="bx bx-user fc-icon"></i>
-                            <span>{{ __('messages.lbl_i_m_looking_for_a') }}</span>
-                        </label>
-                        <div class="fc-select-wrap">
-                            <select name="looking_for" id="Looking" class="fc-custom-select field-select">
-                                <option value="Female" title="Woman">{{ __('messages.field_lbl_female') }}</option>
-                                <option value="Male" title="Man">{{ __('messages.field_lbl_male') }}</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <!-- Field 2: Age From -->
-                    <div class="search-col">
-                        <label class="fc-field-label">
-                            <i class="bx bx-calendar fc-icon"></i>
-                            <span>{{ __('messages.field_lbl_age_from') }}</span>
-                        </label>
-                        @php $age = _ageRang(); @endphp
-                        <div class="fc-select-wrap">
-                            <select name="from_age" id="agefrom" class="fc-custom-select field-select">
-                                @foreach ($age as $key => $valueArr)
-                                    <option value="{{ $key }}" title="{{ $valueArr }}">
-                                        {{ $valueArr }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
-
-                    <!-- Field 3: Age To -->
-                    <div class="search-col">
-                        <label class="fc-field-label">
-                            <i class="bx bx-calendar fc-icon"></i>
-                            <span>{{ __('messages.field_lbl_age_to') }}</span>
-                        </label>
-                        <div class="fc-select-wrap">
-                            <select name="age_to" id="ageto" class="fc-custom-select field-select">
-                                @foreach ($age as $key => $valueArr)
-                                    @php $selected = ($key == '30') ? 'selected' : ''; @endphp
-                                    <option value="{{ $key }}" {{ $selected }}
-                                        title="{{ $valueArr }}">{{ $valueArr }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
-
-                    <!-- Field 4: Religion -->
-                    <div class="search-col">
-                        <label class="fc-field-label">
-                            <span class="fc-icon fc-cross-svg">
-                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none"
-                                    stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
-                                    stroke-linejoin="round">
-                                    <path d="M12 2v20M7 8h10" />
-                                </svg>
-                            </span>
-                            <span>{{ __('messages.field_lbl_religion') }}</span>
-                        </label>
-                        <div class="fc-select-wrap">
-                            <select name="religion" id="Denomination" class="fc-custom-select field-select">
-                                <option class="list" value="" selected
-                                    title="{{ __('messages.field_lbl_select_religion') }}">
-                                    {{ __('messages.field_lbl_select_religion') }}</option>
-                                @foreach ($religionList as $id => $name)
-                                    <option value="{{ $id }}">{{ $name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
-
-                    <!-- Field 5: Location -->
-                    <div class="search-col">
-                        <label class="fc-field-label">
-                            <i class="bx bx-map fc-icon"></i>
-                            <span>{{ __('messages.field_lbl_country') }}</span>
-                        </label>
-                        <div class="fc-select-wrap">
-                            <select name="country_id" id="Location" class="fc-custom-select field-select">
-                                <option class="list" value="" selected
-                                    title="{{ __('messages.field_lbl_country') }}">
-                                    {{ __('messages.field_lbl_select_country') }}</option>
-                                @foreach ($religionList as $id => $name)
-                                    <option value="{{ $id }}">{{ $name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
-
-                    <!-- Search Button -->
-                    <div class="search-col search-btn-col">
-                        <button type="submit" class="fc-search-submit">
-                            <i class="bx bx-search"></i>
-                            <span>{{ __('messages.lbl_search') }}</span>
-                        </button>
-                    </div>
-
-                </form>
-            </div>
-        </div>
-    </div>
 
     <!-- How Does It Work section start -->
     <section class="steps-section" id="how-it-works">
@@ -648,115 +1721,44 @@
 
                 </div>
             </div>
+        </div>
+    </section>
 
-            <!-- Bottom Step CTA Banner -->
-            <div class="fc-steps-cta-bar text-center wow fadeInUp" data-wow-delay="0.4s">
-                <div class="fc-cta-inner d-flex flex-wrap align-items-center justify-content-between">
-                    <div class="fc-cta-text d-flex align-items-center gap-3">
-                        <span class="fc-cta-icon-orb">
-                            <i class="bx bx-church"></i>
+    
+    <!-- Global Christian Reach section start -->
+    <section class="fc-reach-section" id="global-reach">
+        <div class="fc-reach-glow" aria-hidden="true"></div>
+        <div class="container position-relative">
+
+            <!-- Inner Premium Card Wrap -->
+            <div class="fc-reach-banner-card text-center wow fadeInUp" data-wow-delay="0.15s">
+
+                <!-- Header -->
+                <div class="fc-reach-header text-center mb-4">
+                    <div class="fc-pill-badge mb-3">
+                        <span class="fc-badge-cross">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M12 2v20M7 8h10" />
+                            </svg>
                         </span>
-                        <div class="text-start">
-                            <h4 class="fc-cta-title">{{ $data['journey_cta_title'] ?? '' }}</h4>
-                            <p class="fc-cta-desc">{{ $data['journey_cta_desc'] ?? '' }}</p>
-                        </div>
+                        <span>{{ $data['reach_badge'] ?? '' }}</span>
                     </div>
-                    <div class="fc-cta-action">
-                        <a href="{{ route('web.register.index') }}" class="btn-fc-cta-pill">
-                            <span>{{ $data['journey_cta_text'] ?? '' }}</span>
-                            <i class="bx bx-right-arrow-alt"></i>
-                        </a>
-                    </div>
+
+                    <h2 class="fc-reach-title">
+                        {!! $data['reach_title'] ?? '' !!}
+                    </h2>
+
+                    <p class="fc-reach-desc mx-auto">
+                        {!! $data['reach_subtitle'] ?? '' !!}
+                    </p>
                 </div>
+
             </div>
 
         </div>
     </section>
-
-    <!-- Last Added Profiles section start -->
-    @if ($latestProfile->isNotEmpty())
-        <section class="profiles-section" id="profiles">
-            <div class="profiles-glow" aria-hidden="true"></div>
-            <div class="container position-relative">
-
-                <!-- Section Header -->
-                <div class="section-head fc-profiles-head d-flex flex-wrap align-items-end justify-content-between gap-3 wow fadeInUp"
-                    data-wow-delay="0.1s">
-                    <div>
-                        <div class="fc-pill-badge mb-2">
-                            <span class="fc-badge-cross">
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
-                                    stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
-                                    stroke-linejoin="round">
-                                    <path d="M12 2v20M7 8h10" />
-                                </svg>
-                            </span>
-                            <span>{{ $data['profiles_badge'] ?? '' }}</span>
-                        </div>
-                        <h2 class="fc-profiles-title">
-                            {!! $data['profiles_title'] ?? '' !!}
-                        </h2>
-                        <p class="fc-profiles-subtitle">
-                            {!! $data['profiles_subtitle'] ?? '' !!}
-                        </p>
-                    </div>
-                    <div class="lastProfileArrows slider-arrows d-flex gap-2"></div>
-                </div>
-
-                <!-- Profiles Slider -->
-                <div class="LastProfileSlider profiles-slider wow fadeInUp" data-wow-delay="0.2s">
-                    @foreach ($latestProfile as $profile)
-                        @php
-                            $canView = _canViewMemberPhoto($profile, $profile->hasPhotoRequestAccess ?? '');
-                            $hasPhoto = _checkPhotoExist($profile);
-                            $profileImage = _getMemberProfileImage($profile);
-                        @endphp
-                        <div class="px-2">
-                            <div class="fc-profile-card">
-                                <div class="fc-profile-media">
-                                    <a href="{{ route('web.userProfile.index', _encrypt($profile->id)) }}"
-                                        class="fc-profile-img-link">
-                                        @if (!$canView && $hasPhoto)
-                                            <img src="{{ _getProtectedImage($profile->gender) }}"
-                                                alt="{{ _profileTitle($profile) }}" class="fc-profile-img">
-                                        @else
-                                            <img src="{{ $profileImage }}" alt="{{ _profileTitle($profile) }}"
-                                                class="fc-profile-img">
-                                        @endif
-                                    </a>
-                                    <span class="fc-badge-verified-glass">
-                                        <i class="bx bxs-badge-check"></i>
-                                        <span>Verified</span>
-                                    </span>
-                                    <span
-                                        class="fc-denom-pill">{{ optional($profile->religionData)->translated_name }}</span>
-                                </div>
-                                <div class="fc-profile-body">
-                                    <div class="d-flex align-items-center justify-content-between">
-                                        <div>
-                                            <h4 class="fc-member-name"><a
-                                                    href="{{ route('web.userProfile.index', _encrypt($profile->id)) }}">{{ _profileTitle($profile) }}</a>
-                                            </h4>
-                                            <p class="fc-member-info">{{ _birthdateDisplay($profile->birthdate, 0) }}
-                                                · {{ _displayHeight($profile->height) }}</p>
-                                        </div>
-                                        <button type="button" class="fc-profile-connect-btn" title="Send Interest"
-                                            aria-label="Send interest">
-                                            <i class="bx bx-heart"></i>
-                                        </button>
-                                    </div>
-                                    <div class="fc-member-location">
-                                        <i class="bx bx-map"></i>
-                                        <span>{{ _getMemberLocation($profile) }}</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
-            </div>
-        </section>
-    @endif
 
     <!-- Happy Success Stories section start  -->
     @if ($successStoryArr->isNotEmpty())
@@ -941,6 +1943,356 @@
         </section>
     @endif
 
+    {{-- Membership Plans Section Start --}}
+    @php
+        if (!isset($standardPlans)) {
+            $standardPlans = \App\Models\MembershipPlan::active()
+                ->standard()
+                ->get()
+                ->each(function ($plan) {
+                    $user = auth()->user();
+                    $currencyCode = $plan->currency_code;
+                    $originalAmount = (float) $plan->plan_amount;
+
+                    if ($user && str_starts_with($user->mobile ?? '', '+1-')) {
+                        $currencyCode = $plan->international_currency_code;
+                        $originalAmount = (float) $plan->international_plan_amount;
+                    }
+
+                    $discountPercent = (float) $plan->plan_discount;
+                    $discountValue = $discountPercent > 0 ? ($originalAmount * $discountPercent) / 100 : 0;
+
+                    $plan->plan_discount_amount = $originalAmount - $discountValue;
+                    $plan->computed_currency = $currencyCode;
+                    $plan->computed_original_amount = $originalAmount;
+                })->sortBy('plan_discount_amount');
+        }
+        $voiceApproved = ($configArr['zego_voice_call_setting'] ?? '') === 'APPROVED';
+        $videoApproved = ($configArr['zego_video_call_setting'] ?? '') === 'APPROVED';
+    @endphp
+
+    @if (isset($standardPlans) && $standardPlans->isNotEmpty())
+        <section class="fc-pricing-section position-relative" id="membership-plans">
+            <div class="fc-pricing-atmosphere-glow" aria-hidden="true"></div>
+
+            <div class="container position-relative">
+
+                <!-- Section Header -->
+                <div class="fc-pricing-header text-center wow fadeInUp" data-wow-delay="0.1s">
+                    <h2 class="fc-pricing-title">
+                        {{ __('messages.lbl_membership_plans_title') }}
+                    </h2>
+                </div>
+
+                <!-- Plans Grid -->
+                <div class="row g-4 justify-content-center mt-2">
+                    @php
+                        $planTierArr = ['fc-tier-basic', 'fc-tier-popular', 'fc-tier-premium'];
+                        $planBadgeLabels = [__('messages.lbl_for_individuals'), 'Most Popular', 'Best Value'];
+                        $idx = 0;
+                    @endphp
+                    @foreach ($standardPlans as $plan)
+                        @php
+                            $isPopular = ($idx % 3 === 1);
+                            $tierClass = $planTierArr[$idx % 3] ?? 'fc-tier-basic';
+                            $displayCurrency = $plan->computed_currency ?? $plan->currency_code;
+                            $displayAmount = $plan->computed_original_amount ?? $plan->plan_amount;
+                        @endphp
+                        <div class="col-lg-4 col-md-6">
+                            <div class="fc-plan-card {{ $tierClass }} {{ $isPopular ? 'fc-plan-card-featured' : '' }} wow fadeInUp" data-wow-delay="{{ 0.15 + ($idx * 0.1) }}s">
+                                @if ($isPopular)
+                                    <!-- <div class="fc-plan-popular-ribbon">
+                                        <i class="bx bxs-star"></i>
+                                        <span>Recommended</span>
+                                    </div> -->
+                                @endif
+
+                                <div class="fc-plan-header">
+                                    <div class="d-flex align-items-center justify-content-between mb-2">
+                                        <h3 class="fc-plan-name mb-0">{{ $plan->plan_name }}</h3>
+                                        <span class="fc-plan-tier-badge">{{ $planBadgeLabels[$idx % 3] }}</span>
+                                    </div>
+
+                                    <div class="fc-plan-pricing-box">
+                                        @if ($plan->plan_type == 'FREE')
+                                            <div class="fc-plan-price-main">
+                                                <span class="fc-price-num">{{ __('messages.lbl_free') }}</span>
+                                            </div>
+                                        @else
+                                            @if (!empty($plan->plan_discount_amount) && $plan->plan_discount_amount > 0 && $plan->plan_discount_amount != $displayAmount)
+                                                <div class="fc-plan-discount-wrap">
+                                                    <span class="fc-plan-original-price">
+                                                        {{ $displayCurrency }} {{ number_format($displayAmount, 0) }}
+                                                    </span>
+                                                    @if (!empty($plan->plan_discount) && $plan->plan_discount > 0)
+                                                        <span class="fc-discount-tag">{{ (float)$plan->plan_discount }}% OFF</span>
+                                                    @endif
+                                                </div>
+                                                <div class="fc-plan-price-main">
+                                                    <span class="fc-price-currency">{{ $displayCurrency }}</span>
+                                                    <span class="fc-price-num">{{ number_format($plan->plan_discount_amount, 2) }}</span>
+                                                    <span class="fc-price-period">/ {{ $plan->validity_days }} {{ __('messages.lbl_days') }}</span>
+                                                </div>
+                                            @else
+                                                <div class="fc-plan-price-main">
+                                                    <span class="fc-price-currency">{{ $displayCurrency }}</span>
+                                                    <span class="fc-price-num">{{ number_format($displayAmount, 2) }}</span>
+                                                    <span class="fc-price-period">/ {{ $plan->validity_days }} {{ __('messages.lbl_days') }}</span>
+                                                </div>
+                                            @endif
+                                        @endif
+                                    </div>
+                                </div>
+
+                                <div class="fc-plan-divider"></div>
+
+                                <div class="fc-plan-features">
+                                    <h4 class="fc-features-title">{{ __('messages.lbl_key_features') }}</h4>
+                                    <ul class="fc-features-list">
+                                        <li class="fc-feature-item {{ $plan->view_profile_limit > 0 ? 'is-available' : 'is-disabled' }}">
+                                            <span class="fc-feature-icon">
+                                                @if ($plan->view_profile_limit > 0)
+                                                    <i class="bx bx-check"></i>
+                                                @else
+                                                    <i class="bx bx-x"></i>
+                                                @endif
+                                            </span>
+                                            <span class="fc-feature-text">
+                                                {{ __('messages.lbl_allowed_viewed_profile') }}
+                                                <strong>&middot; {{ $plan->view_profile_limit }}</strong>
+                                            </span>
+                                        </li>
+
+                                        <li class="fc-feature-item {{ $plan->interests_limit > 0 ? 'is-available' : 'is-disabled' }}">
+                                            <span class="fc-feature-icon">
+                                                @if ($plan->interests_limit > 0)
+                                                    <i class="bx bx-check"></i>
+                                                @else
+                                                    <i class="bx bx-x"></i>
+                                                @endif
+                                            </span>
+                                            <span class="fc-feature-text">
+                                                {{ __('messages.lbl_allowed_interests') }}
+                                                <strong>&middot; {{ $plan->interests_limit }}</strong>
+                                            </span>
+                                        </li>
+
+                                        <li class="fc-feature-item {{ $plan->contact_views_limit > 0 ? 'is-available' : 'is-disabled' }}">
+                                            <span class="fc-feature-icon">
+                                                @if ($plan->contact_views_limit > 0)
+                                                    <i class="bx bx-check"></i>
+                                                @else
+                                                    <i class="bx bx-x"></i>
+                                                @endif
+                                            </span>
+                                            <span class="fc-feature-text">
+                                                {{ __('messages.lbl_allowed_contact_views') }}
+                                                <strong>&middot; {{ $plan->contact_views_limit }}</strong>
+                                            </span>
+                                        </li>
+
+                                        <li class="fc-feature-item {{ $plan->can_chat ? 'is-available' : 'is-disabled' }}">
+                                            <span class="fc-feature-icon">
+                                                @if ($plan->can_chat)
+                                                    <i class="bx bx-check"></i>
+                                                @else
+                                                    <i class="bx bx-x"></i>
+                                                @endif
+                                            </span>
+                                            <span class="fc-feature-text">
+                                                {{ __('messages.lbl_live_chat') }}
+                                            </span>
+                                        </li>
+
+                                        @if ($voiceApproved)
+                                            <li class="fc-feature-item {{ $plan->audio_minutes_limit > 0 ? 'is-available' : 'is-disabled' }}">
+                                                <span class="fc-feature-icon">
+                                                    @if ($plan->audio_minutes_limit > 0)
+                                                        <i class="bx bx-check"></i>
+                                                    @else
+                                                        <i class="bx bx-x"></i>
+                                                    @endif
+                                                </span>
+                                                <span class="fc-feature-text">
+                                                    {{ __('messages.lbl_audio_calls') }}
+                                                    @if ($plan->audio_minutes_limit > 0)
+                                                        <strong>&middot; {{ $plan->audio_minutes_limit }} min</strong>
+                                                    @endif
+                                                </span>
+                                            </li>
+                                        @endif
+
+                                        @if ($videoApproved)
+                                            <li class="fc-feature-item {{ $plan->video_minutes_limit > 0 ? 'is-available' : 'is-disabled' }}">
+                                                <span class="fc-feature-icon">
+                                                    @if ($plan->video_minutes_limit > 0)
+                                                        <i class="bx bx-check"></i>
+                                                    @else
+                                                        <i class="bx bx-x"></i>
+                                                    @endif
+                                                </span>
+                                                <span class="fc-feature-text">
+                                                    {{ __('messages.lbl_video_calls') }}
+                                                    @if ($plan->video_minutes_limit > 0)
+                                                        <strong>&middot; {{ $plan->video_minutes_limit }} min</strong>
+                                                    @endif
+                                                </span>
+                                            </li>
+                                        @endif
+
+                                        @if (_getConstant('AI_MODE') == 'Enabled')
+                                            <li class="fc-feature-item {{ $plan->ai_interest ? 'is-available' : 'is-disabled' }}">
+                                                <span class="fc-feature-icon">
+                                                    @if ($plan->ai_interest)
+                                                        <i class="bx bx-check"></i>
+                                                    @else
+                                                        <i class="bx bx-x"></i>
+                                                    @endif
+                                                </span>
+                                                <span class="fc-feature-text">
+                                                    {{ __('messages.lbl_send_auto_ai_interest') }}
+                                                </span>
+                                            </li>
+                                        @endif
+                                    </ul>
+                                </div>
+
+                                <div class="fc-plan-action">
+                                    <a href="{{ route('web.membershipPlan.checkout', $plan->id) }}"
+                                        class="btn-fc-plan-cta {{ $isPopular ? 'btn-fc-plan-featured' : '' }}">
+                                        <span>{{ __('messages.lbl_buy_now') }}</span>
+                                        <i class="bx bx-right-arrow-alt"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        @php $idx++; @endphp
+                    @endforeach
+                </div>
+
+                <!-- Assisted Matchmaking Callback Box -->
+                <div class="fc-callback-container mt-4 pt-2 wow fadeInUp" data-wow-delay="0.3s">
+                    @include('web.membershipPlan.callback_box')
+                </div>
+
+            </div>
+        </section>
+    @endif
+    {{-- Membership Plans Section End --}}
+
+    {{-- Upcoming Events Section Start --}}
+    @php
+        $upcomingEvents = \App\Models\Event::where('status', 'APPROVED')
+            ->whereRaw("TIMESTAMP(event_date, COALESCE(event_time, '23:59:59')) >= ?", [now()])
+            ->orderBy('event_date', 'asc')
+            ->take(3)
+            ->get();
+    @endphp
+
+    @if ($upcomingEvents->isNotEmpty())
+        <section class="fc-events-section position-relative" id="upcoming-events">
+            <div class="fc-events-glow" aria-hidden="true"></div>
+
+            <div class="container position-relative">
+
+                <!-- Section Header with Right-Side 'View All' Button -->
+                <div class="fc-events-header-wrap wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="d-flex align-items-end justify-content-between flex-wrap gap-3">
+                        <div>
+                            <h2 class="fc-events-title">
+                                {{ __('messages.lbl_events') }}
+                            </h2>
+                        </div>
+                        <div>
+                            <a href="{{ route('web.event.index') }}" class="btn-fc-view-all">
+                                <span>{{ __('messages.lbl_view_all') }}</span>
+                                <iconify-icon icon="solar:arrow-right-linear"></iconify-icon>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Events Grid (Next 3 Expiring Events) -->
+                <div class="row g-4">
+                    @foreach ($upcomingEvents as $evtIdx => $event)
+                        @php
+                            $eventImage = _assetUrl('upload_path.WEB_NO_IMAGE_FOUND');
+                            if (!blank($event->image) && _checkStorageFileExists('upload_path.EVENT_IMAGE_URL', $event->image)) {
+                                $eventImage = _assetUrl('upload_path.EVENT_IMAGE_URL') . $event->image;
+                            }
+                            $eventTimestamp = strtotime($event->event_date);
+                            $eventDay = date('d', $eventTimestamp);
+                            $eventMonth = date('M', $eventTimestamp);
+                        @endphp
+                        <div class="col-lg-4 col-md-6">
+                            <div class="fc-event-card wow fadeInUp" data-wow-delay="{{ 0.15 + ($evtIdx * 0.1) }}s">
+                                
+                                <!-- Event Image & Floating Badges -->
+                                <div class="fc-event-media">
+                                    <a href="{{ route('web.event.show', $event->id) }}" aria-label="{{ $event->title }}">
+                                        <img src="{{ $eventImage }}" alt="{{ $event->title }}" class="fc-event-img">
+                                    </a>
+
+                                    <!-- Date Chip -->
+                                    <div class="fc-event-date-chip">
+                                        <span class="fc-event-date-day">{{ $eventDay }}</span>
+                                        <span class="fc-event-date-month">{{ $eventMonth }}</span>
+                                    </div>
+
+                                    <!-- Price / Free Badge -->
+                                    <div class="fc-event-price-chip">
+                                        @if (empty($event->ticket_price) || (float) $event->ticket_price == 0)
+                                            {{ __('messages.lbl_free') }}
+                                        @else
+                                            {{ $event->currency ?? '₹' }} {{ number_format((float) $event->ticket_price, 0) }}
+                                        @endif
+                                    </div>
+                                </div>
+
+                                <!-- Card Content Body -->
+                                <div class="fc-event-body">
+                                    <div class="fc-event-meta-bar">
+                                        <span class="fc-event-meta-item">
+                                            <iconify-icon icon="solar:calendar-linear"></iconify-icon>
+                                            <span>{{ _displayDate($event->event_date, 'j F, Y') }}</span>
+                                        </span>
+                                        @if (!empty($event->event_time))
+                                            <span class="fc-event-meta-item">
+                                                <iconify-icon icon="solar:clock-circle-linear"></iconify-icon>
+                                                <span>{{ _displayDate($event->event_time, 'h:i A') }}</span>
+                                            </span>
+                                        @endif
+                                    </div>
+
+                                    <h3 class="fc-event-card-title">
+                                        <a href="{{ route('web.event.show', $event->id) }}">
+                                            {{ $event->title }}
+                                        </a>
+                                    </h3>
+
+                                    <div class="fc-event-footer">
+                                        <span class="fc-event-venue" title="{{ $event->venue ?? '' }}">
+                                            <iconify-icon icon="solar:map-point-wave-linear"></iconify-icon>
+                                            <span>{{ !empty($event->venue) ? $event->venue : __('messages.lbl_online_event') }}</span>
+                                        </span>
+
+                                        <a href="{{ route('web.event.show', $event->id) }}" class="btn-fc-event-link">
+                                            <span>{{ __('messages.lbl_explore_now') }}</span>
+                                            <iconify-icon icon="solar:arrow-right-linear"></iconify-icon>
+                                        </a>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+
+            </div>
+        </section>
+    @endif
+    {{-- Upcoming Events Section End --}}
+
     <!-- Why Choose Us section start  -->
     <section class="why-us-section" id="why-us">
         <div class="container position-relative">
@@ -1093,102 +2445,6 @@
         </div>
     </section>
 
-    <!-- Global Christian Reach section start -->
-    <section class="fc-reach-section" id="global-reach">
-        <div class="fc-reach-glow" aria-hidden="true"></div>
-        <div class="container position-relative">
-
-            <!-- Inner Premium Card Wrap -->
-            <div class="fc-reach-banner-card text-center wow fadeInUp" data-wow-delay="0.15s">
-
-                <!-- Header -->
-                <div class="fc-reach-header text-center mb-4">
-                    <div class="fc-pill-badge mb-3">
-                        <span class="fc-badge-cross">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
-                                stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
-                                stroke-linejoin="round">
-                                <path d="M12 2v20M7 8h10" />
-                            </svg>
-                        </span>
-                        <span>{{ $data['reach_badge'] ?? '' }}</span>
-                    </div>
-
-                    <h2 class="fc-reach-title">
-                        {!! $data['reach_title'] ?? '' !!}
-                    </h2>
-
-                    <p class="fc-reach-desc mx-auto">
-                        {!! $data['reach_subtitle'] ?? '' !!}
-                    </p>
-                </div>
-
-                <!-- 4 Stat Cards Across Full Width -->
-                <div class="row g-3 g-lg-4 justify-content-center">
-
-                    <!-- Stat 1: Traditions -->
-                    <div class="col-xl-3 col-lg-3 col-md-6">
-                        <div class="fc-stat-card">
-                            <div class="fc-stat-icon-wrap orb-reach-1">
-                                <i class="bx bx-church"></i>
-                            </div>
-                            <div class="fc-stat-body">
-                                <h3 class="fc-stat-number">{{ $data['reach_stat1_number'] ?? '' }}</h3>
-                                <h4 class="fc-stat-label">{{ $data['reach_stat1_label'] ?? '' }}</h4>
-                                <p class="fc-stat-sub">{{ $data['reach_stat1_sub'] ?? '' }}</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Stat 2: Countries -->
-                    <div class="col-xl-3 col-lg-3 col-md-6">
-                        <div class="fc-stat-card">
-                            <div class="fc-stat-icon-wrap orb-reach-2">
-                                <i class="bx bx-world"></i>
-                            </div>
-                            <div class="fc-stat-body">
-                                <h3 class="fc-stat-number">{{ $data['reach_stat2_number'] ?? '' }}</h3>
-                                <h4 class="fc-stat-label">{{ $data['reach_stat2_label'] ?? '' }}</h4>
-                                <p class="fc-stat-sub">{{ $data['reach_stat2_sub'] ?? '' }}</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Stat 3: Cities & Parishes -->
-                    <div class="col-xl-3 col-lg-3 col-md-6">
-                        <div class="fc-stat-card">
-                            <div class="fc-stat-icon-wrap orb-reach-3">
-                                <i class="bx bx-buildings"></i>
-                            </div>
-                            <div class="fc-stat-body">
-                                <h3 class="fc-stat-number">{{ $data['reach_stat3_number'] ?? '' }}</h3>
-                                <h4 class="fc-stat-label">{{ $data['reach_stat3_label'] ?? '' }}</h4>
-                                <p class="fc-stat-sub">{{ $data['reach_stat3_sub'] ?? '' }}</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Stat 4: Languages -->
-                    <div class="col-xl-3 col-lg-3 col-md-6">
-                        <div class="fc-stat-card">
-                            <div class="fc-stat-icon-wrap orb-reach-4">
-                                <i class="bx bx-conversation"></i>
-                            </div>
-                            <div class="fc-stat-body">
-                                <h3 class="fc-stat-number">{{ $data['reach_stat4_number'] ?? '' }}</h3>
-                                <h4 class="fc-stat-label">{{ $data['reach_stat4_label'] ?? '' }}</h4>
-                                <p class="fc-stat-sub">{{ $data['reach_stat4_sub'] ?? '' }}</p>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-    </section>
-
     <!-- Best way to manage section / Mobile App Experience -->
     <section class="app-section" id="mobile-app">
         <div class="container">
@@ -1308,84 +2564,6 @@
 
                 </div>
             </div>
-        </div>
-    </section>
-
-
-
-    <!-- Christian Community Directory Section Start -->
-    <section class="fc-directory-section" id="community">
-        <div class="fc-directory-glow" aria-hidden="true"></div>
-        <div class="container position-relative">
-
-            <!-- Section Header -->
-            <div class="fc-directory-header text-center wow fadeInUp" data-wow-delay="0.1s">
-                <div class="fc-pill-badge mb-3">
-                    <span class="fc-badge-cross">
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M12 2v20M7 8h10" />
-                        </svg>
-                    </span>
-                    <span>{{ $data['directory_badge'] ?? '' }}</span>
-                </div>
-
-                <h2 class="fc-directory-title">
-                    {!! $data['directory_title'] ?? '' !!}
-                </h2>
-
-                <p class="fc-directory-desc mx-auto">
-                    {!! $data['directory_subtitle'] ?? '' !!}
-                </p>
-            </div>
-
-            <div class="row g-4 mt-2">
-                @foreach ($matrimonyPagesData as $type => $items)
-                    <div class="col-lg-6">
-                        <div class="fc-dir-card wow fadeInUp" data-wow-delay="0.15s">
-                            <div class="fc-dir-card-header">
-                                <div class="fc-dir-icon orb-dir-1">
-                                    <i class="bx bx-church"></i>
-                                </div>
-                                <div>
-                                    <h4 class="fc-dir-name">{{ $items['label'] }}</h4>
-                                </div>
-                            </div>
-                            <div class="fc-tag-cloud">
-                                @foreach ($items['items'] as $item)
-                                    <a href="{{ route('web.matrimony.index', $item['slug']) }}"
-                                        class="fc-dir-tag">{{ $item['matrimony_name'] ?: $item['matrimony_name_old'] ?? 'N/A' }}</a>
-                                @endforeach
-                                <a href="{{ route('web.matrimony.moreDetails', Str::slug($type)) }}"
-                                    class="fc-dir-tag-more">{{ __('messages.lbl_more_details') }} →</a>
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
-            </div>
-
-            <!-- Bottom Interactive Search Banner -->
-            <div class="fc-dir-bottom-banner mt-5 wow fadeInUp" data-wow-delay="0.35s">
-                <div class="d-flex flex-wrap align-items-center justify-content-between gap-4">
-                    <div class="d-flex align-items-center gap-3">
-                        <div class="fc-dir-cta-icon">
-                            <i class="bx bx-filter-alt"></i>
-                        </div>
-                        <div>
-                            <h5 class="fc-dir-cta-title">{{ $data['directory_bottom_title'] ?? '' }}</h5>
-                            <p class="fc-dir-cta-sub mb-0">{{ $data['directory_bottom_desc'] ?? '' }}</p>
-                        </div>
-                    </div>
-                    <div class="d-flex align-items-center gap-2">
-                        <a href="{{ route('web.search.type', ['type' => 'advance-search']) }}"
-                            class="btn-fc-pill-primary">
-                            <span>{{ $data['directory_bottom_cta_text'] ?? '' }}</span>
-                            <i class="bx bx-right-arrow-alt"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
         </div>
     </section>
 
@@ -1690,6 +2868,23 @@
                     }
                 });
             });
+        });
+
+        // Read more / read less toggle for plan descriptions
+        $(document).on('click', '.read-toggle', function() {
+            var $box = $(this).closest('.read-more-box');
+            var $short = $box.find('.short-text');
+            var $full = $box.find('.full-text');
+
+            if ($full.hasClass('d-none')) {
+                $short.addClass('d-none');
+                $full.removeClass('d-none');
+                $(this).text("{{ __('messages.lbl_read_less') }}");
+            } else {
+                $full.addClass('d-none');
+                $short.removeClass('d-none');
+                $(this).text("{{ __('messages.lbl_read_more') }}");
+            }
         });
     </script>
 
