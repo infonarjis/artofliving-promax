@@ -817,7 +817,9 @@ function _defaultCountryCode($defaultCountryCode = '+91')
     $cacheKey = 'default_country_code_dropdown';
     return Cache::rememberForever($cacheKey, function () use ($defaultCountryCode) {
         $countryCodes = CountryMaster::active()
+            ->whereNotNull('country_code')
             ->orderBy('country_code')
+            ->distinct()
             ->pluck('country_code');
         $html = '';
         foreach ($countryCodes as $code) {

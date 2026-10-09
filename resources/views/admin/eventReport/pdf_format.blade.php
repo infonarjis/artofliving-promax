@@ -173,9 +173,9 @@
             <colgroup>
                 <col style="width: 11%;">
                 <col style="width: 10%;">
+                <col style="width: 10%;">
                 <col style="width: 12%;">
                 <col style="width: 20%;">
-                <col style="width: 10%;">
                 <col style="width: 9%;">
                 <col style="width: 9%;">
                 <col style="width: 9%;">
@@ -192,10 +192,10 @@
                 @foreach ($resultDataArr as $key => $value)
                     <tr>
                         <td>{{ _displayNotAvailable($value->event->title) }}</td>
+                        <td>{{ _displayNotAvailable($value->matri_id) }}</td>
                         <td>{{ _displayNotAvailable($value->name) }}</td>
                         <td>{{ _displayNotAvailable($value->mobile) }}</td>
                         <td>{{ _displayNotAvailable($value->email) }}</td>
-                        <td>{{ _displayNotAvailable($value->hear_about_us) }}</td>
                         <td>{{ _displayNotAvailable($value->tickets_qty) }}</td>
                         <td>{{ _displayNotAvailable($value->grand_total) }}</td>
                         <td>{{ _displayNotAvailable($value->payment_mode) }}</td>

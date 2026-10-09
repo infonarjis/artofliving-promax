@@ -304,10 +304,11 @@ class EventReportController extends Controller
             }
             $exportData[] = [
                 'Event Name'      => $row->event->title ?? '',
+                'Matri Id'      => $row->matri_id ?? '',
                 'Name'         => $row->name ?? '',
-                'Mobile No'         => $row->mobile ?? '',
+                'Mobile No' => '"' . $row->mobile ?? '' . '"',
                 'Email'         => $row->email ?? '',
-                'Hear About Us'         => $row->hear_about_us ?? '',
+                // 'Hear About Us'         => $row->hear_about_us ?? '',
                 'Ticket Quantity'         => $row->tickets_qty ?? '',
                 'Grand Total'         => $row->grand_total ?? '',
                 'Payment Mode'         => $row->payment_mode ?? '',
@@ -315,7 +316,7 @@ class EventReportController extends Controller
             ];
         }
         ## Heading :
-        $heading = ['Event Name', 'Name', 'Mobile No', 'Email', 'Hear About Us', 'Ticket Quantity', 'Grand Total', 'Payment Mode', 'Registered On'];
+        $heading = ['Event Name', 'Matri Id', 'Name', 'Mobile No', 'Email', 'Ticket Quantity', 'Grand Total', 'Payment Mode', 'Registered On'];
 
         $currentDate = _getCurrentDate('d-m-Y H:i:s');
         $fileName = 'Event Report (' . $currentDate . ')';
@@ -327,6 +328,7 @@ class EventReportController extends Controller
                 'heading' => $heading,
             ];
             $viewPath = _getConstant('dir_path.ADMIN_DIR_PATH') . $this->directoryName . '/pdf_format';
+            // return view($viewPath, $dataArr);exit;
             $pdf = PDF::loadView($viewPath, $dataArr)->setOptions(['defaultFont' => 'Helvetica', 'isRemoteEnabled' => true, 'chroot' => public_path()])->setPaper('A4', 'potrait');
             return $pdf->download($fileName . '.pdf');
         } elseif ($postData['downloadFormat'] == 'CSV') {

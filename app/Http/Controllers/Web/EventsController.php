@@ -71,7 +71,25 @@ class EventsController extends Controller
         ];
         $seoManagement = SeoService::getPageSeo('success-story-detail', $seoData);
 
-        return view(_getConstant('dir_path.WEB_DIR_PATH') . '.events.show', compact('event', 'seoManagement'));
+        ## Current Login User :
+        $authUser = auth()->user();
+        $allUsersRegisteredMatriId = [];
+        if ($authUser) {
+            // Check if the user has already registered for any of the displayed events
+            $alreadyRegistered = EventRegister::where('event_id', $event->id)
+                ->where(function ($query) use ($authUser) {
+                    $query->where('member_id', $authUser->id)
+                        ->orWhere('matri_id', $authUser->matri_id);
+                })
+                ->first();
+            if ($alreadyRegistered) {
+                $allUsersRegisteredMatriId = EventRegister::where('event_id', $event->id)
+                    ->pluck('matri_id')
+                    ->toArray();
+            }
+        }
+
+        return view(_getConstant('dir_path.WEB_DIR_PATH') . '.events.show', compact('event', 'seoManagement', 'allUsersRegisteredMatriId'));
     }
 
     /*
@@ -112,7 +130,7 @@ class EventsController extends Controller
     public function storeCheckout(Request $request, $id)
     {
         $event = $this->getEventOrFail($id);
-
+        $user = auth()->user();
         $validator = Validator::make($request->all(), [
             'name'          => 'required|string|max:255',
             'email'         => 'required|email|max:255',
@@ -143,6 +161,8 @@ class EventsController extends Controller
         // Store registration (pending payment)
         $registration = EventRegister::create([
             'event_id'       => $event->id,
+            'member_id'      => $user->id ?? null,
+            'matri_id'       => $user->matri_id ?? null,
             'name'           => $request->name,
             'email'          => $request->email,
             'mobile'         => ($request->country_code ?? '') . $request->mobile,

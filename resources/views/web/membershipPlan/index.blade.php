@@ -48,7 +48,7 @@
 
                             </div>
                             <div class="col-lg-2 col-12"></div>
-
+                        @endif
                         </div>
                         @php
                             $voiceApproved = $configArr['zego_voice_call_setting'] === 'APPROVED';

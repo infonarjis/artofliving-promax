@@ -1413,4 +1413,5 @@ return [
     'lbl_request_call_back_btn'        => 'Request a call back',
     'lbl_callback_sub' => 'Our relationship manager will personally call you and guide you to the right plan.',
     'lbl_request_call_back_msg' => 'Thank you! Our team will call you back shortly.',
+    'lbl_registered_members' => 'Registered Attendees',
 ];

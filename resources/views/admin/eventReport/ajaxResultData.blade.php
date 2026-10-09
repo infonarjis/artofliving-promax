@@ -7,7 +7,7 @@
             <div class="right_content_MDivd w-100">
                 <div class="top_usenr_btnsgroups d-block d-lg-flex align-items-center justify-content-between">
                     <div class="user_name_aprv d-flex align-items-center gap-3">
-                        <h4><span class="fw-semibold w-25">Event Name</span>: {{ $value->event->title }}</h4>
+                        <h4>{{ $value->matri_id }}</h4>
                     </div>
                 </div>
                 <div class="btm_users_details">
