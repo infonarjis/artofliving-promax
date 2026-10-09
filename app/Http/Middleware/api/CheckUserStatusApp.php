@@ -19,7 +19,7 @@ class CheckUserStatusApp
             ], 401);
         }
 
-        if ($user->trashed() || $user->status !== 'APPROVED') {
+        if ($user->trashed() || $user->status == 'Suspended') {
             $request->user()->currentAccessToken()->delete();
             return response()->json([
                 'code' => 401,
