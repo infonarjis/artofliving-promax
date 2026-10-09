@@ -72,7 +72,7 @@ class EventsController extends Controller
         $seoManagement = SeoService::getPageSeo('success-story-detail', $seoData);
 
         ## Current Login User :
-        $authUser = auth()->user();
+        $authUser = auth()->guard('web')->user();
         $allUsersRegisteredMatriId = [];
         if ($authUser) {
             // Check if the user has already registered for any of the displayed events
@@ -151,7 +151,7 @@ class EventsController extends Controller
     public function storeCheckout(Request $request, $id)
     {
         $event = $this->getEventOrFail($id);
-        $user = auth()->user();
+        $user = auth()->guard('web')->user();
         $validator = Validator::make($request->all(), [
             'name'          => 'required|string|max:255',
             'email'         => 'required|email|max:255',

@@ -139,3 +139,19 @@ import sheet required for sample
 
 
 mysql -u root -p artofliving_old < "C:\Users\Narjis\Downloads\artofliving_megamatrimony.sql"
+
+-----------------------------------------------------------
+
+Testing Server Details :
+-----------------------
+Front End Url : http://15.206.123.125/promax/
+
+Admin End Url : http://15.206.123.125/promax/
+    Username  : info@artoflivingmatrimony.org
+    Password  : artofliving@445
+
+
+- Check Mobile Popup otp firebase
+- Percentage issue in dashboard :
+- Event Issue : Done
+- Event Download Invoice Issue :

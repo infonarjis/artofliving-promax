@@ -714,6 +714,22 @@ function _getAdminFilterWhereStr($filterData, $table = 'registers')
             $returnStr .= " AND ( $table.franchise_assign_id in ( '$franchiseIdStr') ) ";
         }
     }
+    if (isset($filterData['art_of_living_teacher']) && !blank($filterData['art_of_living_teacher'])) {
+        $artOfLivingTeacher = $filterData['art_of_living_teacher'];
+        $artOfLivingTeacher = _trimArrRemove($artOfLivingTeacher);
+        if (isset($artOfLivingTeacher) && count($artOfLivingTeacher) > 0) {
+            $artOfLivingTeacherStr = implode("','", $artOfLivingTeacher);
+            $returnStr .= " AND ( $table.Yesart_of_living_teacher in ( '$artOfLivingTeacherStr') ) ";
+        }
+    }
+    if (isset($filterData['have_art_of_living_program']) && !blank($filterData['have_art_of_living_program'])) {
+        $haveArtOfLivingProgram = $filterData['have_art_of_living_program'];
+        $haveArtOfLivingProgram = _trimArrRemove($haveArtOfLivingProgram);
+        if (isset($haveArtOfLivingProgram) && count($haveArtOfLivingProgram) > 0) {
+            $haveArtOfLivingProgramStr = implode("','", $haveArtOfLivingProgram);
+            $returnStr .= " AND ( $table.have_art_of_living_program in ( '$haveArtOfLivingProgramStr') ) ";
+        }
+    }
     return $returnStr;
 }
 

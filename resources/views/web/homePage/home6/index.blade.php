@@ -79,7 +79,7 @@
         }
 
         .fc-pricing-title {
-            font-family: 'Playfair Display', Georgia, serif;
+            /* font-family: 'Playfair Display', Georgia, serif; */
             font-size: 2.35rem;
             font-weight: 700;
             color: #ffffff;
@@ -151,7 +151,7 @@
 
         /* Plan Header */
         .fc-plan-name {
-            font-family: 'Playfair Display', Georgia, serif;
+            /* font-family: 'Playfair Display', Georgia, serif; */
             font-size: 1.45rem;
             font-weight: 700;
             color: #ffffff;
@@ -209,7 +209,7 @@
         }
 
         .fc-price-num {
-            font-family: 'Playfair Display', Georgia, serif;
+            /* font-family: 'Playfair Display', Georgia, serif; */
             font-size: 2.2rem;
             font-weight: 800;
             color: #ffffff;
@@ -914,7 +914,7 @@
         }
 
         .fc-events-title {
-            font-family: 'Playfair Display', Georgia, serif;
+            /* font-family: 'Playfair Display', Georgia, serif; */
             font-size: 2.25rem;
             font-weight: 700;
             color: #ffffff;

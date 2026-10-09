@@ -99,104 +99,6 @@
                         <iconify-icon icon="ph:squares-four-fill"></iconify-icon> {{ __('messages.lbl_dashboard') }}
                     </a>
                 </li>
-                <!-- Search Dropdown Menu -->
-                <li class="nav-item-dropdown {{ request()->routeIs('web.search.*') ? 'nav-active' : '' }}"
-                    id="nav-search-wrapper">
-                    <button type="button" class="nav-link-btn dropdown-toggle-btn" id="nav-search-btn"
-                        aria-expanded="false" aria-haspopup="true">
-                        <iconify-icon icon="ph:magnifying-glass-bold"></iconify-icon> {{ __('messages.lbl_search') }}
-                        <iconify-icon icon="ph:caret-down-bold" class="nav-caret"></iconify-icon>
-                    </button>
-                    <!-- Search Dropdown Popover -->
-                    <div class="dropdown-popover search-popover" id="search-dropdown" role="menu">
-                        <div class="popover-header">
-                            <div class="popover-header-title-wrap">
-                                <span class="popover-title">{{ __('messages.lbl_search_profiles') }}</span>
-                                <span
-                                    class="popover-header-sub">{{ __('messages.lbl_find_matches_by_custom_filters') }}</span>
-                            </div>
-                            <span class="popover-badge-accent">{{ __('messages.lbl_4_modes') }}</span>
-                        </div>
-
-                        <div class="matches-popover-list">
-                            <a href="{{ route('web.search.type', ['type' => 'quick-search']) }}"
-                                class="popover-item-link {{ _navActiveParam('web.search.type', 'type', 'quick-search') }}"
-                                role="menuitem">
-                                <div class="item-icon-box icon-blue">
-                                    <iconify-icon icon="ph:magnifying-glass-fill"></iconify-icon>
-                                </div>
-                                <div class="item-body">
-                                    <div class="item-top-row">
-                                        <span class="item-name">{{ __('messages.lbl_quick_search') }}</span>
-                                        {{-- <span class="item-pill-badge">{{ __('messages.lbl_fast_filter') }}</span> --}}
-                                    </div>
-                                    <span class="item-subtext">{{ __('messages.lbl_quick_search_description') }}</span>
-                                </div>
-                                <iconify-icon icon="ph:caret-right-bold" class="item-chevron"></iconify-icon>
-                            </a>
-
-                            <a href="{{ route('web.search.type', ['type' => 'advance-search']) }}"
-                                class="popover-item-link {{ _navActiveParam('web.search.type', 'type', 'advance-search') }}"
-                                role="menuitem">
-                                <div class="item-icon-box icon-gold">
-                                    <iconify-icon icon="ph:sliders-horizontal-fill"></iconify-icon>
-                                </div>
-                                <div class="item-body">
-                                    <div class="item-top-row">
-                                        <span class="item-name">{{ __('messages.lbl_advance_search') }}</span>
-                                        <span
-                                            class="item-pill-badge badge-gold">{{ __('messages.lbl_deep_filters') }}</span>
-                                    </div>
-                                    <span class="item-subtext">{{ __('messages.lbl_advance_search_description') }}</span>
-                                </div>
-                                <iconify-icon icon="ph:caret-right-bold" class="item-chevron"></iconify-icon>
-                            </a>
-
-                            <a href="{{ route('web.search.type', ['type' => 'keyword-search']) }}"
-                                class="popover-item-link  {{ _navActiveParam('web.search.type', 'type', 'keyword-search') }}"
-                                role="menuitem">
-                                <div class="item-icon-box icon-purple">
-                                    <iconify-icon icon="ph:text-t-bold"></iconify-icon>
-                                </div>
-                                <div class="item-body">
-                                    <div class="item-top-row">
-                                        <span class="item-name">{{ __('messages.lbl_keyword_search') }}</span>
-                                        {{-- <span class="item-pill-badge">{{ __('messages.lbl_specific') }}</span> --}}
-                                    </div>
-                                    <span
-                                        class="item-subtext">{{ __('messages.lbl_find_profiles_by_interests_words_hobbies') }}</span>
-                                </div>
-                                <iconify-icon icon="ph:caret-right-bold" class="item-chevron"></iconify-icon>
-                            </a>
-
-                            <a href="{{ route('web.search.type', ['type' => 'id-search']) }}"
-                                class="popover-item-link {{ _navActiveParam('web.search.type', 'type', 'id-search') }}"
-                                role="menuitem">
-                                <div class="item-icon-box icon-green">
-                                    <iconify-icon icon="ph:identification-card-fill"></iconify-icon>
-                                </div>
-                                <div class="item-body">
-                                    <div class="item-top-row">
-                                        <span class="item-name">{{ __('messages.lbl_id_search') }}</span>
-                                        {{-- <span class="item-pill-badge badge-green">{{ __('messages.lbl_direct') }}</span> --}}
-                                    </div>
-                                    <span
-                                        class="item-subtext">{{ __('messages.lbl_locate_a_candidate_by_member_profile_id') }}</span>
-                                </div>
-                                <iconify-icon icon="ph:caret-right-bold" class="item-chevron"></iconify-icon>
-                            </a>
-                        </div>
-
-                        <div class="popover-footer">
-                            <a href="{{ route('web.search.type', ['type' => 'quick-search']) }}"
-                                class="popover-footer-btn">
-                                <iconify-icon icon="ph:sliders-bold"></iconify-icon>
-                                <span>{{ __('messages.lbl_open_search_directory') }}</span>
-                                <iconify-icon icon="ph:arrow-right-bold" class="footer-arrow"></iconify-icon>
-                            </a>
-                        </div>
-                    </div>
-                </li>
                 <!-- Activities Dropdown Menu -->
                 <li class="nav-item-dropdown {{ request()->routeIs(
                     'web.expressInterest.index',
@@ -1132,9 +1034,11 @@
                     <div class="user-meta-nav">
                         <span
                             class="user-name-nav">{{ \Illuminate\Support\Str::limit($authUser->fullname, 15, '...') }}</span>
-                        <span class="user-status-nav">
-                            <span class="user-status-dot"></span> {{ __('messages.lbl_vip_member') }}
-                        </span>
+                        @if ($authUser->plan_status == 'Paid')
+                            <span class="user-status-nav">
+                                <span class="user-status-dot"></span> {{ __('messages.lbl_vip_member') }}
+                            </span>
+                        @endif
                     </div>
                     <iconify-icon icon="ph:gear-six-bold" class="nav-settings-icon"></iconify-icon>
                 </div>
@@ -1147,9 +1051,11 @@
                             <div class="profile-header-avatar-wrap">
                                 <img src="{{ $profileImage }}" alt="{{ $authUser->matri_id }}"
                                     class="profile-header-avatar">
-                                <span class="profile-vip-crown" title="{{ __('messages.lbl_vip_member') }}">
-                                    <iconify-icon icon="ph:crown-fill"></iconify-icon>
-                                </span>
+                                @if ($authUser->plan_status == 'Paid')
+                                    <span class="profile-vip-crown" title="{{ __('messages.lbl_vip_member') }}">
+                                        <iconify-icon icon="ph:crown-fill"></iconify-icon>
+                                    </span>
+                                @endif
                             </div>
                             <div class="profile-header-info">
                                 <div class="profile-name-row">
@@ -1171,8 +1077,7 @@
                                 @endif
                             </div>
                         </div>
-                        <a href="{{ route('web.myProfile.index') }}"
-                            class="btn-profile-view-edit">
+                        <a href="{{ route('web.myProfile.index') }}" class="btn-profile-view-edit">
                             <iconify-icon icon="ph:user-circle-bold"></iconify-icon>
                             <span>{{ __('messages.lbl_view_profile') }}</span>
                         </a>

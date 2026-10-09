@@ -469,7 +469,6 @@ Route::group(['prefix' => ''], function (): void {
 
         Route::get('database/payments', [PaymentMigrationController::class, 'payments']);
 
-        Route::get('/database/membership-plan', [MembershipPlanMigrationController::class, 'databaseMigration']);
 
         Route::get('lead-generations', [LeadGenerationMigrationController::class, 'leadGenerations']);
         ## Comment Of lead generation :
@@ -493,9 +492,12 @@ Route::group(['prefix' => ''], function (): void {
         Route::get('staff-roles', [StaffRoleMigrationController::class, 'staffRoles']);
 
         Route::get('express-interest', [ExpressInterestMigrationController::class, 'expressInterest']);
-        // Route::get('site-config', [SiteConfigMigrationController::class, 'siteConfig']);
         Route::get('request-call-back', [RequestCallBackMigrationController::class, 'requestCallBack']);
-
+        
         Route::get('education-master', [EducationMasterMigrationController::class, 'educationMaster']);
+        
+        ## Not required now :
+        // Route::get('site-config', [SiteConfigMigrationController::class, 'siteConfig']);
+        // Route::get('/database/membership-plan', [MembershipPlanMigrationController::class, 'databaseMigration']);
     });
 });

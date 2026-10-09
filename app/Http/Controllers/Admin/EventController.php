@@ -122,7 +122,7 @@ class EventController extends Controller
                 ->paginate($limit, ['*'], 'page', $page);
             foreach($resultArr as $key=>$value){
                 $whereCount = ['event_id' => $value->id];
-                $resultArr[$key]->totalEventCount = EventRegister::where($whereCount)->count();
+                $resultArr[$key]->totalEventCount = EventRegister::paid()->where($whereCount)->count();
             }
             
             $html = view(_getConstant('dir_path.ADMIN_DIR_PATH') . $this->directoryName . '/ajaxResultData', compact('resultArr'));

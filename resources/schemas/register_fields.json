@@ -952,7 +952,7 @@
             "name": "part_art_of_living_teacher",
             "label": "field_lbl_artofliving_partner_teacher",
             "placeholder": "field_lbl_select_artofliving_partner_teacher",
-            "type": "single_select_dropdown",
+            "type": "multi_select_dropdown",
             "options": [
               {
                 "id": "Doesn't Matter",
@@ -974,7 +974,7 @@
             "name": "part_have_art_of_living_program",
             "label": "field_lbl_artofliving_partner_program",
             "placeholder": "field_lbl_select_artofliving_partner_program",
-            "type": "single_select_dropdown",
+            "type": "multi_select_dropdown",
             "options": [
               {
                 "id": "Doesn't Matter",

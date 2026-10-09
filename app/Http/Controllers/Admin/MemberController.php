@@ -3652,6 +3652,15 @@ class MemberController extends Controller
                         'rel_col_val' => 'Franchise'
                     )
                 ),
+                'art_of_living_teacher' => array(
+                    'type' => 'dropdown', 'value_arr' => array('Yes' => 'Yes', 'No' => 'No'),
+                    'label' => 'Art of Living Teacher',
+                    'is_register' => 'yes'
+                ),
+                'have_art_of_living_program' => array(
+                    'type' => 'dropdown', 'value_arr' => array('Yes' => 'Yes', 'No' => 'No'),
+                    'label' => 'Art Of Living Program', 'is_register' => 'yes',
+                ),
             );
 
             ## Check Roles Permission:

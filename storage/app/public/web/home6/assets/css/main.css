@@ -2606,7 +2606,7 @@ select:focus-visible {
   transform: translateX(-50%);
   width: 900px;
   height: 480px;
-  background: radial-gradient(circle, rgba(216, 180, 254, 0.22) 0%, rgba(243, 238, 255, 0.1) 50%, rgba(250, 248, 255, 0) 75%);
+  /* background: radial-gradient(circle, rgba(216, 180, 254, 0.22) 0%, rgba(243, 238, 255, 0.1) 50%, rgba(250, 248, 255, 0) 75%); */
   pointer-events: none;
   z-index: 0;
 }
@@ -2849,7 +2849,7 @@ select:focus-visible {
 }
 
 .fc-store-button:hover {
-  background: rgba(255, 255, 255, 0.18);
+  background: var(--primary-color);
   border-color: #D8B4FE;
   color: #FFFFFF;
   transform: translateY(-3px);

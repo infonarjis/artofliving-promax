@@ -133,7 +133,7 @@ class EventReportController extends Controller
             // Tab-wise counts
             $htmlDataArr['tabCount'] = $this->tabWiseCountData($this->statusTabArr, $whereStr);
             // Data
-            $resultArr = EventRegister::with(['event:id,title'])->when(!empty($whereArr), function ($q) use ($whereArr) {
+            $resultArr = EventRegister::with(['event:id,title'])->paid()->when(!empty($whereArr), function ($q) use ($whereArr) {
                 $q->where($whereArr);
             })
                 ->when(!empty($whereStr), function ($q) use ($whereStr) {
@@ -170,7 +170,7 @@ class EventReportController extends Controller
             } elseif (is_string($strWhere) && trim($strWhere) !== '') {
                 $rawWhereArr[] = $strWhere; // handle separately in query
             }
-            $tabWiseCountData[$tabId] = EventRegister::query()
+            $tabWiseCountData[$tabId] = EventRegister::query()->paid()
                 ->when(!empty($whereArr), function ($q) use ($whereArr) {
                     $q->where($whereArr);
                 })
@@ -282,7 +282,7 @@ class EventReportController extends Controller
 
         $query = EventRegister::with([
             'event:id,title'
-        ]);
+        ])->paid();
         // Proper date filtering (no whereRaw)
         if (!blank($postData['filedownloadDate'])) {
             [$fromDate, $toDate] = explode(' - ', $postData['filedownloadDate']);

@@ -114,7 +114,7 @@
 
     {{-- Footers --}}
     @if (Auth::check() && $configArr['chat_module_design'] == 'popup')
-        {{-- @include(_getConstant('dir_path.WEB_DIR_PATH') . '.chat.footer_chat') --}}
+        @include(_getConstant('dir_path.WEB_DIR_PATH') . '.chat.footer_chat')
     @endif
     {{-- Footers --}}
 
@@ -150,6 +150,7 @@
 
     <script>
         const csrfToken = "{{ csrf_token() }}";
+        const baseUrl   = "{{ rtrim(url('/'), '/') }}";
         var lbl_loading = "{{ __('messages.lbl_loading') }}";
         var lbl_read_more = "{{ __('messages.lbl_read_more') }}";
         var lbl_read_less = "{{ __('messages.lbl_read_less') }}";

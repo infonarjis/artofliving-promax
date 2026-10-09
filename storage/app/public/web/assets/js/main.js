@@ -1604,10 +1604,23 @@ $(document).ready(function () {
 $(document).on('click', function (e) {
   const $notification = $('.notification-design');
   const $collapse = $('#notificationCollapse');
-  if (!$notification.is(e.target) && $notification.has(e.target).length === 0) {
-    $collapse.collapse('hide');
+
+  if (
+    !$notification.is(e.target) &&
+    $notification.has(e.target).length === 0
+  ) {
+    const collapseElement = $collapse[0];
+
+    if (collapseElement && typeof bootstrap !== 'undefined') {
+      const collapseInstance =
+        bootstrap.Collapse.getOrCreateInstance(collapseElement);
+
+      collapseInstance.hide();
+    }
   }
+
 });
+
 
 // New Dashboard Code :
 document.addEventListener('DOMContentLoaded', () => {

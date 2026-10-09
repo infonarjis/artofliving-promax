@@ -149,6 +149,9 @@ class CommonRequestController extends Controller
 
                 'enable_ai_matchmaking'         => false,
                 'enable_ai_bio_generator'       => false,
+
+                'android_topic'                 => _getConstant('topic_notification.BULK_NOTIFICATION_TOPIC_ANDROID'),
+                'ios_topic'                     => _getConstant('topic_notification.BULK_NOTIFICATION_TOPIC_IOS'),
             ];
 
             foreach (AppThemeSettingDefinitions::booleanKeys() as $key) {

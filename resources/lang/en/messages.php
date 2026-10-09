@@ -469,7 +469,7 @@ return [
     'msg_account_deactivated' => 'Your account has been deactivated. Please contact the administrator.',
     'msg_please_wait_before_requesting_a_new_otp' => 'Please wait before requesting a new OTP.',
     'msg_otp_resent_successfully' => 'OTP resent successfully.',
-    'msg_invalid_or_expired_otp' => 'Invalid or expired OTP.',
+    'msg_invalid_or_expired_otp' => 'Invalid or expired OTP. Please try again.',
     'msg_please_enter_complete_6_digit_otp' => 'Please enter complete 6 digit OTP.',
     'msg_call_history_saved_minutes_updated' => 'Call history saved & minutes updated',
     'msg_your_interest_has_been_shared_with_this_member' => 'Your interest has been shared with this member.',
