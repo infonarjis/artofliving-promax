@@ -8,6 +8,12 @@
         $countryCode = $mobile[0];
         $mobileNumber = $mobile[1];
     }
+
+    // Fallback Firebase web config (window.FIREBASE_WEB_CONFIG from the layout is preferred)
+    $firebaseConfig = _getSiteSetting()['firebase_configuration'] ?? null;
+    if (is_string($firebaseConfig)) {
+        $firebaseConfig = json_decode($firebaseConfig, true) ?: null;
+    }
 @endphp
 <div class="customsmallmodel_light modal fade" id="mobileVerificationModal" tabindex="-1"
     aria-labelledby="mobileVerificationModalLabel" aria-hidden="true">
@@ -48,6 +54,9 @@
                         </div>
                     </div>
                 </div>
+
+                {{-- Required for Firebase invisible reCAPTCHA (non +91 numbers) --}}
+                <div id="recaptcha-container"></div>
             </div>
             <div class="modal-buttonsGroup d-flex justify-content-end gap-3 px-3 px-lg-4 pb-4 mt-4">
                 <button type="button"
@@ -76,7 +85,8 @@
                             <span class="demo-otp-title">{{ __('messages.lbl_demo_mode') }}</span>
                             <span class="demo-otp-msg">
                                 {{ __('messages.msg_use_demo_otp') }}
-                                <strong class="demo-otp-code" id="demoOtpCode">{{ _getConstant('DEMO_CREDENTIALS.demo_otp') }}</strong>
+                                <strong class="demo-otp-code"
+                                    id="demoOtpCode">{{ _getConstant('DEMO_CREDENTIALS.demo_otp') }}</strong>
                             </span>
                         </div>
                         <button type="button" class="demo-otp-fill" id="fillDemoOtp">
@@ -112,24 +122,148 @@
 </div>
 
 @push('scripts')
+    {{-- <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script> --}}
+    {{-- <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-messaging-compat.js"></script> --}}
     <script>
-        // Generate otp btn :
-        $(document).on('click', '.generate-otp-btn', function() {
-            $.post("{{ route('web.mobile.generateOtp') }}", {
-                _token: '{{ csrf_token() }}'
-            }, function(res) {
-                showToastMessage('success', res.message);
-                if (res.status) {
-                    $('#mobileVerificationModal').modal('hide');
-                    $('#OTPViewmodal').modal('show');
-                }
-            });
-        });
+        let currentMethod = 'sms'; // 'sms' | 'firebase'
+        let firebasePhone = null; // E.164, e.g. +12025550123
+        let confirmationResult = null;
+        let recaptchaVerifier = null;
 
         let resendSeconds = 30;
         let resendInterval = null;
 
+        const generateBtnText = '{{ __('messages.lbl_generate_otp') }}';
+        const FIREBASE_SDK_VERSION = '10.12.2';
+        const serverFirebaseConfig = @json($firebaseConfig ?? []);
+
+        /* =========================================================
+           FIREBASE HELPERS
+        ========================================================= */
+        function getFirebaseConfig() {
+            window.FIREBASE_WEB_CONFIG = {
+                apiKey: @json('AIzaSyBXlbX73xVzqFPoopL-WXWaxdtPqhXNKcU'),
+                authDomain: 'art-of-living-matrimony.firebaseapp.com',
+                databaseURL: 'https://art-of-living-matrimony-default-rtdb.firebaseio.com',
+                projectId: 'art-of-living-matrimony',
+                storageBucket: 'art-of-living-matrimony.firebasestorage.app',
+                messagingSenderId: '317171670340',
+                appId: '1:317171670340:web:029b1a615c9d5d98984b11',
+                measurementId: 'G-GGP5FYTEMW'
+            };
+            return window.FIREBASE_WEB_CONFIG || serverFirebaseConfig || {};
+        }
+
+        function loadScript(src) {
+            return new Promise(function(resolve, reject) {
+                const s = document.createElement('script');
+                s.src = src;
+                s.onload = resolve;
+                s.onerror = reject;
+                document.head.appendChild(s);
+            });
+        }
+
+        // This popup can appear on any logged-in page, so load the SDK on demand if the layout didn't.
+        async function ensureFirebaseSdk() {
+            const base = 'https://www.gstatic.com/firebasejs/' + FIREBASE_SDK_VERSION + '/';
+            if (typeof firebase === 'undefined') {
+                await loadScript(base + 'firebase-app-compat.js');
+            }
+            if (typeof firebase.auth !== 'function') {
+                await loadScript(base + 'firebase-auth-compat.js');
+            }
+        }
+
+        function getRecaptcha() {
+            if (recaptchaVerifier) return recaptchaVerifier;
+            recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container', {
+                size: 'invisible'
+            });
+            return recaptchaVerifier;
+        }
+
+        function resetRecaptcha() {
+            if (recaptchaVerifier) {
+                recaptchaVerifier.render().then(function(widgetId) {
+                    grecaptcha.reset(widgetId);
+                });
+            }
+        }
+
+        // Sends the Firebase SMS. Resolves when sent, rejects with an Error.
+        async function sendFirebaseOtp(phone) {
+            await ensureFirebaseSdk();
+
+            const cfg = getFirebaseConfig();
+            if (!cfg || !cfg.apiKey) {
+                throw new Error('{{ __('messages.msg_unexpected_error_occured') }}');
+            }
+            if (!firebase.apps.length) {
+                firebase.initializeApp(cfg);
+            }
+
+            try {
+                confirmationResult = await firebase.auth().signInWithPhoneNumber(phone, getRecaptcha());
+            } catch (e) {
+                resetRecaptcha();
+                throw e;
+            }
+        }
+
+        /* =========================================================
+           GENERATE OTP
+        ========================================================= */
+        $(document).on('click', '.generate-otp-btn', function() {
+            const $btn = $(this);
+            $btn.prop('disabled', true);
+
+            $.post("{{ route('web.mobile.generateOtp') }}", {
+                    _token: '{{ csrf_token() }}'
+                }, function(res) {
+                    if (!res.status) {
+                        showToastMessage('error', res.message);
+                        $btn.prop('disabled', false);
+                        return;
+                    }
+
+                    currentMethod = res.method || 'sms';
+
+                    const openOtpModal = function() {
+                        showToastMessage('success', res.message);
+                        $('#mobileVerificationModal').modal('hide');
+                        $('#OTPViewmodal').modal('show');
+                    };
+
+                    if (currentMethod === 'firebase') {
+                        firebasePhone = res.phone;
+                        sendFirebaseOtp(firebasePhone)
+                            .then(openOtpModal)
+                            .catch(function(e) {
+                                console.error('Firebase send OTP error:', e);
+                                showToastMessage('error', e.message ||
+                                    '{{ __('messages.msg_unexpected_error_occured') }}');
+                            })
+                            .finally(function() {
+                                $btn.prop('disabled', false);
+                            });
+                    } else {
+                        openOtpModal();
+                        $btn.prop('disabled', false);
+                    }
+                })
+                .fail(function() {
+                    $btn.prop('disabled', false);
+                    showToastMessage('error', '{{ __('messages.lbl_something_went_wrong') }}');
+                });
+        });
+
+        /* =========================================================
+           RESEND TIMER
+        ========================================================= */
         function startResendTimer(seconds = 30) {
+            if (resendInterval) clearInterval(resendInterval);
             resendSeconds = seconds;
 
             $('.resend-otp-btn').addClass('disabled').css({
@@ -159,20 +293,45 @@
             startResendTimer(30);
         });
 
-        // Resend click
+        $('#OTPViewmodal').on('hidden.bs.modal', function() {
+            if (resendInterval) clearInterval(resendInterval);
+        });
+
+        /* =========================================================
+           RESEND
+        ========================================================= */
         $(document).on('click', '.resend-otp-btn', function() {
             if ($(this).hasClass('disabled')) return;
+
+            if (currentMethod === 'firebase') {
+                sendFirebaseOtp(firebasePhone)
+                    .then(function() {
+                        resetOtpFields();
+                        startResendTimer(30);
+                        showToastMessage('success', '{{ __('messages.msg_otp_resent_successfully') }}');
+                    })
+                    .catch(function(e) {
+                        console.error('Firebase resend error:', e);
+                        showToastMessage('error', e.message ||
+                            '{{ __('messages.msg_unexpected_error_occured') }}');
+                    });
+                return;
+            }
 
             $.post("{{ route('web.mobile.resendOtp') }}", {
                 _token: '{{ csrf_token() }}'
             }, function(res) {
-                showToastMessage('success', res.message);
+                showToastMessage(res.status ? 'success' : 'error', res.message);
                 if (res.status) {
+                    resetOtpFields();
                     startResendTimer(30); // restart timer
                 }
             });
         });
 
+        /* =========================================================
+           VERIFY
+        ========================================================= */
         $(document).on('click', '.verify-otp-btn', function(e) {
             e.preventDefault();
 
@@ -183,23 +342,25 @@
             });
 
             if (otp.length < 6) {
-                showToastMessage('error',
-                    '{{ __('messages.msg_enter_valid_otp') ?? 'Please enter a valid OTP' }}');
+                showToastMessage('error', '{{ __('messages.msg_enter_valid_otp') }}');
                 return;
             }
 
             // Show loader
             let originalHtml = $btn.html();
-            $btn.prop('disabled', true)
-                .css('pointer-events', 'none')
-                .html(
-                    '<iconify-icon icon="eos-icons:loading" style="font-size:18px;"></iconify-icon> {{ __('messages.lbl_verify') }}'
-                );
-
-            $.post("{{ route('web.mobile.verifyOtp') }}", {
-                _token: '{{ csrf_token() }}',
-                otp: otp
-            }, function(res) {
+            const setLoading = function() {
+                $btn.prop('disabled', true)
+                    .css('pointer-events', 'none')
+                    .html(
+                        '<iconify-icon icon="eos-icons:loading" style="font-size:18px;"></iconify-icon> {{ __('messages.lbl_verify') }}'
+                    );
+            };
+            const restoreBtn = function() {
+                $btn.prop('disabled', false)
+                    .css('pointer-events', 'auto')
+                    .html(originalHtml);
+            };
+            const onVerified = function(res) {
                 if (res.status) {
                     showToastMessage('success', res.message);
                     $('#OTPViewmodal').modal('hide');
@@ -208,18 +369,52 @@
                     showToastMessage('error', res.message);
                     resetOtpFields();
                 }
-            }).fail(function() {
-                showToastMessage('error',
-                    '{{ __('messages.lbl_something_went_wrong') ?? 'Something went wrong' }}');
+            };
+            const onFailed = function() {
+                showToastMessage('error', '{{ __('messages.lbl_something_went_wrong') }}');
                 resetOtpFields();
-            }).always(function() {
-                // Restore button
-                $btn.prop('disabled', false)
-                    .css('pointer-events', 'auto')
-                    .html(originalHtml);
-            });
+            };
+
+            setLoading();
+
+            if (currentMethod === 'firebase') {
+                /* ---------- FIREBASE (non +91) ---------- */
+                if (!confirmationResult) {
+                    showToastMessage('error', '{{ __('messages.msg_invalid_or_expired_otp') }}');
+                    restoreBtn();
+                    return;
+                }
+
+                confirmationResult.confirm(otp)
+                    .then(function(result) {
+                        return result.user.getIdToken();
+                    })
+                    .then(function(idToken) {
+                        return $.post("{{ route('web.mobile.verifyFirebaseOtp') }}", {
+                            _token: '{{ csrf_token() }}',
+                            id_token: idToken
+                        });
+                    })
+                    .then(onVerified)
+                    .catch(function() {
+                        showToastMessage('error', '{{ __('messages.msg_invalid_or_expired_otp') }}');
+                        resetOtpFields();
+                    })
+                    .finally(restoreBtn);
+            } else {
+                /* ---------- CUSTOM SMS (+91) ---------- */
+                $.post("{{ route('web.mobile.verifyOtp') }}", {
+                        _token: '{{ csrf_token() }}',
+                        otp: otp
+                    }, onVerified)
+                    .fail(onFailed)
+                    .always(restoreBtn);
+            }
         });
 
+        /* =========================================================
+           OTP FIELD UX
+        ========================================================= */
         function resetOtpFields() {
             let $inputs = $('.otp-field input');
 

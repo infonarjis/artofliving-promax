@@ -215,6 +215,7 @@ Route::group(['prefix' => ''], function (): void {
             Route::get('/', [LoginController::class, 'index'])->name('index');
             Route::post('/authenticate', [LoginController::class, 'authenticate'])->name('authenticate');
             ## OTP :
+            Route::post('/check-mobile', [LoginController::class, 'checkMobile'])->name('checkMobile');
             Route::post('/send-otp', [LoginController::class, 'sendOtp'])->name('sendOtp');
             Route::post('/verify-otp', [LoginController::class, 'verifyOtp'])->name('verifyOtp');
             Route::post('/resend-otp', [LoginController::class, 'resendOtp'])->name('resendOtp');
@@ -254,6 +255,7 @@ Route::group(['prefix' => ''], function (): void {
         Route::post('/generate-mobile-otp', [MobileVerificationController::class, 'generateOtp'])->name('web.mobile.generateOtp');
         Route::post('/resend-mobile-otp', [MobileVerificationController::class, 'resendOtp'])->name('web.mobile.resendOtp');
         Route::post('/verify-mobile-otp', [MobileVerificationController::class, 'verifyOtp'])->name('web.mobile.verifyOtp');
+        Route::post('mobile/verify-firebase-otp', [MobileVerificationController::class, 'verifyFirebaseOtp'])->name('web.mobile.verifyFirebaseOtp');
 
         ## My Profiles :
         Route::get('my-profile', [MyProfileController::class, 'index'])->name('web.myProfile.index');

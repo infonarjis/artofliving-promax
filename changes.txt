@@ -136,3 +136,6 @@ After logging in, the user can proceed with the booking and complete the payment
 Once the payment is successfully completed, the booking will be confirmed.
 List of members to be shown only after payment
 import sheet required for sample
+
+
+mysql -u root -p artofliving_old < "C:\Users\Narjis\Downloads\artofliving_megamatrimony.sql"

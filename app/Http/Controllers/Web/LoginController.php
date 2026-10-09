@@ -22,6 +22,9 @@ use Throwable;
 
 class LoginController extends Controller
 {
+    /** +91 => custom SMS, every other country code => Firebase */
+    private const SMS_COUNTRY_CODE = '+1';
+
     public function index()
     {
         $captchaCode = CaptchaHelper::generate('login_captcha');
@@ -39,7 +42,7 @@ class LoginController extends Controller
     }
 
     /**
-     * EMAIL / MATRI ID LOGIN
+     * MOBILE + PASSWORD LOGIN
      */
     public function authenticate(Request $request)
     {
@@ -82,7 +85,7 @@ class LoginController extends Controller
         $canLogin = ($user->status === 'APPROVED' && $user->is_verify === 'Yes')
             || ($user->status === 'UNAPPROVED' && $user->is_verify === 'No')
             || ($user->status === 'APPROVED' && $user->is_verify === 'No');
-            
+
         if (!$canLogin) {
             Auth::guard('web')->logout();
             return $this->invalidLogin();
@@ -97,7 +100,32 @@ class LoginController extends Controller
     }
 
     /**
-     * SEND OTP (SMS method only)
+     * CHECK MOBILE (non +91): called by the browser BEFORE Firebase sends the SMS,
+     * so SMS is never sent to a number that is not in the system.
+     */
+    public function checkMobile(Request $request)
+    {
+        $request->validate([
+            'country_code' => ['required', 'string', 'exists:country_master,country_code'],
+            'mobile' => 'required|digits_between:6,12',
+        ]);
+
+        if ($request->country_code === self::SMS_COUNTRY_CODE) {
+            return $this->mobileError('msg_invalid_request');
+        }
+
+        $mobile = $request->country_code . '-' . $request->mobile;
+
+        [$user, $error] = $this->resolveLoginUser($mobile);
+        if (!$user) {
+            return $this->mobileError($error);
+        }
+
+        return response()->json(['status' => true]);
+    }
+
+    /**
+     * SEND OTP (custom SMS, +91 only)
      */
     public function sendOtp(Request $request)
     {
@@ -106,56 +134,25 @@ class LoginController extends Controller
             'mobile' => 'required|digits_between:8,12'
         ]);
 
-        // Custom SMS is only for +91
         if ($request->country_code !== self::SMS_COUNTRY_CODE) {
-            return response()->json([
-                'status' => false,
-                'message' => __('messages.msg_invalid_request')
-            ]);
+            return $this->mobileError('msg_invalid_request');
         }
 
         $mobile = $request->country_code . '-' . $request->mobile;
 
-        $user = Register::where('mobile', $mobile)->first();
-
+        [$user, $error] = $this->resolveLoginUser($mobile);
         if (!$user) {
-            return response()->json([
-                'status' => false,
-                'message' => __('messages.msg_invalid_mobile_number')
-            ]);
+            return $this->mobileError($error);
         }
 
-        if ($user->trashed()) {
-            return response()->json([
-                'status' => false,
-                'message' => __('messages.msg_account_deactivated')
-            ]);
+        if ($this->isOtpCooldownActive($mobile)) {
+            return $this->mobileError('msg_please_wait_before_requesting_a_new_otp');
         }
 
-        if ($user->status === 'Suspended') {
-            return response()->json([
-                'status' => false,
-                'message' => __('messages.msg_account_suspended')
-            ]);
-        }
-
-        if ($user->status === 'UNAPPROVED' && $user->is_verify === 'Yes') {
-            return response()->json([
-                'status' => false,
-                'message' => __('messages.msg_account_not_approved')
-            ]);
-        }
-
-        $canLogin = ($user->status === 'APPROVED' && $user->is_verify === 'Yes')
-            || ($user->status === 'UNAPPROVED' && $user->is_verify === 'No')
-            || ($user->status === 'APPROVED' && $user->is_verify === 'No');
-
-        if (!$canLogin) {
-            return response()->json([
-                'status' => false,
-                'message' => __('messages.msg_invalid_mobile_number')
-            ]);
-        }
+        // Invalidate previous unused OTPs
+        LoginOtp::where('mobile', $mobile)
+            ->where('is_used', 0)
+            ->update(['is_used' => 1]);
 
         $otp = _generateOtp(6);
 
@@ -175,39 +172,25 @@ class LoginController extends Controller
     }
 
     /**
-     * RESEND OTP (SMS method only)
+     * RESEND OTP (custom SMS, +91 only)
      */
     public function resendOtp(Request $request)
     {
-        $request->validate(['mobile' => 'required|string']); // (verifyOtp also validates otp)
+        $request->validate(['mobile' => 'required|string']);
 
         if (!$this->isSmsMobile($request->mobile)) {
-            return response()->json([
-                'status' => false,
-                'message' => __('messages.msg_invalid_request')
-            ]);
+            return $this->mobileError('msg_invalid_request');
         }
 
-        $request->validate(['mobile' => 'required|string']);
         $mobile = $request->mobile;
 
-        $user = Register::where('mobile', $mobile)
-            ->where('status', 'APPROVED')
-            ->first();
-
+        [$user, $error] = $this->resolveLoginUser($mobile);
         if (!$user) {
-            return response()->json([
-                'status' => false,
-                'message' => __('messages.msg_invalid_mobile_number')
-            ]);
+            return $this->mobileError($error);
         }
 
-        $lastOtp = LoginOtp::where('mobile', $mobile)->latest()->first();
-        if ($lastOtp && $lastOtp->created_at->diffInSeconds(now()) < 30) {
-            return response()->json([
-                'status' => false,
-                'message' => __('messages.msg_please_wait_before_requesting_a_new_otp')
-            ]);
+        if ($this->isOtpCooldownActive($mobile)) {
+            return $this->mobileError('msg_please_wait_before_requesting_a_new_otp');
         }
 
         // Invalidate previous unused OTPs
@@ -233,23 +216,18 @@ class LoginController extends Controller
     }
 
     /**
-     * VERIFY OTP (SMS method only)
+     * VERIFY OTP (custom SMS, +91 only)
      */
     public function verifyOtp(Request $request)
     {
-        $request->validate(['mobile' => 'required|string']); // (verifyOtp also validates otp)
-
-        if (!$this->isSmsMobile($request->mobile)) {
-            return response()->json([
-                'status' => false,
-                'message' => __('messages.msg_invalid_request')
-            ]);
-        }
-
         $request->validate([
             'mobile' => 'required|string',
             'otp' => 'required|digits:6'
         ]);
+
+        if (!$this->isSmsMobile($request->mobile)) {
+            return $this->mobileError('msg_invalid_request');
+        }
 
         $otpRow = LoginOtp::where('mobile', $request->mobile)
             ->where('is_used', 0)
@@ -258,21 +236,12 @@ class LoginController extends Controller
             ->first();
 
         if (!$otpRow || !Hash::check($request->otp, $otpRow->otp)) {
-            return response()->json([
-                'status' => false,
-                'message' => __('messages.msg_invalid_or_expired_otp')
-            ]);
+            return $this->mobileError('msg_invalid_or_expired_otp');
         }
 
-        $user = Register::where('mobile', $request->mobile)
-            ->where('status', 'APPROVED')
-            ->first();
-
+        [$user, $error] = $this->resolveLoginUser($request->mobile);
         if (!$user) {
-            return response()->json([
-                'status' => false,
-                'message' => __('messages.msg_invalid_mobile_number')
-            ]);
+            return $this->mobileError($error);
         }
 
         if ($user->mobile_verify_status === 'No') {
@@ -290,15 +259,11 @@ class LoginController extends Controller
         ]);
     }
 
+    /**
+     * VERIFY FIREBASE OTP (non +91)
+     */
     public function verifyFirebaseOtp(Request $request)
     {
-        // if ($this->getOtpLoginMethod() !== 'firebase') {
-        //     return response()->json([
-        //         'status' => false,
-        //         'message' => __('messages.msg_invalid_request')
-        //     ]);
-        // }
-
         $request->validate([
             'id_token' => 'required|string',
         ]);
@@ -306,30 +271,19 @@ class LoginController extends Controller
         $phoneNumber = app(FirebaseAuthService::class)->verifyIdToken($request->id_token);
 
         if (!$phoneNumber) {
-            return response()->json([
-                'status' => false,
-                'message' => __('messages.msg_invalid_or_expired_otp')
-            ]);
+            return $this->mobileError('msg_invalid_or_expired_otp');
         }
 
         $mobile = $this->normalizeFirebasePhone($phoneNumber);
 
+        // +91 numbers must never log in through Firebase
         if (!$mobile || $this->isSmsMobile($mobile)) {
-            return response()->json([
-                'status' => false,
-                'message' => __('messages.msg_invalid_mobile_number')
-            ]);
+            return $this->mobileError('msg_invalid_mobile_number');
         }
 
-        $user = Register::where('mobile', $mobile)
-            ->where('status', 'APPROVED')
-            ->first();
-
+        [$user, $error] = $this->resolveLoginUser($mobile);
         if (!$user) {
-            return response()->json([
-                'status' => false,
-                'message' => __('messages.msg_invalid_mobile_number')
-            ]);
+            return $this->mobileError($error);
         }
 
         if ($user->mobile_verify_status === 'No') {
@@ -344,6 +298,10 @@ class LoginController extends Controller
             'redirect' => route('web.dashboard.index')
         ]);
     }
+
+    /* =========================================================
+       HELPERS
+    ========================================================= */
 
     private function normalizeFirebasePhone(string $e164Phone): ?string
     {
@@ -360,17 +318,56 @@ class LoginController extends Controller
         return null;
     }
 
-    // private function getOtpLoginMethod(): string
-    // {
-    //     $siteSetting = _getSiteSetting();
-    //     $method = $siteSetting['otp_login_method'] ?? 'sms';
-
-    //     return in_array($method, ['sms', 'firebase'], true) ? $method : 'sms';
-    // }
-    private const SMS_COUNTRY_CODE = '+91';
     private function isSmsMobile(string $mobile): bool
     {
         return str_starts_with($mobile, self::SMS_COUNTRY_CODE . '-');
+    }
+
+    /**
+     * Single source of truth for "can this mobile log in?"
+     * Returns [Register|null, errorMessageKey|null]
+     */
+    private function resolveLoginUser(string $mobile): array
+    {
+        $user = Register::where('mobile', $mobile)->first();
+
+        if (!$user) {
+            return [null, 'msg_invalid_mobile_number'];
+        }
+        if ($user->trashed()) {
+            return [null, 'msg_account_deactivated'];
+        }
+        if ($user->status === 'Suspended') {
+            return [null, 'msg_account_suspended'];
+        }
+        if ($user->status === 'UNAPPROVED' && $user->is_verify === 'Yes') {
+            return [null, 'msg_account_not_approved'];
+        }
+
+        $canLogin = ($user->status === 'APPROVED' && $user->is_verify === 'Yes')
+            || ($user->status === 'UNAPPROVED' && $user->is_verify === 'No')
+            || ($user->status === 'APPROVED' && $user->is_verify === 'No');
+
+        if (!$canLogin) {
+            return [null, 'msg_invalid_mobile_number'];
+        }
+
+        return [$user, null];
+    }
+
+    private function isOtpCooldownActive(string $mobile, int $seconds = 30): bool
+    {
+        $lastOtp = LoginOtp::where('mobile', $mobile)->latest()->first();
+
+        return $lastOtp && $lastOtp->created_at->diffInSeconds(now()) < $seconds;
+    }
+
+    private function mobileError(string $messageKey)
+    {
+        return response()->json([
+            'status' => false,
+            'message' => __('messages.' . $messageKey),
+        ]);
     }
 
     private function logHistory($request)

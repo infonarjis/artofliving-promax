@@ -114,7 +114,7 @@
 
     {{-- Footers --}}
     @if (Auth::check() && $configArr['chat_module_design'] == 'popup')
-        @include(_getConstant('dir_path.WEB_DIR_PATH') . '.chat.footer_chat')
+        {{-- @include(_getConstant('dir_path.WEB_DIR_PATH') . '.chat.footer_chat') --}}
     @endif
     {{-- Footers --}}
 

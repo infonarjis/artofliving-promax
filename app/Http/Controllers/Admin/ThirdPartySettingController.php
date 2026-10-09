@@ -185,7 +185,13 @@ class ThirdPartySettingController extends Controller
 
         $postData = $request->all();
 
-        $updateArr = array();
+        $updateArr = array(
+            'firebase_project_id',
+            'firebase_vapid_key',
+            'firebase_json',
+            'firebase_configuration',
+            'firebase_status',
+        );
 
         $updateData = _getRequestData($updateArr, $postData);
         if (isset($postData['firebase_chat_url']) && !empty($postData['firebase_chat_url'])) {

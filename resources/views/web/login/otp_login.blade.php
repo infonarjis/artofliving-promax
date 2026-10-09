@@ -49,9 +49,7 @@
                         <iconify-icon icon="streamline-freehand-color:mobilephone-action-otp-message-1"
                             data-bs-dismiss="modal" class="white-color-n fts-62">
                         </iconify-icon>
-                        <iconify-icon
-                            icon="streamline-freehand-color:mobile-phone"
-                            data-bs-dismiss="modal"
+                        <iconify-icon icon="streamline-freehand-color:mobile-phone" data-bs-dismiss="modal"
                             class="white-color-n fts-62">
                         </iconify-icon>
                     </div>
@@ -97,6 +95,9 @@
                         </a>
                     </div>
                     <div class="d-flex justify-content-center mt-1 mb-4 ">
+                        <input type="hidden" name="token" id="token" value="">
+                        <input type="hidden" name="latitude" id="latitude" value="">
+                        <input type="hidden" name="longitude" id="longitude" value="">
                         <button type="button" class="comman-bg-btn fts-15 verify-otp-btn">
                             {{ __('messages.lbl_verify') }}
                         </button>
@@ -119,19 +120,14 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.21.0/jquery.validate.min.js"></script>
 
     <script>
-        /* =========================================================
-               CONFIG
-               +91  => custom SMS (backend)
-               else => Firebase
-            ========================================================= */
-        const SMS_COUNTRY_CODE = '+91';
+        const SMS_COUNTRY_CODE = '+1';
 
         let resendSeconds = 30;
         let resendInterval = null;
         let currentMethod = 'sms'; // 'sms' | 'firebase' (set when OTP is sent)
 
         /* =========================================================
-           FIREBASE INIT (always initialised, used for non +91)
+           FIREBASE INIT (always initialised, used for non +1)
         ========================================================= */
         const firebaseConfig = @json($firebaseConfig ?? []);
         let recaptchaVerifier = null;
@@ -233,33 +229,26 @@
             };
 
             if (currentMethod === 'firebase') {
-                /* ---------- FIREBASE (non +91) ---------- */
-                if (typeof firebase === 'undefined') {
-                    $btn.prop('disabled', false).text(btnText);
-                    sendValidator.showErrors({
-                        mobile: '{{ __('messages.msg_unexpected_error_occured') }}'
-                    });
-                    return;
-                }
-
-                const e164 = countryCode + mobileNumber; // e.g. +1 + 2025550123
-
-                firebase.auth().signInWithPhoneNumber(e164, ensureRecaptcha())
-                    .then(function(result) {
-                        confirmationResult = result;
-                        onSent('{{ __('messages.msg_otp_has_sent_successfully') }}');
+                /* ---------- FIREBASE (non +1): check mobile first ---------- */
+                $.post("{{ route('web.login.checkMobile') }}", $('#otpSendForm').serialize())
+                    .done(function(res) {
+                        if (!res.status) {
+                            $btn.prop('disabled', false).text(btnText);
+                            sendValidator.showErrors({
+                                mobile: res.message
+                            });
+                            return;
+                        }
+                        sendFirebaseOtp(countryCode + mobileNumber, $btn, btnText, onSent);
                     })
-                    .catch(function(error) {
-                        sendValidator.showErrors({
-                            mobile: error.message || '{{ __('messages.msg_unexpected_error_occured') }}'
-                        });
-                        resetRecaptcha();
-                    })
-                    .finally(function() {
+                    .fail(function() {
                         $btn.prop('disabled', false).text(btnText);
+                        sendValidator.showErrors({
+                            mobile: '{{ __('messages.msg_unexpected_error_occured') }}'
+                        });
                     });
             } else {
-                /* ---------- CUSTOM SMS (+91) ---------- */
+                /* ---------- CUSTOM SMS (+1) ---------- */
                 $.post("{{ route('web.login.sendOtp') }}", $('#otpSendForm').serialize(), function(res) {
                     $btn.prop('disabled', false).text(btnText);
                     if (res.status) {
@@ -276,6 +265,44 @@
                     });
                 });
             }
+        }
+
+        function sendFirebaseOtp(e164, $btn, btnText, onSent) {
+            if (typeof firebase === 'undefined' || typeof firebase.auth !== 'function') {
+                $btn.prop('disabled', false).text(btnText);
+                sendValidator.showErrors({
+                    mobile: '{{ __('messages.msg_unexpected_error_occured') }}'
+                });
+                return;
+            }
+
+            let verifier;
+            try {
+                verifier = ensureRecaptcha();
+            } catch (e) {
+                console.error('Recaptcha init failed:', e);
+                $btn.prop('disabled', false).text(btnText);
+                sendValidator.showErrors({
+                    mobile: e.message
+                });
+                return;
+            }
+
+            firebase.auth().signInWithPhoneNumber(e164, verifier)
+                .then(function(result) {
+                    confirmationResult = result;
+                    onSent('{{ __('messages.msg_otp_has_sent_successfully') }}');
+                })
+                .catch(function(error) {
+                    console.error('Firebase send OTP error:', error);
+                    sendValidator.showErrors({
+                        mobile: error.message || '{{ __('messages.msg_unexpected_error_occured') }}'
+                    });
+                    resetRecaptcha();
+                })
+                .finally(function() {
+                    $btn.prop('disabled', false).text(btnText);
+                });
         }
 
         $(document).ready(function() {
@@ -395,7 +422,7 @@
                             resetRecaptcha();
                         });
                 } else {
-                    /* ---------- CUSTOM SMS (+91) ---------- */
+                    /* ---------- CUSTOM SMS (+1) ---------- */
                     $.post("{{ route('web.login.resendOtp') }}", {
                         mobile: fullMobile
                     }, function(res) {
@@ -453,7 +480,7 @@
                             setVerifyLoading(false);
                         });
                 } else {
-                    /* ---------- CUSTOM SMS (+91) ---------- */
+                    /* ---------- CUSTOM SMS (+1) ---------- */
                     $.post("{{ route('web.login.verifyOtp') }}", {
                         mobile: $('#full_mobile').val(),
                         otp: otp
@@ -529,7 +556,7 @@
         }
 
         /* =========================================================
-           DEMO OTP AUTOFILL (SMS / +91 path)
+           DEMO OTP AUTOFILL (SMS / +1 path)
         ========================================================= */
         $(document).on('click', '#fillDemoOtp', function() {
             const code = $('#demoOtpCode').text().trim();

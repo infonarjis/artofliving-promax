@@ -9363,7 +9363,7 @@ video::-webkit-media-controls-enclosure {
 
 .custom-otp-modal a:hover {
   text-decoration: underline !important;
-  color: #ffffff !important;
+  /* color: #ffffff !important; */
 }
 
 /* --- OTP Modal Design End --- */

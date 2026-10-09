@@ -258,6 +258,7 @@ return [
     "msg_please_enter_valid_otp" => "Please enter a valid OTP.",
     "msg_your_mobile_number_is_not_registered_with_us" => "Your mobile number is not registered with us. Please register to proceed.",
     "msg_something_went_wrong" => "Something went wrong. Please try again.",
+    "lbl_something_went_wrong" => "Something went wrong. Please try again.",
     "msg_data_get_success" => "Data retrieved successfully.",
     "msg_data_not_found" => "Data not found.",
     "msg_member_not_found" => "Member not found.",

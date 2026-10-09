@@ -20,17 +20,17 @@
                                 <div class="common-tabs-design mt-3">
                                     <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                                         <li class="nav-item w-50">
-                                            <button class="nav-link fts-14 fw-5 active" id="pills-otp-tab" data-bs-toggle="pill"
-                                                data-bs-target="#pills-otp" type="button" role="tab"
-                                                aria-controls="pills-otp" aria-selected="false">
+                                            <button class="nav-link fts-14 fw-5 active" id="pills-otp-tab"
+                                                data-bs-toggle="pill" data-bs-target="#pills-otp" type="button"
+                                                role="tab" aria-controls="pills-otp" aria-selected="false">
                                                 <iconify-icon icon="hugeicons:smart-phone-01" width="20" class="me-2"
                                                     height="20"></iconify-icon>{{ __('messages.lbl_login_with_otp') }}
                                             </button>
                                         </li>
                                         <li class="nav-item w-50">
-                                            <button class="nav-link fts-14 fw-5" id="pills-email-tab"
-                                                data-bs-toggle="pill" data-bs-target="#pills-email" type="button"
-                                                role="tab" aria-controls="pills-email" aria-selected="true">
+                                            <button class="nav-link fts-14 fw-5" id="pills-email-tab" data-bs-toggle="pill"
+                                                data-bs-target="#pills-email" type="button" role="tab"
+                                                aria-controls="pills-email" aria-selected="true">
                                                 <iconify-icon icon="hugeicons:mail-01" width="20" class="me-2"
                                                     height="20"></iconify-icon>{{ __('messages.lbl_login_with_email_or_matri_id') }}
                                             </button>
@@ -72,8 +72,9 @@
 @push('scripts')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
     {{-- @if ($otpLoginMethod === 'firebase') --}}
-        <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-messaging-compat.js"></script>
     {{-- @endif --}}
 
     <script>

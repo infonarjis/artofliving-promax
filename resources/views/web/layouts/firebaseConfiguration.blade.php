@@ -5,11 +5,12 @@
     @endphp
 
     @if (in_array($activeTabs, ['web.login.index']))
-        <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-messaging-compat.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-messaging-compat.js"></script>
 
         <script>
-            window.addEventListener('load', async function () {
+            window.addEventListener('load', async function() {
                 if (!('serviceWorker' in navigator)) {
                     console.warn('FCM: Service workers not supported in this browser');
                     return;
@@ -57,7 +58,9 @@
                             "Content-Type": "application/json",
                             "X-CSRF-TOKEN": "{{ csrf_token() }}"
                         },
-                        body: JSON.stringify({ token: token })
+                        body: JSON.stringify({
+                            token: token
+                        })
                     });
 
                     const data = await res.json();
