@@ -23,6 +23,82 @@
                         <iconify-icon icon="ph:squares-four-fill"></iconify-icon> {{ __('messages.lbl_home') }}
                     </a>
                 </li>
+                <!-- Membership Dropdown Menu -->
+                <li class="nav-item-dropdown {{ request()->routeIs('web.membershipPlan.*') ? 'nav-active' : '' }}"
+                    id="nav-membership-wrapper">
+                    <button type="button" class="nav-link-btn dropdown-toggle-btn" id="nav-membership-btn"
+                        aria-expanded="false" aria-haspopup="true">
+                        <iconify-icon icon="ph:crown-simple-bold"></iconify-icon>
+                        {{ __('messages.lbl_membership') }}
+                        <iconify-icon icon="ph:caret-down-bold" class="nav-caret"></iconify-icon>
+                    </button>
+                    <!-- Membership Dropdown Popover -->
+                    <div class="dropdown-popover membership-popover" id="membership-dropdown" role="menu">
+                        <div class="popover-header">
+                            <div class="popover-header-title-wrap">
+                                <span class="popover-title">{{ __('messages.lbl_membership') }}</span>
+                                <span class="popover-header-sub">{{ __('messages.lbl_plans_active_subscription') }}</span>
+                            </div>
+                        </div>
+                        <div class="matches-popover-list">
+                            {{-- Membership Plans --}}
+                            <a href="{{ route('web.membershipPlan.index') }}"
+                                class="popover-item-link featured {{ _navActive(['web.membershipPlan.*']) }}"
+                                role="menuitem">
+                                <div class="item-icon-box icon-gold">
+                                    <iconify-icon icon="ph:crown-simple-fill"></iconify-icon>
+                                </div>
+                                <div class="item-body">
+                                    <div class="item-top-row">
+                                        <span class="item-name">{{ __('messages.lbl_plans') }}</span>
+                                        {{-- <span class="item-pill-badge badge-gradient-ai">
+                                            {{ __('messages.lbl_upgrade') }}
+                                        </span> --}}
+                                    </div>
+                                    <span class="item-subtext">
+                                        {{ __('messages.lbl_browse_membership_packages') }}
+                                    </span>
+                                </div>
+                                <iconify-icon icon="ph:caret-right-bold" class="item-chevron"></iconify-icon>
+                            </a>
+                        </div>
+                        <div class="popover-footer">
+                            <a href="{{ route('web.membershipPlan.index') }}" class="popover-footer-btn">
+                                <iconify-icon icon="ph:sparkle-bold"></iconify-icon>
+                                <span>
+                                    {{ __('messages.lbl_explore_plans') }}
+                                </span>
+                                <iconify-icon icon="ph:arrow-right-bold" class="footer-arrow"></iconify-icon>
+                            </a>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <a href="{{ route('web.successStory.index') }}"
+                        class="nav-link-btn {{ _navActive(['web.successStory.*']) }}">
+                        <iconify-icon icon="ph:heart-straight-bold"></iconify-icon>
+                        {{ __('messages.lbl_success_stories') }}
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('web.contactUs.index') }}"
+                        class="nav-link-btn {{ _navActive(['web.contactUs.*']) }}">
+                        <iconify-icon icon="ph:chats-circle-bold"></iconify-icon>
+                        {{ __('messages.lbl_contact_us') }}
+                    </a>
+                </li>
+            @endguest
+            @if (Auth::check())
+                @php
+                    $authUser = Auth::guard('web')->user();
+                    $profileImage = _getMemberProfileImage($authUser, 'Yes');
+                @endphp
+                <li>
+                    <a href="{{ route('web.dashboard.index') }}"
+                        class="nav-link-btn {{ _navActive(['web.dashboard.*']) }}" id="nav-dashboard">
+                        <iconify-icon icon="ph:squares-four-fill"></iconify-icon> {{ __('messages.lbl_dashboard') }}
+                    </a>
+                </li>
                 <!-- Search Dropdown Menu -->
                 <li class="nav-item-dropdown {{ request()->routeIs('web.search.*') ? 'nav-active' : '' }}"
                     id="nav-search-wrapper">
@@ -120,82 +196,6 @@
                             </a>
                         </div>
                     </div>
-                </li>
-                <!-- Membership Dropdown Menu -->
-                <li class="nav-item-dropdown {{ request()->routeIs('web.membershipPlan.*') ? 'nav-active' : '' }}"
-                    id="nav-membership-wrapper">
-                    <button type="button" class="nav-link-btn dropdown-toggle-btn" id="nav-membership-btn"
-                        aria-expanded="false" aria-haspopup="true">
-                        <iconify-icon icon="ph:crown-simple-bold"></iconify-icon>
-                        {{ __('messages.lbl_membership') }}
-                        <iconify-icon icon="ph:caret-down-bold" class="nav-caret"></iconify-icon>
-                    </button>
-                    <!-- Membership Dropdown Popover -->
-                    <div class="dropdown-popover membership-popover" id="membership-dropdown" role="menu">
-                        <div class="popover-header">
-                            <div class="popover-header-title-wrap">
-                                <span class="popover-title">{{ __('messages.lbl_membership') }}</span>
-                                <span class="popover-header-sub">{{ __('messages.lbl_plans_active_subscription') }}</span>
-                            </div>
-                        </div>
-                        <div class="matches-popover-list">
-                            {{-- Membership Plans --}}
-                            <a href="{{ route('web.membershipPlan.index') }}"
-                                class="popover-item-link featured {{ _navActive(['web.membershipPlan.*']) }}"
-                                role="menuitem">
-                                <div class="item-icon-box icon-gold">
-                                    <iconify-icon icon="ph:crown-simple-fill"></iconify-icon>
-                                </div>
-                                <div class="item-body">
-                                    <div class="item-top-row">
-                                        <span class="item-name">{{ __('messages.lbl_plans') }}</span>
-                                        {{-- <span class="item-pill-badge badge-gradient-ai">
-                                            {{ __('messages.lbl_upgrade') }}
-                                        </span> --}}
-                                    </div>
-                                    <span class="item-subtext">
-                                        {{ __('messages.lbl_browse_membership_packages') }}
-                                    </span>
-                                </div>
-                                <iconify-icon icon="ph:caret-right-bold" class="item-chevron"></iconify-icon>
-                            </a>
-                        </div>
-                        <div class="popover-footer">
-                            <a href="{{ route('web.membershipPlan.index') }}" class="popover-footer-btn">
-                                <iconify-icon icon="ph:sparkle-bold"></iconify-icon>
-                                <span>
-                                    {{ __('messages.lbl_explore_plans') }}
-                                </span>
-                                <iconify-icon icon="ph:arrow-right-bold" class="footer-arrow"></iconify-icon>
-                            </a>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <a href="{{ route('web.successStory.index') }}"
-                        class="nav-link-btn {{ _navActive(['web.successStory.*']) }}">
-                        <iconify-icon icon="ph:heart-straight-bold"></iconify-icon>
-                        {{ __('messages.lbl_success_stories') }}
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('web.contactUs.index') }}"
-                        class="nav-link-btn {{ _navActive(['web.contactUs.*']) }}">
-                        <iconify-icon icon="ph:chats-circle-bold"></iconify-icon>
-                        {{ __('messages.lbl_contact_us') }}
-                    </a>
-                </li>
-            @endguest
-            @if (Auth::check())
-                @php
-                    $authUser = Auth::guard('web')->user();
-                    $profileImage = _getMemberProfileImage($authUser, 'Yes');
-                @endphp
-                <li>
-                    <a href="{{ route('web.dashboard.index') }}"
-                        class="nav-link-btn {{ _navActive(['web.dashboard.*']) }}" id="nav-dashboard">
-                        <iconify-icon icon="ph:squares-four-fill"></iconify-icon> {{ __('messages.lbl_dashboard') }}
-                    </a>
                 </li>
                 <!-- Activities Dropdown Menu -->
                 <li class="nav-item-dropdown {{ request()->routeIs(

@@ -243,7 +243,7 @@ return [
     "msg_please_enter_valid_email" => "Please enter a valid email.",
     "msg_please_enter_valid_password" => "Please enter a valid password.",
     "msg_please_enter_valid_mobile_number" => "Please enter a valid mobile number.",
-    "msg_invalid_mobile_number" => "Invalid mobile number.",
+    "msg_invalid_mobile_number" => "You are not registered with us.",
     "msg_invalid_receiver_member" => "Invalid receiver member.",
     "msg_invalid_connection_id" => "Invalid connection ID.",
     "msg_invalid_photo_req_id" => "Invalid photo request ID.",
@@ -1413,4 +1413,6 @@ return [
     'lbl_callback_sub' => 'Our relationship manager will personally call you and guide you to the right plan.',
     'lbl_request_call_back_msg' => 'Thank you! Our team will call you back shortly.',
     'lbl_registered_members' => 'Registered Attendees',
+    'lbl_members_who_booked' => 'Members who booked',
+    'lbl_view_all' => 'View All',
 ];

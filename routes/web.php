@@ -186,11 +186,6 @@ Route::group(['prefix' => ''], function (): void {
         Route::get('/{slug}', [BlogController::class, 'details'])->name('details');
     });
 
-    ## Search :
-    Route::get('/search', [SearchController::class, 'searchResult'])->name('web.search.searchResult');
-    Route::get('/search/{type}', [SearchController::class, 'index'])
-        ->where('type', 'quick-search|advance-search|keyword-search|id-search')->name('web.search.type');
-
     ## Membership Plan :
     Route::get('/membership-plan', [MembershipPlanController::class, 'index'])->name('web.membershipPlan.index');
     ## Download Invoice:
@@ -304,6 +299,11 @@ Route::group(['prefix' => ''], function (): void {
             Route::post('/accept/{id}', [ExpressInterestController::class, 'accept'])->name('accept');
             Route::post('/reject/{id}', [ExpressInterestController::class, 'reject'])->name('reject');
         });
+
+        ## Search :
+        Route::get('/search', [SearchController::class, 'searchResult'])->name('web.search.searchResult');
+        Route::get('/search/{type}', [SearchController::class, 'index'])
+            ->where('type', 'quick-search|advance-search|keyword-search|id-search')->name('web.search.type');
 
         ## Saved Search :
         Route::prefix('saved-search')->name('web.savedSearch.')->group(function () {

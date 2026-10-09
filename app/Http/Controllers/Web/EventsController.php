@@ -83,9 +83,30 @@ class EventsController extends Controller
                 })
                 ->first();
             if ($alreadyRegistered) {
+                // Opposite gender users who have already registered :
                 $allUsersRegisteredMatriId = EventRegister::where('event_id', $event->id)
-                    ->pluck('matri_id')
+                    ->whereHas('user', function ($query) use ($authUser) {
+                        $query->where('gender', '!=', $authUser->gender);
+                    })
+                    ->select('matri_id', 'member_id')
+                    ->get()
+                    ->filter(fn($item) => !empty($item->matri_id))
+                    ->unique('matri_id')
+                    ->map(fn($item) => [
+                        'matri_id'  => $item->matri_id,
+                        'member_id' => $item->member_id,
+                    ])
+                    ->values()
                     ->toArray();
+
+                // Keep current logged-in user's matri_id in the list so that (You) can be displayed
+                $hasSelf = collect($allUsersRegisteredMatriId)->contains('matri_id', $authUser->matri_id);
+                if ($authUser->matri_id && !$hasSelf) {
+                    array_unshift($allUsersRegisteredMatriId, [
+                        'matri_id'  => $authUser->matri_id,
+                        'member_id' => $authUser->id,
+                    ]);
+                }
             }
         }
 

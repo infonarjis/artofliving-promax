@@ -1,3 +1,122 @@
+<style>
+    /* ===== Request a call back banner ===== */
+    .callback-banner {
+        max-width: 900px;
+        margin: 40px auto 10px;
+        padding: 20px 26px;
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        background: var(--black-color-1, #151d2f);
+        border: 1px solid var(--black-color-4, rgba(255, 255, 255, 0.08));
+        border-left: 5px solid var(--primary-color, #0d56de);
+        border-radius: 16px;
+        box-shadow: 0 18px 15px -20px rgba(0, 0, 0, 0.8), 0 0 1px 1px var(--black-color-6, rgba(255, 255, 255, 0.04));
+    }
+
+    .callback-banner__icon {
+        flex: 0 0 56px;
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--black-color-6, rgba(13, 86, 222, 0.15));
+        color: var(--primary-color, #0d56de);
+    }
+
+    .callback-banner__text {
+        flex: 1 1 auto;
+        min-width: 0;
+    }
+
+    .callback-banner__title {
+        margin: 0 0 4px;
+        font-size: 18px;
+        font-weight: 600;
+        color: var(--white-color, #ffffff);
+    }
+
+    .callback-banner__sub {
+        margin: 0;
+        font-size: 14px;
+        line-height: 1.5;
+        color: var(--white-color-70, rgba(255, 255, 255, 0.7));
+    }
+
+    .callback-banner__btn {
+        flex: 0 0 auto;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 12px 24px;
+        border: 0;
+        border-radius: 30px;
+        background: var(--primary-color, #0d56de);
+        color: var(--white-color-p, #ffffff);
+        font-size: 15px;
+        font-weight: 500;
+        white-space: nowrap;
+        cursor: pointer;
+        transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+    }
+
+    .callback-banner__btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 18px 15px -20px rgba(0, 0, 0, 0.8), 0 0 1px 1px var(--black-color-6, rgba(255, 255, 255, 0.04));
+        color: #ffffff;
+    }
+
+    /* Light Mode */
+    .light-mode .callback-banner {
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-left: 5px solid var(--primary-color, #0d56de);
+        box-shadow: 0 10px 30px -10px rgba(15, 23, 42, 0.08);
+    }
+
+    .light-mode .callback-banner__icon {
+        background: #eff6ff;
+        color: var(--primary-color, #0d56de);
+    }
+
+    .light-mode .callback-banner__title {
+        color: #0f172a;
+    }
+
+    .light-mode .callback-banner__sub {
+        color: #64748b;
+    }
+
+    .light-mode .callback-banner__btn {
+        background: var(--primary-color, #0d56de);
+        color: #ffffff;
+    }
+
+    /* Mobile */
+    @media (max-width: 767px) {
+        .callback-banner {
+            flex-direction: column;
+            text-align: center;
+            padding: 22px 18px;
+            border-left: 1px solid var(--black-color-4, rgba(255, 255, 255, 0.08));
+            border-top: 5px solid var(--primary-color, #0d56de);
+            margin: 28px 12px 10px;
+        }
+
+        .light-mode .callback-banner {
+            border-left: 1px solid #e2e8f0;
+            border-top: 5px solid var(--primary-color, #0d56de);
+        }
+
+        .callback-banner__btn {
+            width: 100%;
+            justify-content: center;
+        }
+    }
+</style>
+
 <div class="callback-banner mx-auto">
     <div class="callback-banner__icon">
         <iconify-icon icon="solar:phone-calling-rounded-bold" width="28" height="28"></iconify-icon>
@@ -120,9 +239,8 @@
 
 @push('scripts')
     <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
-    @push('scripts')
-        <script>
-            $(function() {
+    <script>
+        $(function() {
                 const $modal = $('#callbackModal');
                 const $form = $('#callbackForm');
                 const $btn = $('#callbackSubmit');
@@ -289,7 +407,6 @@
             });
         </script>
     @endpush
-@endpush
 
 @push('styles')
     <style>

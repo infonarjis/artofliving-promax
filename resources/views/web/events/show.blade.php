@@ -7,121 +7,246 @@
         }
 
         /* Registered Attendees Card */
+        /* Registered Attendees Card */
         .attendees-card {
-            border: 1px solid var(--common-border, rgba(255, 255, 255, 0.1));
+            border: 1px solid rgba(0, 0, 0, 0.08);
             border-radius: 16px;
+            background: #ffffff;
+            box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+        :root:not(.light-mode) .attendees-card {
+            border-color: var(--common-border, rgba(255, 255, 255, 0.1));
             background: rgba(255, 255, 255, 0.03);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
+            box-shadow: none;
         }
         .attendees-card:hover {
             border-color: rgba(var(--primary-color-rgb, 13, 86, 222), 0.35);
         }
         .attendees-icon-badge {
-            width: 38px;
-            height: 38px;
-            border-radius: 10px;
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
             background: rgba(var(--primary-color-rgb, 13, 86, 222), 0.12);
             color: var(--primary-color);
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            font-size: 20px;
+            font-size: 22px;
+        }
+        .attendees-card-title {
+            color: #1e293b;
+            font-size: 16px;
+            font-weight: 700;
+        }
+        :root:not(.light-mode) .attendees-card-title {
+            color: #ffffff;
+        }
+        .attendees-card-sub {
+            color: #64748b;
+            font-size: 12px;
+        }
+        :root:not(.light-mode) .attendees-card-sub {
+            color: rgba(255, 255, 255, 0.7);
         }
         .attendee-search-input {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--common-border, rgba(255, 255, 255, 0.12));
-            color: var(--white-color);
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            color: #1e293b;
             border-radius: 30px;
-            padding: 5px 14px 5px 34px;
-            font-size: 12px;
+            padding: 6px 14px 6px 36px;
+            font-size: 13px;
             outline: none;
             transition: all 0.25s ease;
-            width: 170px;
+            width: 200px;
+        }
+        :root:not(.light-mode) .attendee-search-input {
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(255, 255, 255, 0.15);
+            color: #ffffff;
         }
         .attendee-search-input:focus {
-            background: rgba(255, 255, 255, 0.08);
+            background: #ffffff;
             border-color: var(--primary-color);
-            width: 210px;
-            color: var(--white-color);
+            width: 230px;
+            color: #1e293b;
             box-shadow: 0 0 0 3px rgba(var(--primary-color-rgb, 13, 86, 222), 0.15);
         }
-        .attendee-search-input::placeholder {
-            color: var(--white-color70-n, rgba(255, 255, 255, 0.5));
+        :root:not(.light-mode) .attendee-search-input:focus {
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
         }
         .attendees-chips-grid {
             display: flex;
             flex-wrap: wrap;
-            gap: 8px;
-            max-height: 220px;
+            gap: 10px;
+            max-height: 290px;
             overflow-y: auto;
-            padding-right: 4px;
+            padding: 6px 4px;
         }
         .attendees-chips-grid::-webkit-scrollbar {
-            width: 5px;
+            width: 6px;
         }
         .attendees-chips-grid::-webkit-scrollbar-track {
-            background: rgba(255, 255, 255, 0.02);
+            background: rgba(0, 0, 0, 0.03);
             border-radius: 10px;
         }
         .attendees-chips-grid::-webkit-scrollbar-thumb {
-            background: rgba(255, 255, 255, 0.15);
+            background: rgba(var(--primary-color-rgb, 13, 86, 222), 0.35);
             border-radius: 10px;
         }
+
+        /* Other Users Chip: High contrast, clearly legible, clickable */
         .attendee-chip {
             display: inline-flex;
             align-items: center;
-            gap: 7px;
-            padding: 6px 14px;
+            gap: 8px;
+            padding: 7px 14px;
             border-radius: 30px;
             font-size: 13px;
-            font-weight: 500;
+            font-weight: 600;
             letter-spacing: 0.3px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: var(--white-color);
+            text-decoration: none !important;
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            color: #1e293b !important;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.04);
             transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
             user-select: none;
+        }
+        :root:not(.light-mode) .attendee-chip {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.18);
+            color: #ffffff !important;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
         }
         .attendee-chip:hover {
             transform: translateY(-2px);
-            background: rgba(255, 255, 255, 0.08);
-            border-color: rgba(255, 255, 255, 0.25);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-        }
-        .attendee-chip.attendee-self {
-            background: linear-gradient(135deg, var(--primary-color) 0%, rgba(var(--primary-color-rgb, 13, 86, 222), 0.85) 100%);
-            border: 1px solid rgba(255, 255, 255, 0.3);
+            background: var(--primary-color) !important;
+            border-color: var(--primary-color) !important;
             color: #ffffff !important;
-            box-shadow: 0 4px 14px rgba(var(--primary-color-rgb, 13, 86, 222), 0.35);
+            box-shadow: 0 6px 18px rgba(var(--primary-color-rgb, 13, 86, 222), 0.35);
+        }
+        .attendee-chip:hover .attendee-matri-text {
+            color: #ffffff !important;
+        }
+        .attendee-matri-text {
+            color: #1e293b;
+            font-weight: 600;
+            font-size: 13px;
+            transition: color 0.2s ease;
+        }
+        :root:not(.light-mode) .attendee-matri-text {
+            color: #ffffff;
+        }
+        .attendee-avatar-dot {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: rgba(var(--primary-color-rgb, 13, 86, 222), 0.12);
+            color: var(--primary-color);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            flex-shrink: 0;
+            transition: all 0.2s ease;
+        }
+        .attendee-chip:hover .attendee-avatar-dot {
+            background: rgba(255, 255, 255, 0.25);
+            color: #ffffff;
+        }
+        .attendee-chip .attendee-arrow {
+            font-size: 13px;
+            opacity: 0.5;
+            color: #64748b;
+            transition: all 0.2s ease;
+        }
+        :root:not(.light-mode) .attendee-chip .attendee-arrow {
+            color: rgba(255, 255, 255, 0.7);
+        }
+        .attendee-chip:hover .attendee-arrow {
+            opacity: 1;
+            color: #ffffff;
+            transform: translate(2px, -2px);
+        }
+
+        /* Own ID Chip: Dull, muted, grayed out, non-clickable */
+        .attendee-chip.attendee-self {
+            background: #f1f5f9 !important;
+            border: 1px dashed #cbd5e1 !important;
+            color: #94a3b8 !important;
+            box-shadow: none !important;
+            cursor: default !important;
+            font-weight: 500;
+            opacity: 0.85;
+        }
+        :root:not(.light-mode) .attendee-chip.attendee-self {
+            background: rgba(255, 255, 255, 0.03) !important;
+            border-color: rgba(255, 255, 255, 0.15) !important;
+            color: rgba(255, 255, 255, 0.5) !important;
         }
         .attendee-chip.attendee-self:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 18px rgba(var(--primary-color-rgb, 13, 86, 222), 0.45);
+            transform: none !important;
+            background: #f1f5f9 !important;
+            border-color: #cbd5e1 !important;
+            color: #94a3b8 !important;
+            box-shadow: none !important;
+        }
+        :root:not(.light-mode) .attendee-chip.attendee-self:hover {
+            background: rgba(255, 255, 255, 0.03) !important;
+            border-color: rgba(255, 255, 255, 0.15) !important;
+            color: rgba(255, 255, 255, 0.5) !important;
+        }
+        .attendee-chip.attendee-self .attendee-matri-text {
+            color: #64748b !important;
+        }
+        :root:not(.light-mode) .attendee-chip.attendee-self .attendee-matri-text {
+            color: rgba(255, 255, 255, 0.5) !important;
+        }
+        .attendee-self .attendee-avatar-dot {
+            background: #e2e8f0 !important;
+            color: #94a3b8 !important;
+        }
+        :root:not(.light-mode) .attendee-self .attendee-avatar-dot {
+            background: rgba(255, 255, 255, 0.08) !important;
+            color: rgba(255, 255, 255, 0.45) !important;
         }
         .attendee-self-pill {
-            background: rgba(255, 255, 255, 0.25);
+            background: #e2e8f0;
+            color: #64748b;
             padding: 1px 7px;
-            border-radius: 12px;
+            border-radius: 10px;
             font-size: 10px;
             font-weight: 700;
             letter-spacing: 0.5px;
             text-transform: uppercase;
         }
-        .attendee-avatar-dot {
-            width: 22px;
-            height: 22px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.12);
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 11px;
-            font-weight: 600;
+        :root:not(.light-mode) .attendee-self-pill {
+            background: rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
         }
-        .attendee-self .attendee-avatar-dot {
-            background: rgba(255, 255, 255, 0.25);
+        .attendees-load-more-btn {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            color: #334155;
+            padding: 7px 18px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+        :root:not(.light-mode) .attendees-load-more-btn {
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(255, 255, 255, 0.15);
+            color: #ffffff;
+        }
+        .attendees-load-more-btn:hover {
+            background: var(--primary-color);
+            border-color: var(--primary-color);
             color: #ffffff;
         }
     </style>
@@ -200,19 +325,19 @@
                                         {{-- Registered Members / Attendees --}}
                                         @if (!empty($allUsersRegisteredMatriId) && count($allUsersRegisteredMatriId) > 0)
                                             <div class="attendees-card p-3 p-lg-4 mt-4">
-                                                <div class="d-flex align-items-center justify-content-between flex-wrap gap-3 pb-3 border-bottom border-white border-opacity-10">
+                                                <div class="d-flex align-items-center justify-content-between flex-wrap gap-3 pb-3 border-bottom" style="border-color: rgba(148, 163, 184, 0.2) !important;">
                                                     <div class="d-flex align-items-center gap-2">
                                                         <div class="attendees-icon-badge">
                                                             <iconify-icon icon="solar:users-group-two-rounded-bold-duotone"></iconify-icon>
                                                         </div>
                                                         <div>
-                                                            <h5 class="fts-16 fw-7 white-color-n mb-0 d-flex align-items-center gap-2">
+                                                            <h5 class="attendees-card-title mb-0 d-flex align-items-center gap-2">
                                                                 {{ __('messages.lbl_registered_members') }}
                                                                 <span class="badge rounded-pill bg-primary px-2 py-1 fts-11 fw-6">
                                                                     {{ count($allUsersRegisteredMatriId) }}
                                                                 </span>
                                                             </h5>
-                                                            <p class="fts-12 white-color70-n mb-0 mt-1">
+                                                            <p class="attendees-card-sub mb-0 mt-1">
                                                                 {{ __('messages.lbl_members_who_booked') ?? 'Members registered for this event' }}
                                                             </p>
                                                         </div>
@@ -231,25 +356,67 @@
                                                     @php
                                                         $currentMatriId = auth()->user()?->matri_id;
                                                         // Put the logged-in user at the beginning if present
-                                                        $orderedMatriIds = collect($allUsersRegisteredMatriId)->sortByDesc(fn($id) => $currentMatriId && $id === $currentMatriId)->values()->all();
+                                                        $orderedAttendees = collect($allUsersRegisteredMatriId)->sortByDesc(function($item) use ($currentMatriId) {
+                                                            $mid = is_array($item) ? ($item['matri_id'] ?? '') : $item;
+                                                            return ($currentMatriId && $mid === $currentMatriId) ? 1 : 0;
+                                                        })->values()->all();
                                                     @endphp
-                                                    @foreach ($orderedMatriIds as $matriId)
-                                                        @php $isSelf = ($currentMatriId && $matriId === $currentMatriId); @endphp
-                                                        <div class="attendee-chip {{ $isSelf ? 'attendee-self' : '' }}" data-matri-id="{{ strtolower($matriId) }}">
-                                                            <span class="attendee-avatar-dot">
-                                                                @if ($isSelf)
-                                                                    <iconify-icon icon="solar:user-check-bold" style="font-size: 13px;"></iconify-icon>
-                                                                @else
-                                                                    <iconify-icon icon="solar:user-bold" style="font-size: 12px; opacity: 0.7;"></iconify-icon>
-                                                                @endif
-                                                            </span>
-                                                            <span>{{ $matriId }}</span>
-                                                            @if ($isSelf)
+
+                                                    @foreach ($orderedAttendees as $index => $attendee)
+                                                        @php
+                                                            $matriId = is_array($attendee) ? ($attendee['matri_id'] ?? '') : $attendee;
+                                                            $memberId = is_array($attendee) ? ($attendee['member_id'] ?? null) : null;
+                                                            $isSelf = ($currentMatriId && $matriId === $currentMatriId);
+                                                            // For huge lists (up to 2000), render initial 80 and let Load More or Search show others
+                                                            $isInitialHidden = ($index >= 80);
+                                                        @endphp
+
+                                                        @if ($isSelf)
+                                                            {{-- Own ID: Dull, muted, non-clickable --}}
+                                                            <div class="attendee-chip attendee-self {{ $isInitialHidden ? 'attendee-paged d-none' : '' }}"
+                                                                data-matri-id="{{ strtolower($matriId) }}"
+                                                                title="Your Matri ID">
+                                                                <span class="attendee-avatar-dot">
+                                                                    <iconify-icon icon="solar:user-circle-bold"></iconify-icon>
+                                                                </span>
+                                                                <span class="attendee-matri-text">{{ $matriId }}</span>
                                                                 <span class="attendee-self-pill">You</span>
-                                                            @endif
-                                                        </div>
+                                                            </div>
+                                                        @elseif ($memberId)
+                                                            {{-- Other User: Bright, high contrast, clickable to profile --}}
+                                                            <a href="{{ route('web.userProfile.index', _encrypt($memberId)) }}"
+                                                                class="attendee-chip {{ $isInitialHidden ? 'attendee-paged d-none' : '' }}"
+                                                                data-matri-id="{{ strtolower($matriId) }}"
+                                                                title="View profile of {{ $matriId }}"
+                                                                target="_blank">
+                                                                <span class="attendee-avatar-dot">
+                                                                    <iconify-icon icon="solar:user-bold"></iconify-icon>
+                                                                </span>
+                                                                <span class="attendee-matri-text">{{ $matriId }}</span>
+                                                                <iconify-icon icon="solar:arrow-right-up-linear" class="attendee-arrow fts-12"></iconify-icon>
+                                                            </a>
+                                                        @else
+                                                            {{-- Fallback if memberId not available --}}
+                                                            <div class="attendee-chip {{ $isInitialHidden ? 'attendee-paged d-none' : '' }}"
+                                                                data-matri-id="{{ strtolower($matriId) }}">
+                                                                <span class="attendee-avatar-dot">
+                                                                    <iconify-icon icon="solar:user-bold"></iconify-icon>
+                                                                </span>
+                                                                <span class="attendee-matri-text">{{ $matriId }}</span>
+                                                            </div>
+                                                        @endif
                                                     @endforeach
                                                 </div>
+
+                                                @if (count($orderedAttendees) > 80)
+                                                    <div class="text-center pt-3 pb-1" id="attendeesLoadMoreWrapper">
+                                                        <button type="button" class="attendees-load-more-btn" id="loadMoreAttendeesBtn">
+                                                            <span id="loadMoreText">Show All ({{ count($orderedAttendees) }})</span>
+                                                            <iconify-icon icon="solar:alt-arrow-down-linear" class="ms-1"></iconify-icon>
+                                                        </button>
+                                                    </div>
+                                                @endif
+
                                                 <div id="noAttendeeMatch" class="d-none text-center py-3">
                                                     <p class="fts-13 white-color70-n mb-0">No matching Matri ID found</p>
                                                 </div>
@@ -497,11 +664,52 @@
 
         // Search attendee Matri IDs
         const searchInput = document.getElementById('searchAttendeeInput');
+        const loadMoreWrapper = document.getElementById('attendeesLoadMoreWrapper');
+        const loadMoreBtn = document.getElementById('loadMoreAttendeesBtn');
+
+        if (loadMoreBtn) {
+            loadMoreBtn.addEventListener('click', function() {
+                const hiddenChips = document.querySelectorAll('#attendeesGrid .attendee-paged');
+                hiddenChips.forEach(chip => {
+                    chip.classList.remove('d-none', 'attendee-paged');
+                    chip.style.display = 'inline-flex';
+                });
+                if (loadMoreWrapper) {
+                    loadMoreWrapper.classList.add('d-none');
+                }
+            });
+        }
+
         if (searchInput) {
             searchInput.addEventListener('input', function() {
                 const term = this.value.trim().toLowerCase();
                 const chips = document.querySelectorAll('#attendeesGrid .attendee-chip');
                 let matchCount = 0;
+
+                if (term === '') {
+                    // Reset to initial state (respecting whether load more was clicked)
+                    const isAllExpanded = !loadMoreWrapper || loadMoreWrapper.classList.contains('d-none');
+                    chips.forEach((chip, idx) => {
+                        if (isAllExpanded || idx < 80) {
+                            chip.classList.remove('d-none');
+                            chip.style.display = 'inline-flex';
+                        } else {
+                            chip.classList.add('d-none');
+                            chip.style.display = 'none';
+                        }
+                    });
+                    if (loadMoreWrapper && !isAllExpanded) {
+                        loadMoreWrapper.classList.remove('d-none');
+                    }
+                    const noMatchEl = document.getElementById('noAttendeeMatch');
+                    if (noMatchEl) noMatchEl.classList.add('d-none');
+                    return;
+                }
+
+                // If searching, hide load more wrapper and filter across all chips
+                if (loadMoreWrapper) {
+                    loadMoreWrapper.classList.add('d-none');
+                }
 
                 chips.forEach(chip => {
                     const matriId = chip.getAttribute('data-matri-id') || '';
